@@ -536,7 +536,6 @@ function handlePageNumber(event, num) {
 
 renderPageNumber(listProducts, perPage);
 
-
 // =========== Thêm sản phẩm vào giỏ hàng =============
 function showNotification(message) {
     const notification = document.createElement("div");
