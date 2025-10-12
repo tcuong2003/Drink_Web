@@ -21,7 +21,9 @@
     <link rel="stylesheet" href="./asset/css/responsive.css">
     <!-- Font -->
     <link rel="stylesheet" href="./asset/font/stylesheet.css" />
-</head> 
+
+</head>
+
 
 <body>
     <header class="header">
@@ -33,6 +35,8 @@
             <a href="#"><img src="./asset/img/header-logo.svg" alt="" class="logo hide-on-tablet" /></a>
             <nav class="nav">
                 <ul>
+
+                    <!-- <li class="header-product">
                     <li class="header-product">
                         <a href="#!">Product</a>
                         <img src="./asset/img/header-arrown.svg" alt="" class="arrown" />
@@ -47,6 +51,24 @@
                                 <a href="#recommend" class="btn-shoe">Shoe</a>
                             </li>
                         </ul>
+                    </li> -->
+                    <li class="header-product">
+                        <a href="#product-section" class="btn-product-all">Product</a>
+                        <img src="" alt="" />
+                        <!-- <ul class="sub-menu">
+                            <li>
+                                <a href="#recommend" class="btn-sweater">Sweater</a>
+                            </li>
+                            <li>
+                                <a href="#recommend" class="btn-pants">Pants</a>
+                            </li>
+                            <li>
+                                <a href="#recommend" class="btn-shoe">Shoe</a>
+                            </li>
+                        </ul> -->
+                    </li>
+                    <li>
+                        <a href="#">Sale</a>
                     </li>
                     <li id="aboutLink">
                         <a href="#!">About</a>
@@ -142,13 +164,13 @@
                 <nav class="nav">
                     <ul>
                         <li>
-                            <a href="#hello" class="btn-sweater">Sweater</a>
+                            <a href="#hello" class="btn-sweater">Coffee</a>
                         </li>
                         <li>
-                            <a href="#hello" class="btn-pants">Pants</a>
+                            <a href="#hello" class="btn-pants">Juice</a>
                         </li>
                         <li>
-                            <a href="#!">Shoe</a>
+                            <a href="#hello" class="btn-pants">smoothiemoothie</a>
                         </li>
                         <li id="aboutLinkmobile">
                             <a href="#!">About</a>
@@ -282,8 +304,9 @@
                 </form>
             </div>
 
+
             <!-- display product -->
-            <div class="list-show-product">
+            <div id="product-section" class="list-show-product">
                 <!-- <section class="cart">
                     <div class="wrap-img-cart">
                         <img src="./asset/img/product-pants/pants-201.jpg" alt="" class="img-cart" />
@@ -497,20 +520,29 @@
     </div>
     <!-- History order -->
     <div id="historyOrder" class="historyOrder">
-        
+    </div>
+    <!-- Popup hỗ trợ -->
+    <div id="supportPopup" class="popup" style="visibility: visible; animation-name: backgroundeffect1;">
+        <div class="popup-content">
+            <div class="close" id="closeSupportPopup"><img src="./asset/img/bx-x.svg" alt=""></div>
+            <!-- Thêm nội dung chi tiết của trang hỗ trợ -->
+            <div id="supportContent">
+                <h2 color=black>cuong</h2>
+            </div>
+        </div>
+    </div>
     </div>
 
-     <!-- Popup hỗ trợ -->
-        <div id="supportPopup" class="popup" style="visibility: visible; animation-name: backgroundeffect1;"> 
-            <div class="popup-content"  >
-                <div class="close" id="closeSupportPopup"><img src="./asset/img/bx-x.svg" alt=""></div>
-                    <!-- Thêm nội dung chi tiết của trang hỗ trợ -->
-                    <div id="supportContent">
-                    <h2 color=black>cuong</h2>
-                    </div>
-            </div>             
+    <!-- Popup hỗ trợ -->
+    <div id="supportPopup" class="popup" style="visibility: visible; animation-name: backgroundeffect1;">
+        <div class="popup-content">
+            <div class="close" id="closeSupportPopup"><img src="./asset/img/bx-x.svg" alt=""></div>
+            <!-- Thêm nội dung chi tiết của trang hỗ trợ -->
+            <div id="supportContent">
+
+            </div>
         </div>
-        
+    </div>
     </div>
     <script src="./asset/js/script.js"></script>
     <!-- <script src="./asset/js/cartt.js"></script> -->

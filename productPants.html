@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Product Pants</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .list-show-product {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .list-show-product .cart .img-cart {
+            width: 400px;
+            height: 284px;
+            object-fit: cover;
+            transition: all 0.5s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="list-show-product">
+        <section class="cart">
+            <div class="wrap-img-cart">
+                <img src="./asset/img/product-pants/pants-201.jpg" alt="Quần jean J1" class="img-cart"
+                    onclick="window.location = './details.html?id=9' ">
+            </div>
+            <h3 class="title">Quần jean J1</h3>
+            <div class="row">
+                <span class="price">$39.99</span>
+                <div class="row-price-star">
+                    <img src="./asset/img/main-star.svg" alt="Star Rating" class="star">
+                    <span class="star-num">4.2</span>
+                </div>
+                <button class="add-to-cart-button" onclick="addToCart(9)">Add to Cart</button>
+            </div>
+        </section>
+        <section class="cart">
+            <div class="wrap-img-cart">
+                <img src="./asset/img/product-pants/pants-206.jpg" alt="Quần Thun J1" class="img-cart"
+                    onclick="window.location = './details.html?id=10' ">
+            </div>
+            <h3 class="title">Quần Thun J1</h3>
+            <div class="row">
+                <span class="price">$39.99</span>
+                <div class="row-price-star">
+                    <img src="./asset/img/main-star.svg" alt="Star Rating" class="star">
+                    <span class="star-num">4.2</span>
+                </div>
+                <button class="add-to-cart-button" onclick="addToCart(10)">Add to Cart</button>
+            </div>
+        </section>
+        <section class="cart">
+            <div class="wrap-img-cart">
+                <img src="./asset/img/product-pants/pants-204.jpg" alt="Đầm J1" class="img-cart"
+                    onclick="window.location = './details.html?id=11' ">
+            </div>
+            <h3 class="title">Đầm J1</h3>
+            <div class="row">
+                <span class="price">$39.99</span>
+                <div class="row-price-star">
+                    <img src="./asset/img/main-star.svg" alt="Star Rating" class="star">
+                    <span class="star-num">4.2</span>
+                </div>
+                <button class="add-to-cart-button" onclick="addToCart(11)">Add to Cart</button>
+            </div>
+        </section>
+        <section class="cart">
+            <div class="wrap-img-cart">
+                <img src="./asset/img/product-pants/pants-205.jpg" alt="Quần ngắn J1" class="img-cart"
+                    onclick="window.location = './details.html?id=12' ">
+            </div>
+            <h3 class="title">Quần ngắn J1</h3>
+            <div class="row">
+                <span class="price">$39.99</span>
+                <div class="row-price-star">
+                    <img src="./asset/img/main-star.svg" alt="Star Rating" class="star">
+                    <span class="star-num">4.2</span>
+                </div>
+                <button class="add-to-cart-button" onclick="addToCart(12)">Add to Cart</button>
+            </div>
+        </section>
+        <section class="cart">
+            <div class="wrap-img-cart">
+                <img src="./asset/img/product-pants/pants-206.jpg" alt="Quần Thun J2" class="img-cart"
+                    onclick="window.location = './details.html?id=13' ">
+            </div>
+            <h3 class="title">Quần Thun J2</h3>
+            <div class="row">
+                <span class="price">$39.99</span>
+                <div class="row-price-star">
+                    <img src="./asset/img/main-star.svg" alt="Star Rating" class="star">
+                    <span class="star-num">4.2</span>
+                </div>
+                <button class="add-to-cart-button" onclick="addToCart(13)">Add to Cart</button>
+            </div>
+        </section>
+        <section class="cart">
+            <div class="wrap-img-cart">
+                <img src="./asset/img/product-pants/pants-207.jpg" alt="Quần Ngắn J2" class="img-cart"
+                    onclick="window.location = './details.html?id=14' ">
+            </div>
+            <h3 class="title">Quần Ngắn J2</h3>
+            <div class="row">
+                <span class="price">$39.99</span>
+                <div class="row-price-star">
+                    <img src="./asset/img/main-star.svg" alt="Star Rating" class="star">
+                    <span class="star-num">4.2</span>
+                </div>
+                <button class="add-to-cart-button" onclick="addToCart(14)">Add to Cart</button>
+            </div>
+        </section>
+        <section class="cart">
+            <div class="wrap-img-cart">
+                <img src="./asset/img/product-pants/pants-208.jpg" alt="Quần jean J2" class="img-cart"
+                    onclick="window.location = './details.html?id=15' ">
+            </div>
+            <h3 class="title">Quần jean J2</h3>
+            <div class="row">
+                <span class="price">$39.99</span>
+                <div class="row-price-star">
+                    <img src="./asset/img/main-star.svg" alt="Star Rating" class="star">
+                    <span class="star-num">4.2</span>
+                </div>
+                <button class="add-to-cart-button" onclick="addToCart(15)">Add to Cart</button>
+            </div>
+        </section>
+        <section class="cart">
+            <div class="wrap-img-cart">
+                <img src="./asset/img/product-pants/pants-209.jpg" alt="Quần jean J3" class="img-cart"
+                    onclick="window.location = './details.html?id=16' ">
+            </div>
+            <h3 class="title">Quần jean J3</h3>
+            <div class="row">
+                <span class="price">$39.99</span>
+                <div class="row-price-star">
+                    <img src="./asset/img/main-star.svg" alt="Star Rating" class="star">
+                    <span class="star-num">4.2</span>
+                </div>
+                <button class="add-to-cart-button" onclick="addToCart(16)">Add to Cart</button>
+            </div>
+        </section>
+        <section class="cart">
+            <div class="wrap-img-cart">
+                <img src="./asset/img/product-pants/pants-210.jpg" alt="Quần túi hộp cargo" class="img-cart"
+                    onclick="window.location = './details.html?id=28' ">
+            </div>
+            <h3 class="title">Quần túi hộp cargo</h3>
+            <div class="row">
+                <span class="price">$27.99</span>
+                <div class="row-price-star">
+                    <img src="./asset/img/main-star.svg" alt="Star Rating" class="star">
+                    <span class="star-num">4.2</span>
+                </div>
+                <button class="add-to-cart-button" onclick="addToCart(28)">Add to Cart</button>
+            </div>
+        </section>
+        <section class="cart">
+            <div class="wrap-img-cart">
+                <img src="./asset/img/product-pants/pants-211.jpg" alt="Quần short" class="img-cart"
+                    onclick="window.location = './details.html?id=29' ">
+            </div>
+            <h3 class="title">Quần short</h3>
+            <div class="row">
+                <span class="price">$14.99</span>
+                <div class="row-price-star">
+                    <img src="./asset/img/main-star.svg" alt="Star Rating" class="star">
+                    <span class="star-num">4.2</span>
+                </div>
+                <button class="add-to-cart-button" onclick="addToCart(29)">Add to Cart</button>
+            </div>
+        </section>
+        <section class="cart">
+            <div class="wrap-img-cart">
+                <img src="./asset/img/product-pants/pants-212.jpg" alt="Quần short thun" class="img-cart"
+                    onclick="window.location = './details.html?id=30' ">
+            </div>
+            <h3 class="title">Quần short thun</h3>
+            <div class="row">
+                <span class="price">$12.99</span>
+                <div class="row-price-star">
+                    <img src="./asset/img/main-star.svg" alt="Star Rating" class="star">
+                    <span class="star-num">4.2</span>
+                </div>
+                <button class="add-to-cart-button" onclick="addToCart(30)">Add to Cart</button>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>
