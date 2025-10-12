@@ -1,0 +1,183 @@
+<!DOCTYpe html>
+
+<head>
+    <title>Product Shoe</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        .list-show-product {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .list-show-product .cart .img-cart {
+            width: 400px;
+            height: 284px;
+            object-fit: cover;
+            transition: all 0.5s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="list-show-product">
+        <section class="cart">
+            <div class="wrap-img-cart">
+                <img src="./asset/img/product-shoe/shoe1.jpg" alt="AIR JORDAN 1" class="img-cart"
+                    onclick="window.location = './details.html?id=17' ">
+            </div>
+            <h3 class="title">AIR JORDAN 1</h3>
+            <div class="row">
+                <span class="price">$39.99</span>
+                <div class="row-price-star">
+                    <img src="./asset/img/main-star.svg" alt="Star Rating" class="star">
+                    <span class="star-num">4.2</span>
+                </div>
+                <button class="add-to-cart-button" onclick="addToCart(17)">Add to Cart</button>
+            </div>
+        </section>
+        <section class="cart">
+            <div class="wrap-img-cart">
+                <img src="./asset/img/product-shoe/shoe2.jpg" alt="NIKE SB FORCE 58" class="img-cart"
+                    onclick="window.location = './details.html?id=18' ">
+            </div>
+            <h3 class="title">NIKE SB FORCE 58</h3>
+            <div class="row">
+                <span class="price">$39.99</span>
+                <div class="row-price-star">
+                    <img src="./asset/img/main-star.svg" alt="Star Rating" class="star">
+                    <span class="star-num">4.2</span>
+                </div>
+                <button class="add-to-cart-button" onclick="addToCart(18)">Add to Cart</button>
+            </div>
+        </section>
+        <section class="cart">
+            <div class="wrap-img-cart">
+                <img src="./asset/img/product-shoe/shoe3.jpg" alt="AIR MAX 2017" class="img-cart"
+                    onclick="window.location = './details.html?id=19' ">
+            </div>
+            <h3 class="title">AIR MAX 2017</h3>
+            <div class="row">
+                <span class="price">$39.99</span>
+                <div class="row-price-star">
+                    <img src="./asset/img/main-star.svg" alt="Star Rating" class="star">
+                    <span class="star-num">4.2</span>
+                </div>
+                <button class="add-to-cart-button" onclick="addToCart(19)">Add to Cart</button>
+            </div>
+        </section>
+        <section class="cart">
+            <div class="wrap-img-cart">
+                <img src="./asset/img/product-shoe/shoe4.jpg" alt="AIR JORDAN 1 MID SE" class="img-cart"
+                    onclick="window.location = './details.html?id=20' ">
+            </div>
+            <h3 class="title">AIR JORDAN 1 MID SE</h3>
+            <div class="row">
+                <span class="price">$39.99</span>
+                <div class="row-price-star">
+                    <img src="./asset/img/main-star.svg" alt="Star Rating" class="star">
+                    <span class="star-num">4.2</span>
+                </div>
+                <button class="add-to-cart-button" onclick="addToCart(20)">Add to Cart</button>
+            </div>
+        </section>
+        <section class="cart">
+            <div class="wrap-img-cart">
+                <img src="./asset/img/product-shoe/shoe5.jpg" alt="NIKE TECH HERA" class="img-cart"
+                    onclick="window.location = './details.html?id=21' ">
+            </div>
+            <h3 class="title">NIKE TECH HERA</h3>
+            <div class="row">
+                <span class="price">$39.99</span>
+                <div class="row-price-star">
+                    <img src="./asset/img/main-star.svg" alt="Star Rating" class="star">
+                    <span class="star-num">4.2</span>
+                </div>
+                <button class="add-to-cart-button" onclick="addToCart(21)">Add to Cart</button>
+            </div>
+        </section>
+        <section class="cart">
+            <div class="wrap-img-cart">
+                <img src="./asset/img/product-shoe/shoe6.jpg" alt="NIKE AIR MAX 90" class="img-cart"
+                    onclick="window.location = './details.html?id=22' ">
+            </div>
+            <h3 class="title">NIKE AIR MAX 90</h3>
+            <div class="row">
+                <span class="price">$39.99</span>
+                <div class="row-price-star">
+                    <img src="./asset/img/main-star.svg" alt="Star Rating" class="star">
+                    <span class="star-num">4.2</span>
+                </div>
+                <button class="add-to-cart-button" onclick="addToCart(22)">Add to Cart</button>
+            </div>
+        </section>
+        <section class="cart">
+            <div class="wrap-img-cart">
+                <img src="./asset/img/product-shoe/shoe7.jpg" alt="ADIDAS NMD_G1" class="img-cart"
+                    onclick="window.location = './details.html?id=23' ">
+            </div>
+            <h3 class="title">ADIDAS NMD_G1</h3>
+            <div class="row">
+                <span class="price">$39.99</span>
+                <div class="row-price-star">
+                    <img src="./asset/img/main-star.svg" alt="Star Rating" class="star">
+                    <span class="star-num">4.2</span>
+                </div>
+                <button class="add-to-cart-button" onclick="addToCart(23)">Add to Cart</button>
+            </div>
+        </section>
+        <section class="cart">
+            <div class="wrap-img-cart">
+                <img src="./asset/img/product-shoe/shoe8.jpg" alt="AIR JORDAN LEGACY 312 LOW" class="img-cart"
+                    onclick="window.location = './details.html?id=24' ">
+            </div>
+            <h3 class="title">AIR JORDAN LEGACY 312 LOW</h3>
+            <div class="row">
+                <span class="price">$39.99</span>
+                <div class="row-price-star">
+                    <img src="./asset/img/main-star.svg" alt="Star Rating" class="star">
+                    <span class="star-num">4.2</span>
+                </div>
+                <button class="add-to-cart-button" onclick="addToCart(24)">Add to Cart</button>
+            </div>
+        </section>
+        <section class="cart">
+            <div class="wrap-img-cart">
+                <img src="./asset/img/product-shoe/shoe9.jpg" alt="Giầy cầu lông LI-NING" class="img-cart"
+                    onclick="window.location = './details.html?id=31' ">
+            </div>
+            <h3 class="title">Giầy cầu lông LI-NING</h3>
+            <div class="row">
+                <span class="price">$42.99</span>
+                <div class="row-price-star">
+                    <img src="./asset/img/main-star.svg" alt="Star Rating" class="star">
+                    <span class="star-num">4.2</span>
+                </div>
+                <button class="add-to-cart-button" onclick="addToCart(31)">Add to Cart</button>
+            </div>
+        </section>
+        <section class="cart">
+            <div class="wrap-img-cart">
+                <img src="./asset/img/product-shoe/shoe10.jpg" alt="AIR JORDAN LEGACY 312 LOW" class="img-cart"
+                    onclick="window.location = './details.html?id=32' ">
+            </div>
+            <h3 class="title">AIR JORDAN LEGACY 312 LOW</h3>
+            <div class="row">
+                <span class="price">$59.99</span>
+                <div class="row-price-star">
+                    <img src="./asset/img/main-star.svg" alt="Star Rating" class="star">
+                    <span class="star-num">4.2</span>
+                </div>
+                <button class="add-to-cart-button" onclick="addToCart(32)">Add to Cart</button>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

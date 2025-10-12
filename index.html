@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DoAnWebN11</title>
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="76x76" href="./asset/favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./asset/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./asset/favicon/favicon-16x16.png" />
+    <link rel="manifest" href="./asset/favicon/site.webmanifest" />
+    <link rel="mask-icon" href="./asset/favicon/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- reset CSS -->
+    <link rel="stylesheet" href="./asset/css/reset.css" />
+    <!-- style CSS -->
+    <link rel="stylesheet" href="./asset/css/style.css" />
+    <link rel="stylesheet" href="./asset/css/cart.css" />
+    <link rel="stylesheet" href="./asset/css/responsive.css">
+    <!-- Font -->
+    <link rel="stylesheet" href="./asset/font/stylesheet.css" />
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512" class="bar hide-on-desktop">
+                <path fill="currentColor"
+                    d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+            </svg>
+            <a href="#"><img src="./asset/img/header-logo.svg" alt="" class="logo hide-on-tablet" /></a>
+            <nav class="nav">
+                <ul>
+                    <!-- <li class="header-product">
+                        <a href="#!">Product</a>
+                        <img src="./asset/img/header-arrown.svg" alt="" class="arrown" />
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="#recommend" class="btn-sweater">Sweater</a>
+                            </li>
+                            <li>
+                                <a href="#recommend" class="btn-pants">Pants</a>
+                            </li>
+                            <li>
+                                <a href="#recommend" class="btn-shoe">Shoe</a>
+                            </li>
+                        </ul>
+                    </li> -->
+                    <li class="header-product">
+                        <a href="#product-section"  class="btn-product-all">Product</a>
+                        <img src="" alt=""  />
+                        <!-- <ul class="sub-menu">
+                            <li>
+                                <a href="#recommend" class="btn-sweater">Sweater</a>
+                            </li>
+                            <li>
+                                <a href="#recommend" class="btn-pants">Pants</a>
+                            </li>
+                            <li>
+                                <a href="#recommend" class="btn-shoe">Shoe</a>
+                            </li>
+                        </ul> -->
+                    </li>
+                    <li>
+                        <a href="#">Sale</a>
+                    </li>
+                    <li id="aboutLink">
+                        <a href="#!">About</a>
+                    </li>
+                    <li>
+                        <a href="#footer">Contact us</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="last-icon">
+                <input type="text" name="" id="" placeholder="Search for..." class="search-field hide-on-mobile"
+                    spellcheck="false" />
+                <svg xmlns="" height="1em" viewBox="0 0 512 512" class="icon-delete hidden hide-on-mobile">
+                    <path fill="currentColor"
+                        d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z">
+                    </path>
+                </svg>
+                <button class="btn-search hide-on-mobile">
+                    <img src="./asset/img/header-search.svg" alt="" class="search-icon" />
+                </button>
+                <div class="buy-cart hide-on-mobile">
+                    <img src="./asset/img/header-buy.svg" alt="" />
+                    <span class="price price-buy-cart">$0.00</span>
+                    <div class="list-preview">
+                        <p class="no-product">No product in your cart</p>
+                        <div class="have-product hidden">
+                            <div class="row-1">
+                                <p class="you-have">You have 0 item </p>
+                                <a href="./cart.html" class="see-all">See all</a>
+                            </div>
+                            <div class="row-2">
+                                <!-- <div class="block-each-preview">
+                                        <img src="./asset/img/product-sweater/sweater-102.jpg" alt="" class="img-preview">
+                                        <h2 class="title">Sweater 1874A</h2>
+                                        <span class="price">$100</span>
+                                        <span class="quatity">x 5</span>
+                                    </div>
+                                    <div class="block-each-preview">
+                                        <img src="./asset/img/product-sweater/sweater-102.jpg" alt="" class="img-preview">
+                                        <h2 class="title">Sweater 1874A</h2>
+                                        <span class="price">$100</span>
+                                        <span class="quatity">x 5</span>
+                                    </div>
+                                    <div class="block-each-preview">
+                                        <img src="./asset/img/product-sweater/sweater-102.jpg" alt="" class="img-preview">
+                                        <h2 class="title">Sweater 1874A</h2>
+                                        <span class="price">$100</span>
+                                        <span class="quatity">x 5</span>
+                                    </div> -->
+                            </div>
+                            <div class="separate"></div>
+                            <div class="row-3 row">
+                                <p class="subtotal">Subtotal: </p>
+                                <span class="price price-subtotal">$0.00</span>
+                            </div>
+                            <div class="row-4 row">
+                                <p class="shipping">Shipping: </p>
+                                <span class="price price-shipping">$0.00</span>
+                            </div>
+                            <div class="row-5 row">
+                                <p class="total-price">Total price: </p>
+                                <span class="price" id="price-total">$0.00</span>
+                            </div>
+                            <div class="separate"></div>
+                            <button id="checkout-button" class="checkout-button"><a href="./cart.html">Check Out
+                                    All</a></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="history  hide-on-mobile">
+                    <img src="./asset/img/header-list-order.png" alt="" class="icon-list-order">
+                </div>
+                <div class="iconUser">
+                    <!-- <img src="./asset/img/header-user.svg" alt="" class="icon-user"> -->
+                </div>
+            </div>
+        </div>
+    </header>
+    <header class="header-mobile hide-on-desktop">
+        <div class="menu-overlay"></div>
+        <div class="menu-content">
+            <div class="container">
+                <a href="#"><img src="./asset/img/header-logo.svg" alt="" class="logo hide-on-mobile" /></a>
+                <div class="group-cart hide-on-tablet">
+                    <a href="./cart.html"><img src="./asset/img/header-buy.svg" alt="" class="buy-cart" /></a>
+                    <span class="cart-text"><a href="./cart.html">cart</a></span>
+                    <span class="cart-quantity"></span>
+                </div>
+                <div class="group-history hide-on-tablet">
+                    <img src="./asset/img/header-list-order.png" alt="" class="icon-list-order">
+                    <span class="cart-text">ordered</span>
+                </div>
+                <nav class="nav">
+                    <ul>
+                        <li>
+                            <a href="#hello" class="btn-sweater">Coffee</a>
+                        </li>
+                        <li>
+                            <a href="#hello" class="btn-pants">Juice</a>
+                        </li>
+                        <li>
+                            <a href="#hello" class="btn-pants">smoothiemoothie</a>
+                        </li>
+
+                        <li id="aboutLinkmobile">
+                            <a href="#!">About</a>
+                        </li>
+                        <li>
+                            <a href="#footer">Contact us</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <main id="main" class="main">
+        <div class="container">
+            <div class="group-search hide-on-desktop hide-on-tablet">
+                <input type="text" name="" id="" placeholder="Search for..." class="search-field search-field-mb"
+                    spellcheck="false" />
+                <svg xmlns="" height="1em" viewBox="0 0 512 512" class="icon-delete-mb hidden">
+                    <path fill="currentColor"
+                        d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z">
+                    </path>
+                </svg>
+                <button class="btn-search btn-search-Mb">
+                    <img src="./asset/img/header-search.svg" alt="" class="search-icon" />
+                </button>
+            </div>
+            <div class="slider">
+                <div class="slide">
+                    <img src="./asset/img/header-img-huge-1.jpg" alt="" class="img-huge" />
+                </div>
+                <div class="slide">
+                    <img src="./asset/img/header-img-huge-2.jpg" alt="" class="img-huge" />
+                </div>
+                <div class="slide">
+                    <img src="./asset/img/header-img-huge-3.jpg" alt="" class="img-huge" />
+                </div>
+                <button class="btn-left hide-on-mobile">&larr;</button>
+                <button class="btn-right hide-on-mobile">&rarr;</button>
+                <div class="dots"></div>
+            </div>
+            <!-- recommend -->
+            <div class="recommend" id="recommend">
+                <h3 class="title">Recommend for you</h3>
+                <div class="row">
+                    <div class="recommend-product">
+                        <img src="./asset/img/product-sweater/sweater-105.jpg" alt="" class="img-product" />
+                        <div class="recommed-product-right">
+                            <span class="price">$35</span>
+                            <p class="desc">
+                                New sumatra mandeling coffe blend
+                            </p>
+                        </div>
+                    </div>
+                    <div class="recommend-product">
+                        <img src="./asset/img/product-pants/pants-201.jpg" alt="" class="img-product" />
+                        <div class="recommed-product-right">
+                            <span class="price">$35</span>
+                            <p class="desc">
+                                New sumatra mandeling coffe blend
+                            </p>
+                        </div>
+                    </div>
+                    <div class="recommend-product">
+                        <img src="./asset/img/product-pants/pants-203.jpg" alt="" class="img-product" />
+                        <div class="recommed-product-right">
+                            <span class="price">$35</span>
+                            <p class="desc">
+                                New sumatra mandeling coffe blend
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- hello and filter -->
+            <div class="row hello-filter" id="hello">
+                <p class="hello">Hello <span class="hello-name">everybody</span> . Welcome our website</p>
+                <div class="filter-toggle">
+                    <span class="filter-text">Filter</span>
+                    <img src="./asset/img/main-filter.svg" alt="" class="icon-filter" />
+                </div>
+                <form action="" class="form-filter">
+                    <h3 class="title-filter">Filter</h3>
+                    <div class="row-filer">
+                        <div class="group-form">
+                            <div class="form-item">
+                                <label for="type">Type</label>
+                                <select name="type" id="type">
+                                    <option value="">---</option>
+                                    <option value="coffee">Coffee</option>
+                                    <option value="juice">Juice</option>
+                                    <option value="smoothie">Smoothie</option>
+                                    <option value="tea">Tea</option>
+                                </select>
+                            </div>
+                            <!-- <div class="form-item">
+                                <label for="color">Color</label>
+                                <select name="color" id="color">
+                                    <option value="">---</option>
+                                    <option value="white">white</option>
+                                    <option value="black">black</option>
+                                    <option value="grey">grey</option>
+                                    <option value="blue">blue</option>
+                                    <option value="brown">brown</option>
+                                </select>
+                            </div> -->
+                        </div>
+                        <div class="form-item">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" placeholder="Search name product">
+                            <svg xmlns="" height="1em" viewBox="0 0 512 512" class="icon-delete-advance hidden">
+                                <path fill="currentColor"
+                                    d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div class="group-form">
+                            <div class="form-item">
+                                <label for="min">Min Price</label>
+                                <input type="number" name="" id="min">
+
+                            </div>
+                            <div class="form-item">
+                                <label for="max">Max Price</label>
+                                <input type="number" name="" id="max">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group-btn">
+                        <button class="btn-cancel">Cancel</button>
+                        <button class="btn-show-result">Show Result</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- display product -->
+            <div id="product-section" class="list-show-product">
+                <!-- <section class="cart">
+                    <div class="wrap-img-cart">
+                        <img src="./asset/img/product-pants/pants-201.jpg" alt="" class="img-cart" />
+                    </div>
+                    <h3 class="title">Coffee Beans-Express and nice</h3>
+                    <span class="brand">Lavazza</span>
+                    <div class="row">
+                        <span class="price">$47.00</span>
+                        <div class="row-price-star">
+                            <img src="./asset/img/main-star.svg" alt="" class="star" />
+                            <span class="star-num">4.3</span>
+                        </div>
+                        <button class="add-to-cart-button">
+                            Add to Cart
+                        </button>
+                    </div>
+                </section> -->
+            </div>
+            <div class="pagnigation">
+                <ul class="pagnigation-ul">
+                </ul>
+            </div>
+            <p class="no-product-search hidden">// No product for search</p>
+            <!-- create account -->
+            <div class="create-acc">
+                <div class="container">
+                    <div class="left">
+                        <h3 class="title">Ready to Get Admit</h3>
+                        <p class="desc">
+                            Create your accout and enjoy the moment shopping
+                        </p>
+                    </div>
+                    <button class="btn">Get start</button>
+                </div>
+            </div>
+        </div>
+        <!-- <div id="product-list"></div> -->
+    </main>
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="row">
+                <!-- column-1 -->
+                <div class="column">
+                    <img src="./asset/img/header-logo.svg" alt="grocerymart" class="logo" />
+                    <p class="desc">
+                        Need to help for your new look? trust us. With
+                        cloth, you becomes a lot confident with everybody.
+                    </p>
+                    <div class="list-icon">
+                        <img class="icon" src="./asset/img/facebook.svg" alt="" />
+
+                        <img class="icon" src="./asset/img/tiktok.svg" alt="" />
+
+                        <img class="icon" src="./asset/img/twitter.svg" alt="" />
+
+                        <img class="icon" src="./asset/img/instagram.svg" alt="" />
+                    </div>
+                </div>
+                <!-- column-2 -->
+                <div class="column">
+                    <h3 class="title">Company</h3>
+                    <div class="separate"></div>
+                    <ul class="list-info">
+                        <li>
+                            <a href="#!">About Us</a>
+                        </li>
+                        <li>
+                            <a href="#!">Features</a>
+                        </li>
+                        <li>
+                            <a href="#!">Our Pricing</a>
+                        </li>
+                        <li>
+                            <a href="#!">Latest News</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- column-3 -->
+                <div class="column">
+                    <h3 class="title">Support</h3>
+                    <div class="separate"></div>
+                    <ul class="list-info">
+                        <li>
+                            <a href="#!">FAQ’s</a>
+                        </li>
+                        <li>
+                            <a href="#!">Terms & Conditions</a>
+                        </li>
+                        <li>
+                            <a href="#!">Privacy Policy</a>
+                        </li>
+                        <li>
+                            <a href="#!">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- column-4 -->
+                <div class="column">
+                    <h3 class="title">Address</h3>
+                    <div class="separate"></div>
+                    <ul class="list-info">
+                        <li>
+                            <a href="#!"><strong>Location:</strong> 27 Division St,
+                                New York, NY 10002, USA</a>
+                        </li>
+                        <li>
+                            <a href="mailto:email@gmail.com"><strong>Email:</strong> email@gmail.com</a>
+                        </li>
+                        <li>
+                            <a href="tel:1234567890"><strong>Phone:</strong> 1234 567
+                                890</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="separate-last"></div>
+            <p class="desc-last">
+                Copyright ©2023 webdesign SGU. All rights reserved
+            </p>
+        </div>
+    </footer>
+    <button class="backToTop">&uarr;</button>
+    <!-- Login Tab -->
+    <div class="loginBackground">
+        <div class="loginBlock">
+            <div class="closeLoginBlock"><img src="./asset/img/bx-x.svg"></div>
+            <div class="loginLogo"><img src="./asset/img/header-logo.svg"></div>
+            <div class="loginError"></div>
+            <div class="tab-form">
+                <!-- 2 cái nút để di chuyển qua lại đăng nhập, đăng kí -->
+                <div class="tabs">
+                    <div class="tab-item active">
+                        Đăng nhập
+                    </div>
+                    <div class="tab-item">
+                        Đăng kí
+                    </div>
+                    <div class="line"></div>
+                </div>
+
+                <!-- Tab content -->
+                <div class="tab-content">
+                    <form action="" method="POST" class="form" id="form-1">
+                        <div class="tab-pane active">
+                            <div class="form-group">
+                                <label for="email1" class="form-label">Email</label>
+                                <div class="div">
+                                    <input id="email1" name="email" type="text" placeholder="VD: email@domain.com"
+                                        class="form-control">
+                                </div>
+                                <span class="form-message"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password1" class="form-label">Mật khẩu</label>
+                                <div class="div">
+                                    <input id="password1" name="password" type="password" placeholder="Nhập mật khẩu"
+                                        class="form-control">
+                                    <img class="password1" src="./asset/img/hide.png">
+                                </div>
+                                <span class="form-message"></span>
+                            </div>
+
+                            <button class="form-submit">Đăng nhập</button>
+                        </div>
+                    </form>
+                    <form action="" method="POST" class="form" id="form-2">
+                        <div class="tab-pane">
+                            <div class="form-group">
+                                <label for="email2" class="form-label">Email</label>
+                                <div class="div">
+                                    <input id="email2" name="email" type="text" placeholder="VD: email@domain.com"
+                                        class="form-control">
+                                </div>
+                                <span class="form-message"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="name" class="form-label">Name</label>
+                                <div class="div">
+                                    <input id="name" name="name" type="text" placeholder="VD: Nguyễn Văn A"
+                                        class="form-control">
+                                </div>
+                                <span class="form-message"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="password2" class="form-label">Mật khẩu</label>
+                                <div class="div">
+                                    <input id="password2" name="password" type="password" placeholder="Nhập mật khẩu"
+                                        class="form-control">
+                                    <img class="password2" src="./asset/img/hide.png">
+                                </div>
+                                <span class="form-message"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
+                                <div class="div">
+                                    <input id="password_confirmation" name="password_confirmation"
+                                        placeholder="Nhập lại mật khẩu" type="password" class="form-control">
+                                    <img class="password_confirmation" src="./asset/img/hide.png">
+                                </div>
+                                <span class="form-message"></span>
+                            </div>
+
+                            <button class="form-submit">Đăng ký</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- History order -->
+    <div id="historyOrder" class="historyOrder">
+
+    </div>
+
+    <!-- Popup hỗ trợ -->
+    <div id="supportPopup" class="popup" style="visibility: visible; animation-name: backgroundeffect1;">
+        <div class="popup-content">
+            <div class="close" id="closeSupportPopup"><img src="./asset/img/bx-x.svg" alt=""></div>
+            <!-- Thêm nội dung chi tiết của trang hỗ trợ -->
+            <div id="supportContent">
+                <h2 color=black>cuong</h2>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <script src="./asset/js/script.js"></script>
+    <!-- <script src="./asset/js/cartt.js"></script> -->
+    <script src="./asset/js/form.js"></script>
+    <script src="./asset/js/details.js"></script>
+    <script src="./asset/js/responsive.js"></script>
+    <script src="./asset/js/PupopAbout.js"></script>
+</body>
+
+</html>
