@@ -542,42 +542,6 @@ a {
     border-radius: 4px;
 }
 
-.hello-filter {
-    position: relative;
-    margin: 30px 0;
-    justify-content: space-between;
-}
-
-.hello-filter .hello,
-.recommend .title {
-    color: var(--text-color-dark);
-    font-size: 2.4rem;
-    font-weight: 700;
-    line-height: 1.41;
-}
-
-.hello-filter .hello-name {
-    color: #1ebfc1;
-    font-size: 2.4rem;
-    font-weight: 700;
-    line-height: 1.41;
-}
-
-.hello-filter .filter {
-    background-color: #fff;
-    padding: 12px;
-    display: flex;
-    border-radius: 6px;
-    gap: 14px;
-}
-
-.hello-filter span {
-    color: var(--text-color-dark);
-    font-size: 1.6rem;
-    font-weight: 500;
-    line-height: 1.5;
-}
-
 .list-show-product {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -713,31 +677,6 @@ a {
 .no-product-search {
     font-size: 1.8rem;
     padding-left: 5px;
-}
-
-.pagnigation ul {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    justify-items: center;
-    gap: 10px;
-}
-.pagnigation ul li {
-    display: flex;
-    justify-content: center;
-    justify-items: center;
-    line-height: 25px;
-    width: 30px;
-    height: 25px;
-    border-radius: 5px;
-    border: 1px solid rgb(159, 155, 155);
-    color: var(--text-color-light);
-    cursor: pointer;
-}
-.pagnigation .active {
-    background-color: #1ebfc1;
-    font-size: 20px;
-    color: var(--text-color-dark);
 }
 
 /* ========= Create account ============ */
@@ -1153,62 +1092,6 @@ a {
     user-select: none;
 }
 
-/* =========== Form filter =========== */
-.form-filter {
-    background-color: #fff;
-    /* width: 700px; */
-    /* height: 200px; */
-    position: absolute;
-    top: 54px;
-    right: 27px;
-    z-index: 2;
-    border-radius: 20px;
-    padding: 30px;
-    opacity: 0;
-    visibility: hidden;
-    scale: 0;
-    transition: all 0.3s;
-    transform-origin: 93% top;
-    box-shadow: 0px 16px 40px 0px rgba(0, 0, 0, 0.18);
-}
-
-.filter-toggle.active ~ .form-filter {
-    opacity: 1;
-    visibility: visible;
-    scale: 1;
-}
-
-.form-filter::before {
-    background-color: #fff;
-    content: "";
-    position: absolute;
-    top: -18px;
-    right: 25px;
-    border: 10px solid;
-    border-color: var(--background-color) var(--background-color) #fff;
-}
-
-.filter-toggle {
-    background-color: #fff;
-    padding: 6px 12px;
-    border-radius: 6px;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    cursor: pointer;
-    border: 1px solid #ccc;
-}
-
-.filter-toggle:hover {
-    background-color: rgba(255, 255, 255, 0.8);
-}
-
-.title-filter {
-    color: var(--text-color-dark);
-    font-size: 2.2rem;
-    font-weight: 500;
-}
-
 .row-filer {
     display: flex;
     justify-content: space-between;
@@ -1252,39 +1135,6 @@ a {
     width: 100px;
 }
 
-.form-filter .group-btn {
-    display: flex;
-    margin-top: 20px;
-    justify-content: right;
-    gap: 20px;
-}
-
-.form-filter .group-btn .btn-cancel {
-    color: var(--text-color-light);
-    font-size: 1.4rem;
-    font-weight: 400;
-    border: none;
-    background-color: #fff;
-}
-
-.form-filter .group-btn .btn-cancel:hover {
-    color: var(--text-color-dark);
-}
-
-.form-filter .group-btn .btn-show-result {
-    color: var(--text-color-dark);
-    font-size: 1.5rem;
-    border: none;
-    font-weight: 550;
-    border-radius: 6px;
-    background-color: #1ebfc1;
-    padding: 10px;
-}
-
-.form-filter .group-btn .btn-show-result:hover {
-    background-color: #27b6b9;
-    transform: scale(1.05);
-}
 
 .form-item > svg {
     color: rgb(182, 175, 175);
