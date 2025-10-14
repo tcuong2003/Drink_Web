@@ -1,12 +1,12 @@
-let ListProducts = localStorage.getItem("listProducts")
+let listProducts = localStorage.getItem("listProducts")
     ? JSON.parse(localStorage.getItem("listProducts"))
     : [
-        {
+          {
             id: 1,
             name: "Americano",
             ingredients: "Espresso, nước nóng",
             price: 3.00,
-            image: "./asset/img/ptoduct-coffee/coffee-101.jpg",
+            image: "./asset/img/product-coffee/coffee-101.jpg",
             star: "4.6",
             size: ["S", "M", "L"],
             type: "coffee",
@@ -16,7 +16,7 @@ let ListProducts = localStorage.getItem("listProducts")
             name: "Bạc xỉu",
             ingredients: "Sữa đặc, cà phê pha, đá",
             price: 2.50,
-            image: "./asset/img/ptoduct-coffee/coffee-102.jpg",
+            image: "./asset/img/product-coffee/coffee-102.jpg",
             star: "5",
             size: ["S", "M", "L"],
             type: "coffee",
@@ -26,7 +26,7 @@ let ListProducts = localStorage.getItem("listProducts")
             name: "Cacao latte",
             ingredients: "Bột ca cao, sữa, đường, bọt sữa hấp",
             price: 4.20,
-            image: "./asset/img/ptoduct-coffee/coffee-103.jpg",
+            image: "./asset/img/product-coffee/coffee-103.jpg",
             star: "3.5",
             size: ["S", "M", "L"],
             type: "coffee",
@@ -36,7 +36,7 @@ let ListProducts = localStorage.getItem("listProducts")
             name: "Cacao nóng",
             ingredients: "Bột ca cao, sữa nóng, đường",
             price: 4.00,
-            image: "./asset/img/ptoduct-coffee/coffee-104.jpg",
+            image: "./asset/img/product-coffee/coffee-104.jpg",
             star: "4.5",
             size: ["S", "M", "L"],
             type: "coffee",
@@ -46,7 +46,7 @@ let ListProducts = localStorage.getItem("listProducts")
             name: "Cafe đen",
             ingredients: "Cà phê Robusta pha mạnh",
             price: 2.00,
-            image: "./asset/img/ptoduct-coffee/coffee-105.jpg",
+            image: "./asset/img/product-coffee/coffee-105.jpg",
             star: "5",
             size: ["S", "M", "L"],
             type: "coffee",
@@ -56,7 +56,7 @@ let ListProducts = localStorage.getItem("listProducts")
             name: "Cafe muối",
             ingredients: "Cà phê, sữa đặc, kem muối",
             price: 3.2,
-            image: "./asset/img/ptoduct-coffee/coffee-106.jpg",
+            image: "./asset/img/product-coffee/coffee-106.jpg",
             star: "4.3",
             size: ["S", "M", "L"],
             type: "coffee",
@@ -66,7 +66,7 @@ let ListProducts = localStorage.getItem("listProducts")
             name: "Cafe sữa",
             ingredients: "Cà phê pha mạnh, sữa đặc, đá",
             price: 2.90,
-            image: "./asset/img/ptoduct-coffee/coffee-107.jpg",
+            image: "./asset/img/product-coffee/coffee-107.jpg",
             star: "4.3",
             size: ["S", "M", "L"],
             type: "coffee",
@@ -77,7 +77,7 @@ let ListProducts = localStorage.getItem("listProducts")
             name: "Capuchino",
             ingredients: "Espresso, sữa hấp, bọt sữa",
             price: 3.80,
-            image: "./asset/img/ptoduct-coffee/coffee-108.jpg",
+            image: "./asset/img/product-coffee/coffee-108.jpg",
             star: "4.3",
             size: ["S", "M", "L"],
             type: "coffee",
@@ -87,7 +87,7 @@ let ListProducts = localStorage.getItem("listProducts")
             name: "Mocha coffee",
             ingredients: "Espresso, siro sô-cô-la, sữa hấp, kem tươi",
             price: 4.00,
-            image: "./asset/img/ptoduct-coffee/coffee-109.jpg",
+            image: "./asset/img/product-coffee/coffee-109.jpg",
             star: 4.2,
             size: ["S", "M", "L"],
             type: "coffee",
@@ -462,205 +462,173 @@ let ListProducts = localStorage.getItem("listProducts")
             type: "tea",
         },
 
-    ];
-    // Lấy ID sản phẩm từ URL
-function getProductIdFromURL() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const productId = urlParams.get("id");
-    return parseInt(productId); // Chuyển đổi thành số nguyên
-}
-
-// Tìm sản phẩm dựa trên ID
-function findProductById(productId) {
-    return ListProducts.find(product => product.id === productId);
-}
-document.addEventListener("DOMContentLoaded", displayProduct);
-
-// Hiển thị thông tin sản phẩm
-function displayProductDetails(product) {
-    if (product) {
-    const productTitle = document.querySelector(".heading");
-    const productPrice = document.querySelector(".card .body-card .heading");
-    const productImage = document.querySelector(".product-image");
-    const productReviews = document.querySelector(".row-review .title");
-    const addToCartButton=document.querySelector(".add-to-cart-button");
-    const titlePrice = document.querySelector(".title-price");
-    
-    // const addToCart=document.querySelector(".addToCart2");
-    
-    productTitle.textContent = product.name;
-    productPrice.textContent = "$" + product.price.toFixed(2);
-    productImage.src = product.image;
-    productReviews.textContent = `(${product.star}) 1100 reviews`;
-    titlePrice.textContent = "$" + (product.price * 1.1).toFixed(2);
-
-    if (addToCartButton) {
-        addToCartButton.onclick = function () {
-            addToCart(product.id); // Assuming product.id is the unique identifier for the product
-        };
-    } 
-    } else {
-        console.error("Sản phẩm không tồn tại");
- }
-}
-
-// Hàm chính để hiển thị chi tiết sản phẩm
-function displayProduct() {
-    const productId = getProductIdFromURL();
-    const product = findProductById(productId);
-    displayProductDetails(product);  
-}
-
-// Gọi hàm để hiển thị sản phẩm khi trang được tải
-document.addEventListener("DOMContentLoaded", displayProduct);
+      ];
 
 
+// ================== Hiển thị tất cả sản phẩm ==================
+function renderProduct(arr) {
+    const productListContainer = document.querySelector(".list-show-product");
+    if (productListContainer) {
+        productListContainer.innerHTML = "";
 
+        arr.forEach((product) => {
+            const productSection = document.createElement("section");
+            productSection.classList.add("cart");
 
+            productSection.innerHTML = `
+                    <div class="wrap-img-cart">
+                        <img src="${product.image}" alt="${product.name}" 
+                        class="img-cart" onclick="window.location = './details.html?id=${
+                            product.id
+                        }' " />
+                    </div>
+                    <h3 class="title">${product.name}</h3>
+                    <div class="row">
+                        <span class="price">$${product.price.toFixed(2)}</span>
+                        <div class="row-price-star">
+                            <img src="./asset/img/main-star.svg" alt="Star Rating" class="star" />
+                            <span class="star-num">${product.star}</span>
+                        </div>
+                        <button class="add-to-cart-button" onclick = "addToCart(${
+                            product.id
+                        })">Add to Cart</button>
+                    </div>
+                `;
 
-let datausers = JSON.parse(localStorage.getItem("DataUsers"));
-let login = JSON.parse(localStorage.getItem("loginUser"));
-
-// =========== Thêm sản phẩm vào giỏ hàng =============
-function addToCart(productId) {
-    if (!login) {
-        alert("Bạn phải đăng nhập để mua hàng");
-        //sau đó hiện hộp thoại đăng nhập
-        Object.assign(document.querySelector(".loginBackground").style, {
-            visibility: "visible",
-            "animation-name": "backgroundeffect1",
+            // Thêm sản phẩm vào danh sách sản phẩm
+            productListContainer.appendChild(productSection);
         });
-        Object.assign(document.querySelector(".loginBlock").style, {
-            display: "block",
-        });
-        return;
-    }
-    let userIndex = datausers.findIndex((user) => user.id == login.id);
-
-    if (userIndex !== -1) {
-        let productToAdd = ListProducts.find(
-            (product) => product.id == productId
-        );
-
-        if (productToAdd) {
-            const existingCartItemIndex = datausers[
-                userIndex
-            ].cartItems.findIndex((item) => item.idProduct == productId);
-
-            if (
-                existingCartItemIndex !== -1 &&
-                datausers[userIndex].cartItems[existingCartItemIndex].check == 0
-            ) {
-                datausers[userIndex].cartItems[existingCartItemIndex]
-                    .quantity++;
-            } else {
-                let cartItem = {
-                    idProduct: productToAdd.id,
-                    nameProduct: productToAdd.name,
-                    price: productToAdd.price,
-                    image: productToAdd.image,
-                    quantity: 1,
-                    check: 0,
-                    time: new Date(),
-                };
-                datausers[userIndex].cartItems.push(cartItem);
-            }
-            localStorage.setItem("DataUsers", JSON.stringify(datausers));
-            renderCartUI();
-        }
     }
 }
 
-// ============ render UI layout Cart ==============
-function renderCartUI() {
-    const noProduct = document.querySelector(".no-product");
-    const haveProduct = document.querySelector(".have-product");
-    // const listPreview = document.querySelector(".list-preview");
-    if (!login) {
-        return;
+// ================== Phân trang ==================
+let currentPage = 1;
+let perPage = 9;
+let totalPage = 0;
+let currentProductList = listProducts; // Mặc định hiển thị toàn bộ sản phẩm
+
+// Lấy sản phẩm theo trang
+function getProduct(arr) {
+    totalPage = Math.ceil(arr.length / perPage);
+
+    const start = (currentPage - 1) * perPage;
+    const end = start + perPage;
+    const perProduct = arr.slice(start, end);
+
+    renderProduct(perProduct);
+    renderPagination(arr);
+}
+
+// Render thanh phân trang (Đầu, Trước, Số, Sau, Cuối)
+function renderPagination(arr) {
+    totalPage = Math.ceil(arr.length / perPage);
+    const paginationContainer = document.querySelector(".pagnigation-ul");
+    paginationContainer.innerHTML = "";
+
+    // Nút Đầu và Trước
+    paginationContainer.innerHTML += `
+        <li class="page-btn ${currentPage === 1 ? "disabled" : ""}" onclick="goToPage(1)">Đầu</li>
+        <li class="page-btn ${currentPage === 1 ? "disabled" : ""}" onclick="goToPage(${currentPage - 1})">Trước</li>
+    `;
+
+    // Tính giới hạn hiển thị 5 trang quanh currentPage
+    let start = Math.max(1, currentPage - 2);
+    let end = Math.min(totalPage, currentPage + 2);
+
+    if (currentPage <= 2) {
+        end = Math.min(5, totalPage);
+    } else if (currentPage >= totalPage - 1) {
+        start = Math.max(totalPage - 4, 1);
     }
-    let userIndex = datausers.findIndex((user) => user.id === login.id);
-    if (datausers[userIndex].cartItems.length > 0) {
-        renderImageCart(datausers[userIndex].cartItems);
-        renderNumberCart(datausers[userIndex].cartItems);
-        // noProduct.classList.add("hidden");
-        // haveProduct.classList.remove("hidden");
-        // listPreview.style.width = "500px";
-        // listPreview.style.top = "67px";
-        // listPreview.style.left = "-372px";
-    } else {
-        noProduct.classList.remove("hidden");
-        haveProduct.classList.add("hidden");
+
+    for (let i = start; i <= end; i++) {
+        paginationContainer.innerHTML += `
+            <li class="page-num ${i === currentPage ? "active" : ""}" onclick="goToPage(${i})">${i}</li>
+        `;
     }
-}
-renderCartUI();
 
-// ============ render UI Cart về hình ảnh ============
-function renderImageCart(cartItems) {
-    const cartItemsList = document.querySelector(".row-2");
-    const noProduct = document.querySelector(".no-product");
-    const haveProduct = document.querySelector(".have-product");
-    const listPreview = document.querySelector(".list-preview");
-    cartItemsList.innerHTML = "";
-
-    let itemCount = 1;
-
-    cartItems.forEach((item) => {
-        if (itemCount <= 3 && item.check == 0) {
-            const cartItem = document.createElement("div");
-            cartItem.className = "block-each-preview";
-            cartItem.innerHTML = `
-                <img src="${item.image}" alt="" class="img-preview">
-                <h2 class="title">${item.nameProduct}</h2>
-                <span class="price">$${(item.price * item.quantity).toFixed(
-                    2
-                )}</span>
-                <span class="quantity">x ${item.quantity}</span>
-            `;
-            cartItemsList.appendChild(cartItem);
-            itemCount++;
-            noProduct.classList.add("hidden");
-            haveProduct.classList.remove("hidden");
-            listPreview.style.width = "500px";
-            listPreview.style.top = "67px";
-            listPreview.style.left = "-372px";
-        }
-    });
+    // Nút Sau và Cuối
+    paginationContainer.innerHTML += `
+        <li class="page-btn ${currentPage === totalPage ? "disabled" : ""}" onclick="goToPage(${currentPage + 1})">Sau</li>
+        <li class="page-btn ${currentPage === totalPage ? "disabled" : ""}" onclick="goToPage(${totalPage})">Cuối</li>
+    `;
 }
 
-// ============ render UI Cart về số liệu =============
-function renderNumberCart(cartItems) {
-    const cartQuantity = document.querySelector(".you-have"); // Số lượng sản phẩm trong giỏ hàng
-    const cartTotal = document.querySelector("#price-total"); // Tổng giá trị cuối cùng
-    const subtotal = document.querySelector(".price-subtotal"); // Tổng giá trị trước khi tính phí vận chuyển
-    const shipping = document.querySelector(".price-shipping"); // Phí vận chuyển
-    const feeTotal = document.querySelector(".price-buy-cart"); // Tổng giá trị cuối cùng trong giỏ hàng
-
-    let totalQuantity = 0; // Tổng số lượng tất cả sản phẩm
-    let totalPrice = 0; // Tổng giá tiền tất cả sản phẩm
-    let shippingPrice = 5; // Giá vận chuyển cho mỗi sản phẩm
-
-    cartItems.forEach((item) => {
-        if (item.check == 0) {
-            totalQuantity += item.quantity;
-            totalPrice += item.price * item.quantity;
-        }
-    });
-    cartQuantity.textContent = `You have ${totalQuantity} item`;
-    subtotal.textContent = `$${totalPrice.toFixed(2)}`;
-    shipping.textContent = `$${shippingPrice * totalQuantity}`;
-    cartTotal.textContent = `$${(
-        totalPrice +
-        shippingPrice * totalQuantity
-    ).toFixed(2)}`;
-    feeTotal.textContent = cartTotal.textContent;
+// Chuyển trang
+function goToPage(page) {
+    if (page < 1 || page > totalPage || page === currentPage) return;
+    currentPage = page;
+    getProduct(currentProductList);
 }
 
-// ============ render tên người dùng khi đăng nhập ===============
-// function renderName() {
-//     const name = document.querySelector(".hello-name");
-//     if (login) {
-//         name.textContent = login.name;
-//     }
-// }
-// renderName();
+// Khởi tạo khi vào trang
+getProduct(listProducts);
+
+
+// ================== Bộ lọc ==================
+
+const btnFilter = document.getElementById("apply-filter");
+const typeSelect = document.getElementById("filter-type");
+const ratingSelect = document.getElementById("filter-rating");
+const priceMin = document.getElementById("price-min");
+const priceMax = document.getElementById("price-max");
+const searchInput = document.getElementById("search-input");
+const resetBtn = document.getElementById("reset-filter");
+
+// ====== Lọc sản phẩm theo điều kiện ======
+function applyFilters() {
+  let filtered = listProducts;
+
+  // Search theo tên sản phẩm (realtime)
+  const searchVal = searchInput.value.trim().toLowerCase();
+  if (searchVal) {
+    filtered = filtered.filter((p) =>
+      p.name.toLowerCase().includes(searchVal)
+    );
+  }
+
+  // Lọc theo loại
+  const typeVal = typeSelect.value;
+  if (typeVal !== "all") {
+    filtered = filtered.filter((p) => p.type === typeVal);
+  }
+
+  // Lọc theo sao (lấy phần nguyên)
+  const ratingVal = parseInt(ratingSelect.value);
+  if (ratingVal > 0) {
+    filtered = filtered.filter((p) => Math.floor(p.star) >= ratingVal);
+  }
+
+  // Lọc theo giá
+  const min = parseFloat(priceMin.value) || 0;
+  const max = parseFloat(priceMax.value) || Infinity;
+  filtered = filtered.filter((p) => p.price >= min && p.price <= max);
+
+  // Render lại
+  currentProductList = filtered;
+  currentPage = 1;
+  getProduct(filtered);
+  renderPageNumber(filtered, perPage);
+}
+
+// ====== Event: Apply Filter ======
+btnFilter.addEventListener("click", applyFilters);
+
+// ====== Event: Search realtime ======
+searchInput.addEventListener("input", applyFilters);
+
+// ====== Event: Reset Filter ======
+resetBtn.addEventListener("click", () => {
+  // Reset giá trị input
+  typeSelect.value = "all";
+  ratingSelect.value = "0";
+  priceMin.value = "";
+  priceMax.value = "";
+  searchInput.value = "";
+
+  // Render toàn bộ
+  currentProductList = listProducts;
+  currentPage = 1;
+  getProduct(listProducts);
+  renderPageNumber(listProducts, perPage);
+});
