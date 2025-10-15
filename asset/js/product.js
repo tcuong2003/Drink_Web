@@ -608,6 +608,7 @@ let perPage = 9;
 let totalPage = 0;
 let currentProductList = listProducts; // Mặc định hiển thị toàn bộ sản phẩm
 
+
 // Lấy sản phẩm theo trang
 function getProduct(arr) {
     totalPage = Math.ceil(arr.length / perPage);

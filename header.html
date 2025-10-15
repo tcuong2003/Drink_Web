@@ -1,22 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>All Drinks</title>
-  <link rel="stylesheet" href="./asset/css/style.css" />
-  <link rel="stylesheet" href="./asset/css/responsive.css" />
-  <link rel="stylesheet" href="./asset/css/product.css" />
-  <link rel="stylesheet" href="./asset/font/stylesheet.css" />
-
-</head>
-<body>
-  <!-- <header> -->
-    <!-- <h1 class="page-title">All Drinks</h1> -->
-     <!-- <header>
-        <div id="header-placeholder"></div>
-     </header> -->
-     <header class="header">
+<header class="header">
         <div class="container">
             <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512" class="bar hide-on-desktop">
                 <path fill="currentColor"
@@ -28,14 +10,13 @@
                         alt=""
                         class="logo hide-on-tablet"
                 /></a>
-            <!-- <nav class="nav">
+            <nav class="nav">
                 <ul>
                     <li class="header-product">
                         <a href="./product.html" class="btn-product-all">Product</a>
                     </li>
                     <li>
-                        <a href="./index.html">Sale</a>
-                        
+                        <a href="#">Sale</a>
                     </li>
                     <li id="aboutLink">
                         <a href="#!">About</a>
@@ -44,7 +25,7 @@
                         <a href="#footer">Contact us</a>
                     </li>
                 </ul>
-            </nav> -->
+            </nav>
             <div class="last-icon">
                 <div class="row hello-filter" id="hello"></div>
                 <p class="hello">Hello <span class="hello-name">everybody</span> . Welcome our website</p>
@@ -143,81 +124,3 @@
             </div>
         </div>
     </header>
-  <!-- </header> -->
-
-  <main>
-    <!-- Bộ lọc -->
-    <aside class="filter-container">
-      <h2 id="filter">FILTER</h2>
-
-      <div class="filter-section">
-        <h3>Search</h3>
-        <input 
-          type="text" 
-          id="search-input" 
-          placeholder="Search drinks..." 
-          oninput="handleSearch(this.value)"
-        />
-      </div>
-
-      <div class="filter-section">
-        <h3>Type</h3>
-        <select id="filter-type">
-          <option value="all">All</option>
-          <option value="coffee">Coffee</option>
-          <option value="tea">Tea</option>
-          <option value="smoothie">Smoothie</option>
-          <option value="juice">Juice</option>
-        </select>
-      </div>
-
-      <div class="filter-section">
-        <h3>Rating</h3>
-        <select id="filter-rating">
-          <option value="0">All</option>
-          <option value="5">5 stars</option>
-          <option value="4">4 stars & up</option>
-          <option value="3">3 stars & up</option>
-          <option value="2">2 stars & up</option>
-          <option value="1">1 star & up</option>
-        </select>
-      </div>
-
-      <div class="filter-section">
-        <h3>Price</h3>
-        <label>Min - Max ($)</label>
-        <input type="number" class="price" id="price-min" placeholder="Min" />
-        <input type="number" class="price" id="price-max" placeholder="Max" />
-      </div>
-
-      <button class="filter-btn" id="apply-filter">Apply Filter</button>
-      <button class="reset-btn" id="reset-filter">Reset Filter</button>
-    </aside>
-
-    <!-- Danh sách sản phẩm -->
-    <section class="product-container">
-      <div class="list-show-product"></div>
-
-      <div class="pagnigation">
-        <ul class="pagnigation-ul"></ul>
-      </div>
-    </section>
-  </main>
-  <div id="historyOrder" class="historyOrder">
-    </div>
-
-  <script src="./asset/js/product.js"></script>
-  <script src="./asset/js/script.js"></script>
-  <script src="./asset/js/form.js"></script>
-  
-  <!-- <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      fetch("./header.html")
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById("header-placeholder").innerHTML = data;
-        });
-    });
-  </script> -->
-</body>
-</html>
