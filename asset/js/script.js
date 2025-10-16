@@ -799,3 +799,30 @@ function cancelAfterSearched(e) {
     iconDeleteAdvance.classList.add("hidden");
     isFormVisible = false;
 }
+
+
+// ================== Hien thi gia phan SALE OFF =============================
+// Lấy danh sách sản phẩm từ localStorage
+const listProducts = JSON.parse(localStorage.getItem("listProducts")) || [];
+
+// Lặp qua từng sản phẩm trong phần Sale
+document.querySelectorAll(".sale-product").forEach(item => {
+  // Lấy ID sản phẩm từ link href (ví dụ "./details.html?id=5")
+  const url = new URL(item.href, window.location.origin);
+  const id = parseInt(url.searchParams.get("id"));
+
+  // Lấy % giảm giá từ text
+  const discountText = item.querySelector(".discount").textContent;
+  const discountPercent = parseInt(discountText.replace("-", "").replace("%", ""));
+
+  // Tìm sản phẩm trong list
+  const product = listProducts.find(p => p.id === id);
+  if (!product) return;
+
+  const oldPrice = product.price;
+  const newPrice = oldPrice - (oldPrice * discountPercent / 100);
+
+  // Hiển thị giá
+  item.querySelector(".old-price").textContent = `$${oldPrice.toFixed(2)}`;
+  item.querySelector(".new-price").textContent = `$${newPrice.toFixed(2)}`;
+});

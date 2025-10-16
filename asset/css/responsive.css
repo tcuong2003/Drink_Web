@@ -139,7 +139,7 @@
     }
 
     /* recommend */
-    .recommend .row {
+    .sale .row {
         flex-wrap: wrap;
         justify-content: center;
     }
