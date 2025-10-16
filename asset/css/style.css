@@ -328,6 +328,7 @@ a {
 
 .header .list-preview .price {
     line-height: 1.46;
+    align-items: center;
 }
 
 .header .list-preview .row-2 .price {
