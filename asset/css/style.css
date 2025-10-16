@@ -1024,6 +1024,8 @@ a {
 
 .tab-pane.active {
     display: block;
+    pointer-events: auto;
+    opacity: 1;
 }
 
 .form-group {

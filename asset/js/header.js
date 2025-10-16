@@ -9,7 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if (e.target.classList.contains("icon-list-order")) {
                 console.log("Click history");
                 handleRenderHistoryOrder();
-    }
+            }
+
 });
 
         });
