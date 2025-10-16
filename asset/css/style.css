@@ -558,7 +558,22 @@ a {
     height: 116px;
     border-radius: 4px;
 }
-
+/* .sale .row-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.sale .title-price {
+    text-decoration: line-through;
+    color: #777;
+}
+.sale {
+    color: #fff;
+    background: #ff4d4d;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+} */
 /* ------------------------------------- CSS cho About us -------------------------------- */
 .about-section {
     scroll-margin-top: 100px;

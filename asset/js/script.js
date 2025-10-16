@@ -190,13 +190,13 @@ function renderNumberCart(cartItems) {
 }
 
 // ============ render tên người dùng khi đăng nhập ===============
-function renderName() {
-    const name = document.querySelector(".hello-name");
-    if (login) {
-        name.textContent = login.name;
-    }
-}
-renderName();
+// function renderName() {
+//     const name = document.querySelector(".hello-name");
+//     if (login) {
+//         name.textContent = login.name;
+//     }
+// }
+// renderName();
 
 // ============== hinh anh truot qua lai ===============
 const slides = document.querySelectorAll(".slide");
@@ -702,90 +702,90 @@ function searchMb() {
 document.querySelector(".btn-search-Mb").addEventListener("click", searchMb);
 
 // ===================   An-hien form tim kiem nang cao ====================
-let isFormVisible = false;
-const btnForm = document.querySelector(".filter-toggle");
-btnForm.addEventListener("click", function () {
-    if (isFormVisible == false) {
-        btnForm.classList.add("active");
-        isFormVisible = true;
-    } else {
-        btnForm.classList.remove("active");
-        isFormVisible = false;
-    }
-});
+// let isFormVisible = false;
+// const btnForm = document.querySelector(".filter-toggle");
+// btnForm.addEventListener("click", function () {
+//     if (isFormVisible == false) {
+//         btnForm.classList.add("active");
+//         isFormVisible = true;
+//     } else {
+//         btnForm.classList.remove("active");
+//         isFormVisible = false;
+//     }
+// });
 
 // ============== tim kiem nang cao  ==================
-const type = document.getElementById("type");
-const color = document.getElementById("color");
+// const type = document.getElementById("type");
+// const color = document.getElementById("color");
 // const textInputAdvance đã gọi bên trên
-const minPrice = document.getElementById("min");
-const maxPrice = document.getElementById("max");
+// const minPrice = document.getElementById("min");
+// const maxPrice = document.getElementById("max");
 
-function searchAdvance(type, color, name, minPrice, maxPrice) {
-    const noProduct = document.querySelector(".no-product-search");
-    const productSearch = listProducts.filter((product, i) => {
-        if (
-            name &&
-            !product.name
-                .trim()
-                .toLowerCase()
-                .includes(name.trim().toLowerCase())
-        ) {
-            return false;
-        }
-        if (
-            (minPrice && product.price < minPrice) ||
-            (maxPrice && product.price > maxPrice)
-        ) {
-            return false;
-        }
-        if (type && !(product.nature.type == `${type}`)) {
-            return false;
-        }
-        if (color && !product.nature.color.includes(color)) {
-            return false;
-        }
-        return true;
-    });
+// function searchAdvance(type, color, name, minPrice, maxPrice) {
+//     const noProduct = document.querySelector(".no-product-search");
+//     const productSearch = listProducts.filter((product, i) => {
+//         if (
+//             name &&
+//             !product.name
+//                 .trim()
+//                 .toLowerCase()
+//                 .includes(name.trim().toLowerCase())
+//         ) {
+//             return false;
+//         }
+//         if (
+//             (minPrice && product.price < minPrice) ||
+//             (maxPrice && product.price > maxPrice)
+//         ) {
+//             return false;
+//         }
+//         if (type && !(product.nature.type == `${type}`)) {
+//             return false;
+//         }
+//         if (color && !product.nature.color.includes(color)) {
+//             return false;
+//         }
+//         return true;
+//     });
 
-    if (productSearch.length === 0) {
-        noProduct.classList.remove("hidden");
-    } else {
-        noProduct.classList.add("hidden");
-    }
-    // renderProduct(productSearchAdvance); // Render the filtered products
-    if (productSearch.length == 0) {
-        noProduct.classList.remove("hidden");
-        pagnigation.classList.add("hidden");
-        getProduct(productSearch);
-        return;
-    }
-    if (productSearch.length > 0) {
-        currentProductList = productSearch;
-        getProduct(productSearch);
-        renderPageNumber(productSearch, perPage);
-        noProduct.classList.add("hidden");
-        pagnigation.classList.remove("hidden");
-    }
-}
+//     if (productSearch.length === 0) {
+//         noProduct.classList.remove("hidden");
+//     } else {
+//         noProduct.classList.add("hidden");
+//     }
+//     // renderProduct(productSearchAdvance); // Render the filtered products
+//     if (productSearch.length == 0) {
+//         noProduct.classList.remove("hidden");
+//         pagnigation.classList.add("hidden");
+//         getProduct(productSearch);
+//         return;
+//     }
+//     if (productSearch.length > 0) {
+//         currentProductList = productSearch;
+//         getProduct(productSearch);
+//         renderPageNumber(productSearch, perPage);
+//         noProduct.classList.add("hidden");
+//         pagnigation.classList.remove("hidden");
+//     }
+// }
 
-const btnShowResultAdvance = document.querySelector(".btn-show-result");
-const btnCancelAdvance = document.querySelector(".btn-cancel");
+// const btnShowResultAdvance = document.querySelector(".btn-show-result");
+// const btnCancelAdvance = document.querySelector(".btn-cancel");
 
-btnShowResultAdvance.addEventListener("click", function (e) {
-    console.log("da search advance");
-    e.preventDefault();
-    searchAdvance(
-        type.value,
-        color.value,
-        textInputAdvance.value,
-        minPrice.value,
-        maxPrice.value
-    );
-    cancelAfterSearched();
-});
+// btnShowResultAdvance.addEventListener("click", function (e) {
+//     console.log("da search advance");
+//     e.preventDefault();
+//     searchAdvance(
+//         type.value,
+//         color.value,
+//         textInputAdvance.value,
+//         minPrice.value,
+//         maxPrice.value
+//     );
+//     cancelAfterSearched();
+// });
 
-btnCancelAdvance.onclick = cancelAfterSearched;
+// btnCancelAdvance.onclick = cancelAfterSearched;
 // ========== hàm dùng để huỷ các giá trị và ẩn form
 function cancelAfterSearched(e) {
     const iconDeleteAdvance = document.querySelector(".icon-delete-advance");
