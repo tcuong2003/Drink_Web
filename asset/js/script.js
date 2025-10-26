@@ -308,6 +308,12 @@ function hideHistoryOrder1() {
     btnHistory.addEventListener("click", () => {
         displayHideHistory();
     });
+    console.log("JS loaded");
+
+document.querySelector(".history").addEventListener("click", () => {
+  console.log("Đã bấm vào icon lịch sử");
+});
+
 }
 function hideHistoryOrder2() {
     const btnCloseHistory = document.querySelector(".close-history");
