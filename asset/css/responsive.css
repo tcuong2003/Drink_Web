@@ -30,6 +30,9 @@
 
     .header .last-icon svg {
         left: 233px;
+        align-items: center; 
+        text-align: center;
+        justify-content: center;
     }
 
     .header .bar {
@@ -69,6 +72,7 @@
 
     .menu-content .container {
         padding: 30px;
+        align-items: center;
     }
 
     /* 
@@ -139,7 +143,7 @@
     }
 
     /* recommend */
-    .recommend .row {
+    .sale .row {
         flex-wrap: wrap;
         justify-content: center;
     }
@@ -363,6 +367,7 @@
     .hello-filter .hello-name,
     .hello-filter .hello {
         font-size: 1.8rem;
+        text-align: center;
     }
 
     .list-show-product {
