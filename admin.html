@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DoAnWebN11</title>
+    <title>DoAnWeb</title>
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="76x76" href="./asset/favicon/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="./asset/favicon/favicon-32x32.png" />
@@ -22,6 +22,8 @@
 </head>
 
 <body>
+
+    <!-- Logo-Tên thương hiệu -- tiêu đề ứng với từng mục được chọn -->
     <header class="header">
         <div class="container">
                 <img src="./asset/img/header-logo.svg" class="logo" alt="" />
@@ -30,8 +32,13 @@
             </div>
         </div>
     </header>
+
+
+    <!-- Nội dung chính -->
     <main class="main">
         <div class="container">
+
+            <!-- Thanh điều hướng bên trái - navbar -->
             <nav class="navbar">
                 <ul>
                     <li class="productManagement">
@@ -56,67 +63,18 @@
                     </li>
                 </ul>
             </nav>
+
+            <!-- Phần nội dung bên phải -->
             <div class="main-content">
                 <div class="contain-add-product-search">
-                    <!-- <div class="head">
-                        <div class="form-input-startics">
-                            <form>
-                                <div class="start-date-div">
-                                    <label for="start_date">From Date:</label>
-                                    <input type="date" id="start-date" name="start-date" />
-                                </div>
-
-                                <div class="end-date-div">
-                                    <label for="end-date">To Date:</label>
-                                    <input type="date" id="end-date" name="end-date" />
-                                </div>
-
-                                <button class="btn-submit">Submit</button>
-
-                            </form>
-                            <button class="btn-sale">Top Sales</button>
-                            <button class="btn-customer">Top Customers</button>
-                        </div>
-                    </div>
-                    <div class="body">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>STT</th>
-                                    <th>Email</th>
-                                    <th>Image</th>
-                                    <th>Name</th>
-                                    <th>Quatity</th>    
-                                    <th>Price</th>
-                                    <th>Order time</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>loc@gmail.com</td>
-                                    <td><img class="img" src="./asset/img/product-sweater/sweater-101.jpg" alt=""></td>
-                                    <td>sweater dep</td>
-                                    <td>3</td>
-                                    <td>$67</td>
-                                    <td>12/10/2032</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>loc@gmail.com</td>
-                                    <td><img class="img" src="./asset/img/product-sweater/sweater-101.jpg" alt=""></td>
-                                    <td>sweater dep</td>
-                                    <td>3</td>
-                                    <td>$67</td>
-                                    <td>12/10/2032</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div> -->
+                    <!-- Nội dung động - render từ admin.js  -->
+                    
                 </div>
             </div>
         </div>
     </main>
+
+    <!-- Thêm/ sửa sản phẩm -->
     <div class="add-edit-product-background-form">
         <div class="add-edit-product-form">
             <div class="head-form">
@@ -145,9 +103,10 @@
                     <div class="div">
                         <select name="type" id="type" class="form-select">
                             <option value="" hidden>Choose type product</option>
-                            <option value="sweater">Sweater</option>
-                            <option value="pants">Pants</option>
-                            <option value="shoe">Shoe</option>
+                            <option value="coffee">Coffee</option>
+                            <option value="tea">Tea</option>
+                            <option value="smoothie">Smoothie</option>
+                            <option value="juice">Juice</option>
                         </select>
                     </div>
                     <p class="form-error"></p>
@@ -164,6 +123,9 @@
             </form>
         </div>
     </div>
+
+
+    <!-- Thông báo khi lưu thành công -->
     <div class="toast">
         <div class="toast-content">
             <!-- dau tich (check) -->

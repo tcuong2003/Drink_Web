@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
         dataUsersNow[userIndex].cartItems.forEach((item) => {
             sumQuantity += item.quantity;
             sumPrice += item.price * item.quantity;
-            shipTotal += 5 * item.quantity;
+            shipTotal += 2 * item.quantity;
         })
         totalQuantity.textContent = sumQuantity;
         price.textContent = sumPrice.toFixed(2);
@@ -144,7 +144,7 @@ function renderPriceAfter(deletedItem) {
     dataUsersNow[userIndex].cartItems.forEach((item) => {
         sumQuantity += item.quantity;
         sumPrice += item.price * item.quantity;
-        shipTotal += 5 * item.quantity;
+        shipTotal += 2 * item.quantity;
     });
 
     totalQuantity.textContent = sumQuantity;
