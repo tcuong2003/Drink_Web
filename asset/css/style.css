@@ -196,6 +196,7 @@ a {
     top: 18px;
     left: 252px;
     color: rgb(182, 175, 175);
+    align-items: center;
 }
 
 .header .buy-cart {
