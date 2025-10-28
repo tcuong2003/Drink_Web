@@ -733,3 +733,193 @@ resetBtn.addEventListener("click", () => {
   getProduct(listProducts);
   renderPageNumber(listProducts, perPage);
 });
+
+// ============ render UI Cart về số liệu =============
+function renderNumberCart(cartItems) {
+    const cartQuantity = document.querySelector(".you-have"); // Số lượng sản phẩm trong giỏ hàng
+    const cartTotal = document.querySelector("#price-total"); // Tổng giá trị cuối cùng
+    const subtotal = document.querySelector(".price-subtotal"); // Tổng giá trị trước khi tính phí vận chuyển
+    const shipping = document.querySelector(".price-shipping"); // Phí vận chuyển
+    const feeTotal = document.querySelector(".price-buy-cart"); // Tổng giá trị cuối cùng trong giỏ hàng
+
+    let totalQuantity = 0; // Tổng số lượng tất cả sản phẩm
+    let totalPrice = 0; // Tổng giá tiền tất cả sản phẩm
+    let shippingPrice = 5; // Giá vận chuyển cho mỗi sản phẩm
+
+    cartItems.forEach((item) => {
+        if (item.check == 0) {
+            totalQuantity += item.quantity;
+            totalPrice += item.price * item.quantity;
+        }
+    });
+
+    cartQuantity.textContent = `You have ${totalQuantity} item`;
+    subtotal.textContent = `$${totalPrice.toFixed(2)}`;
+    shipping.textContent = `$${shippingPrice * totalQuantity}`;
+    cartTotal.textContent = `$${(
+        totalPrice +
+        shippingPrice * totalQuantity
+    ).toFixed(2)}`;
+    feeTotal.textContent = cartTotal.textContent;
+}
+
+// ============ render tên người dùng khi đăng nhập ===============
+function renderName() {
+    const name = document.querySelector(".hello-name");
+    if (login) {
+        name.textContent = login.name;
+    }
+}
+renderName();
+
+document.addEventListener("click", (e) => {
+            if (e.target.classList.contains("icon-list-order")) {
+                console.log("Click history");
+                handleRenderHistoryOrder();
+            }});
+// ========= chức năng xem lại đơn hàng đã mua =============
+function displayHideHistory() {
+    const history = document.querySelector(".historyOrder");
+    history.classList.toggle("active");
+}
+function hideHistoryOrder1() {
+    const btnHistory = document.querySelector(".history");
+    btnHistory.addEventListener("click", () => {
+        displayHideHistory();
+    });
+    
+
+}
+function hideHistoryOrder2() {
+    const btnCloseHistory = document.querySelector(".close-history");
+    btnCloseHistory.addEventListener("click", () => {
+        displayHideHistory();
+    });
+}
+let ListOrders = localStorage.getItem("listOrders")
+    ? JSON.parse(localStorage.getItem("listOrders"))
+    : [];
+
+// render trong historyOrder
+function handleRenderHistoryOrder() {
+    if (login == null) return;
+    const historyOrder = document.querySelector(".historyOrder");
+    historyOrder.innerHTML = `
+        <div class="table-header">
+            <h2 class="title">History Order</h2>
+        </div>
+        <div class="container">
+            <img class="close-history" src="./asset/img/bx-x.svg" alt="">
+            <table>
+                <thead class = "tableHistoryHead"> 
+            
+                </thead>
+                <tbody class = "tableHistoryBody">
+
+                </tbody>
+            </table>
+        </div>
+    `;
+    const tableHead = document.querySelector(".tableHistoryHead");
+    tableHead.innerHTML = `
+        <tr>
+            <th>STT</th>
+            <th>Order time</th>
+            <th>Total Price</th>
+            <th>Status</th>
+            <th></th>
+        </tr> 
+    `;
+    hideHistoryOrder1();
+    hideHistoryOrder2();
+    const tableBody = document.querySelector(".tableHistoryBody");
+    let userIndex = dataUsers.findIndex((user) => user.id == login.id);
+    let number = 0;
+    ListOrders.forEach((item) => {
+        if (dataUsers[userIndex].id == item.userId) {
+            number++;
+            let row = `
+                <tr>
+                    <td>${number}</td> // day la doan can them ham render de tinh totalprice // kho hieu
+                    <td>${item.order[0].time}</td> // tai sao lai k hien dc ma qua ham MB ms hien duoc
+                    <td></td>
+                    <td>${status(item.order[0].check)}</td>
+                    <td onclick = "renderHistoryOrderItem(${item.id})">
+                        <img class="showmore" src="./asset/img/showmore.png" alt="">
+                    </td>
+                </tr>`;
+            tableBody.innerHTML += row;
+        }
+    });
+}
+function renderHistoryOrderItem(orderId) {
+    const historyOrder = document.querySelector(".historyOrder");
+    historyOrder.innerHTML = `
+        <div class="table-header">
+            <h2 class="title">History Order</h2>
+        </div>
+        <div class="container">
+            <div>
+                <img class="close-history" src="./asset/img/back_3114883.png" alt="Quay lại" onclick="handleRenderHistoryOrder()">
+            </div>
+            <table>
+                <thead class = "tableHistoryHead"> 
+            
+                </thead>
+                <tbody class = "tableHistoryBody">
+
+                </tbody>
+            </table>
+        </div>
+    `;
+    hideHistoryOrder1();
+    const tableHead = document.querySelector(".tableHistoryHead");
+    tableHead.innerHTML = `
+        <tr>
+            <th>STT</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Quatity</th>    
+            <th>Price</th>
+        </tr> 
+    `;
+    const table = document.querySelector(".tableHistoryBody");
+    table.innerHTML = "";
+    let number = 0;
+    let totalPrice = 0;
+    for (var i = 0; i < ListOrders.length; i++) {
+        if (ListOrders[i].id === orderId) {
+            ListOrders[i].order.forEach((item) => {
+                number++;
+                let row = `
+                <tr>
+                    <td>${number}</td>
+                    <td><img class="img-history" src="${item.image}" alt=""></td>
+                    <td>${item.nameProduct}</td>
+                    <td>${item.quantity}</td>
+                    <td>$${item.price}</td>
+                </tr>`;
+                table.innerHTML += row;
+            });
+        }
+    }
+}
+handleRenderHistoryOrder();
+function status(check) {
+    if (check == 0) {
+      return "Đang chờ...";
+    } else {
+        if(check == 1){
+          return "Đã xác nhận!";
+        }
+        else{
+          return "Đã hủy";
+      }
+    }
+  }
+const textInput = document.querySelector(".search-field");
+const textInputMb = document.querySelector(".search-field-mb"); // mobile
+const iconDelete = document.querySelector(".icon-delete");
+const iconDeleteMb = document.querySelector(".icon-delete-mb");
+const textInputAdvance = document.getElementById("name");
+const iconDeleteAdvance = document.querySelector(".icon-delete-advance");

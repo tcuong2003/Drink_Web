@@ -4,7 +4,20 @@
       gap: 20px;
       padding: 20px;
     }
-    .nav { display: none; }
+    .nav ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 40px; /* khoảng cách giữa các mục */
+    }
+    .nav ul li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+  font-size: 16px;
+  position: relative;
+  transition: color 0.3s ease;
+}
 
     /* Cột filter chiếm 30% */
     .filter-container {
