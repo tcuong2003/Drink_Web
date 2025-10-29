@@ -81,6 +81,7 @@ let userIndex = dataUsersNow.findIndex((user) => user.id == loginUserNow.id);
 console.log(dataUsersNow[userIndex]);
 console.log(dataUsersNow[userIndex].cartItems);
 
+
 function up(idProduct) {
     const amount = document.getElementById(`amount-${idProduct}`)
     console.log("fjsadkfasdfdsfsdaf");
@@ -193,3 +194,27 @@ function afterUpdate(){
     localStorage.setItem("DataUsers", JSON.stringify(dataUsersNow));
     window.location = "./index.html"
 }
+// ============ render tên người dùng khi đăng nhập ===============
+function renderName() {
+    const nameElement = document.querySelector(".hello-name");
+    const loginUser = JSON.parse(localStorage.getItem("loginUser"));
+
+    if (loginUser && loginUser.name) {
+        nameElement.textContent = loginUser.name;
+    } else {
+        nameElement.textContent = "everybody";
+    }
+}
+renderName();
+
+// ============ Hiển thị lịch sử đơn hàng ===============
+document.addEventListener("DOMContentLoaded", () => {
+  // Đảm bảo login có dữ liệu
+  window.login = JSON.parse(localStorage.getItem("loginUser"));
+  window.dataUsers = JSON.parse(localStorage.getItem("DataUsers")) || [];
+  window.listOrders = JSON.parse(localStorage.getItem("listOrders")) || [];
+
+  if (typeof handleRenderHistoryOrder === "function") {
+    handleRenderHistoryOrder();
+  }
+});

@@ -506,3 +506,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+// ============ render tên người dùng khi đăng nhập ===============
+function renderName() {
+    const name = document.querySelector(".hello-name");
+    if (login) {
+        name.textContent = login.name;
+    }
+}
+renderName();

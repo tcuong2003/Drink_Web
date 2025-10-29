@@ -411,3 +411,11 @@ function checkLogin(data) {
     localStorage.setItem("loginUser", JSON.stringify(loginUser));
     window.location = "./index.html"
  }
+ // ============ render tên người dùng khi đăng nhập ===============
+function renderName() {
+    const name = document.querySelector(".hello-name");
+    if (login) {
+        name.textContent = login.name;
+    }
+}
+renderName();

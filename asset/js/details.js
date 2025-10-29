@@ -757,10 +757,40 @@ function renderNumberCart(cartItems) {
 }
 
 // ============ render tên người dùng khi đăng nhập ===============
-// function renderName() {
-//     const name = document.querySelector(".hello-name");
-//     if (login) {
-//         name.textContent = login.name;
-//     }
-// }
-// renderName();
+function renderName() {
+    const name = document.querySelector(".hello-name");
+    if (login) {
+        name.textContent = login.name;
+    }
+}
+renderName();
+
+// ==============Hiển thị Producrt - link đến các nội dung main==============
+document.addEventListener("DOMContentLoaded", () => {
+  const mainPage = document.querySelector("#main");
+  const productPage = document.querySelector("./index.html/#product");
+
+  // Nút xem tất cả product
+  const btnProductAll = document.querySelector(".btn-product-all");
+  if (btnProductAll && mainPage && productPage) {
+    btnProductAll.addEventListener("click", (e) => {
+      e.preventDefault();
+      mainPage.classList.add("hidden");
+      productPage.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      // Cập nhật URL hash
+      history.pushState(null, "", "#product");
+    });
+  }
+});
+//render history order
+document.addEventListener("DOMContentLoaded", () => {
+  // Đảm bảo login có dữ liệu
+  window.login = JSON.parse(localStorage.getItem("loginUser"));
+  window.dataUsers = JSON.parse(localStorage.getItem("DataUsers")) || [];
+  window.listOrders = JSON.parse(localStorage.getItem("listOrders")) || [];
+
+  if (typeof handleRenderHistoryOrder === "function") {
+    handleRenderHistoryOrder();
+  }
+});

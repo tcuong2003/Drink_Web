@@ -189,14 +189,15 @@ a {
     display: flex;
     margin-left: auto;
     position: relative;
+    align-items: center;  /*chỉnh hello nằm giữa theo chiều dọc*/
 }
+
 
 .header .last-icon svg {
     position: absolute;
     top: 18px;
     left: 252px;
     color: rgb(182, 175, 175);
-    align-items: center;
 }
 
 .header .buy-cart {

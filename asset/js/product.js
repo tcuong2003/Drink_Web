@@ -935,3 +935,10 @@ function renderNumberCart(cartItems) {
     ).toFixed(2)}`;
     feeTotal.textContent = cartTotal.textContent;
 }
+// ============ render tên người dùng khi đăng nhập ===============
+function renderName() {
+    const name = document.querySelector(".hello-name");
+    if (login) {
+        name.textContent = login.name;
+    }
+}
