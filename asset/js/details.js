@@ -561,6 +561,7 @@ let ListProducts = localStorage.getItem("listProducts")
             size: ["S", "M", "L"],
             type: "juice",
         },
+       
 
     ];
     // Lấy ID sản phẩm từ URL
