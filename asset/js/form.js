@@ -411,11 +411,7 @@ function checkLogin(data) {
     localStorage.setItem("loginUser", JSON.stringify(loginUser));
    
     window.location = "./index.html"
-<<<<<<< HEAD
 
-
- }
-=======
  }
  // ============ render tên người dùng khi đăng nhập ===============
 function renderName() {
@@ -425,4 +421,3 @@ function renderName() {
     }
 }
 renderName();
->>>>>>> tuyen
