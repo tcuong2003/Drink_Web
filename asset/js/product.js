@@ -1,7 +1,8 @@
 let listProducts = localStorage.getItem("listProducts")
     ? JSON.parse(localStorage.getItem("listProducts"))
     : [
-          {
+        
+        {
             id: 1,
             name: "Americano",
             ingredients: "Espresso, nước nóng",
@@ -561,7 +562,6 @@ let listProducts = localStorage.getItem("listProducts")
             size: ["S", "M", "L"],
             type: "juice",
         },
-
 
       ];
 
