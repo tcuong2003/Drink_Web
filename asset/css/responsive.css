@@ -363,6 +363,7 @@
     .hello-filter .hello-name,
     .hello-filter .hello {
         font-size: 1.8rem;
+        align-items: center;
     }
 
     .list-show-product {

@@ -4,6 +4,20 @@
       gap: 20px;
       padding: 20px;
     }
+    /* .nav { display: none; } */
+    .header__nav li::after {
+    content: "";
+    }
+    .nav ul {
+      list-style: none;      /*  bỏ dấu chấm */
+      margin: 0;             /* bỏ khoảng cách mặc định */
+      padding: 0;            /* bỏ thụt đầu dòng mặc định */
+      display: flex;         /* các mục nằm ngang */
+      gap: 30px;             /* khoảng cách giữa các mục */
+      align-items: center;   /* căn giữa theo hàng dọc */
+    }
+
+
 
     /* Cột filter chiếm 30% */
     .filter-container {
