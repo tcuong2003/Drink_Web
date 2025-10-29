@@ -19,6 +19,7 @@
 
 .header .last-icon svg {
     left: 233px;
+    align-items: center;
 }
 
 /* Căn phần nav về bên trái giống index */

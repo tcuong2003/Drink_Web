@@ -189,11 +189,7 @@ a {
     display: flex;
     margin-left: auto;
     position: relative;
-<<<<<<< HEAD
-    align-items: center;
-=======
     align-items: center;  /*chỉnh hello nằm giữa theo chiều dọc*/
->>>>>>> tuyen
 }
 
 
