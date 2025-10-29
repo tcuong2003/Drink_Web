@@ -1,4 +1,4 @@
-    main {
+    .product-wrapper {
       display: flex;
       align-items: flex-start;
       gap: 20px;
@@ -26,6 +26,13 @@
         padding: 20px;
         width: 30%;
         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .filter-container h2 {
+        margin-bottom: 8px;
+        font-size: 20px;
+        font-weight: 600;
+        color: #333;
         }
 
         .filter-section {
@@ -98,6 +105,18 @@
     /* Danh sách sản phẩm chiếm 70% */
     .product-container {
       width: 70%;
+      position: relative;
+    }
+
+    /* Không tìm thấy sản phẩm*/
+    .noProduct {
+      position: absolute;
+      top: 50%;
+      left: 40%;
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: #555;
+      margin-top: 50px;
     }
 
     .list-show-product {
@@ -200,3 +219,5 @@
     .filter-btn:hover {
       background: #555;
     }
+
+    

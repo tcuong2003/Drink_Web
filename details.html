@@ -5,29 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Details</title>
         <!-- Favicon -->
-        <link
-            rel="apple-touch-icon"
-            sizes="76x76"
-            href="./asset/favicon/apple-touch-icon.png"
-        />
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="./asset/favicon/favicon-32x32.png"
-        />
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="16x16"
-            href="./asset/favicon/favicon-16x16.png"
-        />
+        <link rel="apple-touch-icon" sizes="76x76" href="./asset/favicon/apple-touch-icon.png"/>
+        <link rel="icon" type="image/png" sizes="32x32" href="./asset/favicon/logo-tab-32x32.png"/>
+        <link rel="icon" type="image/png" sizes="16x16" href="./asset/favicon/favicon-16x16.png"/>
         <link rel="manifest" href="./asset/favicon/site.webmanifest" />
-        <link
-            rel="mask-icon"
-            href="./asset/favicon/safari-pinned-tab.svg"
-            color="#5bbad5"
-        />
+        <link rel="mask-icon" href="./asset/favicon/safari-pinned-tab.svg" color="#5bbad5"/>
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
         <!-- reset CSS -->
@@ -42,132 +24,199 @@
         <link rel="stylesheet" href="./asset/font/stylesheet.css" />
     </head>
     <body>
-        <!-- HEADER -->
         <header class="header">
-        <div class="container">
-            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512" class="bar hide-on-desktop">
-                <path fill="currentColor"
-                    d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
-            </svg>
-            <a href="./index.html"
+            <div class="container">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="1em"
+                    viewBox="0 0 448 512"
+                    class="bar hide-on-desktop"
+                >
+                    <path
+                        fill="currentColor"
+                        d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"
+                    />
+                </svg>
+                <a href="./index.html"
                     ><img
                         src="./asset/img/header-logo.svg"
                         alt=""
                         class="logo hide-on-tablet"
                 /></a>
-            <nav class="nav">
-                <ul>
-                    <li class="header-product">
-                        <a href="./product.html" class="btn-product-all">Product</a>
-                    </li>
-                    <li>
-                        <a href="#">Sale</a>
-                    </li>
-                    <li id="aboutLink">
-                        <a href="#!">About</a>
-                    </li>
-                    <li>
-                        <a href="#footer">Contact us</a>
-                    </li>
-                </ul>
-            </nav>
-            <div class="last-icon">
-                <div class="row hello-filter" id="hello"></div>
-                <p class="hello">Hello <span class="hello-name">everybody</span> . Welcome our website</p>
-
-                <div class="buy-cart hide-on-mobile">
-                    <img src="./asset/img/header-buy.svg" alt="" />
-                    <span class="price price-buy-cart">$0.00</span>
-                    <div class="list-preview">
-                        <p class="no-product">No product in your cart</p>
-                        <div class="have-product hidden">
-                            <div class="row-1">
-                                <p class="you-have">You have 0 item </p>
-                                <a href="./cart.html" class="see-all">See all</a>
-                            </div>
-                            <div class="row-2">
-                            
-                            </div>
-                            <div class="separate"></div>
-                            <div class="row-3 row">
-                                <p class="subtotal">Subtotal: </p>
-                                <span class="price price-subtotal">$0.00</span>
-                            </div>
-                            <div class="row-4 row">
-                                <p class="shipping">Shipping: </p>
-                                <span class="price price-shipping">$0.00</span>
-                            </div>
-                            <div class="row-5 row">
-                                <p class="total-price">Total price: </p>
-                                <span class="price" id="price-total">$0.00</span>
+                <nav class="nav">
+                    <ul>
+                        <li class="header-product">
+                            <a href="#!">Product</a>
+                            <img
+                                src="./asset/img/header-arrown.svg"
+                                alt=""
+                                class="arrown"
+                            />
+                            <ul class="sub-menu">
+                                <li>
+                                    <a href="#recommend" class="btn-sweater"
+                                        >Sweater</a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="#recommend" class="btn-pants"
+                                        >Pants</a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="#!">Shoe</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#!">About</a>
+                        </li>
+                        <li>
+                            <a href="#!">Contact us</a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="last-icon">
+                    <input
+                        type="text"
+                        name=""
+                        id=""
+                        placeholder="Search for..."
+                        class="search-field hide-on-mobile"
+                        spellcheck="false"
+                    />
+                    <svg
+                        xmlns=""
+                        height="1em"
+                        viewBox="0 0 512 512"
+                        class="icon-delete hidden hide-on-mobile"
+                    >
+                        <path
+                            fill="currentColor"
+                            d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"
+                        ></path>
+                    </svg>
+                    <button class="btn-search hide-on-mobile">
+                        <img
+                            src="./asset/img/header-search.svg"
+                            alt=""
+                            class="search-icon"
+                        />
+                    </button>
+                    <div class="buy-cart hide-on-mobile">
+                        <img src="./asset/img/header-buy.svg" alt="" />
+                        <span class="price price-buy-cart">$0.00</span>
+                        <div class="list-preview">
+                            <p class="no-product">No product in your cart</p>
+                            <div class="have-product hidden">
+                                <div class="row-1">
+                                    <p class="you-have">You have 0 item</p>
+                                    <a href="./cart.html" class="see-all"
+                                        >See all</a
+                                    >
+                                </div>
+                                <div class="row-2">
+                                    <!-- <div class="block-each-preview">
+                                            <img src="./asset/img/product-sweater/sweater-102.jpg" alt="" class="img-preview">
+                                            <h2 class="title">Sweater 1874A</h2>
+                                            <span class="price">$100</span>
+                                            <span class="quatity">x 5</span>
+                                        </div>
+                                        <div class="block-each-preview">
+                                            <img src="./asset/img/product-sweater/sweater-102.jpg" alt="" class="img-preview">
+                                            <h2 class="title">Sweater 1874A</h2>
+                                            <span class="price">$100</span>
+                                            <span class="quatity">x 5</span>
+                                        </div>
+                                        <div class="block-each-preview">
+                                            <img src="./asset/img/product-sweater/sweater-102.jpg" alt="" class="img-preview">
+                                            <h2 class="title">Sweater 1874A</h2>
+                                            <span class="price">$100</span>
+                                            <span class="quatity">x 5</span>
+                                        </div> -->
+                                </div>
+                                <div class="separate"></div>
+                                <div class="row-3 row">
+                                    <p class="subtotal">Subtotal:</p>
+                                    <span class="price price-subtotal"
+                                        >$0.00</span
+                                    >
+                                </div>
+                                <div class="row-4 row">
+                                    <p class="shipping">Shipping:</p>
+                                    <span class="price price-shipping"
+                                        >$0.00</span
+                                    >
+                                </div>
+                                <div class="row-5 row">
+                                    <p class="total-price">Total price:</p>
+                                    <span class="price" id="price-total"
+                                        >$0.00</span
+                                    >
+                                </div>
+                                <div class="separate"></div>
+                                <button
+                                    id="checkout-button"
+                                    class="checkout-button"
+                                >
+                                    <a href="./cart.html">Check Out All</a>
+                                </button>
                             </div>
                             <div class="separate"></div>
                             <button id="checkout-button" class="checkout-button"><a href="./cart.html">Check Out
                                     All</a></button>
                         </div>
                     </div>
-                </div>
-                <div class="history  hide-on-mobile">
-                    <img src="./asset/img/header-list-order.png" alt="" class="icon-list-order">
-                </div>
-                <div class="iconUser">
-                    <!-- <img src="./asset/img/header-user.svg" alt="" class="icon-user"> -->
-                </div>
-            </div>
-        </div>
-    </header>
-    <header class="header-mobile hide-on-desktop">
-        <div class="menu-overlay"></div>
-        <div class="menu-content">
-            <div class="container">
-                <a href="#"><img src="./asset/img/header-logo.svg" alt="" class="logo hide-on-mobile" /></a>
-                <div class="group-cart hide-on-tablet">
-                    <a href="./cart.html"><img src="./asset/img/header-buy.svg" alt="" class="buy-cart" /></a>
-                    <span class="cart-text"><a href="./cart.html">cart</a></span>
-                    <span class="cart-quantity"></span>
-                </div>
-                <div class="group-history hide-on-tablet">
-                    <img src="./asset/img/header-list-order.png" alt="" class="icon-list-order">
-                    <span class="cart-text">ordered</span>
-                </div>
-                <nav class="nav">
-                    <ul>
-                        <li>
-                            <a href="#hello" class="btn-sweater">Coffee</a>
-                        </li>
-                        <li>
-                            <a href="#hello" class="btn-pants">Juice</a>
-                        </li>
-                        <li>
-                            <a href="#hello" class="btn-pants">smoothiemoothie</a>
-                        </li>
-                        <li id="aboutLinkmobile">
-                            <a href="#!">About</a>
-                        </li>
-                        <li>
-                            <a href="#footer">Contact us</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </header>
-        <!-- HẾT HEADER -->
-
-        <main>
-            <!-- Filter -->
-            <div class="filter">
-                <div class="container">
-                    <div class="body">
-                        <div class="body-filter">
-                            <a class="title" href="./index.html">Home</a>
-                            <img src="./asset/img/arrow-right.svg" alt="" />
-                            <a class="title" href="#!">Details</a>
-                        </div>
+                    <div class="iconUser">
+                        <!-- <img src="./asset/img/header-user.svg" alt="" class="icon-user"> -->
                     </div>
                 </div>
             </div>
+        </header>
+        
+        <header class="header-mobile hide-on-desktop">
+            <div class="menu-overlay"></div>
+            <div class="menu-content">
+                <div class="container">
+                    <a href="#"
+                        ><img
+                            src="./asset/img/header-logo.svg"
+                            alt=""
+                            class="logo hide-on-mobile"
+                    /></a>
+                    <div class="group-cart hide-on-tablet">
+                        <img
+                            src="./asset/img/header-buy.svg"
+                            alt=""
+                            class="buy-cart"
+                        />
+                        <span class="cart-text">cart</span>
+                        <span class="cart-quantity">5</span>
+                    </div>
+                    <nav class="nav">
+                        <ul>
+                            <li>
+                                <a href="#hello" class="btn-sweater">Sweater</a>
+                            </li>
+                            <li>
+                                <a href="#hello" class="btn-pants">Pants</a>
+                            </li>
+                            <li>
+                                <a href="#!">Shoe</a>
+                            </li>
+                            <li>
+                                <a href="#!">About</a>
+                            </li>
+                            <li>
+                                <a href="#!">Contact us</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
 
+        <main>
             <!-- Product -->
             <div class="product">
                 <div class="container">
@@ -233,7 +282,7 @@
                                                 <div
                                                     class="desc line-clamp break-all"
                                                 >
-                                                    From $6 for 1-3 days
+                                                    From $2 for 1-3 hours
                                                 </div>
                                             </div>
                                         </div>
@@ -259,7 +308,7 @@
                 </div>
             </div>
 
-            <!-- Customs -->
+            <!-- Đánh giá của khách hàng-->
             <div class="custom">
                 <div class="container">
                     <div class="body">
@@ -271,45 +320,20 @@
                             <!-- custom 1 -->
                             <div class="custom-rating">
                                 <div class="user">
-                                    <img
-                                        src="./asset/img/customer-1.avif"
-                                        alt="Jakir Hussen"
-                                        class="images"
-                                    />
+                                    <img src="./asset/img/customer-1.avif" alt="Jakir Hussen" class="images"/>
                                     <div class="note">
                                         <h3 class="title">Jakir Hussen</h3>
                                         <p class="desc line-clamp break-all">
-                                            Great product, I love this Coffee
-                                            Beans
+                                            Great product, I love this Coffee Beans
                                         </p>
                                     </div>
                                 </div>
                                 <div class="review">
-                                    <img
-                                        src="./asset/img/main-star.svg"
-                                        alt=""
-                                        class="star"
-                                    />
-                                    <img
-                                        src="./asset/img/main-star.svg"
-                                        alt=""
-                                        class="star"
-                                    />
-                                    <img
-                                        src="./asset/img/main-star.svg"
-                                        alt=""
-                                        class="star"
-                                    />
-                                    <img
-                                        src="./asset/img/Star.svg"
-                                        alt=""
-                                        class="star"
-                                    />
-                                    <img
-                                        src="./asset/img/Star-opacity.svg"
-                                        alt=""
-                                        class="star"
-                                    />
+                                    <img src="./asset/img/main-star.svg" alt="" class="star"/>
+                                    <img src="./asset/img/main-star.svg"alt="" class="star"/>
+                                    <img src="./asset/img/main-star.svg"alt="" class="star"/>
+                                    <img src="./asset/img/Star.svg" alt="" class="star"/>
+                                    <img src="./asset/img/Star-opacity.svg" alt="" class="star"/>
                                     <p class="title">(3.5) Review</p>
                                 </div>
                             </div>
@@ -325,38 +349,17 @@
                                     <div class="note">
                                         <h3 class="title">Jubed Ahmed</h3>
                                         <p class="desc line-clamp break-all">
-                                            Awesome Coffee, I love this Coffee
-                                            Beans
+                                            It's decent coffee, but not my favorite.
                                         </p>
                                     </div>
                                 </div>
                                 <div class="review">
-                                    <img
-                                        src="./asset/img/main-star.svg"
-                                        alt=""
-                                        class="star"
-                                    />
-                                    <img
-                                        src="./asset/img/main-star.svg"
-                                        alt=""
-                                        class="star"
-                                    />
-                                    <img
-                                        src="./asset/img/main-star.svg"
-                                        alt=""
-                                        class="star"
-                                    />
-                                    <img
-                                        src="./asset/img/Star.svg"
-                                        alt=""
-                                        class="star"
-                                    />
-                                    <img
-                                        src="./asset/img/Star-opacity.svg"
-                                        alt=""
-                                        class="star"
-                                    />
-                                    <p class="title">(3.5) Review</p>
+                                    <img src="./asset/img/main-star.svg" alt="" class="star"/>
+                                    <img src="./asset/img/main-star.svg"alt="" class="star"/>
+                                    <img src="./asset/img/Star.svg" alt="" class="star"/>
+                                    <img src="./asset/img/Star-opacity.svg" alt="" class="star"/>
+                                    <img src="./asset/img/Star-opacity.svg" alt="" class="star"/>
+                                    <p class="title">(2.5) Review</p>
                                 </div>
                             </div>
 
@@ -371,38 +374,17 @@
                                     <div class="note">
                                         <h3 class="title">Delwar Hussain</h3>
                                         <p class="desc line-clamp break-all">
-                                            Great product, I like this Coffee
-                                            Beans
+                                            Great coffee! Rich flavor and nice aroma.
                                         </p>
                                     </div>
                                 </div>
                                 <div class="review">
-                                    <img
-                                        src="./asset/img/main-star.svg"
-                                        alt=""
-                                        class="star"
-                                    />
-                                    <img
-                                        src="./asset/img/main-star.svg"
-                                        alt=""
-                                        class="star"
-                                    />
-                                    <img
-                                        src="./asset/img/main-star.svg"
-                                        alt=""
-                                        class="star"
-                                    />
-                                    <img
-                                        src="./asset/img/Star.svg"
-                                        alt=""
-                                        class="star"
-                                    />
-                                    <img
-                                        src="./asset/img/Star-opacity.svg"
-                                        alt=""
-                                        class="star"
-                                    />
-                                    <p class="title">(3.5) Review</p>
+                                    <img src="./asset/img/main-star.svg" alt="" class="star"/>
+                                    <img src="./asset/img/main-star.svg"alt="" class="star"/>
+                                    <img src="./asset/img/main-star.svg"alt="" class="star"/>
+                                    <img src="./asset/img/main-star.svg"alt="" class="star"/>
+                                    <img src="./asset/img/Star.svg" alt="" class="star"/>
+                                    <p class="title">(4.5) Review</p>
                                 </div>
                             </div>
                         </div>
@@ -410,6 +392,7 @@
                 </div>
             </div>
         </main>
+        
         <!-- Login Tab -->
         <div class="loginBackground">
             <div class="loginBlock">
@@ -417,7 +400,7 @@
                     <img src="./asset/img/bx-x.svg" />
                 </div>
                 <div class="loginLogo">
-                    <img src="./asset/img/header-logo.svg" />
+                    <img src="./asset/img/logo-quan-nuoc.png" />
                 </div>
                 <div class="loginError"></div>
                 <div class="tab-form">
@@ -552,10 +535,8 @@
                 </div>
             </div>
         </div>
-        <div id="historyOrder" class="historyOrder"></div>
         <script src="./asset/js/form.js"></script>
-        <script src="./asset/js/details.js"></script>
+        
         <script src="./asset/js/responsive.js"></script>
-        <script src="./asset/js/header.js"></script>
     </body>
 </html>

@@ -24,15 +24,15 @@ document.querySelector(".icon-user").onclick = function () {
         display:'block',        
     });
 };
-document.querySelector(".btn").onclick = function () { // .btn là nút create ở gần footer
-    Object.assign(document.querySelector(".loginBackground").style, {
-        visibility: 'visible',      
-        'animation-name': 'backgroundeffect1',
-    });
-    Object.assign(document.querySelector(".loginBlock").style, {
-        display:'block',      
-    });
-};
+// document.querySelector(".btn").onclick = function () { // .btn là nút create ở gần footer
+//     Object.assign(document.querySelector(".loginBackground").style, {
+//         visibility: 'visible',      
+//         'animation-name': 'backgroundeffect1',
+//     });
+//     Object.assign(document.querySelector(".loginBlock").style, {
+//         display:'block',      
+//     });
+// };
 document.querySelector(".closeLoginBlock img").onclick = function () { // nút dấu x để tắt form
     Object.assign(document.querySelector(".loginBackground").style, {
         'animation-name': 'backgroundefffect2', // hiện rồi ẩn
@@ -411,6 +411,18 @@ function checkLogin(data) {
     localStorage.setItem("loginUser", JSON.stringify(loginUser));
    
     window.location = "./index.html"
+<<<<<<< HEAD
 
 
  }
+=======
+ }
+ // ============ render tên người dùng khi đăng nhập ===============
+function renderName() {
+    const name = document.querySelector(".hello-name");
+    if (login) {
+        name.textContent = login.name;
+    }
+}
+renderName();
+>>>>>>> tuyen

@@ -5,9 +5,9 @@
     }
 }
 
-.header .nav {
+/* .header .nav {
     display: none;
-}
+} */
 
 .header .logo {
     /* position: absolute;
@@ -20,6 +20,32 @@
 .header .last-icon svg {
     left: 233px;
 }
+
+/* Căn phần nav về bên trái giống index */
+.header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header .nav {
+    margin-left: 20px; /* Dịch nav sát logo */
+    flex: 1;
+}
+
+.header .nav ul {
+    display: flex;
+    justify-content: flex-start;
+    gap: 40px; /* Khoảng cách giữa các mục menu */
+}
+
+.header .last-icon {
+    margin-left: auto; /* Đẩy phần giỏ hàng và user sang phải */
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
 
 .header .bar {
     display: none;
