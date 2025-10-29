@@ -158,7 +158,7 @@ function handleRenderHistoryOrder() {
         if (dataUsers[userIndex].id == item.userId) {
             number++;
             let row = `
-                <tr>
+                <tr> 
                     <td>${number}</td> // day la doan can them ham render de tinh totalprice // kho hieu
                     <td>${item.order[0].time}</td> // tai sao lai k hien dc ma qua ham MB ms hien duoc
                     <td></td>
