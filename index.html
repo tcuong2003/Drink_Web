@@ -25,13 +25,15 @@
 
 
 <body>
+
+    <!----------------HEADER DESKTOP----------------->
     <header class="header">
         <div class="container">
             <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512" class="bar hide-on-desktop">
                 <path fill="currentColor"
                     d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
             </svg>
-            <a href="#"><img src="./asset/img/header-logo.svg" alt="" class="logo hide-on-tablet" /></a>
+            <a href="./index.html"><img src="./asset/img/logo-quan-nuoc.png" alt="" class="logo hide-on-tablet" /></a>
             <nav class="nav">
                 <ul>
                     <li class="header-product">
@@ -49,7 +51,12 @@
                 </ul>
             </nav>
             <div class="last-icon">
-                <input type="text" name="" id="" placeholder="Search for..." class="search-field hide-on-mobile"
+
+                <!---------- HELLO USER ---------->
+                <div class="row hello-filter" id="hello"></div>
+                <p class="hello">Hello <span class="hello-name">everybody</span> . Welcome our website</p> 
+                
+                <!-- <input type="text" name="" id="" placeholder="Search for..." class="search-field hide-on-mobile"
                     spellcheck="false" />
                 <svg xmlns="" height="1em" viewBox="0 0 512 512" class="icon-delete hidden hide-on-mobile">
                     <path fill="currentColor"
@@ -58,7 +65,7 @@
                 </svg>
                 <button class="btn-search hide-on-mobile">
                     <img src="./asset/img/header-search.svg" alt="" class="search-icon" />
-                </button>
+                </button> -->
                 <div class="buy-cart hide-on-mobile">
                     <img src="./asset/img/header-buy.svg" alt="" />
                     <span class="price price-buy-cart">$0.00</span>
@@ -70,7 +77,24 @@
                                 <a href="./cart.html" class="see-all">See all</a>
                             </div>
                             <div class="row-2">
-                            
+                                <!-- <div class="block-each-preview">
+                                        <img src="./asset/img/product-sweater/sweater-102.jpg" alt="" class="img-preview">
+                                        <h2 class="title">Sweater 1874A</h2>
+                                        <span class="price">$100</span>
+                                        <span class="quatity">x 5</span>
+                                    </div>
+                                    <div class="block-each-preview">
+                                        <img src="./asset/img/product-sweater/sweater-102.jpg" alt="" class="img-preview">
+                                        <h2 class="title">Sweater 1874A</h2>
+                                        <span class="price">$100</span>
+                                        <span class="quatity">x 5</span>
+                                    </div>
+                                    <div class="block-each-preview">
+                                        <img src="./asset/img/product-sweater/sweater-102.jpg" alt="" class="img-preview">
+                                        <h2 class="title">Sweater 1874A</h2>
+                                        <span class="price">$100</span>
+                                        <span class="quatity">x 5</span>
+                                    </div> -->
                             </div>
                             <div class="separate"></div>
                             <div class="row-3 row">
@@ -139,6 +163,8 @@
             </div>
         </div>
     </header>
+
+   
     <main id="main" class="main">
         
         <!-- Thêm background -->
@@ -205,36 +231,31 @@
                     </a>
                 </div>
             </div>
-            <!-- hello and filter -->
-            <div class="row hello-filter" id="hello">
-                <p class="hello">Hello <span class="hello-name">everybody</span> . Welcome our website</p>
 
+           
+            <!-- ABOUT US -->
+            <section class="about-section" id="about">
+                <div class="container">
+                    <h2 class="heading">About Grocerymart</h2>
+                    <p class="about-desc">
+                    At <strong>Grocerymart</strong>, we bring you a refreshing world of drinks — 
+                    from rich coffee and creamy smoothies to soothing tea and natural juices. 
+                    Every sip is crafted to energize your day and lift your mood.
+                    </p>
 
-            <!-- display product -->
-            <div id="product-section" class="list-show-product">
-                <!-- <section class="cart">
-                    <div class="wrap-img-cart">
-                        <img src="./asset/img/product-pants/pants-201.jpg" alt="" class="img-cart" />
+                    <div class="about-stats">
+                    <div class="about-item">
+                        <h3>100+</h3>
+                        <p>Delicious Beverages</p>
                     </div>
                     <div class="about-item">
                         <h3>50+</h3>
                         <p>Trusted Suppliers</p>
                     </div>
-                </section> -->
-            </div>
-            <div class="pagnigation">
-                <ul class="pagnigation-ul">
-                </ul>
-            </div>
-            <p class="no-product-search hidden">// No product for search</p>
-            <!-- create account -->
-            <div class="create-acc">
-                <div class="container">
-                    <div class="left">
-                        <h3 class="title">Ready to Get Admit</h3>
-                        <p class="desc">
-                            Create your accout and enjoy the moment shopping
-                        </p>
+                    <div class="about-item">
+                        <h3>10K+</h3>
+                        <p>Happy Customers</p>
+                    </div>
                     </div>
                 </div>
             </section>
@@ -492,29 +513,8 @@
     <!-- History order -->
     <div id="historyOrder" class="historyOrder">
     </div>
-    <!-- Popup hỗ trợ -->
-    <div id="supportPopup" class="popup" style="visibility: visible; animation-name: backgroundeffect1;">
-        <div class="popup-content">
-            <div class="close" id="closeSupportPopup"><img src="./asset/img/bx-x.svg" alt=""></div>
-            <!-- Thêm nội dung chi tiết của trang hỗ trợ -->
-            <div id="supportContent">
-                <h2 color=black>cuong</h2>
-            </div>
-        </div>
-    </div>
-    </div>
-
-    <!-- Popup hỗ trợ -->
-    <div id="supportPopup" class="popup" style="visibility: visible; animation-name: backgroundeffect1;">
-        <div class="popup-content">
-            <div class="close" id="closeSupportPopup"><img src="./asset/img/bx-x.svg" alt=""></div>
-            <!-- Thêm nội dung chi tiết của trang hỗ trợ -->
-            <div id="supportContent">
-
-            </div>
-        </div>
-    </div>
-    </div>
+    
+    <script src="./asset/js/product.js"></script>
     <script src="./asset/js/script.js"></script>
     <script src="./asset/js/form.js"></script>
     <script src="./asset/js/responsive.js"></script>
