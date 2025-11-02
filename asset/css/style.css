@@ -99,7 +99,7 @@ a {
     content: "";
     position: absolute;
     border-radius: 50%;
-    left: 5px;
+    left: px;
     bottom: 0px;
     width: 80%;
     height: 2px;
@@ -517,7 +517,7 @@ a {
 /* -------------------------------------- CSS cho Sale off ------------------------------- */
 .sale {
     margin-top: 40px;
-    scroll-margin-top: 100px;
+    scroll-margin-top: 150px;
 }
 
 .sale .title {
@@ -581,7 +581,7 @@ a {
 
 /* ------------------------------------- CSS cho About us -------------------------------- */
 .about-section {
-    scroll-margin-top: 100px;
+    scroll-margin-top: 150px;
     background-color: #cceae9;
     margin-top: 100px;
     border-radius: 12px;

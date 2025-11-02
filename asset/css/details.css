@@ -86,7 +86,7 @@ a {
 }
 
 .header ul li {
-    padding: 4px 8px;
+    padding: 4px 4px;
 }
 
 .header .nav ul li {
@@ -163,6 +163,15 @@ a {
 .header .last-icon {
     display: flex;
     margin-left: auto;
+    position: relative;
+    align-items: center; 
+}
+
+.header .last-icon svg {
+    position: absolute;
+    top: 18px;
+    left: 252px;
+    color: rgb(182, 175, 175);
 }
 
 .header .buy-cart {
@@ -366,6 +375,34 @@ a {
     padding: 5px 0px;
     margin: 0px 20px 0 8px;
     align-items: center;
+}
+/* ===========BACK BUTTON============ */
+.breadcrumb {
+    background-color: rgba(238, 238, 238, 0.697);
+    padding: 12px 0;
+    font-size: 1.4rem;
+}
+.breadcrumb .container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    color: var(--text-color-dark);
+}
+.breadcrumb-link {
+    color: var(--text-color-dark);
+    text-decoration-line: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+.breadcrumb-link:hover{
+    color: #1ebfc1;
+}
+.breadcrumb-separator {
+    margin: 0 8px;
+    color: var(--text-color-light);
+}
+.breadcrumb-current {
+    color: var(--text-color-light);
 }
 
 /* =========== Product =========== */
