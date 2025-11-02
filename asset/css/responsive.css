@@ -499,6 +499,9 @@
     .footer .row .column:nth-child(2) {
         margin-top: 42px;
     }
+    .hello {
+       display: none;
+    }
 }
 
 @media screen and (min-width: 595px) and (max-width: 752px) {
