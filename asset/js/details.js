@@ -561,6 +561,7 @@ let ListProducts = localStorage.getItem("listProducts")
             size: ["S", "M", "L"],
             type: "juice",
         },
+       
 
     ];
     // Lấy ID sản phẩm từ URL
@@ -738,7 +739,7 @@ function renderNumberCart(cartItems) {
 
     let totalQuantity = 0; // Tổng số lượng tất cả sản phẩm
     let totalPrice = 0; // Tổng giá tiền tất cả sản phẩm
-    let shippingPrice = 5; // Giá vận chuyển cho mỗi sản phẩm
+    let shippingPrice = 2; // Giá vận chuyển cho mỗi sản phẩm
 
     cartItems.forEach((item) => {
         if (item.check == 0) {
@@ -757,10 +758,40 @@ function renderNumberCart(cartItems) {
 }
 
 // ============ render tên người dùng khi đăng nhập ===============
-// function renderName() {
-//     const name = document.querySelector(".hello-name");
-//     if (login) {
-//         name.textContent = login.name;
-//     }
-// }
-// renderName();
+function renderName() {
+    const name = document.querySelector(".hello-name");
+    if (login) {
+        name.textContent = login.name;
+    }
+}
+renderName();
+
+// ==============Hiển thị Producrt - link đến các nội dung main==============
+document.addEventListener("DOMContentLoaded", () => {
+  const mainPage = document.querySelector("#main");
+  const productPage = document.querySelector("./index.html/#product");
+
+  // Nút xem tất cả product
+  const btnProductAll = document.querySelector(".btn-product-all");
+  if (btnProductAll && mainPage && productPage) {
+    btnProductAll.addEventListener("click", (e) => {
+      e.preventDefault();
+      mainPage.classList.add("hidden");
+      productPage.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      // Cập nhật URL hash
+      history.pushState(null, "", "#product");
+    });
+  }
+});
+//render history order
+document.addEventListener("DOMContentLoaded", () => {
+  // Đảm bảo login có dữ liệu
+  window.login = JSON.parse(localStorage.getItem("loginUser"));
+  window.dataUsers = JSON.parse(localStorage.getItem("DataUsers")) || [];
+  window.listOrders = JSON.parse(localStorage.getItem("listOrders")) || [];
+
+  if (typeof handleRenderHistoryOrder === "function") {
+    handleRenderHistoryOrder();
+  }
+});

@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DoAnWebN11</title>
+    <title>DoAnWeb</title>
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="76x76" href="./asset/favicon/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="./asset/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./asset/favicon/logonew-tab-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="./asset/favicon/favicon-16x16.png" />
     <link rel="manifest" href="./asset/favicon/site.webmanifest" />
     <link rel="mask-icon" href="./asset/favicon/safari-pinned-tab.svg" color="#5bbad5" />
@@ -17,40 +17,47 @@
     <link rel="stylesheet" href="./asset/css/reset.css" />
     <!-- style CSS -->
     <link rel="stylesheet" href="./asset/css/style.css" />
-    <link rel="stylesheet" href="./asset/css/cart.css" />
     <link rel="stylesheet" href="./asset/css/responsive.css">
+    <link rel="stylesheet" href="./asset/css/product.css" />
     <!-- Font -->
     <link rel="stylesheet" href="./asset/font/stylesheet.css" />
 </head>
 
 
 <body>
+
+    <!----------------HEADER DESKTOP----------------->
     <header class="header">
         <div class="container">
             <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512" class="bar hide-on-desktop">
                 <path fill="currentColor"
                     d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
             </svg>
-            <a href="#"><img src="./asset/img/logo-quan-nuoc.png" alt="" class="logo hide-on-tablet" /></a>
+
+            <a href="./index.html"><img src="./asset/img/logo-coffe.png" alt="" class="logo hide-on-tablet" /></a>
             <nav class="nav">
                 <ul>
                     <li class="header-product">
-                        <a href="./product.html" class="btn-product-all">Product</a>
+                        <a href="#" class="btn-product-all">Product</a>
                     </li>
                     <li>
-                        <a href="#sale">Sale</a>
+                        <a href="#" class="btn-sale">Sale</a>
                     </li>
                     <li>
-                        <a href="#about">About</a>
+                        <a href="#" class="btn-about">About</a>
                     </li>
                     <li>
-                        <a href="#footer">Contact us</a>
+                        <a href="#" class="btn-contact">Contact us</a>
                     </li>
                 </ul>
             </nav>
             <div class="last-icon">
-                 <div class="row hello-filter" id="hello"></div>
+
+
+                <!---------- HELLO USER ---------->
+                <div class="row hello-filter" id="hello"></div>
                 <p class="hello">Hello <span class="hello-name">everybody</span> . Welcome our website</p> 
+                
                 <!-- <input type="text" name="" id="" placeholder="Search for..." class="search-field hide-on-mobile"
                     spellcheck="false" />
                 <svg xmlns="" height="1em" viewBox="0 0 512 512" class="icon-delete hidden hide-on-mobile">
@@ -119,11 +126,16 @@
             </div>
         </div>
     </header>
+
+
+    <!--------------- HEADER MOBILE ----------------->
     <header class="header-mobile hide-on-desktop">
         <div class="menu-overlay"></div>
         <div class="menu-content">
             <div class="container">
-                <a href="#"><img src="./asset/img/logo-quan-nuoc.png" alt="" class="logo hide-on-mobile" /></a>
+
+                <a href="#"><img src="./asset/img/logo-coffe.png" alt="" class="logo hide-on-mobile" /></a>
+
                 <div class="group-cart hide-on-tablet">
                     <a href="./cart.html"><img src="./asset/img/header-buy.svg" alt="" class="buy-cart" /></a>
                     <span class="cart-text"><a href="./cart.html">cart</a></span>
@@ -155,24 +167,14 @@
             </div>
         </div>
     </header>
+
+   
     <main id="main" class="main">
+        
         <!-- Thêm background -->
         <img src="./asset/img/img_bg.png" class="bg-main" alt="">
         
         <div class="container">
-            <!-- Thanh tìm kiếm cho giao diện trên mobile và tablet nằm trong header -->
-            <div class="group-search hide-on-desktop hide-on-tablet">
-                <input type="text" name="" id="" placeholder="Search for..." class="search-field search-field-mb"
-                    spellcheck="false" />
-                <svg xmlns="" height="1em" viewBox="0 0 512 512" class="icon-delete-mb hidden">
-                    <path fill="currentColor"
-                        d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z">
-                    </path>
-                </svg>
-                <button class="btn-search btn-search-Mb">
-                    <img src="./asset/img/header-search.svg" alt="" class="search-icon" />
-                </button>
-            </div>
 
             <!-- Phần banner -->
             <div class="slider">
@@ -189,39 +191,6 @@
                 <button class="btn-right hide-on-mobile">&rarr;</button>
                 <div class="dots"></div>
             </div>
-            <!-- recommend
-            <div class="recommend" id="recommend">
-                <h3 class="title">Recommend for you</h3>
-                <div class="row">
-                    <div class="recommend-product">
-                        <img src="./asset/img/product-sweater/sweater-105.jpg" alt="" class="img-product" />
-                        <div class="recommed-product-right">
-                            <span class="price">$2.00</span>
-                            <p class="desc">
-                                New sumatra mandeling coffe blend
-                            </p>
-                        </div>
-                    </div>
-                    <div class="recommend-product">
-                        <img src="./asset/img/product-tea/tea-201.jpg" alt="" class="img-product" />
-                        <div class="recommed-product-right">
-                            <span class="price">$3.50</span>
-                            <p class="desc">
-                                New sumatra mandeling coffe blend
-                            </p>
-                        </div>
-                    </div>
-                    <div class="recommend-product">
-                        <img src="./asset/img/product-smoothie/smoothie-303.jpg" alt="" class="img-product" />
-                        <div class="recommed-product-right">
-                            <span class="price">$4.59</span>
-                            <p class="desc">
-                                New sumatra mandeling coffe blend
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
 
 
             <!-- SALE OFF -->
@@ -267,7 +236,8 @@
                 </div>
             </div>
 
-            <!-- about us -->
+           
+            <!-- ABOUT US -->
             <section class="about-section" id="about">
                 <div class="container">
                     <h2 class="heading">About Grocerymart</h2>
@@ -293,63 +263,85 @@
                     </div>
                 </div>
             </section>
-
-            <!-- hello and filter -->
-            <!-- <div class="row hello-filter" id="hello">
-                <p class="hello">Hello <span class="hello-name">everybody</span> . Welcome our website</p> -->
-
-
-            <!-- display product -->
-            <div id="product-section" class="list-show-product">
-                <!-- <section class="cart">
-                    <div class="wrap-img-cart">
-                        <img src="./asset/img/product-pants/pants-201.jpg" alt="" class="img-cart" />
-                    </div>
-                    <h3 class="title">Coffee Beans-Express and nice</h3>
-                    <span class="brand">Lavazza</span>
-                    <div class="row">
-                        <span class="price">$47.00</span>
-                        <div class="row-price-star">
-                            <img src="./asset/img/main-star.svg" alt="" class="star" />
-                            <span class="star-num">4.3</span>
-                        </div>
-                        <button class="add-to-cart-button">
-                            Add to Cart
-                        </button>
-                    </div>
-                </section> -->
-            </div>
-            <div class="pagnigation">
-                <ul class="pagnigation-ul">
-                </ul>
-            </div>
-            <p class="no-product-search hidden">// No product for search</p>
-
-            
-            <!-- create account -->
-             <!-- phần màu xanh -->
-            <!-- <div class="create-acc">
-                <div class="container">
-                    <div class="left">
-                        <h3 class="title">Ready to Get Admit</h3>
-                        <p class="desc">
-                            Create your accout and enjoy the moment shopping
-                        </p>
-                    </div>
-                    <button class="btn">Get start</button>
-                </div>
-            </div> -->
         </div> 
-
-
-        <!-- <div id="product-list"></div> -->
+      
     </main>
+
+
+    <!-- PRODUCT -->
+        <section id="product" class="hidden">
+            <div class="product-wrapper">
+            <!-- Bộ lọc -->
+            <aside class="filter-container">
+                <h2 id="filter">FILTER</h2>
+
+                <div class="filter-section">
+                    <h3>Search</h3>
+                    <input 
+                    type="text" 
+                    id="search-input" 
+                    placeholder="Search drinks..." 
+                    
+                    />
+                </div>
+
+                <div class="filter-section">
+                    <h3>Type</h3>
+                    <select id="filter-type">
+                    <option value="all">All</option>
+                    <option value="coffee">Coffee</option>
+                    <option value="tea">Tea</option>
+                    <option value="smoothie">Smoothie</option>
+                    <option value="juice">Juice</option>
+                    </select>
+                </div>
+
+                <div class="filter-section">
+                    <h3>Rating</h3>
+                    <select id="filter-rating">
+                    <option value="0">All</option>
+                    <option value="5">5 stars</option>
+                    <option value="4">4 stars & up</option>
+                    <option value="3">3 stars & up</option>
+                    <option value="2">2 stars & up</option>
+                    <option value="1">1 star & up</option>
+                    </select>
+                </div>
+
+                <div class="filter-section">
+                    <h3>Price</h3>
+                    <label>Min - Max ($)</label>
+                    <input type="number" class="price" id="price-min" placeholder="Min" />
+                    <input type="number" class="price" id="price-max" placeholder="Max" />
+                </div>
+
+                <button class="filter-btn" id="apply-filter">Apply Filter</button>
+                <button class="reset-btn" id="reset-filter">Reset Filter</button>
+            </aside>
+
+            <!-- Danh sách sản phẩm -->
+            <section class="product-container">
+                <div class="list-show-product"></div>
+
+                <div class="pagnigation">
+                    <ul class="pagnigation-ul"></ul>
+                </div>
+            </section>
+            </div>
+        </section>
+
+
+    
     <footer class="footer" id="footer">
+
+        <!-- CONTACT US -->
         <div class="container">
             <div class="row">
-                <!-- column-1 -->
+                <!-- Tên thương hiệu -->
                 <div class="column">
-                    <img src="./asset/img/logo-quan-nuoc.png" alt="grocerymart" class="logo" />
+
+                    <img src="./asset/img/logo-coffe.png" alt="grocerymart" class="logo" />
+
                     <p class="desc">
                         Need a little boost for your day? 
                         Our delicious drinks bring freshness and energy to every moment.
@@ -364,7 +356,7 @@
                         <img class="icon" src="./asset/img/instagram.svg" alt="" />
                     </div>
                 </div>
-                <!-- column-2 -->
+                <!-- Company -->
                 <div class="column">
                     <h3 class="title">Company</h3>
                     <div class="separate"></div>
@@ -383,7 +375,7 @@
                         </li>
                     </ul>
                 </div>
-                <!-- column-3 -->
+                <!-- Support -->
                 <div class="column">
                     <h3 class="title">Support</h3>
                     <div class="separate"></div>
@@ -402,7 +394,7 @@
                         </li>
                     </ul>
                 </div>
-                <!-- column-4 -->
+                <!-- Address -->
                 <div class="column">
                     <h3 class="title">Address</h3>
                     <div class="separate"></div>
@@ -427,12 +419,19 @@
             </p>
         </div>
     </footer>
+
+
+    <!-- Button backToTop -->
     <button class="backToTop">&uarr;</button>
+
+
     <!-- Login Tab -->
     <div class="loginBackground">
         <div class="loginBlock">
             <div class="closeLoginBlock"><img src="./asset/img/bx-x.svg"></div>
-            <div class="loginLogo"><img src="./asset/img/logo-quan-nuoc.png"></div>
+
+            <div class="loginLogo"><img src="./asset/img/logo-coffe.png"></div>
+
             <div class="loginError"></div>
             <div class="tab-form">
                 <!-- 2 cái nút để di chuyển qua lại đăng nhập, đăng kí -->
@@ -517,38 +516,18 @@
             </div>
         </div>
     </div>
+
+
     <!-- History order -->
     <div id="historyOrder" class="historyOrder">
     </div>
-    <!-- Popup hỗ trợ -->
-    <div id="supportPopup" class="popup" style="visibility: visible; animation-name: backgroundeffect1;">
-        <div class="popup-content">
-            <div class="close" id="closeSupportPopup"><img src="./asset/img/bx-x.svg" alt=""></div>
-            <!-- Thêm nội dung chi tiết của trang hỗ trợ -->
-            <div id="supportContent">
-                <h2 color=black>cuong</h2>
-            </div>
-        </div>
-    </div>
-    </div>
-
-    <!-- Popup hỗ trợ -->
-    <div id="supportPopup" class="popup" style="visibility: visible; animation-name: backgroundeffect1;">
-        <div class="popup-content">
-            <div class="close" id="closeSupportPopup"><img src="./asset/img/bx-x.svg" alt=""></div>
-            <!-- Thêm nội dung chi tiết của trang hỗ trợ -->
-            <div id="supportContent">
-
-            </div>
-        </div>
-    </div>
-    </div>
+    
+    <script src="./asset/js/product.js"></script>
     <script src="./asset/js/script.js"></script>
-    <!-- <script src="./asset/js/cartt.js"></script> -->
     <script src="./asset/js/form.js"></script>
-    <!-- <script src="./asset/js/details.js"></script> -->
     <script src="./asset/js/responsive.js"></script>
-    <!-- <script src="./asset/js/PupopAbout.js"></script> -->
+    <script src="./asset/js/details.js"></script>
+
 </body>
 
 </html>

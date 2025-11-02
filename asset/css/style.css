@@ -193,6 +193,7 @@ a {
     align-items: center;  /*chỉnh hello nằm giữa theo chiều dọc*/
 }
 
+
 .header .last-icon svg {
     position: absolute;
     top: 18px;
@@ -330,6 +331,7 @@ a {
 
 .header .list-preview .price {
     line-height: 1.46;
+    align-items: center;
 }
 
 .header .list-preview .row-2 .price {

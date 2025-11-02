@@ -1,23 +1,23 @@
-    main {
+    .product-wrapper {
       display: flex;
       align-items: flex-start;
       gap: 20px;
       padding: 20px;
     }
-    .nav ul {
-      list-style: none;
-      display: flex;
-      align-items: center;
-      gap: 40px; /* khoảng cách giữa các mục */
+
+    /* .nav { display: none; } */
+    .header__nav li::after {
+    content: "";
     }
-    .nav ul li a {
-  text-decoration: none;
-  color: #333;
-  font-weight: 600;
-  font-size: 16px;
-  position: relative;
-  transition: color 0.3s ease;
-}
+    .nav ul {
+      list-style: none;      /*  bỏ dấu chấm */
+      margin: 0;             /* bỏ khoảng cách mặc định */
+      padding: 0;            /* bỏ thụt đầu dòng mặc định */
+      display: flex;         /* các mục nằm ngang */
+      gap: 30px;             /* khoảng cách giữa các mục */
+      align-items: center;   /* căn giữa theo hàng dọc */
+    }
+
 
     /* Cột filter chiếm 30% */
     .filter-container {
@@ -26,6 +26,13 @@
         padding: 20px;
         width: 30%;
         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .filter-container h2 {
+        margin-bottom: 8px;
+        font-size: 20px;
+        font-weight: 600;
+        color: #333;
         }
 
         .filter-section {
@@ -98,6 +105,18 @@
     /* Danh sách sản phẩm chiếm 70% */
     .product-container {
       width: 70%;
+      position: relative;
+    }
+
+    /* Không tìm thấy sản phẩm*/
+    .noProduct {
+      position: absolute;
+      top: 50%;
+      left: 40%;
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: #555;
+      margin-top: 50px;
     }
 
     .list-show-product {
@@ -200,3 +219,5 @@
     .filter-btn:hover {
       background: #555;
     }
+
+    

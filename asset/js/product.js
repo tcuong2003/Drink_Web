@@ -1,7 +1,8 @@
 let listProducts = localStorage.getItem("listProducts")
     ? JSON.parse(localStorage.getItem("listProducts"))
     : [
-          {
+        
+        {
             id: 1,
             name: "Americano",
             ingredients: "Espresso, nước nóng",
@@ -562,7 +563,6 @@ let listProducts = localStorage.getItem("listProducts")
             type: "juice",
         },
 
-
       ];
 
 
@@ -607,6 +607,7 @@ let currentPage = 1;
 let perPage = 9;
 let totalPage = 0;
 let currentProductList = listProducts; // Mặc định hiển thị toàn bộ sản phẩm
+
 
 // Lấy sản phẩm theo trang
 function getProduct(arr) {
@@ -705,11 +706,22 @@ function applyFilters() {
   const max = parseFloat(priceMax.value) || Infinity;
   filtered = filtered.filter((p) => p.price >= min && p.price <= max);
 
-  // Render lại
+  // Render lại - kiểm tra nếu không tìm thấy
   currentProductList = filtered;
   currentPage = 1;
-  getProduct(filtered);
-  renderPageNumber(filtered, perPage);
+  const productListContainer = document.querySelector(".list-show-product");
+  const paginationContainer = document.querySelector(".pagnigation");
+  if(filtered.length === 0){
+    if(productListContainer){
+        productListContainer.innerHTML = '<p class="noProduct"> Không tìm thấy sản phẩm </p>'
+    }
+    paginationContainer.style.display = "none";
+
+  } else {
+    getProduct(filtered);
+    paginationContainer.style.display = "flex";
+  }
+
 }
 
 // ====== Event: Apply Filter ======
@@ -731,8 +743,171 @@ resetBtn.addEventListener("click", () => {
   currentProductList = listProducts;
   currentPage = 1;
   getProduct(listProducts);
-  renderPageNumber(listProducts, perPage);
 });
+
+
+
+
+// ========== 2 biến toàn cục là dữ liệu data và tài khoản hiện tại đang login ==========
+let dataUsers = JSON.parse(localStorage.getItem("DataUsers"));
+let login = JSON.parse(localStorage.getItem("loginUser"));
+
+// =========== Thêm sản phẩm vào giỏ hàng =============
+function showNotification(message) {
+    const notification = document.createElement("div");
+    notification.className = "notification";
+    notification.textContent = message;
+
+    document.body.appendChild(notification);
+    notification.style.display = "flex";
+
+    setTimeout(function () {
+        document.body.removeChild(notification);
+    }, 3000);
+}
+
+function addToCart(productId) {
+    if (!login) {
+        alert("Bạn phải đăng nhập để mua hàng");
+        //sau đó hiện hộp thoại đăng nhập
+        Object.assign(document.querySelector(".loginBackground").style, {
+            visibility: "visible",
+            "animation-name": "backgroundeffect1",
+        });
+        Object.assign(document.querySelector(".loginBlock").style, {
+            display: "block",
+        });
+        return;
+    }
+    let userIndex = dataUsers.findIndex((user) => user.id == login.id);
+
+    if (userIndex !== -1) {
+        let productToAdd = listProducts.find(
+            (product) => product.id == productId
+        );
+
+        if (productToAdd) {
+            const existingCartItemIndex = dataUsers[
+                userIndex
+            ].cartItems.findIndex((item) => item.idProduct == productId);
+
+            if (
+                existingCartItemIndex !== -1 &&
+                dataUsers[userIndex].cartItems[existingCartItemIndex].check == 0
+            ) {
+                dataUsers[userIndex].cartItems[existingCartItemIndex]
+                    .quantity++;
+            } else {
+                let cartItem = {
+                    idProduct: productToAdd.id,
+                    nameProduct: productToAdd.name,
+                    price: productToAdd.price,
+                    image: productToAdd.image,
+                    quantity: 1,
+                    type: productToAdd.type,
+                    check: 0,
+                    time: new Date().toLocaleString("en-US", {
+                        timeZone: "Asia/Ho_Chi_Minh",
+                    }),
+                };
+                dataUsers[userIndex].cartItems.push(cartItem);
+            }
+            localStorage.setItem("DataUsers", JSON.stringify(dataUsers));
+            renderCartUI();
+            renderProductQuantityMb();
+        }
+    }
+    showNotification("Add to cart successfully");
+}
+// =========== thêm sản phẩm của mobile ===============
+// hiển thị tổng số lượng sản phẩm
+
+function renderProductQuantityMb() {
+    let screenWidthNow = window.innerWidth;
+    let maxWidthMobile = 767.98;
+    if (screenWidthNow < maxWidthMobile) {
+        if (login == null) return;
+        let userIndex = dataUsers.findIndex((user) => user.id == login.id);
+        const cartQuantity = document.querySelector(".cart-quantity");
+        let totalQuantity = 0;
+        dataUsers[userIndex].cartItems.forEach((item) => {
+            if (item.check == 0) totalQuantity += item.quantity;
+        });
+        cartQuantity.textContent = totalQuantity;
+    }
+}
+renderProductQuantityMb();
+
+function handleDeleteCartItem(productId) {
+    // Xử lý xóa sản phẩm từ giỏ hàng, cập nhật Local Storage và cập nhật giao diện
+    const storedCartItems = localStorage.getItem("DataUsers");
+    const cartItems = storedCartItems ? JSON.parse(storedCartItems) : [];
+
+    const updatedCartItems = cartItems.filter(
+        (item) => item.idProduct !== productId
+    );
+
+    localStorage.setItem("DataUsers", JSON.stringify(updatedCartItems));
+
+    window.location.href = "cart.html";
+}
+
+// ============ render UI layout Cart ==============
+function renderCartUI() {
+    const noProduct = document.querySelector(".no-product");
+    const haveProduct = document.querySelector(".have-product");
+    // const listPreview = document.querySelector(".list-preview");
+    if (!login) {
+        return;
+    }
+    let userIndex = dataUsers.findIndex((user) => user.id === login.id);
+    if (dataUsers[userIndex].cartItems.length > 0) {
+        renderImageCart(dataUsers[userIndex].cartItems);
+        renderNumberCart(dataUsers[userIndex].cartItems);
+        // noProduct.classList.add("hidden");
+        // haveProduct.classList.remove("hidden");
+        // listPreview.style.width = "500px";
+        // listPreview.style.top = "67px";
+        // listPreview.style.left = "-372px";
+    } else {
+        noProduct.classList.remove("hidden");
+        haveProduct.classList.add("hidden");
+    }
+}
+renderCartUI();
+
+// ============ render UI Cart về hình ảnh ============
+function renderImageCart(cartItems) {
+    const cartItemsList = document.querySelector(".row-2");
+    const noProduct = document.querySelector(".no-product");
+    const haveProduct = document.querySelector(".have-product");
+    const listPreview = document.querySelector(".list-preview");
+    cartItemsList.innerHTML = "";
+
+    let itemCount = 1;
+
+    cartItems.forEach((item) => {
+        if (itemCount <= 3 && item.check == 0) {
+            const cartItem = document.createElement("div");
+            cartItem.className = "block-each-preview";
+            cartItem.innerHTML = `
+                <img src="${item.image}" alt="" class="img-preview">
+                <h2 class="title">${item.nameProduct}</h2>
+                <span class="price">$${(item.price * item.quantity).toFixed(
+                    2
+                )}</span>
+                <span class="quantity">x ${item.quantity}</span>
+            `;
+            cartItemsList.appendChild(cartItem);
+            itemCount++;
+            noProduct.classList.add("hidden");
+            haveProduct.classList.remove("hidden");
+            listPreview.style.width = "500px";
+            listPreview.style.top = "67px";
+            listPreview.style.left = "-372px";
+        }
+    });
+}
 
 // ============ render UI Cart về số liệu =============
 function renderNumberCart(cartItems) {
@@ -744,7 +919,9 @@ function renderNumberCart(cartItems) {
 
     let totalQuantity = 0; // Tổng số lượng tất cả sản phẩm
     let totalPrice = 0; // Tổng giá tiền tất cả sản phẩm
-    let shippingPrice = 5; // Giá vận chuyển cho mỗi sản phẩm
+
+    let shippingPrice = 2; // Giá vận chuyển cho mỗi sản phẩm
+
 
     cartItems.forEach((item) => {
         if (item.check == 0) {
@@ -762,164 +939,11 @@ function renderNumberCart(cartItems) {
     ).toFixed(2)}`;
     feeTotal.textContent = cartTotal.textContent;
 }
-
 // ============ render tên người dùng khi đăng nhập ===============
 function renderName() {
     const name = document.querySelector(".hello-name");
     if (login) {
         name.textContent = login.name;
     }
-}
-renderName();
-
-document.addEventListener("click", (e) => {
-            if (e.target.classList.contains("icon-list-order")) {
-                console.log("Click history");
-                handleRenderHistoryOrder();
-            }});
-// ========= chức năng xem lại đơn hàng đã mua =============
-function displayHideHistory() {
-    const history = document.querySelector(".historyOrder");
-    history.classList.toggle("active");
-}
-function hideHistoryOrder1() {
-    const btnHistory = document.querySelector(".history");
-    btnHistory.addEventListener("click", () => {
-        displayHideHistory();
-    });
-    
 
 }
-function hideHistoryOrder2() {
-    const btnCloseHistory = document.querySelector(".close-history");
-    btnCloseHistory.addEventListener("click", () => {
-        displayHideHistory();
-    });
-}
-let ListOrders = localStorage.getItem("listOrders")
-    ? JSON.parse(localStorage.getItem("listOrders"))
-    : [];
-
-// render trong historyOrder
-function handleRenderHistoryOrder() {
-    if (login == null) return;
-    const historyOrder = document.querySelector(".historyOrder");
-    historyOrder.innerHTML = `
-        <div class="table-header">
-            <h2 class="title">History Order</h2>
-        </div>
-        <div class="container">
-            <img class="close-history" src="./asset/img/bx-x.svg" alt="">
-            <table>
-                <thead class = "tableHistoryHead"> 
-            
-                </thead>
-                <tbody class = "tableHistoryBody">
-
-                </tbody>
-            </table>
-        </div>
-    `;
-    const tableHead = document.querySelector(".tableHistoryHead");
-    tableHead.innerHTML = `
-        <tr>
-            <th>STT</th>
-            <th>Order time</th>
-            <th>Total Price</th>
-            <th>Status</th>
-            <th></th>
-        </tr> 
-    `;
-    hideHistoryOrder1();
-    hideHistoryOrder2();
-    const tableBody = document.querySelector(".tableHistoryBody");
-    let userIndex = dataUsers.findIndex((user) => user.id == login.id);
-    let number = 0;
-    ListOrders.forEach((item) => {
-        if (dataUsers[userIndex].id == item.userId) {
-            number++;
-            let row = `
-                <tr>
-                    <td>${number}</td> // day la doan can them ham render de tinh totalprice // kho hieu
-                    <td>${item.order[0].time}</td> // tai sao lai k hien dc ma qua ham MB ms hien duoc
-                    <td></td>
-                    <td>${status(item.order[0].check)}</td>
-                    <td onclick = "renderHistoryOrderItem(${item.id})">
-                        <img class="showmore" src="./asset/img/showmore.png" alt="">
-                    </td>
-                </tr>`;
-            tableBody.innerHTML += row;
-        }
-    });
-}
-function renderHistoryOrderItem(orderId) {
-    const historyOrder = document.querySelector(".historyOrder");
-    historyOrder.innerHTML = `
-        <div class="table-header">
-            <h2 class="title">History Order</h2>
-        </div>
-        <div class="container">
-            <div>
-                <img class="close-history" src="./asset/img/back_3114883.png" alt="Quay lại" onclick="handleRenderHistoryOrder()">
-            </div>
-            <table>
-                <thead class = "tableHistoryHead"> 
-            
-                </thead>
-                <tbody class = "tableHistoryBody">
-
-                </tbody>
-            </table>
-        </div>
-    `;
-    hideHistoryOrder1();
-    const tableHead = document.querySelector(".tableHistoryHead");
-    tableHead.innerHTML = `
-        <tr>
-            <th>STT</th>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Quatity</th>    
-            <th>Price</th>
-        </tr> 
-    `;
-    const table = document.querySelector(".tableHistoryBody");
-    table.innerHTML = "";
-    let number = 0;
-    let totalPrice = 0;
-    for (var i = 0; i < ListOrders.length; i++) {
-        if (ListOrders[i].id === orderId) {
-            ListOrders[i].order.forEach((item) => {
-                number++;
-                let row = `
-                <tr>
-                    <td>${number}</td>
-                    <td><img class="img-history" src="${item.image}" alt=""></td>
-                    <td>${item.nameProduct}</td>
-                    <td>${item.quantity}</td>
-                    <td>$${item.price}</td>
-                </tr>`;
-                table.innerHTML += row;
-            });
-        }
-    }
-}
-handleRenderHistoryOrder();
-function status(check) {
-    if (check == 0) {
-      return "Đang chờ...";
-    } else {
-        if(check == 1){
-          return "Đã xác nhận!";
-        }
-        else{
-          return "Đã hủy";
-      }
-    }
-  }
-const textInput = document.querySelector(".search-field");
-const textInputMb = document.querySelector(".search-field-mb"); // mobile
-const iconDelete = document.querySelector(".icon-delete");
-const iconDeleteMb = document.querySelector(".icon-delete-mb");
-const textInputAdvance = document.getElementById("name");
-const iconDeleteAdvance = document.querySelector(".icon-delete-advance");
