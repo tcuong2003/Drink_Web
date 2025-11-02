@@ -1119,6 +1119,3 @@ function renderName() {
         name.textContent = login.name;
     }
 }
-
-
-
