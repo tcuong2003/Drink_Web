@@ -99,7 +99,7 @@ a {
     content: "";
     position: absolute;
     border-radius: 50%;
-    left: px;
+    left: 5px;
     bottom: 0px;
     width: 80%;
     height: 2px;
@@ -210,10 +210,6 @@ a {
     margin-left: 20px;
     position: relative;
     cursor: pointer;
-}
-
-.header .buy-cart .prices {
-    margin: 6px;
 }
 
 .header .buy-cart .list-preview {
