@@ -608,6 +608,7 @@ let perPage = 9;
 let totalPage = 0;
 let currentProductList = listProducts; // Mặc định hiển thị toàn bộ sản phẩm
 
+
 // Lấy sản phẩm theo trang
 function getProduct(arr) {
     totalPage = Math.ceil(arr.length / perPage);
@@ -934,4 +935,11 @@ function renderNumberCart(cartItems) {
         shippingPrice * totalQuantity
     ).toFixed(2)}`;
     feeTotal.textContent = cartTotal.textContent;
+}
+// ============ render tên người dùng khi đăng nhập ===============
+function renderName() {
+    const name = document.querySelector(".hello-name");
+    if (login) {
+        name.textContent = login.name;
+    }
 }

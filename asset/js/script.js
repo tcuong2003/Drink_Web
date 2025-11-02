@@ -108,6 +108,12 @@ function hideHistoryOrder1() {
     btnHistory.addEventListener("click", () => {
         displayHideHistory();
     });
+    console.log("JS loaded");
+
+document.querySelector(".history").addEventListener("click", () => {
+  console.log("Đã bấm vào icon lịch sử");
+});
+
 }
 function hideHistoryOrder2() {
     const btnCloseHistory = document.querySelector(".close-history");
@@ -158,7 +164,7 @@ function handleRenderHistoryOrder() {
         if (dataUsers[userIndex].id == item.userId) {
             number++;
             let row = `
-                <tr>
+                <tr> 
                     <td>${number}</td> // day la doan can them ham render de tinh totalprice // kho hieu
                     <td>${item.order[0].time}</td> // tai sao lai k hien dc ma qua ham MB ms hien duoc
                     <td></td>
@@ -506,3 +512,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+// ============ render tên người dùng khi đăng nhập ===============
+function renderName() {
+    const name = document.querySelector(".hello-name");
+    if (login) {
+        name.textContent = login.name;
+    }
+}
+renderName();
