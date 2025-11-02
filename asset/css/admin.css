@@ -43,8 +43,11 @@ a {
 
 .header {
    background-color: var(--background-header);
-   position: sticky;
+   /* Header cố định */
+   position: fixed; 
+   left: 0px;
    top: 0px;
+   width: 100%;
    z-index: 1;
 }
 
@@ -70,16 +73,17 @@ a {
    background-color: var(--background-color);
    z-index: 0;
    min-height: calc(100vh - 80px);
+   padding-top: 150px;
 }
 
 .main .navbar {
    width: 20%;
    margin-top: 150px;
-   position: sticky;
    position: fixed;
    top: 0px;
+   left: 40px;
    z-index: 0;
-   /* background-color: orange; */
+   
 }
 
 .main .navbar ul li {
@@ -95,7 +99,7 @@ a {
    align-items: center;
    gap: 6px;
    cursor: pointer;
-   user-select: none;
+   user-select: none; 
 }
 
 .main .navbar .logout-relative {
@@ -193,8 +197,13 @@ a {
       4px 4px 5px 0px rgba(0, 0, 0, .1);
    transition: all 0.3s ease;
 }
-
+/* Thêm CSS này vào file của bạn */
+.product.product-hidden {
+  opacity: 0.5;
+  border: 1px dashed #999;
+}
 .main-content .product .edit-btn,
+.main-content .product .hide-btn,
 .main-content .product .delete-btn {
    padding: 10px 20px;
    padding-right: 45px;
@@ -218,12 +227,24 @@ a {
 .main-content .product .edit-btn {
    background-color: rgb(31, 101, 251);
 }
+.hide-btn {
+  background-color: #e2c611; /* Màu vàng cam cho nút "Ẩn" */
+  color: white;
+  border: none;
+}
+
+.show-btn {
+  background-color: #4caf50; /* Màu xanh cho nút "Hiện" */
+  color: white;
+  border: none;
+}
 
 .main-content .product .delete-btn {
    background-color: #dc3139;
 }
 
 .main-content .product .icon-edit,
+.main-content .product .icon-hide,
 .main-content .product .icon-delete {
    width: 30px;
    height: 30px;
