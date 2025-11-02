@@ -34,6 +34,7 @@ body {
 a {
    text-decoration: none;
 }
+
 .hidden {
    display: none;
 }
@@ -110,6 +111,7 @@ a {
 .main .navbar ul li p {
    color: var(--text-color-dark);
 }
+
 .navbar ul li p::after {
    display: flex;
    content: "";
@@ -139,6 +141,7 @@ a {
    padding: 20px;
    margin-left: auto;
 }
+
 .main-content .contain-product {
    display: flex;
    flex-direction: column;
@@ -157,25 +160,28 @@ a {
 .main-content .product:hover {
    box-shadow: 0px 16px 40px 0px rgba(0, 0, 0, 0.18)
 }
+
 .main-content .product .img-product {
    width: 110px;
    height: 100px;
    object-fit: cover;
    border-radius: 10px;
 }
+
 .main-content .product .img-history {
    width: 110px;
    height: 100px;
    object-fit: cover;
    border-radius: 10px;
 }
+
 .main-content .product .name {
    font-size: 19px;
 }
 
 .main-content .add-btn {
    padding: 5px 20px;
-   background-color: rgb(65, 97, 168);
+   background-color: rgb(31, 101, 251);
    border-radius: 5px;
    border: none;
    color: #fff;
@@ -210,7 +216,7 @@ a {
 }
 
 .main-content .product .edit-btn {
-   background-color: #2260da;
+   background-color: rgb(31, 101, 251);
 }
 
 .main-content .product .delete-btn {
@@ -289,6 +295,7 @@ a {
 .add-product-search .btn-search:hover {
    background-color: #e7e1e1;
 }
+
 .add-product-search .search-icon {
    width: 24px;
    height: 24px;
@@ -307,10 +314,12 @@ a {
    background: rgba(0, 0, 0, 0.5);
    backdrop-filter: blur(1px);
 }
+
 .animate {
    visibility: visible;
    opacity: 1;
 }
+
 .add-edit-product-form {
    position: relative;
    position: fixed;
@@ -322,8 +331,8 @@ a {
    transform: translate(-50%, -50%);
    border-radius: 20px;
    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
-   7px 7px 20px 0px rgba(0, 0, 0, .1),
-   4px 4px 5px 0px rgba(0, 0, 0, .1);
+      7px 7px 20px 0px rgba(0, 0, 0, .1),
+      4px 4px 5px 0px rgba(0, 0, 0, .1);
 }
 
 .add-edit-product-form .head-form {
@@ -351,6 +360,7 @@ a {
    flex-direction: column;
    margin-bottom: 16px;
 }
+
 .form-group .type-product {
    padding: 10px;
 }
@@ -362,10 +372,12 @@ a {
    font-size: 1.6rem;
    user-select: none;
 }
+
 .div {
    border: 1px solid #b3b3b3;
    border-radius: 6px;
 }
+
 .form-input {
    width: 100%;
    height: 40px;
@@ -376,6 +388,7 @@ a {
    outline: none;
    font-size: 1.4rem;
 }
+
 .form-select {
    width: 100%;
    height: 40px;
@@ -386,6 +399,7 @@ a {
    outline: none;
    font-size: 1.4rem;
 }
+
 .btn-save {
    font-weight: 700;
    width: 100%;
@@ -395,16 +409,18 @@ a {
    border: none;
    border-radius: 5px;
    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
-   7px 7px 20px 0px rgba(0, 0, 0, .1),
-   4px 4px 5px 0px rgba(0, 0, 0, .1);
-transition: all 0.3s ease;
+      7px 7px 20px 0px rgba(0, 0, 0, .1),
+      4px 4px 5px 0px rgba(0, 0, 0, .1);
+   transition: all 0.3s ease;
 }
+
 .btn-save:hover {
    box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, .5),
       -4px -4px 6px 0 rgba(116, 125, 136, .5),
       inset -4px -4px 6px 0 rgba(255, 255, 255, .2),
       inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
 }
+
 /* ========== CSS phan toast ============= */
 
 .toast {
@@ -413,24 +429,25 @@ transition: all 0.3s ease;
    bottom: 35px;
    left: 30px;
    border-radius: 12px;
-    background: #fff;
-    padding: 20px 35px 20px 25px;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-    border-left: 6px solid #4070f4;
-    overflow: hidden;
-    transform: translateX(calc(-100% - 30px));
-    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.35);
+   background: #fff;
+   padding: 20px 35px 20px 25px;
+   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+   border-left: 6px solid #4070f4;
+   overflow: hidden;
+   transform: translateX(calc(-100% - 30px));
+   transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.35);
 }
-.toast.active{
+
+.toast.active {
    transform: translateX(0%);
 }
 
-.toast .toast-content{
+.toast .toast-content {
    display: flex;
    align-items: center;
 }
 
-.toast-content .check{
+.toast-content .check {
    display: flex;
    align-items: center;
    justify-content: center;
@@ -442,23 +459,25 @@ transition: all 0.3s ease;
    border-radius: 50%;
 }
 
-.toast-content .message{
+.toast-content .message {
    display: flex;
    flex-direction: column;
    margin: 0 20px;
 }
-.message .text{
+
+.message .text {
    font-size: 20px;
-   font-weight: 400;;
+   font-weight: 400;
+   ;
    color: #666666;
 }
 
-.message .text.text-1{
+.message .text.text-1 {
    font-weight: 600;
    color: #333;
 }
 
-.toast .close{
+.toast .close {
    position: absolute;
    top: 10px;
    right: 15px;
@@ -467,11 +486,11 @@ transition: all 0.3s ease;
    opacity: 0.7;
 }
 
-.toast .close:hover{
+.toast .close:hover {
    opacity: 1;
 }
 
-.toast .progress{
+.toast .progress {
    position: absolute;
    bottom: 0;
    left: 0;
@@ -480,8 +499,8 @@ transition: all 0.3s ease;
    background: #ddd;
 }
 
-.toast .progress:before{
-      content: '';
+.toast .progress:before {
+   content: '';
    position: absolute;
    bottom: 0;
    right: 0;
@@ -489,28 +508,34 @@ transition: all 0.3s ease;
    width: 100%;
    background-color: #4070f4;
 }
-.progress.active:before{
+
+.progress.active:before {
    animation: progress 2.5s linear forwards;
 }
 
 @keyframes progress {
-   100%{
-       right: 100%;
+   100% {
+      right: 100%;
    }
 }
+
 .form-error {
    color: red;
 }
+
 .userTable {
    text-align: center;
    width: 100%;
 }
-.userTable th{
+
+.userTable th {
    padding: 10px 0px;
 }
-.userTable td{
+
+.userTable td {
    padding: 25px 0px;
 }
+
 .historyOrder {
    margin: 20px;
    background-color: #fff;
@@ -526,6 +551,7 @@ transition: all 0.3s ease;
    justify-content: space-between;
    align-items: center;
 }
+
 .table-header .title {
    padding-top: 10px;
    font-size: 2.8rem;
@@ -565,6 +591,7 @@ td {
    border-collapse: collapse;
    border-bottom: 1px solid #ccc;
 }
+
 .helloUser-Order {
    font-size: 25px;
    padding: 25px;
@@ -574,16 +601,19 @@ td {
    gap: 0px;
    /* gap: 35%; */
 }
+
 .helloUser-Order .sub-hello {
    display: flex;
    /* justify-content: space-between; */
    gap: 342px;
 
 }
+
 .fee_shipping {
    font-size: 15px;
    margin-top: 7px;
 }
+
 .adminAcceptOrder {
    margin: 20px;
    padding: 5px 20px;
@@ -597,14 +627,16 @@ td {
    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
       7px 7px 20px 0px rgba(0, 0, 0, .1),
       4px 4px 5px 0px rgba(0, 0, 0, .1);
-   
+
 }
+
 .adminAcceptOrder:hover {
    box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, .5),
       -4px -4px 6px 0 rgba(116, 125, 136, .5),
       inset -4px -4px 6px 0 rgba(255, 255, 255, .2),
       inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
 }
+
 .adminRejectOrder {
    margin: 20px;
    padding: 5px 20px;
@@ -618,103 +650,143 @@ td {
    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
       7px 7px 20px 0px rgba(0, 0, 0, .1),
       4px 4px 5px 0px rgba(0, 0, 0, .1);
-   
+
 }
+
 .adminRejectOrder:hover {
    box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, .5),
       -4px -4px 6px 0 rgba(116, 125, 136, .5),
       inset -4px -4px 6px 0 rgba(255, 255, 255, .2),
       inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
 }
+
 .handleAcceptOrder {
    gap: 50%;
    justify-content: center;
    display: flex;
 }
+
 /* ================== CSS order startic */
 .form-input-startics {
    display: flex;
    justify-content: space-between;
    align-items: center;
 }
+
 .start-date-div {
    display: block;
    margin-bottom: 10px;
 }
-.contain-add-product-search table{
+
+.contain-add-product-search table {
    width: 100%;
 }
+
 .contain-add-product-search .img {
    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 8px;
-    vertical-align: middle;
+   height: 100px;
+   object-fit: cover;
+   border-radius: 8px;
+   vertical-align: middle;
 }
-.contain-add-product-search table tbody{
+
+.contain-add-product-search table tbody {
    text-align: center;
 }
 
-/* CSS */
-.btn-sale, .btn-customer, .btn-submit {
-  background: linear-gradient(to bottom right, #EF4765, #FF9A5A);
-  border: 0;
-  border-radius: 12px;
-  color: #FFFFFF;
-  cursor: pointer;
-  display: inline-block;
-  font-family: -apple-system,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 2.5;
-  outline: transparent;
-  padding: 0 1rem;
-  text-align: center;
-  text-decoration: none;
-  transition: box-shadow .2s ease-in-out;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  white-space: nowrap;  
+.btn-sale,
+.btn-customer{
+   padding: 5px 20px;
+   background-color: rgb(31, 101, 251);
+   border-radius: 5px;
+   border: none;
+   color: #fff;
+   font-size: 20px;
+   max-width: 200px;
+   height: 80.25px;
+   cursor: pointer;
+   box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+      7px 7px 20px 0px rgba(0, 0, 0, .1),
+      4px 4px 5px 0px rgba(0, 0, 0, .1);
+   transition: all 0.3s ease;
+}
+.btn-submit {
+ 
+   padding: 5px 20px;
+   background-color: rgb(31, 101, 251);
+   border-radius: 5px;
+   border: none;
+   color: #fff;
+   font-size: 20px;
+   max-width: 200px;
+   cursor: pointer;
+   box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+      7px 7px 20px 0px rgba(0, 0, 0, .1),
+      4px 4px 5px 0px rgba(0, 0, 0, .1);
+   transition: all 0.3s ease;
 }
 
 .btn-sale:not([disabled]):focus,
 .btn-customer:not([disabled]):focus,
-.btn-submit:not([disabled]):focus
-{
-  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.9), -.125rem -.125rem 1rem rgba(19, 2, 5, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+.btn-submit:not([disabled]):focus {
+   box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.9), -.125rem -.125rem 1rem rgba(19, 2, 5, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
 }
 
-.btn-sale:not([disabled]):hover, .btn-customer:not([disabled]):hover,
-.btn-submit:not([disabled]):hover  {
-  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(19, 2, 5, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+.btn-sale:not([disabled]):hover,
+.btn-customer:not([disabled]):hover,
+.btn-submit:not([disabled]):hover {
+   box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(19, 2, 5, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
 }
+
 .form-input-startics {
    margin-bottom: 30px;
 }
+
 .form-input-startics form {
    display: flex;
    gap: 20px;
    justify-content: space-between;
 }
+
 .form-input-startics .form-item {
    margin-top: 10px;
 }
+
 .delete-user {
    font-weight: 600;
    transition: all 0.3s;
 }
+
 .delete-user:hover {
    font-weight: 600;
    color: #fff;
    background-color: #dc3139;
 }
+
 .orderManagementHeader {
    display: flex;
    gap: 10%;
    justify-content: center;
 }
-.container td,th{
+
+.container td,
+th {
    vertical-align: middle;
    text-align: center;
+}
+/* CSS phần chuyển màu Order Management */
+.orderManagementHeader .add-btn.active-filter {
+    background-color: #ea5c66; 
+    color: #ffffff;
+    /* Bỏ hiệu ứng đổ bóng để trông giống nút đang được nhấn */
+    box-shadow: inset 2px 2px 5px 0 rgba(0, 0, 0, .4);
+}
+/* CSS phần chuyển màu Order Startictis */
+.form-input-startics .btn-submit.active-filter ,
+.form-input-startics .btn-sale.active-filter,
+.form-input-startics .btn-customer.active-filter {
+    background-color: #ea5c66; 
+    color: #ffffff;
+  
+    box-shadow: inset 2px 2px 5px 0 rgba(0, 0, 0, .4);
 }
