@@ -212,6 +212,10 @@ a {
     cursor: pointer;
 }
 
+.header .buy-cart .prices {
+    margin: 6px;
+}
+
 .header .buy-cart .list-preview {
     padding: 30px;
     position: absolute;
