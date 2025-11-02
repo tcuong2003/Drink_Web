@@ -368,7 +368,7 @@ function checkLogin(data) {
           isFound = true;
           loginUser = DataUser;
           updateLocalStorage();
-          window.location.href = window.location.origin + "/index.html";
+          window.location = "./index.html"
        }
     }
     if (!isFound) {
