@@ -455,7 +455,6 @@ window.addEventListener('storage', function (e) {
                 loginUser = null;
                 localStorage.setItem('loginUser', JSON.stringify(null));
                 // Reload trang để UI về trạng thái chưa đăng nhập
-                alert('Tài khoản của bạn đã bị chặn và đã bị đăng xuất.');
                 window.location = './index.html';
                 return;
             }
@@ -470,7 +469,6 @@ window.addEventListener('storage', function (e) {
                 if (updated && updated.isBlocked) {
                     loginUser = null;
                     localStorage.setItem('loginUser', JSON.stringify(null));
-                    alert('Tài khoản của bạn đã bị chặn và đã bị đăng xuất.');
                     window.location = './index.html';
                     return;
                 }
@@ -495,6 +493,5 @@ window.addEventListener('storage', function (e) {
 // Khi load trang: nếu loginUser đã bị block (cập nhật từ admin) -> logout ngay
 if (loginUser && loginUser.isBlocked) {
     localStorage.setItem('loginUser', JSON.stringify(null));
-    alert('Tài khoản của bạn đã bị chặn và đã bị đăng xuất.');
     window.location = './index.html';
 }
