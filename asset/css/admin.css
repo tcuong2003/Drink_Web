@@ -811,3 +811,40 @@ th {
   
     box-shadow: inset 2px 2px 5px 0 rgba(0, 0, 0, .4);
 }
+
+/* CSS phần block user */
+.block-user {
+   font-weight: 600;
+   transition: all 0.3s;
+}
+
+.block-user:hover {
+   font-weight: 600;
+   color: #fff; 
+   background-color: #ff9800;
+}
+
+.block-user.blocked {
+   font-weight: 600;
+   transition: all 0.3s;
+}
+
+.block-user.blocked:hover {
+   font-weight: 600;
+   color: #fff;
+   background-color: #4CAF50;
+}
+
+/* CSS phần edit user */
+.edit-user {
+   font-weight: 600;
+   transition: all 0.3s;
+}
+
+.edit-user:hover {
+   font-weight: 600;
+   color: #fff;
+   background-color: #2196F3;
+}
+
+
