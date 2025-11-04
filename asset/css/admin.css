@@ -881,8 +881,17 @@ td {
 
 /* nút Cancel trong modal */
 .modal-cancel {
-  background: #999;
-  color: #fff;
+   font-weight: 700;
+   width: 100%;
+   font-size: 16px;
+   padding: 5px;
+   background-color: rgb(134, 139, 149);
+   border: none;
+   border-radius: 5px;
+   box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+      7px 7px 20px 0px rgba(0, 0, 0, .1),
+      4px 4px 5px 0px rgba(0, 0, 0, .1);
+   transition: all 0.3s ease;
 }
 
 /* đảm bảo layout 2 nút nằm cạnh nhau đẹp */
