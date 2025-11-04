@@ -8,6 +8,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Espresso, nước nóng",
       price: 3.00,
       image: "./asset/img/product-coffee/coffee-101.jpg",
+      isHidden: false,
       star: "4.6",
       nature: {
         size: ["S", "M", "L"],
@@ -21,6 +22,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Sữa đặc, cà phê pha, đá",
       price: 2.50,
       image: "./asset/img/product-coffee/coffee-102.jpg",
+      isHidden: false,
       star: "5",
       nature: {
         size: ["S", "M", "L"],
@@ -34,6 +36,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Bột ca cao, sữa, đường, bọt sữa hấp",
       price: 4.20,
       image: "./asset/img/product-coffee/coffee-103.jpg",
+      isHidden: false,
       star: "3.5",
       nature: {
         size: ["S", "M", "L"],
@@ -46,6 +49,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Bột ca cao, sữa nóng, đường",
       price: 4.00,
       image: "./asset/img/product-coffee/coffee-104.jpg",
+      isHidden: false,
       star: "4.5",
       nature: {
         size: ["S", "M", "L"],
@@ -58,6 +62,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Cà phê Robusta pha mạnh",
       price: 2.00,
       image: "./asset/img/product-coffee/coffee-105.jpg",
+      isHidden: false,
       star: "5",
       nature: {
         size: ["S", "M", "L"],
@@ -70,6 +75,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Cà phê, sữa đặc, kem muối",
       price: 3.2,
       image: "./asset/img/product-coffee/coffee-106.jpg",
+      isHidden: false,
       star: "4.3",
       nature: {
         size: ["S", "M", "L"],
@@ -82,6 +88,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Cà phê pha mạnh, sữa đặc, đá",
       price: 2.90,
       image: "./asset/img/product-coffee/coffee-107.jpg",
+      isHidden: false,
       star: "4.3",
       nature: {
         size: ["S", "M", "L"],
@@ -95,9 +102,12 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Espresso, sữa hấp, bọt sữa",
       price: 3.80,
       image: "./asset/img/product-coffee/coffee-108.jpg",
+      isHidden: false,
       star: "4.3",
-      size: ["S", "M", "L"],
-      type: "coffee",
+      nature: {
+        size: ["S", "M", "L"],
+        type: "coffee",
+      }
     },
     {
       id: 9,
@@ -105,6 +115,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Espresso, siro sô-cô-la, sữa hấp, kem tươi",
       price: 4.00,
       image: "./asset/img/product-coffee/coffee-109.jpg",
+      isHidden: false,
       star: 4.2,
       nature: {
         size: ["S", "M", "L"],
@@ -117,6 +128,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Bột trà xanh, sữa, đường, đá",
       price: 3.50,
       image: "./asset/img/product-tea/tea-201.jpg",
+      isHidden: false,
       star: 4.2,
       nature: {
         size: ["S", "M", "L"],
@@ -129,6 +141,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Trà bí đao, đường phèn, đá",
       price: 2.58,
       image: "./asset/img/product-tea/tea-202.jpg",
+      isHidden: false,
       star: 4.2,
       nature: {
         size: ["S", "M", "L"],
@@ -141,6 +154,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Trà đen, siro đào, đào cắt lát, đá",
       price: 3.45,
       image: "./asset/img/product-tea/tea-203.jpg",
+      isHidden: false,
       star: 4.2,
       nature: {
         size: ["S", "M", "L"],
@@ -153,6 +167,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Trà đen, siro dâu, nước ép ổi hồng, đá",
       price: 3.4,
       image: "./asset/img/product-tea/tea-204.jpg",
+      isHidden: false,
       star: 4.2,
       nature: {
         size: ["S", "M", "L"],
@@ -165,6 +180,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Trà sen, mật ong, đá",
       price: 4.20,
       image: "./asset/img/product-tea/tea-205.png",
+      isHidden: false,
       star: 4.2,
       nature: {
         size: ["S", "M", "L"],
@@ -177,6 +193,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Trà đen, sữa tươi, bột khoai môn, đường, đá",
       price: 3.57,
       image: "./asset/img/product-tea/tea-206.jpg",
+      isHidden: false,
       star: 4.2,
       nature: {
         size: ["S", "M", "L"],
@@ -189,6 +206,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Trà đen, sữa tươi, siro socola, đá",
       price: 3.57,
       image: "./asset/img/product-tea/tea-207.jpg",
+      isHidden: false,
       star: 4.2,
       nature: {
         size: ["S", "M", "L"],
@@ -201,6 +219,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Trà đen Thái, sữa đặc, sữa tươi, đường, đá",
       price: 4.00,
       image: "./asset/img/product-tea/tea-208.jpg",
+      isHidden: false,
       star: 4.2,
       nature: {
         size: ["S", "M", "L"],
@@ -211,7 +230,9 @@ let listProducts = localStorage.getItem("listProducts")
       id: 18,
       name: "Trà sữa truyền thống",
       ingredients: "Trà đen, sữa tươi hoặc sữa đặc, đường, đá",
-      price: 3.50, image: "./asset/img/product-tea/tea-209.png",
+      price: 3.50,
+      image: "./asset/img/product-tea/tea-209.png",
+      isHidden: false,
       star: 4.2,
       nature: {
         size: ["S", "M", "L"],
@@ -224,6 +245,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Trà xanh, nước cốt tắc, mật ong hoặc đường, đá",
       price: 3.20,
       image: "./asset/img/product-tea/tea-210.jpg",
+      isHidden: false,
       star: 4.2,
       nature: {
         size: ["S", "M", "L"],
@@ -236,6 +258,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Trà xanh, hỗn hợp trái cây nhiệt đới, đá, đường",
       price: 4.15,
       image: "./asset/img/product-tea/tea-211.jpg",
+      isHidden: false,
       star: 4.2,
       nature: {
         size: ["S", "M", "L"],
@@ -248,6 +271,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Trà đen, nước ép vải, đường, đá",
       price: 3.99,
       image: "./asset/img/product-tea/tea-212.png",
+      isHidden: false,
       star: 4.2,
       nature: {
         size: ["S", "M", "L"],
@@ -260,6 +284,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Xoài chín, sữa đặc, sữa tươi, đường, đá xay",
       price: 4.49,
       image: "./asset/img/product-smoothie/smoothie-301.jpg",
+      isHidden: false,
       star: 4.5,
       nature: {
         size: ["S", "M", "L"],
@@ -272,6 +297,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Thơm (dứa), mật ong, sữa tươi, đá viên",
       price: 4.19,
       image: "./asset/img/product-smoothie/smoothie-302.jpg",
+      isHidden: false,
       star: 4.3,
       nature: {
         size: ["S", "M", "L"],
@@ -284,6 +310,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Mãng cầu xiêm, sữa đặc, sữa tươi, đá xay",
       price: 4.59,
       image: "./asset/img/product-smoothie/smoothie-303.jpg",
+      isHidden: false,
       star: 4.6,
       nature: {
         size: ["S", "M", "L"],
@@ -296,6 +323,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Kiwi, táo xanh, mật ong, đá viên",
       price: 4.79,
       image: "./asset/img/product-smoothie/smoothie-304.jpg",
+      isHidden: false,
       star: 4.4,
       nature: {
         size: ["S", "M", "L"],
@@ -308,6 +336,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Dâu tây, sữa chua, sữa tươi, đá xay",
       price: 4.69,
       image: "./asset/img/product-smoothie/smoothie-305.jpg",
+      isHidden: false,
       star: 4.7,
       nature: {
         size: ["S", "M", "L"],
@@ -320,6 +349,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Chuối chín, sữa tươi, mật ong, đá viên",
       price: 3.99,
       image: "./asset/img/product-smoothie/smoothie-306.jpg",
+      isHidden: false,
       star: 4.3,
       nature: {
         size: ["S", "M", "L"],
@@ -332,6 +362,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Bơ sáp, sữa đặc, sữa tươi, đá xay",
       price: 4.89,
       image: "./asset/img/product-smoothie/smoothie-307.jpg",
+      isHidden: false,
       star: 4.8,
       nature: {
         size: ["S", "M", "L"],
@@ -344,6 +375,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Táo tươi, nước lọc, đường (tuỳ chọn), đá viên",
       price: 3.99,
       image: "./asset/img/product-juice/juice-401.jpg",
+      isHidden: false,
       star: 4.4,
       nature: {
         size: ["S", "M", "L"],
@@ -356,6 +388,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Rau má tươi, nước lọc, sữa đặc hoặc đường, đá viên",
       price: 3.49,
       image: "./asset/img/product-juice/juice-402.jpg",
+      isHidden: false,
       star: 4.5,
       nature: {
         size: ["S", "M", "L"],
@@ -368,6 +401,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Ổi hồng, muối, đường, đá xay",
       price: 3.79,
       image: "./asset/img/product-juice/juice-403.jpg",
+      isHidden: false,
       star: 4.3,
       nature: {
         size: ["S", "M", "L"],
@@ -380,6 +414,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Lựu tươi, mật ong, đá viên",
       price: 4.49,
       image: "./asset/img/product-juice/juice-404.jpg",
+      isHidden: false,
       star: 4.6,
       nature: {
         size: ["S", "M", "L"],
@@ -392,6 +427,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Dưa hấu, đường (tuỳ chọn), đá viên",
       price: 3.59,
       image: "./asset/img/product-juice/juice-405.jpg",
+      isHidden: false,
       star: 4.5,
       nature: {
         size: ["S", "M", "L"],
@@ -404,6 +440,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Chanh dây, đường, nước lọc, đá viên",
       price: 3.69,
       image: "./asset/img/product-juice/juice-406.jpg",
+      isHidden: false,
       star: 4.7,
       nature: {
         size: ["S", "M", "L"],
@@ -416,6 +453,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Cam tươi, mật ong (tuỳ chọn), đá viên",
       price: 3.99,
       image: "./asset/img/product-juice/juice-407.jpg",
+      isHidden: false,
       star: 4.8,
       nature: {
         size: ["S", "M", "L"],
@@ -428,6 +466,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Cà rốt tươi, mật ong, đá viên",
       price: 3.89,
       image: "./asset/img/product-juice/juice-408.jpg",
+      isHidden: false,
       star: 4.4,
       nature: {
         size: ["S", "M", "L"],
@@ -440,6 +479,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Sữa đặc, cà phê rang say, nước nóng",
       price: 4.00,
       image: "./asset/img/product-coffee/coffee-110.jpg",
+      isHidden: false,
       star: "4.3",
       nature: {
         size: ["S", "M", "L"],
@@ -452,6 +492,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Espresso, sữa tươi, sốt caramel, siro vani",
       price: 5.38,
       image: "./asset/img/product-coffee/coffee-111.jpg",
+      isHidden: false,
       star: "3.4",
       nature: {
         size: ["S", "M", "L"],
@@ -464,6 +505,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Espresso, kem tươi đánh bông",
       price: 3.50,
       image: "./asset/img/product-coffee/coffee-112.jpg",
+      isHidden: false,
       star: "2.5",
       nature: {
         size: ["S", "M", "L"],
@@ -476,6 +518,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Cà phê xay mịn, nước nóng",
       price: 3.00,
       image: "./asset/img/product-coffee/coffee-113.jpg",
+      isHidden: false,
       star: "1.5",
       nature: {
         size: ["S", "M", "L"],
@@ -488,6 +531,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Ristretto, sữa tươi đánh bọt",
       price: 4.20,
       image: "./asset/img/product-coffee/coffee-114.jpg",
+      isHidden: false,
       star: "2.6",
       nature: {
         size: ["S", "M", "L"],
@@ -500,6 +544,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Trà olong, hoa nhài, đá",
       price: 4.05,
       image: "./asset/img/product-tea/tea-213.jpg",
+      isHidden: false,
       star: 4.3,
       nature: {
         size: ["S", "M", "L"],
@@ -512,6 +557,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Trà đen, sữa tươi, kem Oreo, đá",
       price: 5.70,
       image: "./asset/img/product-tea/tea-214.jpg",
+      isHidden: false,
       star: 3.5,
       nature: {
         size: ["S", "M", "L"],
@@ -524,6 +570,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Trà đen, sữa tươi, pudding trứng, đá",
       price: 6.00,
       image: "./asset/img/product-tea/tea-215.jpg",
+      isHidden: false,
       star: 1.4,
       nature: {
         size: ["S", "M", "L"],
@@ -536,6 +583,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Trà xanh, xoài, kem cheese, đá",
       price: 4.80,
       image: "./asset/img/product-tea/tea-216.jpg",
+      isHidden: false,
       star: 4.7,
       nature: {
         size: ["S", "M", "L"],
@@ -548,6 +596,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Trà đen, đào, cam, sả, đá",
       price: 4.50,
       image: "./asset/img/product-tea/tea-217.jpg",
+      isHidden: false,
       star: 3.5,
       nature: {
         size: ["S", "M", "L"],
@@ -560,6 +609,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Dưa lưới chín, sữa tươi, sữa đặc, đá xay",
       price: 4.39,
       image: "./asset/img/product-smoothie/smoothie-308.jpg",
+      isHidden: false,
       star: 4.5,
       nature: {
         size: ["S", "M", "L"],
@@ -572,6 +622,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Sầu riêng, sữa tươi, sữa đặc, đá xay",
       price: 1.99,
       image: "./asset/img/product-smoothie/smoothie-309.jpg",
+      isHidden: false,
       star: 4.6,
       nature: {
         size: ["S", "M", "L"],
@@ -584,6 +635,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Đu đủ chín, sữa tươi, sữa đặc, đá viên",
       price: 3.89,
       image: "./asset/img/product-smoothie/smoothie-310.jpg",
+      isHidden: false,
       star: 4.4,
       nature: {
         size: ["S", "M", "L"],
@@ -596,6 +648,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Việt quất, sữa chua, sữa tươi, đá xay",
       price: 4.79,
       image: "./asset/img/product-smoothie/smoothie-311.jpg",
+      isHidden: false,
       star: 4.7,
       nature: {
         size: ["S", "M", "L"],
@@ -608,6 +661,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Mít tươi, sữa tươi, sữa đặc, đá viên",
       price: 2.29,
       image: "./asset/img/product-smoothie/smoothie-312.jpg",
+      isHidden: false,
       star: 4.5,
       nature: {
         size: ["S", "M", "L"],
@@ -620,6 +674,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Nho tím tươi, mật ong, đá viên",
       price: 4.49,
       image: "./asset/img/product-juice/juice-409.jpg",
+      isHidden: false,
       star: 4.6,
       nature: {
         size: ["S", "M", "L"],
@@ -632,6 +687,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Đào chín, đường (tuỳ chọn), đá viên",
       price: 4.19,
       image: "./asset/img/product-juice/juice-410.jpg",
+      isHidden: false,
       star: 4.4,
       nature: {
         size: ["S", "M", "L"],
@@ -644,6 +700,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Mận chín, đường, đá xay",
       price: 4.09,
       image: "./asset/img/product-juice/juice-411.jpg",
+      isHidden: false,
       star: 4.3,
       nature: {
         size: ["S", "M", "L"],
@@ -656,6 +713,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Dưa leo tươi, mật ong, đá viên",
       price: 3.79,
       image: "./asset/img/product-juice/juice-412.jpg",
+      isHidden: false,
       star: 1.2,
       nature: {
         size: ["S", "M", "L"],
@@ -668,6 +726,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Cà chua tươi, mật ong hoặc đường, đá viên",
       price: 3.69,
       image: "./asset/img/product-juice/juice-413.jpg",
+      isHidden: false,
       star: 2.1,
       nature: {
         size: ["S", "M", "L"],
@@ -703,6 +762,7 @@ function renderAdmin() {
     window.location = "./index.html";
   };
 }
+    //========Product Management========//
 function renderProductManagement() {
   document.querySelector(".div-title").innerHTML = `
         <h1 class="title">Product Management</h1>
@@ -754,6 +814,17 @@ function renderProducts(arr) {
     const productDiv = document.createElement("div");
     productDiv.classList.add("product"); // Add the "product" class
 
+    // --- THÊM MỚI ---
+    // 1. Thêm class "product-hidden" nếu sản phẩm bị ẩn
+    if (product.isHidden) {
+      productDiv.classList.add("product-hidden");
+    }
+
+    // 2. Quyết định text cho nút bấm (Ẩn hoặc Hiện)
+    const hideButtonText = product.isHidden ? "Visible" : "Hidden";
+    const hideButtonClass = product.isHidden ? "show-btn" : "hide-btn"; // Để bạn style riêng nếu muốn
+    // ---------------
+
     productDiv.innerHTML = `
             <img src="${product.image}" alt="" class="img-product" />
             <h2 class="name">${product.name}</h2>
@@ -761,11 +832,15 @@ function renderProducts(arr) {
             <div class="group-btn">
                 <button class="edit-btn" onclick = "openEditForm(${product.id})">
                     <img src="./asset/img/admin-edit-product.png" alt="" class="icon-edit" />
-                    Edit Product
+                    Edit 
+                </button>
+                    <button class="${hideButtonClass} hide-btn" onclick="toggleHideProduct(${product.id})">
+                    <img src="./asset/img/hide.png" alt="" class="icon-hide" />
+                    ${hideButtonText}
                 </button>
                 <button class="delete-btn" onclick = "deleteProduct(${product.id})">
                     <img src="./asset/img/admin-delete-product.png" alt="" class="icon-delete" />
-                    Delete Product
+                    Delete 
                 </button>
             </div>
         `;
@@ -773,7 +848,7 @@ function renderProducts(arr) {
     productListContainer.appendChild(productDiv);
   });
 }
-    //-------------------------------------------------------------//
+  //=============order Management=============//
   // phần order Management đổi màu khi nhấn chọn 
 function renderOrderManagement() {
   document.querySelector(".div-title").innerHTML = `
@@ -825,7 +900,7 @@ function renderOrderManagement() {
   // renderWaitOrder(listOrders);
   // waitBtn.classList.add('active-filter');
 }
-    //---------------------------------------------------//
+  //---------------------------------------------------//
 function renderTotalPriceAdmin(arrOfOrderInListOrder) {
   let sumQuantity = 0;
   let sumPrice = 0;
@@ -838,7 +913,7 @@ function renderTotalPriceAdmin(arrOfOrderInListOrder) {
   let totalPriceFull = sumPrice + shipTotal;
   return totalPriceFull.toFixed(2);
 }
-
+//======== Các Đơn Hàng Chờ Xác Nhận =========//
 function renderWaitOrder(arr) {
   const orderManagementBody = document.querySelector(".orderManagementBody")
   orderManagementBody.innerHTML = "";
@@ -888,6 +963,7 @@ function renderWaitOrder(arr) {
     }
   });
 }
+//======== Các Đơn Hàng Đã Xác Nhận =========//
 function renderAcceptedOrder(arr) {
   const orderManagementBody = document.querySelector(".orderManagementBody")
   orderManagementBody.innerHTML = "";
@@ -929,6 +1005,7 @@ function renderAcceptedOrder(arr) {
     }
   });
 }
+//======== Các Đơn Hàng Đã Bị Hủy =========//
 function renderRejectedOrder(arr) {
   const orderManagementBody = document.querySelector(".orderManagementBody")
   orderManagementBody.innerHTML = "";
@@ -970,6 +1047,7 @@ function renderRejectedOrder(arr) {
     }
   });
 }
+
 function renderTotalShipAdmin(arrOfOrderInListOrder) {
   let sumQuantity = 0;
   let sumPrice = 0;
@@ -1004,6 +1082,7 @@ function renderOrderItem(arr, orderid) {
     orderManagementTbody.appendChild(orderTr);
   });
 }
+//======== Status=========//
 function status(check) {
   if (check == 0) {
     return "Đang chờ...";
@@ -1016,6 +1095,8 @@ function status(check) {
     }
   }
 }
+
+//-----------------------------------------------------------------------------------------------------//
 function renderUserManagement() {
   document.querySelector(".div-title").innerHTML = `
         <h1 class="title">User Management</h1>
@@ -1132,7 +1213,7 @@ function renderOrderStartictis() {
     handleTopCustomer();
   });
 }
-      //-----------------------------------------------//
+//-----------------------------------------------//
 function renderTableBody() {
   const tableBody = document.querySelector(".body-table");
   tableBody.innerHTML = `<table>
@@ -1478,6 +1559,33 @@ function deleteProduct(productId) {
   localStorage.setItem("listProducts", JSON.stringify(listProducts));
   renderProducts(listProducts);
 }
+
+// === HÀM MỚI ĐỂ ẨN/HIỆN SẢN PHẨM ===
+function toggleHideProduct(productId) {
+  // 1. Tìm sản phẩm trong mảng
+  const productToToggle = listProducts.find(
+    (product) => product.id === productId
+  );
+
+  if (productToToggle) {
+    // 2. Đảo ngược trạng thái isHidden (từ false -> true hoặc từ true -> false)
+    productToToggle.isHidden = !productToToggle.isHidden;
+
+    // 3. Cập nhật lại localStorage
+    localStorage.setItem("listProducts", JSON.stringify(listProducts));
+
+    // 4. Render lại danh sách sản phẩm để thấy thay đổi
+    // Lưu ý: Nếu bạn đang dùng search, bạn có thể cần render lại kết quả search
+    // Cách đơn giản nhất là render lại toàn bộ listProducts
+    renderProducts(listProducts);
+    
+    // Hoặc nếu bạn muốn giữ nguyên kết quả search, bạn phải gọi lại hàm performSearch()
+    // performSearch(); // (Hàm này cần được truy cập từ đây)
+  } else {
+    console.log("Không tìm thấy sản phẩm với ID: " + productId);
+  }
+}
+// ======================================
 // Function to delete a user
 function deleteUser(userId) {
   const shouldDelete = window.confirm(
