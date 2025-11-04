@@ -1,569 +1,743 @@
 let listProducts = localStorage.getItem("listProducts")
-    ? JSON.parse(localStorage.getItem("listProducts"))
-    : [
-        {
-            id: 1,
-            name: "Americano",
-            ingredients: "Espresso, nước nóng",
-            price: 3.00,
-            image: "./asset/img/product-coffee/coffee-101.jpg",
-            star: "4.6",
-            size: ["S", "M", "L"],
-            type: "coffee",
-        },
-        {
-            id: 2,
-            name: "Bạc xỉu",
-            ingredients: "Sữa đặc, cà phê pha, đá",
-            price: 2.50,
-            image: "./asset/img/product-coffee/coffee-102.jpg",
-            star: "5",
-            size: ["S", "M", "L"],
-            type: "coffee",
-        },
-        {
-            id: 3,
-            name: "Cacao latte",
-            ingredients: "Bột ca cao, sữa, đường, bọt sữa hấp",
-            price: 4.20,
-            image: "./asset/img/product-coffee/coffee-103.jpg",
-            star: "3.5",
-            size: ["S", "M", "L"],
-            type: "coffee",
-        },
-        {
-            id: 4,
-            name: "Cacao nóng",
-            ingredients: "Bột ca cao, sữa nóng, đường",
-            price: 4.00,
-            image: "./asset/img/product-coffee/coffee-104.jpg",
-            star: "4.5",
-            size: ["S", "M", "L"],
-            type: "coffee",
-        },
-        {
-            id: 5,
-            name: "Cafe đen",
-            ingredients: "Cà phê Robusta pha mạnh",
-            price: 2.00,
-            image: "./asset/img/product-coffee/coffee-105.jpg",
-            star: "5",
-            size: ["S", "M", "L"],
-            type: "coffee",
-        },
-        {
-            id: 6,
-            name: "Cafe muối",
-            ingredients: "Cà phê, sữa đặc, kem muối",
-            price: 3.2,
-            image: "./asset/img/product-coffee/coffee-106.jpg",
-            star: "4.3",
-            size: ["S", "M", "L"],
-            type: "coffee",
-        },
-        {
-            id: 7,
-            name: "Cafe sữa",
-            ingredients: "Cà phê pha mạnh, sữa đặc, đá",
-            price: 2.90,
-            image: "./asset/img/product-coffee/coffee-107.jpg",
-            star: "4.3",
-            size: ["S", "M", "L"],
-            type: "coffee",
-        },
-       
-        {
-            id: 8,
-            name: "Capuchino",
-            ingredients: "Espresso, sữa hấp, bọt sữa",
-            price: 3.80,
-            image: "./asset/img/product-coffee/coffee-108.jpg",
-            star: "4.3",
-            size: ["S", "M", "L"],
-            type: "coffee",
-        },
-        {
-            id: 9,
-            name: "Mocha coffee",
-            ingredients: "Espresso, siro sô-cô-la, sữa hấp, kem tươi",
-            price: 4.00,
-            image: "./asset/img/product-coffee/coffee-109.jpg",
-            star: 4.2,
-            size: ["S", "M", "L"],
-            type: "coffee",
-        },
-        {
-            id: 10,
-            name: "Matcha latte",
-            ingredients: "Bột trà xanh, sữa, đường, đá",
-            price: 3.50,
-            image: "./asset/img/product-tea/tea-201.jpg",
-            star: 4.2,
-            size: ["S", "M", "L"],
-            type: "tea",
-        },
-        {
-            id: 11,
-            name: "Trà bí đao",
-            ingredients: "Trà bí đao, đường phèn, đá",
-            price: 2.58,
-            image: "./asset/img/product-tea/tea-202.jpg",
-            star: 4.2,
-            size: ["S", "M", "L"],
-            type: "tea",
-        },
-        {
-            id: 12,
-            name: "Trà đào",
-            ingredients: "Trà đen, siro đào, đào cắt lát, đá",
-            price: 3.45,
-            image: "./asset/img/product-tea/tea-203.jpg",
-            star: 4.2,
-            size: ["S", "M", "L"],
-            type: "tea",
-        },
-        {
-            id: 13,
-            name: "Trà dâu ổi hồng",
-            ingredients: "Trà đen, siro dâu, nước ép ổi hồng, đá",
-            price: 3.4,
-            image: "./asset/img/product-tea/tea-204.jpg",
-            star: 4.2,
-            size: ["S", "M", "L"],
-            type: "tea",
-        },
-        {
-            id: 14,
-            name: "Trà sen vàng",
-            ingredients: "Trà sen, mật ong, đá",
-            price: 4.20,
-            image: "./asset/img/product-tea/tea-205.png",
-            star: 4.2,
-            size: ["S", "M", "L"],
-            type: "tea",
-        },
-        {
-            id: 15,
-            name: "Trà sữa khoai môn",
-            ingredients: "Trà đen, sữa tươi, bột khoai môn, đường, đá",
-            price: 3.57,
-            image: "./asset/img/product-tea/tea-206.jpg",
-            star: 4.2,
-            size: ["S", "M", "L"],
-            type: "tea",
-        },
-        {
-            id: 16,
-            name: "Trà sữa socola",
-            ingredients: "Trà đen, sữa tươi, siro socola, đá",
-            price: 3.57,
-            image: "./asset/img/product-tea/tea-207.jpg",
-            star: 4.2,
-            size: ["S", "M", "L"],
-            type: "tea",
-        },
-        {
-            id: 17,
-            name: "Trà sữa thái",
-            ingredients: "Trà đen Thái, sữa đặc, sữa tươi, đường, đá",
-            price: 4.00,
-            image: "./asset/img/product-tea/tea-208.jpg",
-            star: 4.2,
-            size: ["S", "M", "L"],
-            type: "tea",
-        },
-        {
-            id: 18,
-            name: "Trà sữa truyền thống",
-            ingredients: "Trà đen, sữa tươi hoặc sữa đặc, đường, đá",
-            price: 3.50,image: "./asset/img/product-tea/tea-209.png",
-            star: 4.2,
-            size: ["S", "M", "L"],
-            type: "tea",
-        },
-        {
-            id: 19,
-            name: "Trà tắc",
-            ingredients: "Trà xanh, nước cốt tắc, mật ong hoặc đường, đá",
-            price: 3.20,
-            image: "./asset/img/product-tea/tea-210.jpg",
-            star: 4.2,
-            size: ["S", "M", "L"],
-            type: "tea",
-        },
-        {
-            id: 20,
-            name: "Trà trái cây nhiệt đới",
-            ingredients: "Trà xanh, hỗn hợp trái cây nhiệt đới, đá, đường",
-            price: 4.15,
-            image: "./asset/img/product-tea/tea-211.jpg",
-            star: 4.2,
-            size: ["S", "M", "L"],
-            type: "tea",
-        },
-        {
-            id: 21,
-            name: "Trà vải",
-            ingredients: "Trà đen, nước ép vải, đường, đá",
-            price: 3.99,
-            image: "./asset/img/product-tea/tea-212.png",
-            star: 4.2,
-            size: ["S", "M", "L"],
-            type: "tea",
-        },
-        {
-            id: 22,
-            name: "Sinh tố dứa",
-            ingredients: "Xoài chín, sữa đặc, sữa tươi, đường, đá xay",
-            price: 4.49,
-            image: "./asset/img/product-smoothie/smoothie-301.jpg",
-            star: 4.5,
-            size: ["S", "M", "L"],
-            type: "smoothie",
-        },
-        {
-            id: 23,
-            name: "Sinh tố xoài",
-            ingredients: "Thơm (dứa), mật ong, sữa tươi, đá viên",
-            price: 4.19,
-            image: "./asset/img/product-smoothie/smoothie-302.jpg",
-            star: 4.3,
-            size: ["S", "M", "L"],
-            type: "smoothie",
-        },
-        {
-            id: 24,
-            name: "Sinh tố bơ",
-            ingredients: "Mãng cầu xiêm, sữa đặc, sữa tươi, đá xay",
-            price: 4.59,
-            image: "./asset/img/product-smoothie/smoothie-303.jpg",
-            star: 4.6,
-            size: ["S", "M", "L"],
-            type: "smoothie",
-        },
-        {
-            id: 25,
-            name: "Sinh tố chuối",
-            ingredients: "Kiwi, táo xanh, mật ong, đá viên",
-            price: 4.79,
-            image: "./asset/img/product-smoothie/smoothie-304.jpg",
-            star: 4.4,
-            size: ["S", "M", "L"],
-            type: "smoothie",
-        },
-        {
-            id: 26,
-            name: "Sinh tố dâu tây",
-            ingredients: "Dâu tây, sữa chua, sữa tươi, đá xay",
-            price: 4.69,
-            image: "./asset/img/product-smoothie/smoothie-305.jpg",
-            star: 4.7,
-            size: ["S", "M", "L"],
-            type: "smoothie",
-        },
-        {
-            id: 27,
-            name: "Sinh tố kiwi",
-            ingredients: "Chuối chín, sữa tươi, mật ong, đá viên",
-            price: 3.99,
-            image: "./asset/img/product-smoothie/smoothie-306.jpg",
-            star: 4.3,
-            size: ["S", "M", "L"],
-            type: "smoothie",
-        },
-        {
-            id: 28,
-            name: "Sinh tố mãng cầu",
-            ingredients: "Bơ sáp, sữa đặc, sữa tươi, đá xay",
-            price: 4.89,
-            image: "./asset/img/product-smoothie/smoothie-307.jpg",
-            star: 4.8,
-            size: ["S", "M", "L"],
-            type: "smoothie",
-        },
-        {
-            id: 29,
-            name: "Nước ép táo",
-            ingredients: "Táo tươi, nước lọc, đường (tuỳ chọn), đá viên",
-            price: 3.99,
-            image: "./asset/img/product-juice/juice-401.jpg",
-            star: 4.4,
-            size: ["S", "M", "L"],
-            type: "juice",
-        },
-        {
-            id: 30,
-            name: "Nước ép cam",
-            ingredients: "Rau má tươi, nước lọc, sữa đặc hoặc đường, đá viên",
-            price: 3.49,
-            image: "./asset/img/product-juice/juice-402.jpg",
-            star: 4.5,
-            size: ["S", "M", "L"],
-            type: "juice",
-        },
-        {
-            id: 31,
-            name: "Nước ép cà rốt",
-            ingredients: "Ổi hồng, muối, đường, đá xay",
-            price: 3.79,
-            image: "./asset/img/product-juice/juice-403.jpg",
-            star: 4.3,
-            size: ["S", "M", "L"],
-            type: "juice",
-        },
-        {
-            id: 32,
-            name: "Nước ép chanh dây",
-            ingredients: "Lựu tươi, mật ong, đá viên",
-            price: 4.49,
-            image: "./asset/img/product-juice/juice-404.jpg",
-            star: 4.6,
-            size: ["S", "M", "L"],
-            type: "juice",
-        },
-        {
-            id: 33,
-            name: "Nước ép dưa hấu",
-            ingredients: "Dưa hấu, đường (tuỳ chọn), đá viên",
-            price: 3.59,
-            image: "./asset/img/product-juice/juice-405.jpg",
-            star: 4.5,
-            size: ["S", "M", "L"],
-            type: "juice",
-        },
-        {
-            id: 34,
-            name: "Nước ép lựu",
-            ingredients: "Chanh dây, đường, nước lọc, đá viên",
-            price: 3.69,
-            image: "./asset/img/product-juice/juice-406.jpg",
-            star: 4.7,
-            size: ["S", "M", "L"],
-            type: "juice",
-        },
-        {
-            id: 35,
-            name: "Nước ép ổi",
-            ingredients: "Cam tươi, mật ong (tuỳ chọn), đá viên",
-            price: 3.99,
-            image: "./asset/img/product-juice/juice-407.jpg",
-        star: 4.8,
-            size: ["S", "M", "L"],
-            type: "juice",
-        },
-        {
-            id: 36,
-            name: "Nước ép rau má",
-            ingredients: "Cà rốt tươi, mật ong, đá viên",
-            price: 3.89,
-            image: "./asset/img/product-juice/juice-408.jpg",
-            star: 4.4,
-            size: ["S", "M", "L"],
-            type: "juice",
-        }, 
-        {
-            id: 37,
-            name: "Cà phê phin",
-            ingredients: "Sữa đặc, cà phê rang say, nước nóng",
-            price: 4.00,
-            image: "./asset/img/product-coffee/coffee-110.jpg",
-            star: "4.3",
-            size: ["S", "M", "L"],
-            type: "coffee",
-        },
-        {
-            id: 38,
-            name: "Caramel Macchiato",
-            ingredients: "Espresso, sữa tươi, sốt caramel, siro vani",
-            price: 5.38,
-            image: "./asset/img/product-coffee/coffee-111.jpg",
-            star: "3.4",
-            size: ["S", "M", "L"],
-            type: "coffee",
-        },
-        {
-            id: 39,
-            name: "Espresso con Panna",
-            ingredients: "Espresso, kem tươi đánh bông",
-            price: 3.50,
-            image: "./asset/img/product-coffee/coffee-112.jpg",
-            star: "2.5",
-            size: ["S", "M", "L"],
-            type: "coffee",
-        },
-        {
-            id: 40,
-            name: "Espresso",
-            ingredients: "Cà phê xay mịn, nước nóng",
-            price: 3.00,
-            image: "./asset/img/product-coffee/coffee-113.jpg",
-            star: "1.5",
-            size: ["S", "M", "L"],
-            type: "coffee",
-        },
-        {
-            id: 41,
-            name: "Ristretto Bianco",
-            ingredients: "Ristretto, sữa tươi đánh bọt",
-            price: 4.20,
-            image: "./asset/img/product-coffee/coffee-114.jpg",
-            star: "2.6",
-            size: ["S", "M", "L"],
-            type: "coffee",
-        },
-        {
-            id: 42,
-            name: "Trà olong nhài",
-            ingredients: "Trà olong, hoa nhài, đá",
-            price: 4.05,
-            image: "./asset/img/product-tea/tea-213.jpg",
-            star: 4.3,
-            size: ["S", "M", "L"],
-            type: "tea",
-        },
-        {
-            id: 43,
-            name: "Trà sữa Oreo",
-            ingredients: "Trà đen, sữa tươi, kem Oreo, đá",
-            price: 5.70,
-            image: "./asset/img/product-tea/tea-214.jpg",
-            star: 3.5,
-            size: ["S", "M", "L"],
-            type: "tea",
-        },
-        {
-            id: 44,
-            name: "Trà sữa pudding trứng",
-            ingredients: "Trà đen, sữa tươi, pudding trứng, đá",
-            price: 6.00,
-            image: "./asset/img/product-tea/tea-215.jpg",
-            star: 1.4,
-            size: ["S", "M", "L"],
-            type: "tea",
-        },
-        {
-            id: 45,
-            name: "Trà xoài kem cheese",
-            ingredients: "Trà xanh, xoài, kem cheese, đá",
-            price: 4.80,
-            image: "./asset/img/product-tea/tea-216.jpg",
-            star: 4.7,
-            size: ["S", "M", "L"],
-            type: "tea",
-        },
-        {
-            id: 46,
-            name: "Trà đào cam sả",
-            ingredients: "Trà đen, đào, cam, sả, đá",
-            price: 4.50,
-            image: "./asset/img/product-tea/tea-217.jpg",
-            star: 3.5,
-            size: ["S", "M", "L"],
-            type: "tea",
-        },
-        {
-            id: 47,
-            name: "Sinh tố dưa lưới",
-            ingredients: "Dưa lưới chín, sữa tươi, sữa đặc, đá xay",
-            price: 4.39,
-            image: "./asset/img/product-smoothie/smoothie-308.jpg",
-            star: 4.5,
-            size: ["S", "M", "L"],
-            type: "smoothie",
-        },
-        {
-            id: 48,
-            name: "Sinh tố sầu riêng",
-            ingredients: "Sầu riêng, sữa tươi, sữa đặc, đá xay",
-            price: 1.99,
-            image: "./asset/img/product-smoothie/smoothie-309.jpg",
-            star: 4.6,
-            size: ["S", "M", "L"],
-            type: "smoothie",
-        },
-        {
-            id: 49,
-            name: "Sinh tố đu đủ",
-            ingredients: "Đu đủ chín, sữa tươi, sữa đặc, đá viên",
-            price: 3.89,
-            image: "./asset/img/product-smoothie/smoothie-310.jpg",
-            star: 4.4,
-            size: ["S", "M", "L"],
-            type: "smoothie",
-        },
-        {
-            id: 50,
-            name: "Sinh tố việt quất",
-            ingredients: "Việt quất, sữa chua, sữa tươi, đá xay",
-            price: 4.79,
-            image: "./asset/img/product-smoothie/smoothie-311.jpg",
-            star: 4.7,
-            size: ["S", "M", "L"],
-            type: "smoothie",
-        },
-        {
-            id: 51,
-            name: "Sinh tố mít",
-            ingredients: "Mít tươi, sữa tươi, sữa đặc, đá viên",
-            price: 2.29,
-            image: "./asset/img/product-smoothie/smoothie-312.jpg",
-            star: 4.5,
-            size: ["S", "M", "L"],
-            type: "smoothie",
-        },
-        {
-            id: 52,
-            name: "Nước ép nho",
-            ingredients: "Nho tím tươi, mật ong, đá viên",
-            price: 4.49,
-            image: "./asset/img/product-juice/juice-409.jpg",
-            star: 4.6,
-            size: ["S", "M", "L"],
-            type: "juice",
-        },
-        {
-            id: 53,
-            name: "Nước ép đào",
-            ingredients: "Đào chín, đường (tuỳ chọn), đá viên",
-            price: 4.19,
-            image: "./asset/img/product-juice/juice-410.jpg",
-            star: 4.4,
-            size: ["S", "M", "L"],
-            type: "juice",
-        },
-        {
-            id: 54,
-            name: "Nước ép mận",
-            ingredients: "Mận chín, đường, đá xay",
-            price: 4.09,
-            image: "./asset/img/product-juice/juice-411.jpg",
-            star: 4.3,
-            size: ["S", "M", "L"],
-            type: "juice",
-        },
-        {
-            id: 55,
-            name: "Nước ép dưa leo",
-            ingredients: "Dưa leo tươi, mật ong, đá viên",
-            price: 3.79,
-            image: "./asset/img/product-juice/juice-412.jpg",
-            star: 1.2,
-            size: ["S", "M", "L"],
-            type: "juice",
-        },
-        {
-            id: 56,
-            name: "Nước ép cà chua",
-            ingredients: "Cà chua tươi, mật ong hoặc đường, đá viên",
-            price: 3.69,
-            image: "./asset/img/product-juice/juice-413.jpg",
-            star: 2.1,
-            size: ["S", "M", "L"],
-            type: "juice",
-        },
+  ? JSON.parse(localStorage.getItem("listProducts"))
+  : [
+
+    {
+      id: 1,
+      name: "Americano",
+      ingredients: "Espresso, nước nóng",
+      price: 3.00,
+      image: "./asset/img/product-coffee/coffee-101.jpg",
+      isHidden: false,
+      star: "4.6",
+      nature: {
+        size: ["S", "M", "L"],
+        type: "coffee",
+      }
+
+    },
+    {
+      id: 2,
+      name: "Bạc xỉu",
+      ingredients: "Sữa đặc, cà phê pha, đá",
+      price: 2.50,
+      image: "./asset/img/product-coffee/coffee-102.jpg",
+      isHidden: false,
+      star: "5",
+      nature: {
+        size: ["S", "M", "L"],
+        type: "coffee",
+      }
+
+    },
+    {
+      id: 3,
+      name: "Cacao latte",
+      ingredients: "Bột ca cao, sữa, đường, bọt sữa hấp",
+      price: 4.20,
+      image: "./asset/img/product-coffee/coffee-103.jpg",
+      isHidden: false,
+      star: "3.5",
+      nature: {
+        size: ["S", "M", "L"],
+        type: "coffee",
+      }
+    },
+    {
+      id: 4,
+      name: "Cacao nóng",
+      ingredients: "Bột ca cao, sữa nóng, đường",
+      price: 4.00,
+      image: "./asset/img/product-coffee/coffee-104.jpg",
+      isHidden: false,
+      star: "4.5",
+      nature: {
+        size: ["S", "M", "L"],
+        type: "coffee",
+      }
+    },
+    {
+      id: 5,
+      name: "Cafe đen",
+      ingredients: "Cà phê Robusta pha mạnh",
+      price: 2.00,
+      image: "./asset/img/product-coffee/coffee-105.jpg",
+      isHidden: false,
+      star: "5",
+      nature: {
+        size: ["S", "M", "L"],
+        type: "coffee",
+      }
+    },
+    {
+      id: 6,
+      name: "Cafe muối",
+      ingredients: "Cà phê, sữa đặc, kem muối",
+      price: 3.2,
+      image: "./asset/img/product-coffee/coffee-106.jpg",
+      isHidden: false,
+      star: "4.3",
+      nature: {
+        size: ["S", "M", "L"],
+        type: "coffee",
+      }
+    },
+    {
+      id: 7,
+      name: "Cafe sữa",
+      ingredients: "Cà phê pha mạnh, sữa đặc, đá",
+      price: 2.90,
+      image: "./asset/img/product-coffee/coffee-107.jpg",
+      isHidden: false,
+      star: "4.3",
+      nature: {
+        size: ["S", "M", "L"],
+        type: "coffee",
+      }
+    },
+
+    {
+      id: 8,
+      name: "Capuchino",
+      ingredients: "Espresso, sữa hấp, bọt sữa",
+      price: 3.80,
+      image: "./asset/img/product-coffee/coffee-108.jpg",
+      isHidden: false,
+      star: "4.3",
+      nature: {
+        size: ["S", "M", "L"],
+        type: "coffee",
+      }
+    },
+    {
+      id: 9,
+      name: "Mocha coffee",
+      ingredients: "Espresso, siro sô-cô-la, sữa hấp, kem tươi",
+      price: 4.00,
+      image: "./asset/img/product-coffee/coffee-109.jpg",
+      isHidden: false,
+      star: 4.2,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "coffee",
+      }
+    },
+    {
+      id: 10,
+      name: "Matcha latte",
+      ingredients: "Bột trà xanh, sữa, đường, đá",
+      price: 3.50,
+      image: "./asset/img/product-tea/tea-201.jpg",
+      isHidden: false,
+      star: 4.2,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "tea",
+      }
+    },
+    {
+      id: 11,
+      name: "Trà bí đao",
+      ingredients: "Trà bí đao, đường phèn, đá",
+      price: 2.58,
+      image: "./asset/img/product-tea/tea-202.jpg",
+      isHidden: false,
+      star: 4.2,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "tea",
+      }
+    },
+    {
+      id: 12,
+      name: "Trà đào",
+      ingredients: "Trà đen, siro đào, đào cắt lát, đá",
+      price: 3.45,
+      image: "./asset/img/product-tea/tea-203.jpg",
+      isHidden: false,
+      star: 4.2,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "tea",
+      }
+    },
+    {
+      id: 13,
+      name: "Trà dâu ổi hồng",
+      ingredients: "Trà đen, siro dâu, nước ép ổi hồng, đá",
+      price: 3.4,
+      image: "./asset/img/product-tea/tea-204.jpg",
+      isHidden: false,
+      star: 4.2,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "tea",
+      }
+    },
+    {
+      id: 14,
+      name: "Trà sen vàng",
+      ingredients: "Trà sen, mật ong, đá",
+      price: 4.20,
+      image: "./asset/img/product-tea/tea-205.png",
+      isHidden: false,
+      star: 4.2,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "tea",
+      }
+    },
+    {
+      id: 15,
+      name: "Trà sữa khoai môn",
+      ingredients: "Trà đen, sữa tươi, bột khoai môn, đường, đá",
+      price: 3.57,
+      image: "./asset/img/product-tea/tea-206.jpg",
+      isHidden: false,
+      star: 4.2,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "tea",
+      }
+    },
+    {
+      id: 16,
+      name: "Trà sữa socola",
+      ingredients: "Trà đen, sữa tươi, siro socola, đá",
+      price: 3.57,
+      image: "./asset/img/product-tea/tea-207.jpg",
+      isHidden: false,
+      star: 4.2,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "tea",
+      }
+    },
+    {
+      id: 17,
+      name: "Trà sữa thái",
+      ingredients: "Trà đen Thái, sữa đặc, sữa tươi, đường, đá",
+      price: 4.00,
+      image: "./asset/img/product-tea/tea-208.jpg",
+      isHidden: false,
+      star: 4.2,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "tea",
+      }
+    },
+    {
+      id: 18,
+      name: "Trà sữa truyền thống",
+      ingredients: "Trà đen, sữa tươi hoặc sữa đặc, đường, đá",
+      price: 3.50,
+      image: "./asset/img/product-tea/tea-209.png",
+      isHidden: false,
+      star: 4.2,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "tea",
+      }
+    },
+    {
+      id: 19,
+      name: "Trà tắc",
+      ingredients: "Trà xanh, nước cốt tắc, mật ong hoặc đường, đá",
+      price: 3.20,
+      image: "./asset/img/product-tea/tea-210.jpg",
+      isHidden: false,
+      star: 4.2,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "tea",
+      }
+    },
+    {
+      id: 20,
+      name: "Trà trái cây nhiệt đới",
+      ingredients: "Trà xanh, hỗn hợp trái cây nhiệt đới, đá, đường",
+      price: 4.15,
+      image: "./asset/img/product-tea/tea-211.jpg",
+      isHidden: false,
+      star: 4.2,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "tea",
+      }
+    },
+    {
+      id: 21,
+      name: "Trà vải",
+      ingredients: "Trà đen, nước ép vải, đường, đá",
+      price: 3.99,
+      image: "./asset/img/product-tea/tea-212.png",
+      isHidden: false,
+      star: 4.2,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "tea",
+      }
+    },
+    {
+      id: 22,
+      name: "Sinh tố dứa",
+      ingredients: "Xoài chín, sữa đặc, sữa tươi, đường, đá xay",
+      price: 4.49,
+      image: "./asset/img/product-smoothie/smoothie-301.jpg",
+      isHidden: false,
+      star: 4.5,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "smoothie",
+      }
+    },
+    {
+      id: 23,
+      name: "Sinh tố xoài",
+      ingredients: "Thơm (dứa), mật ong, sữa tươi, đá viên",
+      price: 4.19,
+      image: "./asset/img/product-smoothie/smoothie-302.jpg",
+      isHidden: false,
+      star: 4.3,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "smoothie",
+      }
+    },
+    {
+      id: 24,
+      name: "Sinh tố bơ",
+      ingredients: "Mãng cầu xiêm, sữa đặc, sữa tươi, đá xay",
+      price: 4.59,
+      image: "./asset/img/product-smoothie/smoothie-303.jpg",
+      isHidden: false,
+      star: 4.6,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "smoothie",
+      }
+    },
+    {
+      id: 25,
+      name: "Sinh tố chuối",
+      ingredients: "Kiwi, táo xanh, mật ong, đá viên",
+      price: 4.79,
+      image: "./asset/img/product-smoothie/smoothie-304.jpg",
+      isHidden: false,
+      star: 4.4,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "smoothie",
+      }
+    },
+    {
+      id: 26,
+      name: "Sinh tố dâu tây",
+      ingredients: "Dâu tây, sữa chua, sữa tươi, đá xay",
+      price: 4.69,
+      image: "./asset/img/product-smoothie/smoothie-305.jpg",
+      isHidden: false,
+      star: 4.7,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "smoothie",
+      }
+    },
+    {
+      id: 27,
+      name: "Sinh tố kiwi",
+      ingredients: "Chuối chín, sữa tươi, mật ong, đá viên",
+      price: 3.99,
+      image: "./asset/img/product-smoothie/smoothie-306.jpg",
+      isHidden: false,
+      star: 4.3,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "smoothie",
+      }
+    },
+    {
+      id: 28,
+      name: "Sinh tố mãng cầu",
+      ingredients: "Bơ sáp, sữa đặc, sữa tươi, đá xay",
+      price: 4.89,
+      image: "./asset/img/product-smoothie/smoothie-307.jpg",
+      isHidden: false,
+      star: 4.8,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "smoothie",
+      }
+    },
+    {
+      id: 29,
+      name: "Nước ép táo",
+      ingredients: "Táo tươi, nước lọc, đường (tuỳ chọn), đá viên",
+      price: 3.99,
+      image: "./asset/img/product-juice/juice-401.jpg",
+      isHidden: false,
+      star: 4.4,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "juice",
+      }
+    },
+    {
+      id: 30,
+      name: "Nước ép cam",
+      ingredients: "Rau má tươi, nước lọc, sữa đặc hoặc đường, đá viên",
+      price: 3.49,
+      image: "./asset/img/product-juice/juice-402.jpg",
+      isHidden: false,
+      star: 4.5,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "juice",
+      }
+    },
+    {
+      id: 31,
+      name: "Nước ép cà rốt",
+      ingredients: "Ổi hồng, muối, đường, đá xay",
+      price: 3.79,
+      image: "./asset/img/product-juice/juice-403.jpg",
+      isHidden: false,
+      star: 4.3,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "juice",
+      }
+    },
+    {
+      id: 32,
+      name: "Nước ép chanh dây",
+      ingredients: "Lựu tươi, mật ong, đá viên",
+      price: 4.49,
+      image: "./asset/img/product-juice/juice-404.jpg",
+      isHidden: false,
+      star: 4.6,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "juice",
+      }
+    },
+    {
+      id: 33,
+      name: "Nước ép dưa hấu",
+      ingredients: "Dưa hấu, đường (tuỳ chọn), đá viên",
+      price: 3.59,
+      image: "./asset/img/product-juice/juice-405.jpg",
+      isHidden: false,
+      star: 4.5,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "juice",
+      }
+    },
+    {
+      id: 34,
+      name: "Nước ép lựu",
+      ingredients: "Chanh dây, đường, nước lọc, đá viên",
+      price: 3.69,
+      image: "./asset/img/product-juice/juice-406.jpg",
+      isHidden: false,
+      star: 4.7,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "juice",
+      }
+    },
+    {
+      id: 35,
+      name: "Nước ép ổi",
+      ingredients: "Cam tươi, mật ong (tuỳ chọn), đá viên",
+      price: 3.99,
+      image: "./asset/img/product-juice/juice-407.jpg",
+      isHidden: false,
+      star: 4.8,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "juice",
+      }
+    },
+    {
+      id: 36,
+      name: "Nước ép rau má",
+      ingredients: "Cà rốt tươi, mật ong, đá viên",
+      price: 3.89,
+      image: "./asset/img/product-juice/juice-408.jpg",
+      isHidden: false,
+      star: 4.4,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "juice",
+      }
+    },
+    {
+      id: 37,
+      name: "Cà phê phin",
+      ingredients: "Sữa đặc, cà phê rang say, nước nóng",
+      price: 4.00,
+      image: "./asset/img/product-coffee/coffee-110.jpg",
+      isHidden: false,
+      star: "4.3",
+      nature: {
+        size: ["S", "M", "L"],
+        type: "coffee",
+      }
+    },
+    {
+      id: 38,
+      name: "Caramel Macchiato",
+      ingredients: "Espresso, sữa tươi, sốt caramel, siro vani",
+      price: 5.38,
+      image: "./asset/img/product-coffee/coffee-111.jpg",
+      isHidden: false,
+      star: "3.4",
+      nature: {
+        size: ["S", "M", "L"],
+        type: "coffee",
+      }
+    },
+    {
+      id: 39,
+      name: "Espresso con Panna",
+      ingredients: "Espresso, kem tươi đánh bông",
+      price: 3.50,
+      image: "./asset/img/product-coffee/coffee-112.jpg",
+      isHidden: false,
+      star: "2.5",
+      nature: {
+        size: ["S", "M", "L"],
+        type: "coffee",
+      }
+    },
+    {
+      id: 40,
+      name: "Espresso",
+      ingredients: "Cà phê xay mịn, nước nóng",
+      price: 3.00,
+      image: "./asset/img/product-coffee/coffee-113.jpg",
+      isHidden: false,
+      star: "1.5",
+      nature: {
+        size: ["S", "M", "L"],
+        type: "coffee",
+      }
+    },
+    {
+      id: 41,
+      name: "Ristretto Bianco",
+      ingredients: "Ristretto, sữa tươi đánh bọt",
+      price: 4.20,
+      image: "./asset/img/product-coffee/coffee-114.jpg",
+      isHidden: false,
+      star: "2.6",
+      nature: {
+        size: ["S", "M", "L"],
+        type: "coffee",
+      }
+    },
+    {
+      id: 42,
+      name: "Trà olong nhài",
+      ingredients: "Trà olong, hoa nhài, đá",
+      price: 4.05,
+      image: "./asset/img/product-tea/tea-213.jpg",
+      isHidden: false,
+      star: 4.3,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "tea",
+      }
+    },
+    {
+      id: 43,
+      name: "Trà sữa Oreo",
+      ingredients: "Trà đen, sữa tươi, kem Oreo, đá",
+      price: 5.70,
+      image: "./asset/img/product-tea/tea-214.jpg",
+      isHidden: false,
+      star: 3.5,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "tea",
+      }
+    },
+    {
+      id: 44,
+      name: "Trà sữa pudding trứng",
+      ingredients: "Trà đen, sữa tươi, pudding trứng, đá",
+      price: 6.00,
+      image: "./asset/img/product-tea/tea-215.jpg",
+      isHidden: false,
+      star: 1.4,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "tea",
+      }
+    },
+    {
+      id: 45,
+      name: "Trà xoài kem cheese",
+      ingredients: "Trà xanh, xoài, kem cheese, đá",
+      price: 4.80,
+      image: "./asset/img/product-tea/tea-216.jpg",
+      isHidden: false,
+      star: 4.7,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "tea",
+      }
+    },
+    {
+      id: 46,
+      name: "Trà đào cam sả",
+      ingredients: "Trà đen, đào, cam, sả, đá",
+      price: 4.50,
+      image: "./asset/img/product-tea/tea-217.jpg",
+      isHidden: false,
+      star: 3.5,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "tea",
+      }
+    },
+    {
+      id: 47,
+      name: "Sinh tố dưa lưới",
+      ingredients: "Dưa lưới chín, sữa tươi, sữa đặc, đá xay",
+      price: 4.39,
+      image: "./asset/img/product-smoothie/smoothie-308.jpg",
+      isHidden: false,
+      star: 4.5,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "smoothie",
+      }
+    },
+    {
+      id: 48,
+      name: "Sinh tố sầu riêng",
+      ingredients: "Sầu riêng, sữa tươi, sữa đặc, đá xay",
+      price: 1.99,
+      image: "./asset/img/product-smoothie/smoothie-309.jpg",
+      isHidden: false,
+      star: 4.6,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "smoothie",
+      }
+    },
+    {
+      id: 49,
+      name: "Sinh tố đu đủ",
+      ingredients: "Đu đủ chín, sữa tươi, sữa đặc, đá viên",
+      price: 3.89,
+      image: "./asset/img/product-smoothie/smoothie-310.jpg",
+      isHidden: false,
+      star: 4.4,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "smoothie",
+      }
+    },
+    {
+      id: 50,
+      name: "Sinh tố việt quất",
+      ingredients: "Việt quất, sữa chua, sữa tươi, đá xay",
+      price: 4.79,
+      image: "./asset/img/product-smoothie/smoothie-311.jpg",
+      isHidden: false,
+      star: 4.7,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "smoothie",
+      }
+    },
+    {
+      id: 51,
+      name: "Sinh tố mít",
+      ingredients: "Mít tươi, sữa tươi, sữa đặc, đá viên",
+      price: 2.29,
+      image: "./asset/img/product-smoothie/smoothie-312.jpg",
+      isHidden: false,
+      star: 4.5,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "smoothie",
+      }
+    },
+    {
+      id: 52,
+      name: "Nước ép nho",
+      ingredients: "Nho tím tươi, mật ong, đá viên",
+      price: 4.49,
+      image: "./asset/img/product-juice/juice-409.jpg",
+      isHidden: false,
+      star: 4.6,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "juice",
+      }
+    },
+    {
+      id: 53,
+      name: "Nước ép đào",
+      ingredients: "Đào chín, đường (tuỳ chọn), đá viên",
+      price: 4.19,
+      image: "./asset/img/product-juice/juice-410.jpg",
+      isHidden: false,
+      star: 4.4,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "juice",
+      }
+    },
+    {
+      id: 54,
+      name: "Nước ép mận",
+      ingredients: "Mận chín, đường, đá xay",
+      price: 4.09,
+      image: "./asset/img/product-juice/juice-411.jpg",
+      isHidden: false,
+      star: 4.3,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "juice",
+      }
+    },
+    {
+      id: 55,
+      name: "Nước ép dưa leo",
+      ingredients: "Dưa leo tươi, mật ong, đá viên",
+      price: 3.79,
+      image: "./asset/img/product-juice/juice-412.jpg",
+      isHidden: false,
+      star: 1.2,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "juice",
+      }
+    },
+    {
+      id: 56,
+      name: "Nước ép cà chua",
+      ingredients: "Cà chua tươi, mật ong hoặc đường, đá viên",
+      price: 3.69,
+      image: "./asset/img/product-juice/juice-413.jpg",
+      isHidden: false,
+      star: 2.1,
+      nature: {
+        size: ["S", "M", "L"],
+        type: "juice",
+      }
+    },
 
 
-    ];
+
+
+  ];
 let listUsers = JSON.parse(localStorage.getItem("DataUsers"));
 // console.log(listProducts); // Đây là danh sách sản phẩm từ localStorage
 let listOrders = localStorage.getItem("listOrders")
@@ -588,6 +762,7 @@ function renderAdmin() {
     window.location = "./index.html";
   };
 }
+    //========Product Management========//
 function renderProductManagement() {
   document.querySelector(".div-title").innerHTML = `
         <h1 class="title">Product Management</h1>
@@ -639,6 +814,17 @@ function renderProducts(arr) {
     const productDiv = document.createElement("div");
     productDiv.classList.add("product"); // Add the "product" class
 
+    // --- THÊM MỚI ---
+    // 1. Thêm class "product-hidden" nếu sản phẩm bị ẩn
+    if (product.isHidden) {
+      productDiv.classList.add("product-hidden");
+    }
+
+    // 2. Quyết định text cho nút bấm (Ẩn hoặc Hiện)
+    const hideButtonText = product.isHidden ? "Visible" : "Hidden";
+    const hideButtonClass = product.isHidden ? "show-btn" : "hide-btn"; // Để bạn style riêng nếu muốn
+    // ---------------
+
     productDiv.innerHTML = `
             <img src="${product.image}" alt="" class="img-product" />
             <h2 class="name">${product.name}</h2>
@@ -646,11 +832,15 @@ function renderProducts(arr) {
             <div class="group-btn">
                 <button class="edit-btn" onclick = "openEditForm(${product.id})">
                     <img src="./asset/img/admin-edit-product.png" alt="" class="icon-edit" />
-                    Edit Product
+                    Edit 
+                </button>
+                    <button class="${hideButtonClass} hide-btn" onclick="toggleHideProduct(${product.id})">
+                    <img src="./asset/img/hide.png" alt="" class="icon-hide" />
+                    ${hideButtonText}
                 </button>
                 <button class="delete-btn" onclick = "deleteProduct(${product.id})">
                     <img src="./asset/img/admin-delete-product.png" alt="" class="icon-delete" />
-                    Delete Product
+                    Delete 
                 </button>
             </div>
         `;
@@ -658,6 +848,8 @@ function renderProducts(arr) {
     productListContainer.appendChild(productDiv);
   });
 }
+  //=============order Management=============//
+  // phần order Management đổi màu khi nhấn chọn 
 function renderOrderManagement() {
   document.querySelector(".div-title").innerHTML = `
         <h1 class="title">Order Management</h1>
@@ -665,48 +857,73 @@ function renderOrderManagement() {
   const orderManagementContainer = document.querySelector(
     ".contain-add-product-search"
   );
+
   orderManagementContainer.innerHTML = ` 
     <div class="orderManagementHeader">
-      <button class="add-btn" onclick = "renderWaitOrder(listOrders)" >
-        Các đơn hàng chưa xác nhận
-      </button>
-      <button class="add-btn" onclick = "renderAcceptedOrder(listOrders)">
-        Các đơn hàng đã xác nhận
-      </button>
-      <button class="add-btn" onclick = "renderRejectedOrder(listOrders)">
-        Các đơn hàng bị hủy
-      </button>
+        <button class="add-btn" id="wait-order-btn">
+            Các đơn hàng chưa xác nhận
+        </button>
+        <button class="add-btn" id="accepted-order-btn">
+            Các đơn hàng đã xác nhận
+        </button>
+        <button class="add-btn" id="rejected-order-btn">
+            Các đơn hàng bị hủy
+        </button>
     </div>
-    <div class="orderManagementBody">
+    <div class="orderManagementBody"></div>
+    `;
 
-    </div>
-  `;
-  //Render ra các đơn hàng đã xác nhận thay vì để trống
-  renderWaitOrder(listOrders);
+  const waitBtn = document.getElementById("wait-order-btn");
+  const acceptedBtn = document.getElementById("accepted-order-btn");
+  const rejectedBtn = document.getElementById("rejected-order-btn");
+  const allButtons = [waitBtn, acceptedBtn, rejectedBtn];
+
+  function setActiveButton(clickedButton) {
+    allButtons.forEach(btn => btn.classList.remove('active-filter'));
+    clickedButton.classList.add('active-filter');
+  }
+
+  waitBtn.addEventListener('click', () => {
+    setActiveButton(waitBtn);
+    renderWaitOrder(listOrders);
+  });
+  acceptedBtn.addEventListener('click', () => {
+    setActiveButton(acceptedBtn);
+    renderAcceptedOrder(listOrders);
+  });
+  rejectedBtn.addEventListener('click', () => {
+    setActiveButton(rejectedBtn);
+    renderRejectedOrder(listOrders);
+  });
+
+  // Mặc định hiển thị đơn hàng chờ và kích hoạt nút đầu tiên
+  // renderWaitOrder(listOrders);
+  // waitBtn.classList.add('active-filter');
 }
+  //---------------------------------------------------//
 function renderTotalPriceAdmin(arrOfOrderInListOrder) {
   let sumQuantity = 0;
   let sumPrice = 0;
   let shipTotal = 0;
   arrOfOrderInListOrder.forEach((item) => {
-      sumQuantity += item.quantity;
-      sumPrice += item.price * item.quantity;
-      shipTotal += 5 * item.quantity;
+    sumQuantity += item.quantity;
+    sumPrice += item.price * item.quantity;
+    shipTotal += 5 * item.quantity;
   })
   let totalPriceFull = sumPrice + shipTotal;
   return totalPriceFull.toFixed(2);
-} 
-
+}
+//======== Các Đơn Hàng Chờ Xác Nhận =========//
 function renderWaitOrder(arr) {
   const orderManagementBody = document.querySelector(".orderManagementBody")
   orderManagementBody.innerHTML = "";
   arr.forEach((order) => {
-    if(order.order[0].check === 0){
-    const orderDiv = document.createElement("div");
-    orderDiv.classList.add("historyOrder");
-    var orderid = order.id;
-    orderDiv.setAttribute("id", orderid);
-    orderDiv.innerHTML = `
+    if (order.order[0].check === 0) {
+      const orderDiv = document.createElement("div");
+      orderDiv.classList.add("historyOrder");
+      var orderid = order.id;
+      orderDiv.setAttribute("id", orderid);
+      orderDiv.innerHTML = `
     <div class="helloUser-Order">
     <div class="sub-hello">
       <p>User: ${order.email}</p>
@@ -741,21 +958,22 @@ function renderWaitOrder(arr) {
           </div>
         </div>
     `;
-    orderManagementBody.appendChild(orderDiv);
-    renderOrderItem(order.order, orderid);
+      orderManagementBody.appendChild(orderDiv);
+      renderOrderItem(order.order, orderid);
     }
   });
 }
-function renderAcceptedOrder(arr){
+//======== Các Đơn Hàng Đã Xác Nhận =========//
+function renderAcceptedOrder(arr) {
   const orderManagementBody = document.querySelector(".orderManagementBody")
   orderManagementBody.innerHTML = "";
   arr.forEach((order) => {
-    if(order.order[0].check === 1){
-    const orderDiv = document.createElement("div");
-    orderDiv.classList.add("historyOrder");
-    var orderid = order.id;
-    orderDiv.setAttribute("id", orderid);
-    orderDiv.innerHTML = `
+    if (order.order[0].check === 1) {
+      const orderDiv = document.createElement("div");
+      orderDiv.classList.add("historyOrder");
+      var orderid = order.id;
+      orderDiv.setAttribute("id", orderid);
+      orderDiv.innerHTML = `
         <div class="helloUser-Order">
           <div class="sub-hello">
             <p>User: ${order.email}</p>
@@ -782,21 +1000,22 @@ function renderAcceptedOrder(arr){
             </table>
         </div>
     `;
-    orderManagementBody.appendChild(orderDiv);
-    renderOrderItem(order.order, orderid);
+      orderManagementBody.appendChild(orderDiv);
+      renderOrderItem(order.order, orderid);
     }
   });
 }
-function renderRejectedOrder(arr){
+//======== Các Đơn Hàng Đã Bị Hủy =========//
+function renderRejectedOrder(arr) {
   const orderManagementBody = document.querySelector(".orderManagementBody")
   orderManagementBody.innerHTML = "";
   arr.forEach((order) => {
-    if(order.order[0].check === 2){
-    const orderDiv = document.createElement("div");
-    orderDiv.classList.add("historyOrder");
-    var orderid = order.id;
-    orderDiv.setAttribute("id", orderid);
-    orderDiv.innerHTML = `
+    if (order.order[0].check === 2) {
+      const orderDiv = document.createElement("div");
+      orderDiv.classList.add("historyOrder");
+      var orderid = order.id;
+      orderDiv.setAttribute("id", orderid);
+      orderDiv.innerHTML = `
         <div class="helloUser-Order">
         <div class="sub-hello">
           <p>User: ${order.email}</p>
@@ -823,19 +1042,20 @@ function renderRejectedOrder(arr){
             </table>
         </div>
     `;
-    orderManagementBody.appendChild(orderDiv);
-    renderOrderItem(order.order, orderid);
+      orderManagementBody.appendChild(orderDiv);
+      renderOrderItem(order.order, orderid);
     }
   });
 }
+
 function renderTotalShipAdmin(arrOfOrderInListOrder) {
   let sumQuantity = 0;
   let sumPrice = 0;
   let shipTotal = 0;
   arrOfOrderInListOrder.forEach((item) => {
-      sumQuantity += item.quantity;
-      sumPrice += item.price * item.quantity;
-      shipTotal += 5 * item.quantity;
+    sumQuantity += item.quantity;
+    sumPrice += item.price * item.quantity;
+    shipTotal += 5 * item.quantity;
   })
   return shipTotal;
 }
@@ -844,7 +1064,7 @@ function renderOrderItem(arr, orderid) {
   const orderManagementTbody = document
     .getElementById(orderid)
     .querySelector(".tableHistory");
-    var variableNeed = ".fee_shipping" + orderid
+  var variableNeed = ".fee_shipping" + orderid
   document.querySelector(variableNeed).textContent = "Fee shipping: $" + renderTotalShipAdmin(arr);
   let number = 0;
   arr.forEach((item) => {
@@ -862,18 +1082,21 @@ function renderOrderItem(arr, orderid) {
     orderManagementTbody.appendChild(orderTr);
   });
 }
+//======== Status=========//
 function status(check) {
   if (check == 0) {
     return "Đang chờ...";
   } else {
-      if(check == 1){
-        return "Đã xác nhận!";
-      }
-      else{
-        return "Đã hủy";
+    if (check == 1) {
+      return "Đã xác nhận!";
+    }
+    else {
+      return "Đã hủy";
     }
   }
 }
+
+//-----------------------------------------------------------------------------------------------------//
 function renderUserManagement() {
   document.querySelector(".div-title").innerHTML = `
         <h1 class="title">User Management</h1>
@@ -895,6 +1118,7 @@ function renderUserManagement() {
     `;
   renderUser(listUsers);
 }
+
 function renderUser(arr) {
   const userManagementTbody = document.querySelector(".userTable tbody");
   userManagementTbody.innerHTML = "";
@@ -914,6 +1138,9 @@ function renderUser(arr) {
     userManagementTbody.appendChild(userTr);
   });
 }
+
+    //-----------------------------------------------//
+    // Phần OrderStartictis đổi màu khi chọn //
 function renderOrderStartictis() {
   document.querySelector(".div-title").innerHTML = `
         <h1 class="title">Order Startictis</h1>
@@ -940,24 +1167,53 @@ function renderOrderStartictis() {
               <label for="type">Type</label>
               <select name="type" id="type">
                   <option value="">---</option>
-                  <option value="sweater">sweater</option>
-                  <option value="pants">pants</option>
-                  <option value="shoe">shoe</option>
+                  <option value="coffee">Coffee</option>
+                  <option value="juice">Juice</option>
+                  <option value="smoothie">Smoothie</option>
+                  <option value="tea">Tea</option>
               </select>
           </div>
 
         </div>
-          <button type = "button" class="btn-submit" onclick = "handleOrderStartictis()">Submit</button>
+          <button type = "button" class="btn-submit" id = "handle-Order-Startictis">Submit</button>
       </form>
-      <button class="btn-sale" onclick = "handleTopSale()">Top Sales</button>
-      <button class="btn-customer" onclick = "handleTopCustomer()">Top Customers</button>
+      <button class="btn-sale" id = "handle-Top-Sale">Top Sales</button>
+      <button class="btn-customer" id = "handle-Top-Customer">Top Customers</button>
   </div>
 </div>
-<div class="body-table">
-  
-</div>
-    `;
+<div class="body-table"></div>
+`;
+
+  //  Lấy tham chiếu đến các nút vừa tạo
+  const startictisBtn = document.querySelector("#handle-Order-Startictis");
+  const topSaledBtn = document.querySelector("#handle-Top-Sale");
+  const customerdBtn = document.querySelector("#handle-Top-Customer");
+  const allButtons = [startictisBtn, topSaledBtn, customerdBtn];
+
+  //  Hàm xử lý việc chuyển đổi class "active-filter"
+  function handleButtonClick(clickedButton) {
+    // Xóa class 'active-filter' khỏi tất cả các nút
+    allButtons.forEach(btn => btn.classList.remove('active-filter'));
+    // Thêm class 'active-filter' vào nút vừa được nhấn
+    clickedButton.classList.add('active-filter');
+  }
+  //  Gán sự kiện click cho từng nút
+  startictisBtn.addEventListener('click', () => {
+    handleButtonClick(startictisBtn); // Cập nhật giao diện nút
+    handleOrderStartictis(); // Render nội dung tương ứng
+  });
+
+  topSaledBtn.addEventListener('click', () => {
+    handleButtonClick(topSaledBtn);
+    handleTopSale();
+  });
+
+  customerdBtn.addEventListener('click', () => {
+    handleButtonClick(customerdBtn);
+    handleTopCustomer();
+  });
 }
+//-----------------------------------------------//
 function renderTableBody() {
   const tableBody = document.querySelector(".body-table");
   tableBody.innerHTML = `<table>
@@ -1001,8 +1257,8 @@ function fillterTopSale() {
   listOrders.forEach((item) => {
     item.order.forEach((itemOrder) => {
       const productId = itemOrder.idProduct;
-       let check = itemOrder.check;    // == 0 la chua mua, 1 la mua roi
-        console.log(check);
+      let check = itemOrder.check;    // == 0 la chua mua, 1 la mua roi
+      console.log(check);
       // If the product is not in the map, initialize it
       if (!productQuantities[productId] && check == 1) {
         productQuantities[productId] = {
@@ -1014,7 +1270,7 @@ function fillterTopSale() {
       }
 
       // Update the total quantity for the product
-      if(check == 1)
+      if (check == 1)
         productQuantities[productId].totalQuantity += itemOrder.quantity;
     });
   });
@@ -1070,7 +1326,7 @@ function fillterTopCustomer() {
           totalPrice: 0,
         };
       }
-      if(itemOrder.check == 1) // khi da mua roi moi cong them tien
+      if (itemOrder.check == 1) // khi da mua roi moi cong them tien
         customer[userId].totalPrice += itemOrder.quantity * itemOrder.price + itemOrder.quantity * 5;
     });
   });
@@ -1137,19 +1393,19 @@ function filterOrdersByTime() {
 
     const matchesType = typeProduct.value !== '' ? filteredOrders.some(order => order.type === typeProduct.value) : true;
 
-if (filteredOrders.length > 0 && matchesType) {
-  // Create a new filtered object with only the necessary properties
-  const filteredItem = {
-    email: item.email,
-    id: item.id,
-    nameCustomer: item.nameCustomer,
-    order: filteredOrders.filter(order => typeProduct.value === '' || order.type === typeProduct.value),
-    userId: item.userId
-  };
+    if (filteredOrders.length > 0 && matchesType) {
+      // Create a new filtered object with only the necessary properties
+      const filteredItem = {
+        email: item.email,
+        id: item.id,
+        nameCustomer: item.nameCustomer,
+        order: filteredOrders.filter(order => typeProduct.value === '' || order.type === typeProduct.value),
+        userId: item.userId
+      };
 
-  // Add the item to the filtered list
-  listFilter.push(filteredItem);
-}
+      // Add the item to the filtered list
+      listFilter.push(filteredItem);
+    }
 
   });
 
@@ -1188,42 +1444,46 @@ function handleOrderStartictis() {
   renderOrderStartictisProduct();
 }
 
+// Search theo tên sản phẩm
 function handleProductManagement() {
   const textInput = document.querySelector(".search-field");
   const iconDelete = document.querySelector(".icon-delete");
+  const searchButton = document.querySelector(".btn-search");
 
-  function search() {
-    let productSearch = listProducts.filter((value) => {
-      return value.name
-        .toLowerCase()
-        .trim()
-        .includes(textInput.value.trim().toLowerCase());
+  // Hàm tìm kiếm chính
+  function performSearch() {
+    const searchText = textInput.value.trim().toLowerCase();
+    const productSearch = listProducts.filter((product) => {
+      const productName = product.name.trim().toLowerCase();
+      return productName.includes(searchText);
     });
-    if (productSearch.length == 0) {
-      console.log("No products found");
-    }
+
     renderProducts(productSearch);
   }
-  document.querySelector(".btn-search").addEventListener("click", search);
 
-  function deleteText() {
-    textInput.addEventListener("input", function () {
-      if (textInput.value.length > 0) {
-        iconDelete.classList.remove("hidden");
-        console.log("thay");
-        iconDelete.addEventListener("click", function () {
-          textInput.value = "";
-          iconDelete.classList.add("hidden");
-          search();
-        });
-      } else {
-        iconDelete.classList.add("hidden");
-        console.log("k thay");
-      }
-    });
-  }
-  deleteText();
+  // --- Gán các sự kiện ---
 
+  //Gán sự kiện 'input' để tìm kiếm ngay khi người dùng gõ chữ
+  textInput.addEventListener("input", performSearch);
+
+  // Vẫn giữ sự kiện 'click' cho nút tìm kiếm cho những ai có thói quen bấm
+  searchButton.addEventListener("click", performSearch);
+
+  // Xử lý hiển thị/ẩn nút xóa 'x'
+  textInput.addEventListener("input", function () {
+    if (textInput.value.length > 0) {
+      iconDelete.classList.remove("hidden");
+    } else {
+      iconDelete.classList.add("hidden");
+    }
+  });
+
+  // Xử lý sự kiện click vào nút xóa 'x'
+  iconDelete.addEventListener("click", function () {
+    textInput.value = "";
+    iconDelete.classList.add("hidden");
+    performSearch();
+  });
 }
 
 function addAnimate() {
@@ -1293,12 +1553,39 @@ function deleteProduct(productId) {
       console.log("da xoa  " + listProducts[i].id);
       console.log(listProducts);
       listProducts.splice(i, 1);
-      
+
     }
   }
   localStorage.setItem("listProducts", JSON.stringify(listProducts));
   renderProducts(listProducts);
 }
+
+// === HÀM MỚI ĐỂ ẨN/HIỆN SẢN PHẨM ===
+function toggleHideProduct(productId) {
+  // 1. Tìm sản phẩm trong mảng
+  const productToToggle = listProducts.find(
+    (product) => product.id === productId
+  );
+
+  if (productToToggle) {
+    // 2. Đảo ngược trạng thái isHidden (từ false -> true hoặc từ true -> false)
+    productToToggle.isHidden = !productToToggle.isHidden;
+
+    // 3. Cập nhật lại localStorage
+    localStorage.setItem("listProducts", JSON.stringify(listProducts));
+
+    // 4. Render lại danh sách sản phẩm để thấy thay đổi
+    // Lưu ý: Nếu bạn đang dùng search, bạn có thể cần render lại kết quả search
+    // Cách đơn giản nhất là render lại toàn bộ listProducts
+    renderProducts(listProducts);
+    
+    // Hoặc nếu bạn muốn giữ nguyên kết quả search, bạn phải gọi lại hàm performSearch()
+    // performSearch(); // (Hàm này cần được truy cập từ đây)
+  } else {
+    console.log("Không tìm thấy sản phẩm với ID: " + productId);
+  }
+}
+// ======================================
 // Function to delete a user
 function deleteUser(userId) {
   const shouldDelete = window.confirm(
@@ -1370,9 +1657,9 @@ function addProduct(data) {
     name: productName,
     price: productPrice,
     image: productImg,
-    star: 5.0,
+    star: 4.5,
     nature: {
-      color: ["white", "black"],
+      // color: ["white", "black"],
       size: ["S", "M", "L"],
       type: productType,
     },
@@ -1527,7 +1814,7 @@ function Validator(options) {
             values[input.name] = input.value;
             return values;
           },
-          {});
+            {});
           options.onSubmit(formValues);
         }
         // Trường hợp submit với hành vi mặc định

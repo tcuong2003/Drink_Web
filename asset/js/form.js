@@ -9,6 +9,7 @@ let DataUsers = localStorage.getItem('DataUsers') ? JSON.parse(localStorage.getI
         ],
     },
 ];
+
 let loginUser = JSON.parse(localStorage.getItem('loginUser'))
 updateLocalStorage()
 renderUser()
@@ -368,7 +369,7 @@ function checkLogin(data) {
           isFound = true;
           loginUser = DataUser;
           updateLocalStorage();
-          window.location.href = window.location.origin + "/index.html";
+          window.location = "./index.html"
        }
     }
     if (!isFound) {
@@ -416,8 +417,8 @@ function checkLogin(data) {
  // ============ render tên người dùng khi đăng nhập ===============
 function renderName() {
     const name = document.querySelector(".hello-name");
-    if (login) {
-        name.textContent = login.name;
+    if (loginUser) {
+        name.textContent = loginUser.name;
     }
 }
 renderName();

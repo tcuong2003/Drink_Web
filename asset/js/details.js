@@ -561,6 +561,7 @@ let ListProducts = localStorage.getItem("listProducts")
             size: ["S", "M", "L"],
             type: "juice",
         },
+       
 
     ];
     // Lấy ID sản phẩm từ URL
@@ -618,7 +619,7 @@ document.addEventListener("DOMContentLoaded", displayProduct);
 
 
 
-let datausers = JSON.parse(localStorage.getItem("DataUsers"));
+let dataUsers = JSON.parse(localStorage.getItem("DataUsers"));
 let login = JSON.parse(localStorage.getItem("loginUser"));
 
 // =========== Thêm sản phẩm vào giỏ hàng =============
@@ -635,7 +636,7 @@ function addToCart(productId) {
         });
         return;
     }
-    let userIndex = datausers.findIndex((user) => user.id == login.id);
+    let userIndex = dataUsers.findIndex((user) => user.id == login.id);
 
     if (userIndex !== -1) {
         let productToAdd = ListProducts.find(
@@ -643,15 +644,15 @@ function addToCart(productId) {
         );
 
         if (productToAdd) {
-            const existingCartItemIndex = datausers[
+            const existingCartItemIndex = dataUsers[
                 userIndex
             ].cartItems.findIndex((item) => item.idProduct == productId);
 
             if (
                 existingCartItemIndex !== -1 &&
-                datausers[userIndex].cartItems[existingCartItemIndex].check == 0
+                dataUsers[userIndex].cartItems[existingCartItemIndex].check == 0
             ) {
-                datausers[userIndex].cartItems[existingCartItemIndex]
+                dataUsers[userIndex].cartItems[existingCartItemIndex]
                     .quantity++;
             } else {
                 let cartItem = {
@@ -663,9 +664,9 @@ function addToCart(productId) {
                     check: 0,
                     time: new Date(),
                 };
-                datausers[userIndex].cartItems.push(cartItem);
+                dataUsers[userIndex].cartItems.push(cartItem);
             }
-            localStorage.setItem("DataUsers", JSON.stringify(datausers));
+            localStorage.setItem("DataUsers", JSON.stringify(dataUsers));
             renderCartUI();
         }
     }
@@ -679,10 +680,10 @@ function renderCartUI() {
     if (!login) {
         return;
     }
-    let userIndex = datausers.findIndex((user) => user.id === login.id);
-    if (datausers[userIndex].cartItems.length > 0) {
-        renderImageCart(datausers[userIndex].cartItems);
-        renderNumberCart(datausers[userIndex].cartItems);
+    let userIndex = dataUsers.findIndex((user) => user.id === login.id);
+    if (dataUsers[userIndex].cartItems.length > 0) {
+        renderImageCart(dataUsers[userIndex].cartItems);
+        renderNumberCart(dataUsers[userIndex].cartItems);
         // noProduct.classList.add("hidden");
         // haveProduct.classList.remove("hidden");
         // listPreview.style.width = "500px";
@@ -765,32 +766,14 @@ function renderName() {
 }
 renderName();
 
-// ==============Hiển thị Producrt - link đến các nội dung main==============
-document.addEventListener("DOMContentLoaded", () => {
-  const mainPage = document.querySelector("#main");
-  const productPage = document.querySelector("./index.html/#product");
-
-  // Nút xem tất cả product
-  const btnProductAll = document.querySelector(".btn-product-all");
-  if (btnProductAll && mainPage && productPage) {
-    btnProductAll.addEventListener("click", (e) => {
-      e.preventDefault();
-      mainPage.classList.add("hidden");
-      productPage.classList.remove("hidden");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      // Cập nhật URL hash
-      history.pushState(null, "", "#product");
-    });
-  }
-});
-//render history order
-document.addEventListener("DOMContentLoaded", () => {
-  // Đảm bảo login có dữ liệu
-  window.login = JSON.parse(localStorage.getItem("loginUser"));
-  window.dataUsers = JSON.parse(localStorage.getItem("DataUsers")) || [];
-  window.listOrders = JSON.parse(localStorage.getItem("listOrders")) || [];
-
-  if (typeof handleRenderHistoryOrder === "function") {
-    handleRenderHistoryOrder();
-  }
-});
+// ============ Khi người dùng nhấn vào nút Product ========
+const productLink = document.querySelector(".btn-product-all");
+if (productLink) {
+  productLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    // Lưu trạng thái muốn mở product
+    localStorage.setItem("showProductPage", "true");
+    // Quay lại trang index
+    window.location.href = "index.html";
+  });
+}

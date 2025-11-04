@@ -29,6 +29,7 @@ body {
     width: 1340px;
     max-width: calc(100% - 48px);
     margin: 0 auto;
+    align-items: center;
 }
 
 .container h1 {
@@ -198,6 +199,7 @@ a {
     top: 18px;
     left: 252px;
     color: rgb(182, 175, 175);
+    align-items: center;
 }
 
 .header .buy-cart {
@@ -412,6 +414,7 @@ a {
 
 .main .container {
     padding-top: 30px;
+    align-items: center;
 }
 
 .main .slider {
@@ -517,7 +520,7 @@ a {
 /* -------------------------------------- CSS cho Sale off ------------------------------- */
 .sale {
     margin-top: 40px;
-    scroll-margin-top: 100px;
+    scroll-margin-top: 150px;
 }
 
 .sale .title {
@@ -581,7 +584,7 @@ a {
 
 /* ------------------------------------- CSS cho About us -------------------------------- */
 .about-section {
-    scroll-margin-top: 100px;
+    scroll-margin-top: 150px;
     background-color: #cceae9;
     margin-top: 100px;
     border-radius: 12px;

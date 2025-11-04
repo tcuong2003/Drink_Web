@@ -86,7 +86,7 @@ a {
 }
 
 .header ul li {
-    padding: 4px 8px;
+    padding: 4px 4px;
 }
 
 .header .nav ul li {
@@ -163,6 +163,15 @@ a {
 .header .last-icon {
     display: flex;
     margin-left: auto;
+    position: relative;
+    align-items: center; 
+}
+
+.header .last-icon svg {
+    position: absolute;
+    top: 18px;
+    left: 252px;
+    color: rgb(182, 175, 175);
 }
 
 .header .buy-cart {
@@ -366,7 +375,7 @@ a {
     padding: 5px 0px;
     margin: 0px 20px 0 8px;
     align-items: center;
-}
+} 
 
 /* =========== Product =========== */
 .product .body {
