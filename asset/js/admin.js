@@ -1134,16 +1134,21 @@ function renderUser(arr) {
             <td>${user.password}</td>
             <td>
                 ${user.isAdmin ? '' : `
-                    <button class="delete-btn product delete-user" onclick="deleteUser(${user.id})">
-                        Delete
-                    </button>
-                    <button class="block-btn product block-user ${user.isBlocked ? 'blocked' : ''}" 
-                            onclick="toggleBlockUser(${user.id})">
-                        ${user.isBlocked ? 'Unblock' : 'Block'}
-                    </button>
-                    <button class="delete-btn product edit-user" onclick="openEditUser(${user.id})">
+                  <button class="edit-user" onclick="openEditUser(${user.id})">
+                  <img src="./asset/img/admin-edit-product.png" alt="" class="user-icon-edit" />
                         Edit
                     </button>
+                    <button class="block-user ${user.isBlocked ? 'blocked' : ''}" 
+                            onclick="toggleBlockUser(${user.id})">
+                            <img src="./asset/img/admin-block-icon.png" alt="" class="user-icon-block" />
+                        ${user.isBlocked ? 'Unblock' : 'Block'}
+                    </button>
+                    <button class="delete-user" onclick="deleteUser(${user.id})">
+                        <img src="./asset/img/admin-delete-product.png" alt="" class="user-icon-delete" />
+                        Delete
+                    </button>
+                    
+                    
                 `}
             </td>
         `;
@@ -1160,11 +1165,11 @@ function openEditUser(userId) {
 
     // tạo modal (background + form)
     const modalHtml = `
-        <div id="edit-user-background" class="add-edit-product-background-form animate" style="visibility:visible;opacity:1;">
-            <div id="edit-user-form" class="add-edit-product-form" style="width:420px;">
+        <div id="edit-user-background" class="add-edit-product-background-form animate">
+            <div id="edit-user-form" class="add-edit-product-form">
                 <div class="head-form">
                     <h2 class="title">Edit User</h2>
-                    <span id="close-edit-user" style="cursor:pointer;font-size:24px;font-weight:bold;">&times;</span>
+                    <span id="close-edit-user">&times;</span>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Name</label>
@@ -1176,9 +1181,9 @@ function openEditUser(userId) {
                     <div class="div"><input id="edit-user-password" class="form-input" type="text" placeholder="New password" /></div>
                     <div class="form-error" id="edit-user-password-error"></div>
                 </div>
-                <div style="display:flex;gap:12px;">
+                <div class="edit-user-actions">
                     <button class="btn-save" id="save-edit-user">Save</button>
-                    <button class="add-btn" id="cancel-edit-user" style="background:#999">Cancel</button>
+                    <button class="add-btn modal-cancel" id="cancel-edit-user">Cancel</button>
                 </div>
             </div>
         </div>

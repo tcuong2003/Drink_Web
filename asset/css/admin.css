@@ -693,16 +693,16 @@ td {
    justify-content: space-between;
    align-items: center;
 }
-
+/* CSS phần date picker */
 .start-date-div {
    display: block;
    margin-bottom: 10px;
 }
-
+/* CSS phần table thêm sản phẩm vào kho */
 .contain-add-product-search table {
    width: 100%;
 }
-
+/* CSS phần img trong table thêm sản phẩm vào kho */
 .contain-add-product-search .img {
    width: 100px;
    height: 100px;
@@ -710,11 +710,11 @@ td {
    border-radius: 8px;
    vertical-align: middle;
 }
-
+/* CSS phần căn giữa text trong table thêm sản phẩm vào kho */
 .contain-add-product-search table tbody {
    text-align: center;
 }
-
+/* CSS phần button sale và customer */
 .btn-sale,
 .btn-customer{
    padding: 5px 20px;
@@ -731,6 +731,7 @@ td {
       4px 4px 5px 0px rgba(0, 0, 0, .1);
    transition: all 0.3s ease;
 }
+/* CSS phần button submit */
 .btn-submit {
  
    padding: 5px 20px;
@@ -746,50 +747,163 @@ td {
       4px 4px 5px 0px rgba(0, 0, 0, .1);
    transition: all 0.3s ease;
 }
-
+/* CSS phần hiệu ứng focus và hover cho các button */
 .btn-sale:not([disabled]):focus,
 .btn-customer:not([disabled]):focus,
 .btn-submit:not([disabled]):focus {
    box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.9), -.125rem -.125rem 1rem rgba(19, 2, 5, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
 }
-
+/* CSS phần hiệu ứng hover cho các button */
 .btn-sale:not([disabled]):hover,
 .btn-customer:not([disabled]):hover,
 .btn-submit:not([disabled]):hover {
    box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(19, 2, 5, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
 }
-
+/* CSS phần form chọn khoảng thời gian */
 .form-input-startics {
    margin-bottom: 30px;
 }
-
+/* CSS phần căn chỉnh form chọn khoảng thời gian */
 .form-input-startics form {
    display: flex;
    gap: 20px;
    justify-content: space-between;
 }
-
+/* CSS phần khoảng cách giữa các item trong form chọn khoảng thời gian */
 .form-input-startics .form-item {
    margin-top: 10px;
 }
-
-.delete-user {
-   font-weight: 600;
-   transition: all 0.3s;
-}
-
-.delete-user:hover {
-   font-weight: 600;
+/* CSS phần edit user */
+.edit-user {
+   padding: 10px 20px;
+   padding-right: 45px;
    color: #fff;
+   border: none;
+   border-radius: 5px;
+   font-size: 20px;
+   position: relative;
+   cursor: pointer;
+   box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+      7px 7px 20px 0px rgba(0, 0, 0, .1),
+      4px 4px 5px 0px rgba(0, 0, 0, .1);
+   transition: all 0.3s ease;
+   background-color: rgb(31, 101, 251);
+}
+/* CSS phần block user */
+.block-user {
+   padding: 10px 20px;
+   padding-right: 45px;
+   color: #fff;
+   border: none;
+   border-radius: 5px;
+   font-size: 20px;
+   position: relative;
+   cursor: pointer;
+   box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+      7px 7px 20px 0px rgba(0, 0, 0, .1),
+      4px 4px 5px 0px rgba(0, 0, 0, .1);
+   transition: all 0.3s ease;
+   background-color: #e2c611; 
+   color: white;
+   border: none;
+}
+/* CSS phần unblock user */
+.block-user.blocked {
+   background-color: #4caf50; 
+   color: white;
+   border: none;
+}
+/* CSS phần delete user */
+.delete-user {
+ padding: 10px 20px;
+   padding-right: 45px;
+   color: #fff;
+   border: none;
+   border-radius: 5px;
+   font-size: 20px;
+   position: relative;
+   cursor: pointer;
+   box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+      7px 7px 20px 0px rgba(0, 0, 0, .1),
+      4px 4px 5px 0px rgba(0, 0, 0, .1);
+   transition: all 0.3s ease;
    background-color: #dc3139;
 }
+/* Hiệu ứng hover cho các nút */
+.edit-user:hover,
+.block-user.blocked:hover,
+.block-user:hover,
+.delete-user:hover {
+   box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, .5),
+      -4px -4px 6px 0 rgba(116, 125, 136, .5),
+      inset -4px -4px 6px 0 rgba(255, 255, 255, .2),
+      inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
+}
+/* Kích thước và vị trí icon trong nút */
+.user-icon-edit,
+.user-icon-block,
+.user-icon-delete {
+   width: 30px;
+   height: 30px;
+   position: absolute;
+   top: 5px;
+   right: 3px;
+}
+/* Căn phải cho cột chứa các nút */
+.userTable td:last-child {
+    text-align: right;
+    padding-right: 20px;
+    white-space: nowrap;
+    width: 1%;
+}
 
+#edit-user-background {
+  /* tận dụng class .add-edit-product-background-form cho vị trí/fade */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#edit-user-form {
+  /* kích thước modal nhỏ hơn form product mặc định */
+  width: 420px;
+  max-width: calc(100% - 40px);
+  padding: 20px;
+  border-radius: 12px;
+}
+
+/* nút đóng ở góc */
+#close-edit-user {
+  cursor: pointer;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* nút Cancel trong modal */
+.modal-cancel {
+  background: #999;
+  color: #fff;
+}
+
+/* đảm bảo layout 2 nút nằm cạnh nhau đẹp */
+.edit-user-actions {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+.edit-user-actions .btn-save {
+  flex: 1;
+}
+.edit-user-actions .modal-cancel {
+  flex: 1;
+}
+/* Căn giữa header của Order Management */
 .orderManagementHeader {
    display: flex;
    gap: 10%;
    justify-content: center;
 }
-
+/* Căn giữa nội dung trong bảng của Order Management và Order Startictis */
 .container td,
 th {
    vertical-align: middle;
@@ -811,40 +925,3 @@ th {
   
     box-shadow: inset 2px 2px 5px 0 rgba(0, 0, 0, .4);
 }
-
-/* CSS phần block user */
-.block-user {
-   font-weight: 600;
-   transition: all 0.3s;
-}
-
-.block-user:hover {
-   font-weight: 600;
-   color: #fff; 
-   background-color: #ff9800;
-}
-
-.block-user.blocked {
-   font-weight: 600;
-   transition: all 0.3s;
-}
-
-.block-user.blocked:hover {
-   font-weight: 600;
-   color: #fff;
-   background-color: #4CAF50;
-}
-
-/* CSS phần edit user */
-.edit-user {
-   font-weight: 600;
-   transition: all 0.3s;
-}
-
-.edit-user:hover {
-   font-weight: 600;
-   color: #fff;
-   background-color: #2196F3;
-}
-
-
