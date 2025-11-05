@@ -1106,6 +1106,7 @@ function renderUserManagement() {
             <thead>
                 <tr>
                     <th>Id</th>
+                    <th>Name</th>
                     <th>Email</th>
                     <th>Password</th>
                     <th></th>
@@ -1118,29 +1119,142 @@ function renderUserManagement() {
     `;
   renderUser(listUsers);
 }
-
+// Thêm user, nút block, nút edit vào bảng user management
 function renderUser(arr) {
-  const userManagementTbody = document.querySelector(".userTable tbody");
-  userManagementTbody.innerHTML = "";
+    const userManagementTbody = document.querySelector(".userTable tbody");
+    userManagementTbody.innerHTML = "";
 
-  arr.forEach((user) => {
-    const userTr = document.createElement("tr");
-    userTr.innerHTML = `
-                <td>${user.id}</td>
-                <td>${user.email}</td>
-                <td>${user.password}</td>
-                <td>
-                <button class="delete-btn product delete-user" onclick = "deleteUser(${user.id})">
-                    Delete User
-                </button>
-                </td>
+    arr.forEach((user) => {
+        const userTr = document.createElement("tr");
+        
+        userTr.innerHTML = `
+            <td>${user.id}</td>
+            <td>${user.name || ''}</td>
+            <td>${user.email}</td>
+            <td>${user.password}</td>
+            <td>
+                ${user.isAdmin ? '' : `
+                  <button class="edit-user" onclick="openEditUser(${user.id})">
+                  <img src="./asset/img/admin-edit-product.png" alt="" class="user-icon-edit" />
+                        Edit
+                    </button>
+                    <button class="block-user ${user.isBlocked ? 'blocked' : ''}" 
+                            onclick="toggleBlockUser(${user.id})">
+                            <img src="./asset/img/admin-block-icon.png" alt="" class="user-icon-block" />
+                        ${user.isBlocked ? 'Unblock' : 'Block'}
+                    </button>
+                    <button class="delete-user" onclick="deleteUser(${user.id})">
+                        <img src="./asset/img/admin-delete-product.png" alt="" class="user-icon-delete" />
+                        Delete
+                    </button>
+                    
+                    
+                `}
+            </td>
         `;
-    userManagementTbody.appendChild(userTr);
-  });
+        
+        userManagementTbody.appendChild(userTr);
+    });
 }
 
-    //-----------------------------------------------//
-    // Phần OrderStartictis đổi màu khi chọn //
+// Hàm mở modal edit user
+function openEditUser(userId) {
+    const user = listUsers.find(u => u.id === userId);
+    if (!user) return;
+
+
+    // tạo modal (background + form)
+    const modalHtml = `
+        <div id="edit-user-background" class="add-edit-product-background-form animate">
+            <div id="edit-user-form" class="add-edit-product-form">
+                <div class="head-form">
+                    <h2 class="title">Edit User</h2>
+                    <span id="close-edit-user">&times;</span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Name</label>
+                    <div class="div"><input id="edit-user-name" class="form-input" type="text" value="${(user.name||'').replace(/"/g,'&quot;')}" /></div>
+                    <div class="form-error" id="edit-user-name-error"></div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password (leave blank to keep)</label>
+                    <div class="div"><input id="edit-user-password" class="form-input" type="text" placeholder="New password" /></div>
+                    <div class="form-error" id="edit-user-password-error"></div>
+                </div>
+                <div class="edit-user-actions">
+                    <button class="btn-save" id="save-edit-user">Save</button>
+                    <button class="add-btn modal-cancel" id="cancel-edit-user">Cancel</button>
+                </div>
+            </div>
+        </div>
+    `;
+    // chèn vào DOM
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+    // gán sự kiện đóng
+    document.getElementById('close-edit-user').addEventListener('click', closeEditUserModal);
+    document.getElementById('cancel-edit-user').addEventListener('click', closeEditUserModal);
+    document.getElementById('edit-user-background').addEventListener('click', function (e) {
+        if (e.target.id === 'edit-user-background') closeEditUserModal();
+    });
+
+    // lưu
+    document.getElementById('save-edit-user').addEventListener('click', function () {
+        const newName = document.getElementById('edit-user-name').value.trim();
+        const newPassword = document.getElementById('edit-user-password').value;
+
+        // kiểm tra dữ liệu nhập
+        let valid = true;
+        document.getElementById('edit-user-name-error').innerText = '';
+        document.getElementById('edit-user-password-error').innerText = '';
+
+        if (newName === '') {
+            document.getElementById('edit-user-name-error').innerText = 'Vui lòng nhập tên';
+            valid = false;
+        }
+        if (newPassword && newPassword.length > 0 && newPassword.length < 6) {
+            document.getElementById('edit-user-password-error').innerText = 'Mật khẩu tối thiểu 6 kí tự';
+            valid = false;
+        }
+
+        if (!valid) return;
+
+        saveUserEdit(userId, newName, newPassword);
+        closeEditUserModal();
+    });
+}
+
+function closeEditUserModal() {
+    const bg = document.getElementById('edit-user-background');
+    if (bg) bg.remove();
+}
+
+// Lưu thay đổi user
+function saveUserEdit(userId, newName, newPassword) {
+    for (let i = 0; i < listUsers.length; i++) {
+        if (listUsers[i].id === userId) {
+            listUsers[i].name = newName;
+            if (newPassword && newPassword.length >= 6) {
+                listUsers[i].password = newPassword;
+            }
+            break;
+        }
+    }
+    // cập nhật localStorage
+    localStorage.setItem('DataUsers', JSON.stringify(listUsers));
+
+    // nếu đang login là user này thì cập nhật loginUser luôn
+    const currentLogin = JSON.parse(localStorage.getItem('loginUser'));
+    if (currentLogin && currentLogin.id === userId) {
+        currentLogin.name = newName;
+        if (newPassword && newPassword.length >= 6) currentLogin.password = newPassword;
+        localStorage.setItem('loginUser', JSON.stringify(currentLogin));
+    }
+
+    // cập nhật UI
+    renderUser(listUsers);
+}
+//-----------------------------------------------------------------------------------------------------//
 function renderOrderStartictis() {
   document.querySelector(".div-title").innerHTML = `
         <h1 class="title">Order Startictis</h1>
@@ -1892,4 +2006,27 @@ function runCheckAddForm() {
       }
     },
   });
+}
+
+function toggleBlockUser(userId) {
+    const user = listUsers.find(user => user.id === userId);
+    if (!user) return;
+
+    user.isBlocked = !user.isBlocked;
+    localStorage.setItem('DataUsers', JSON.stringify(listUsers));
+
+    // Nếu user vừa bị block và đang là tài khoản đang đăng nhập -> đăng xuất
+    const currentLogin = JSON.parse(localStorage.getItem('loginUser'));
+    if (currentLogin && currentLogin.id === userId && user.isBlocked) {
+        // Xoá session ở localStorage
+        localStorage.setItem('loginUser', JSON.stringify(null));
+        // Ghi flag để các tab khác nhận biết và reload
+        localStorage.setItem('forceLogout', JSON.stringify({ userId: userId, time: Date.now() }));
+        // Ghi thêm một key để bắt chắc sự kiện storage (timestamp)
+        localStorage.setItem('needReload', Date.now().toString());
+        // Thông báo
+        alert('Người dùng đã bị chặn');
+    }
+
+    renderUser(listUsers);
 }
