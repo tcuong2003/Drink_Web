@@ -3,7 +3,7 @@ let dataUsers = JSON.parse(localStorage.getItem("DataUsers"));
 
 document.addEventListener("DOMContentLoaded", function () {
 
-
+//Hiển thị danh sách sản phẩm trong giỏ hàng ra giao diện
     function render(arr) {
         const productListContainer = document.querySelector(".main-left__product");
         productListContainer.innerHTML = "";
@@ -49,6 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
     render(dataUsersNow[userIndex].cartItems);
+//Tính toán và hiển thị tổng tiền, tổng số lượng, phí vận chuyển, và tổng thanh toán
     function renderPrice() {
         const totalQuantity = document.querySelector(".total-quantity");
         console.log(totalQuantity);
@@ -84,7 +85,7 @@ let userIndex = dataUsersNow.findIndex((user) => user.id == loginUserNow.id);
 console.log(dataUsersNow[userIndex]);
 console.log(dataUsersNow[userIndex].cartItems);
 
-
+//Tăng số lượng của sản phẩm có idProduct trong giỏ hàng
 function up(idProduct) {
     const amount = document.getElementById(`amount-${idProduct}`)
     console.log("fjsadkfasdfdsfsdaf");
@@ -102,6 +103,7 @@ function up(idProduct) {
         }
     })
 }
+//Giảm số lượng sản phẩm (nhưng không nhỏ hơn 1)
 function down(idProduct) {
     const amount = document.getElementById(`amount-${idProduct}`)
     dataUsersNow[userIndex].cartItems.forEach((item) => {
@@ -120,7 +122,7 @@ function down(idProduct) {
         }
     })
 }
-
+//Xoá sản phẩm khỏi giỏ hàng
 function deleteProduct(idProduct) {
     const indexToDelete = dataUsersNow[userIndex].cartItems.findIndex(item => item.idProduct === idProduct);
     if (indexToDelete !== -1) {
@@ -135,7 +137,7 @@ function deleteProduct(idProduct) {
         }
     }
 }
-
+//Cập nhật lại tổng giá, số lượng, phí ship sau khi thay đổi giỏ hàng
 function renderPriceAfter(deletedItem) {
     const totalQuantity = document.querySelector(".total-quantity");
     const price = document.querySelector(".price-checkout");
@@ -160,13 +162,14 @@ function renderPriceAfter(deletedItem) {
     sumPrice -= deletedItem.price * deletedItem.quantity;
     totalPrice.textContent = totalPriceFull.toFixed(2);
 }
-
+//Xử lý khi người dùng nhấn nút thanh toán
 function checkOut(){
     const checkOutBtn = document.querySelector('.action-checkout')
     checkOutBtn.onclick = function(){
         updateListOrders(dataUsersNow[userIndex])
     }
 }
+//Sinh ID mới cho đơn hàng
 function setId(){
     let max=0
     for(let i=0;i<listOrders.length;i++){
@@ -174,6 +177,7 @@ function setId(){
     }
     return max+1;
  }
+ //Thêm đơn hàng mới vào danh sách listOrders
 function updateListOrders(data){
     listOrders.unshift(
         {
@@ -187,17 +191,19 @@ function updateListOrders(data){
     updateListOrderstoLocalStorage()
     afterUpdate()
 }
+//Lưu danh sách listOrders vào localStorage
 function updateListOrderstoLocalStorage(){
     let order = JSON.stringify(listOrders);
     localStorage.setItem('listOrders', order);
 }
+//Hoàn tất quá trình thanh toán
 function afterUpdate(){
     alert("Thank you!")
     dataUsersNow[userIndex].cartItems = [];
     localStorage.setItem("DataUsers", JSON.stringify(dataUsersNow));
     window.location = "./index.html"
 }
-// ============ render tên người dùng khi đăng nhập ===============
+// render tên người dùng khi đăng nhập
 function renderName() {
     const nameElement = document.querySelector(".hello-name");
     const loginUser = JSON.parse(localStorage.getItem("loginUser"));
@@ -210,11 +216,10 @@ function renderName() {
 }
 renderName();
 
-// ============ render UI layout Cart ==============
+// Cập nhật giao diện xem nhanh giỏ hàng (preview mini-cart)
 function renderCartUI() {
     const noProduct = document.querySelector(".no-product");
     const haveProduct = document.querySelector(".have-product");
-    // const listPreview = document.querySelector(".list-preview");
     if (!login) {
         return;
     }
@@ -222,11 +227,6 @@ function renderCartUI() {
     if (dataUsers[userIndex].cartItems.length > 0) {
         renderImageCart(dataUsers[userIndex].cartItems);
         renderNumberCart(dataUsers[userIndex].cartItems);
-        // noProduct.classList.add("hidden");
-        // haveProduct.classList.remove("hidden");
-        // listPreview.style.width = "500px";
-        // listPreview.style.top = "67px";
-        // listPreview.style.left = "-372px";
     } else {
         noProduct.classList.remove("hidden");
         haveProduct.classList.add("hidden");
@@ -234,7 +234,7 @@ function renderCartUI() {
 }
 renderCartUI();
 
-// ============ render UI Cart về hình ảnh ============
+// Hiển thị 3 sản phẩm đầu tiên trong giỏ hàng ở phần xem nhanh (preview).
 function renderImageCart(cartItems) {
     const cartItemsList = document.querySelector(".row-2");
     const noProduct = document.querySelector(".no-product");
@@ -267,7 +267,7 @@ function renderImageCart(cartItems) {
     });
 }
 
-// ============ render UI Cart về số liệu =============
+// Hiển thị tổng số lượng và tổng giá trong phần xem nhanh giỏ hàng
 function renderNumberCart(cartItems) {
     const cartQuantity = document.querySelector(".you-have"); // Số lượng sản phẩm trong giỏ hàng
     const cartTotal = document.querySelector("#price-total"); // Tổng giá trị cuối cùng
@@ -295,7 +295,7 @@ function renderNumberCart(cartItems) {
     feeTotal.textContent = cartTotal.textContent;
 }
 
-// ============ Khi người dùng nhấn vào nút Product ========
+// Khi người dùng nhấn vào nút Product 
 const productLink = document.querySelector(".btn-product-all");
 if (productLink) {
   productLink.addEventListener("click", (e) => {

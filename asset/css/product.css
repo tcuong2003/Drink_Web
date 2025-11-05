@@ -5,7 +5,6 @@
       padding: 20px;
     }
 
-    /* .nav { display: none; } */
     .header__nav li::after {
     content: "";
     }

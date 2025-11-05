@@ -778,7 +778,7 @@ function renderProduct(arr) {
     }
 }
 
-// ================== Phân trang ==================
+//  Phân trang 
 let currentPage = 1;
 let perPage = 9;
 let totalPage = 0;
@@ -1040,11 +1040,6 @@ function renderCartUI() {
     if (dataUsers[userIndex].cartItems.length > 0) {
         renderImageCart(dataUsers[userIndex].cartItems);
         renderNumberCart(dataUsers[userIndex].cartItems);
-        // noProduct.classList.add("hidden");
-        // haveProduct.classList.remove("hidden");
-        // listPreview.style.width = "500px";
-        // listPreview.style.top = "67px";
-        // listPreview.style.left = "-372px";
     } else {
         noProduct.classList.remove("hidden");
         haveProduct.classList.add("hidden");
