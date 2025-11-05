@@ -1,12 +1,12 @@
 let DataUsers = localStorage.getItem('DataUsers') ? JSON.parse(localStorage.getItem('DataUsers')) : [
     {
-        id:         1,
-        isAdmin:    1,
+        id: 1,
+        isAdmin: 1,
+        isBlocked: false, // Add this field
         name: "",
-        email:      'admin123@gmail.com',
-        password:   'admin123',
-        cartItems: [
-        ],
+        email: 'admin123@gmail.com',
+        password: 'admin123',
+        cartItems: [],
     },
 ];
 
@@ -299,22 +299,28 @@ function runCheckRegister() {
 })
 function checkRegister(data) {
     let isFound = false;
-    let errorMessage = ``
+    let errorMessage = '';
+    
     for (let DataUser of DataUsers) {
         if (data.email === DataUser.email) {
             isFound = true;
-            errorMessage = `Email này đã được đăng ký! `
-        }
-        if (isFound) {
-            document.querySelector('.loginError').innerHTML = `${errorMessage}`
+            if (DataUser.isBlocked) {
+                errorMessage = 'Email này đã bị chặn!';
+            } else {
+                errorMessage = 'Email này đã được đăng ký!';
+            }
             break;
         }
     }
-    if (!isFound) {
-       updateDataUsers(data)
-       window.location = "./index.html"
+    
+    if (isFound) {
+        document.querySelector('.loginError').innerHTML = errorMessage;
+    } else {
+        updateDataUsers(data);
+        window.location = "./index.html";
     }
  }
+
  function setId(){
     let max=DataUsers[0].id
     for(let i=1;i<DataUsers.length;i++){
@@ -323,17 +329,15 @@ function checkRegister(data) {
     return max+1;
  }
  function updateDataUsers(data) {
-    DataUsers.push(
-        {
-            id: setId(),
-            isAdmin: 0,
-            name: data.name,
-            email: data.email,
-            password: data.password,
-            cartItems: [
-            ],
-        }
-    )
+    DataUsers.push({
+        id: setId(),
+        isAdmin: 0,
+        isBlocked: false,
+        name: data.name,
+        email: data.email,
+        password: data.password,
+        cartItems: [],
+    });
     loginUser = DataUsers[DataUsers.length - 1];
     updateLocalStorage();
 }
@@ -353,19 +357,35 @@ function runCheckLogin() {
             checkLogin(data)
         }
     });
-
+    
 function checkLogin(data) {
+    // Lấy DataUsers mới nhất từ localStorage
+    DataUsers = JSON.parse(localStorage.getItem('DataUsers'));
+    
     let isFound = false;
     for (let DataUser of DataUsers) {
-       if (data.email === DataUser.email && data.password === DataUser.password) {
-          isFound = true;
-          loginUser = DataUser;
-          updateLocalStorage();
-          window.location = "./index.html"
-       }
+        if (data.email === DataUser.email) {
+            isFound = true;
+            if (DataUser.isBlocked) {
+                document.querySelector('.loginError').innerHTML =
+                    `Tài khoản này đã bị chặn!`;
+                return;
+            }
+            if (data.password === DataUser.password) {
+                loginUser = DataUser;
+                updateLocalStorage();
+                window.location = "./index.html"
+                return;
+            } else {
+                document.querySelector('.loginError').innerHTML =
+                    `Tài khoản hoặc mật khẩu không chính xác!`;
+                return;
+            }
+        }
     }
     if (!isFound) {
-        document.querySelector('.loginError').innerHTML = `Tài khoản hoặc mật khẩu không chính xác!`
+        document.querySelector('.loginError').innerHTML =
+            `Tài khoản hoặc mật khẩu không chính xác!`;
     }
  }
 } 
@@ -414,3 +434,56 @@ function renderName() {
     }
 }
 renderName();
+
+// Nếu trang khác (tab) gửi thông báo forceLogout thì xử lý ở đây
+window.addEventListener('storage', function (e) {
+    try {
+        // 1) Xử lý forceLogout - dùng để logout ngay và reload UI
+        if (e.key === 'forceLogout' && e.newValue) {
+            const payload = JSON.parse(e.newValue);
+            const currentLogin = JSON.parse(localStorage.getItem('loginUser'));
+            if (currentLogin && currentLogin.id === payload.userId) {
+                // Cập nhật biến trong tab hiện tại
+                loginUser = null;
+                localStorage.setItem('loginUser', JSON.stringify(null));
+                // Reload trang để UI về trạng thái chưa đăng nhập
+                window.location = './index.html';
+                return;
+            }
+        }
+
+        // 2) Nếu DataUsers thay đổi, kiểm tra user hiện tại có bị block không
+        if (e.key === 'DataUsers' && e.newValue) {
+            const newUsers = JSON.parse(e.newValue);
+            const currentLogin = JSON.parse(localStorage.getItem('loginUser'));
+            if (currentLogin) {
+                const updated = newUsers.find(u => u.id === currentLogin.id);
+                if (updated && updated.isBlocked) {
+                    loginUser = null;
+                    localStorage.setItem('loginUser', JSON.stringify(null));
+                    window.location = './index.html';
+                    return;
+                }
+            }
+        }
+
+        // 3) Hỗ trợ key 'needReload' (timestamp) để buộc reload UI nếu cần
+        if (e.key === 'needReload' && e.newValue) {
+            // nếu có loginUser nhưng localStorage đã bị set null -> reload
+            const currentLogin = JSON.parse(localStorage.getItem('loginUser'));
+            if (!currentLogin) {
+                loginUser = null;
+                window.location = './index.html';
+                return;
+            }
+        }
+    } catch (err) {
+        // ignore parse errors
+    }
+});
+
+// Khi load trang: nếu loginUser đã bị block (cập nhật từ admin) -> logout ngay
+if (loginUser && loginUser.isBlocked) {
+    localStorage.setItem('loginUser', JSON.stringify(null));
+    window.location = './index.html';
+}
