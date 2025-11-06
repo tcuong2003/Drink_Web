@@ -446,7 +446,6 @@ a {
 
 .toast {
    position: fixed;
-   /* position: relative; */
    bottom: 35px;
    left: 30px;
    border-radius: 12px;
@@ -620,12 +619,10 @@ td {
    display: flex;
    justify-content: space-between;
    gap: 0px;
-   /* gap: 35%; */
 }
 
 .helloUser-Order .sub-hello {
    display: flex;
-   /* justify-content: space-between; */
    gap: 342px;
 
 }
@@ -687,7 +684,7 @@ td {
    display: flex;
 }
 
-/* ================== CSS order startic */
+/*  CSS order startic */
 .form-input-startics {
    display: flex;
    justify-content: space-between;

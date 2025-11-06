@@ -1,3 +1,4 @@
+//lưu danh sách các sản phẩm vào ListProducts (từ sản phẩm mẫu và localStorage)
 let ListProducts = localStorage.getItem("listProducts")
     ? JSON.parse(localStorage.getItem("listProducts"))
     : [
@@ -587,7 +588,6 @@ function displayProductDetails(product) {
     const addToCartButton=document.querySelector(".add-to-cart-button");
     const titlePrice = document.querySelector(".title-price");
     
-    // const addToCart=document.querySelector(".addToCart2");
     
     productTitle.textContent = product.name;
     productPrice.textContent = "$" + product.price.toFixed(2);
@@ -676,7 +676,6 @@ function addToCart(productId) {
 function renderCartUI() {
     const noProduct = document.querySelector(".no-product");
     const haveProduct = document.querySelector(".have-product");
-    // const listPreview = document.querySelector(".list-preview");
     if (!login) {
         return;
     }
@@ -684,11 +683,6 @@ function renderCartUI() {
     if (dataUsers[userIndex].cartItems.length > 0) {
         renderImageCart(dataUsers[userIndex].cartItems);
         renderNumberCart(dataUsers[userIndex].cartItems);
-        // noProduct.classList.add("hidden");
-        // haveProduct.classList.remove("hidden");
-        // listPreview.style.width = "500px";
-        // listPreview.style.top = "67px";
-        // listPreview.style.left = "-372px";
     } else {
         noProduct.classList.remove("hidden");
         haveProduct.classList.add("hidden");

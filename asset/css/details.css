@@ -71,7 +71,6 @@ a {
 .header .sub-menu {
     padding: 12px;
     display: none;
-    /* display: block; */
     position: absolute;
     top: 30px;
     background-color: var(--background-header);
@@ -254,7 +253,6 @@ a {
 
 .header .list-preview .row-2 {
     display: flex;
-    /* justify-content: space-between; */
     justify-content: flex-start;
     gap: 30px;
 }
@@ -348,12 +346,10 @@ a {
 
 .filter .body-filter {
     margin-left: 20px;
-    /* width: 600px; */
     height: 24px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    /* background: #fff; */
 }
 
 .body-filter .title {
@@ -394,7 +390,6 @@ a {
 
 /* Body right */
 .product .body-right {
-    /* width: 759px; */
     background: #f6f6f6;
 }
 

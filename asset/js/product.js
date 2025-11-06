@@ -778,7 +778,7 @@ function renderProduct(arr) {
     }
 }
 
-// ================== Phân trang ==================
+//  Phân trang 
 let currentPage = 1;
 let perPage = 9;
 let totalPage = 0;
@@ -922,6 +922,7 @@ resetBtn.addEventListener("click", () => {
 
 
 
+
 // ========== 2 biến toàn cục là dữ liệu data và tài khoản hiện tại đang login ==========
 let dataUsers = JSON.parse(localStorage.getItem("DataUsers"));
 let login = JSON.parse(localStorage.getItem("loginUser"));
@@ -1039,11 +1040,6 @@ function renderCartUI() {
     if (dataUsers[userIndex].cartItems.length > 0) {
         renderImageCart(dataUsers[userIndex].cartItems);
         renderNumberCart(dataUsers[userIndex].cartItems);
-        // noProduct.classList.add("hidden");
-        // haveProduct.classList.remove("hidden");
-        // listPreview.style.width = "500px";
-        // listPreview.style.top = "67px";
-        // listPreview.style.left = "-372px";
     } else {
         noProduct.classList.remove("hidden");
         haveProduct.classList.add("hidden");
@@ -1094,7 +1090,9 @@ function renderNumberCart(cartItems) {
 
     let totalQuantity = 0; // Tổng số lượng tất cả sản phẩm
     let totalPrice = 0; // Tổng giá tiền tất cả sản phẩm
+
     let shippingPrice = 2; // Giá vận chuyển cho mỗi sản phẩm
+
 
     cartItems.forEach((item) => {
         if (item.check == 0) {
@@ -1118,4 +1116,5 @@ function renderName() {
     if (login) {
         name.textContent = login.name;
     }
+
 }

@@ -38,10 +38,6 @@
         color: #666;
     }
 
-    /* .header .search-field {
-      width: 280px;
-   } */
-
     .header-mobile .logo {
         width: 237px;
     }
@@ -70,11 +66,6 @@
     .menu-content .container {
         padding: 30px;
     }
-
-    /* 
-   .header-mobile .nav {
-      margin-top: 30px;
-   } */
 
     .header-mobile .nav ul {
         display: flex;
@@ -139,7 +130,7 @@
     }
 
     /* recommend */
-    .sale .row {
+    .recommend .row {
         flex-wrap: wrap;
         justify-content: center;
     }
@@ -180,12 +171,6 @@
         height: 1px;
         background: #59554b;
     }
-
-    /* form dang nhap, dang ki */
-    /* .loginBlock {
-      top: calc(50% - 297px);
-      left: calc(50% - 272px);
-   } */
 
     /* HistoryOrder */
     .historyOrder {
@@ -320,7 +305,6 @@
         padding: 13px;
         background-color: #fff;
         border-radius: 0 8px 8px 0;
-        /* margin-left: 0px; */
     }
 
     /* header mobile */
@@ -485,19 +469,12 @@
     }
 }
 
-/* @media screen and (max-width: 436px) {
-   .footer .row .column:nth-child(2) {
-      margin-top: 42px;
-   } 
-} */
-/* @media screen and (max-width: 606px) {
-   .footer .row .column:nth-child(3) {
-      margin-top: 0px;
-   } 
-} */
 @media screen and (max-width: 570px) {
     .footer .row .column:nth-child(2) {
         margin-top: 42px;
+    }
+    .hello {
+       display: none;
     }
 }
 
