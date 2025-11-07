@@ -1505,23 +1505,29 @@ function filterOrdersByTime() {
       return orderTime >= startDateTime && orderTime < endDateTime;
     });
 
-    const matchesType = typeProduct.value !== '' ? filteredOrders.some(order => order.type === typeProduct.value) : true;
+    // Get orders that match the selected type
+    const typeFilteredOrders = filteredOrders.filter(order => {
+        // If no type is selected, include all orders
+        if (typeProduct.value === '') return true;
+        
+        // Find the corresponding product in listProducts to get its type
+        const product = listProducts.find(p => p.id === order.idProduct);
+        // Check if product exists and its type matches selected type
+        return product && product.nature.type === typeProduct.value;
+    });
 
-    if (filteredOrders.length > 0 && matchesType) {
-      // Create a new filtered object with only the necessary properties
-      const filteredItem = {
-        email: item.email,
-        id: item.id,
-        nameCustomer: item.nameCustomer,
-        order: filteredOrders.filter(order => typeProduct.value === '' || order.type === typeProduct.value),
-        userId: item.userId
-      };
-
-      // Add the item to the filtered list
-      listFilter.push(filteredItem);
+    // Only add to filtered list if we have matching orders
+    if (typeFilteredOrders.length > 0) {
+        const filteredItem = {
+            email: item.email,
+            id: item.id,
+            nameCustomer: item.nameCustomer,
+            order: typeFilteredOrders,
+            userId: item.userId
+        };
+        listFilter.push(filteredItem);
     }
-
-  });
+});
 
   console.log("Filtered Orders:");
   console.log(listFilter);
@@ -1702,18 +1708,41 @@ function toggleHideProduct(productId) {
 // ======================================
 // Function to delete a user
 function deleteUser(userId) {
-  const shouldDelete = window.confirm(
-    "Are you sure you want to delete this user"
-  );
-  for (let i = 0; i < listUsers.length; i++) {
-    if (listUsers[i].id === userId && shouldDelete) {
-      listUsers.splice(i, 1);
-      // console.log("da xoa  " + listUsers[i].id);
-      console.log(listUsers);
+    const shouldDelete = window.confirm(
+        "Are you sure you want to delete this user"
+    );
+
+    if (shouldDelete) {
+        // Remove user from listUsers array
+        for (let i = 0; i < listUsers.length; i++) {
+            if (listUsers[i].id === userId) {
+                listUsers.splice(i, 1);
+                break;
+            }
+        }
+
+        // Update localStorage
+        localStorage.setItem("DataUsers", JSON.stringify(listUsers));
+
+        // Force logout if deleted user is currently logged in
+        const currentLogin = JSON.parse(localStorage.getItem('loginUser'));
+        if (currentLogin && currentLogin.id === userId) {
+            // Clear login session
+            localStorage.setItem('loginUser', JSON.stringify(null));
+            
+            // Set flag for other tabs to detect and logout
+            localStorage.setItem('forceLogout', JSON.stringify({
+                userId: userId,
+                time: Date.now()
+            }));
+            
+            // Trigger storage event in other tabs
+            localStorage.setItem('needReload', Date.now().toString());
+        }
+
+        // Update admin UI
+        renderUser(listUsers);
     }
-  }
-  localStorage.setItem("DataUsers", JSON.stringify(listUsers));
-  renderUser(listUsers);
 }
 // Hàm để hiển thị form chỉnh sửa sản phẩm với thông tin sản phẩm cần chỉnh sửa
 function openEditForm(productId) {
