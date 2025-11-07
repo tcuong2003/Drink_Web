@@ -306,3 +306,4 @@ if (productLink) {
     window.location.href = "index.html";
   });
 }
+// UPDATE button broduct

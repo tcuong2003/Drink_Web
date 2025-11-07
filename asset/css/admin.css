@@ -931,3 +931,99 @@ th {
   
     box-shadow: inset 2px 2px 5px 0 rgba(0, 0, 0, .4);
 }
+.bar {
+   display: none;
+}
+.header-mobile {
+   display: none;
+}
+@media screen and (max-width: 991.98px) {
+   .navbar{
+      display: none;
+   }
+   .bar {
+    display: block;
+    font-size: 30px;
+    cursor: pointer;
+    padding-right: 30px;
+  }
+   .main .main-content{
+      width: 100%;
+   }
+}
+/* Thêm CSS này vào file admin.css để hỗ trợ toggle menu mobile */
+
+/* Ẩn menu và overlay mặc định */
+.menu-content {
+  position: fixed;
+  top: 0;
+  left: -100%; /* Ẩn sang bên trái */
+  width: 250px; /* Chiều rộng menu */
+  height: 100%;
+  background-color: #fff;
+  transition: left 0.3s ease;
+  z-index: 1000;
+  padding-top: 60px; /* Để tránh chồng lên header */
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 999;
+}
+
+/* Khi active */
+.menu-content.active {
+  left: 0;
+}
+
+.menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Style cho navbar trong menu mobile */
+.menu-content .navbar-header ul {
+  list-style: none;
+  padding: 0;
+}
+
+.menu-content .navbar-header ul li {
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+/* Điều chỉnh header mobile */
+.header-mobile {
+  display: block; /* Hiển thị trên mobile */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--background-header);
+  z-index: 1001;
+}
+
+.header-mobile .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+}
+
+@media screen and (min-width: 992px) {
+  .header-mobile {
+    display: none;
+  }
+  .menu-overlay,
+  .menu-content {
+    display: none;
+  }
+}
