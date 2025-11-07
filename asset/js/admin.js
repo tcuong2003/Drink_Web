@@ -1047,7 +1047,7 @@ function renderRejectedOrder(arr) {
     }
   });
 }
-
+//======== Total ship=========//
 function renderTotalShipAdmin(arrOfOrderInListOrder) {
   let sumQuantity = 0;
   let sumPrice = 0;
@@ -1059,7 +1059,7 @@ function renderTotalShipAdmin(arrOfOrderInListOrder) {
   })
   return shipTotal;
 }
-
+//======== Order time=========//
 function renderOrderItem(arr, orderid) {
   const orderManagementTbody = document
     .getElementById(orderid)
@@ -1599,11 +1599,12 @@ function handleProductManagement() {
     performSearch();
   });
 }
-
+// <-- Hàm này làm cho form (bảng) hiện lên
 function addAnimate() {
   addEditProductBackgroundForm.classList.add("animate");
   addEditProductForm.classList.add("animate");
 }
+// <-- Hàm này làm cho form (bảng) ẩn
 function rmvAnimate() {
   if (checkEdit == 1) clearForm();
   addEditProductBackgroundForm.classList.remove("animate");
@@ -1634,7 +1635,7 @@ let checkEdit = 0;
 const btnCloseForm = document.querySelector(".closeImg");
 const btnAddProduct = document.querySelector(".add-btn");
 function openAddForm() {
-  addAnimate();
+  addAnimate();// <-- Hàm này làm cho form (bảng) hiện lên
   btnCloseForm.addEventListener("click", rmvAnimate);
 }
 
@@ -1666,7 +1667,8 @@ function deleteProduct(productId) {
     if (listProducts[i].id === productId && shouldDelete) {
       console.log("da xoa  " + listProducts[i].id);
       console.log(listProducts);
-      listProducts.splice(i, 1);
+      // splice: thay đổi mảng gốc
+      listProducts.splice(i, 1); // i là tham số tìm thấy, còn 1: xóa 1 phần tử
 
     }
   }
@@ -1716,7 +1718,7 @@ function deleteUser(userId) {
   renderUser(listUsers);
 }
 // Hàm để hiển thị form chỉnh sửa sản phẩm với thông tin sản phẩm cần chỉnh sửa
-function openEditForm(productId) {
+function openEditForm(productId) { //truyền id sản phẩm đó vào
   document.getElementById("idProduct").value = productId;
   checkEdit = 1;
   const productName = document.getElementById("nameProduct");
@@ -1725,7 +1727,7 @@ function openEditForm(productId) {
   const productImg = document.getElementById("linkImage");
 
   for (let i = 0; i < listProducts.length; i++) {
-    if (listProducts[i].id === productId) {
+    if (listProducts[i].id === productId) { // kiểm tra xem có trùng id k
       const product = listProducts[i];
       productName.value = product.name;
       productPrice.value = product.price;
@@ -1760,12 +1762,14 @@ function editProduct() {
   }
 }
 // ============ Hàm thêm sản phẩm ==================
-function addProduct(data) {
+function addProduct(data) { //  Tạo ID mới
   const productId = setId();
   const productName = data.nameProduct;
   const productPrice = parseFloat(data.price);
   const productType = data.type;
   const productImg = data.linkImage;
+
+  // Đóng gói dữ liệu thành object mới
   const product = {
     id: productId,
     name: productName,
@@ -1773,17 +1777,19 @@ function addProduct(data) {
     image: productImg,
     star: 4.5,
     nature: {
-      // color: ["white", "black"],
       size: ["S", "M", "L"],
       type: productType,
     },
   };
+  // Thêm vào mảng (bộ nhớ tạm)
   listProducts.unshift(product);
   clearForm();
+  //  Lưu vào localStorage (bộ nhớ vĩnh viễn)
   localStorage.setItem("listProducts", JSON.stringify(listProducts));
-  console.log(listProducts);
+  console.log(listProducts); // in sản phẩm ra màn hình Console
+  //  Cập nhật giao diện (Output)
   renderProducts(listProducts);
-  rmvAnimate();
+  rmvAnimate(); //ẩn form
 }
 // ======== Ham xu li thong bao khi them san pham ===========
 function addSuccessForm() {
@@ -1906,12 +1912,12 @@ function Validator(options) {
   if (formElement) {
     // Khi submit form
     formElement.onsubmit = function (e) {
-      e.preventDefault();
+      e.preventDefault(); // Ngăn form tự động gửi đi
       var isFormValid = true;
       // Lặp qua từng rules và validate
       options.rules.forEach(function (rule) {
         var inputElement = formElement.querySelector(rule.selector);
-        var isValid = validate(inputElement, rule);
+        var isValid = validate(inputElement, rule);// chạy hàm validator ở dưới
         if (!isValid) {
           isFormValid = false;
         }
@@ -1984,6 +1990,7 @@ Validator.isRequired = function (selector, message) {
   };
 };
 runCheckAddForm();
+// thư viện Validator (Kiểm tra lỗi).
 function runCheckAddForm() {
   Validator({
     form: "#add-form",
@@ -1995,12 +2002,12 @@ function runCheckAddForm() {
       Validator.isRequired("#type", "Vui lòng chọn loại sản phẩm"),
       Validator.isRequired("#linkImage", "Vui lòng chọn link hình ảnh"),
     ],
-    onSubmit: function (data) {
-      if (checkEdit === 0) {
-        addSuccessForm();
-        console.log(data);
-        clearForm();
-        addProduct(data);
+    onSubmit: function (data) { // <--- KHI NHẤN "SAVE" VÀ HỢP LỆ
+      if (checkEdit === 0) {    // checkEdit = 0 nghĩa là đang THÊM MỚI 
+        addSuccessForm();       //  Hiện thông báo thành công
+        console.log(data);      
+        clearForm();            //  Xóa chữ trong form
+        addProduct(data);       //  gọi hàm thêm sản phẩm
       } else {
         editProduct();
       }

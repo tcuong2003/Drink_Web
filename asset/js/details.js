@@ -592,6 +592,7 @@ function displayProductDetails(product) {
     productTitle.textContent = product.name;
     productPrice.textContent = "$" + product.price.toFixed(2);
     productImage.src = product.image;
+    
     productReviews.textContent = `(${product.star}) 1100 reviews`;
     titlePrice.textContent = "$" + (product.price * 1.1).toFixed(2);
 

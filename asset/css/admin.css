@@ -98,7 +98,9 @@ a {
    display: flex;
    align-items: center;
    gap: 6px;
+   /* hiện con trỏ chuột  */
    cursor: pointer;
+   /* ngăn cho người dùng không bôi đen */
    user-select: none; 
 }
 
@@ -326,6 +328,7 @@ a {
 .add-edit-product-background-form {
    width: 100%;
    height: 100%;
+   /* form đang ẩn */
    visibility: hidden;
    opacity: 0;
    position: fixed;
@@ -337,7 +340,9 @@ a {
 }
 
 .animate {
+   /* hiện form */
    visibility: visible;
+   /* hiện thị rõ k trong suốt, ban đầu k trong suốt: opacity: 0; */
    opacity: 1;
 }
 
