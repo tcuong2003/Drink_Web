@@ -931,99 +931,256 @@ th {
   
     box-shadow: inset 2px 2px 5px 0 rgba(0, 0, 0, .4);
 }
-.bar {
-   display: none;
+/* Existing CSS remains the same, add the following at the end for responsiveness */
+#bar {
+  display: none; /* mặc định ẩn cho desktop */
+  cursor: pointer;
+  position: relative;
+  z-index: 1002; /* cao hơn header/navbar để có thể click */
 }
-.header-mobile {
-   display: none;
+.navbar {
+   display: block;
 }
-@media screen and (max-width: 991.98px) {
-   .navbar{
-      display: none;
-   }
-   .bar {
-    display: block;
-    font-size: 30px;
-    cursor: pointer;
-    padding-right: 30px;
-  }
-   .main .main-content{
-      width: 100%;
-   }
-}
-/* Thêm CSS này vào file admin.css để hỗ trợ toggle menu mobile */
+/* Tablet (768px - 1024px) */
 
-/* Ẩn menu và overlay mặc định */
-.menu-content {
-  position: fixed;
-  top: 0;
-  left: -100%; /* Ẩn sang bên trái */
-  width: 250px; /* Chiều rộng menu */
-  height: 100%;
-  background-color: #fff;
-  transition: left 0.3s ease;
-  z-index: 1000;
-  padding-top: 60px; /* Để tránh chồng lên header */
-}
+@media (max-width: 1024px) {
+    .container {
+        max-width: calc(100% - 32px); /* Reduce padding */
+    }
 
-.menu-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-  z-index: 999;
-}
+    .header .container {
+        padding: 20px 0;
+    }
 
-/* Khi active */
-.menu-content.active {
-  left: 0;
-}
+    .logo {
+      display: block;
+    }
 
-.menu-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
+    .header .div-title {
+        font-size: 24px; /* Smaller title */
+    }
 
-/* Style cho navbar trong menu mobile */
-.menu-content .navbar-header ul {
-  list-style: none;
-  padding: 0;
-}
+    .main .navbar {
+        width: 25%; /* Slightly wider navbar */
+        left: 20px; /* Adjust position */
+    }
 
-.menu-content .navbar-header ul li {
-  padding: 15px 20px;
-  border-bottom: 1px solid #eee;
-}
+    .main .main-content {
+        width: 75%; /* Adjust content width */
+        padding: 15px;
+    }
 
-/* Điều chỉnh header mobile */
-.header-mobile {
-  display: block; /* Hiển thị trên mobile */
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: var(--background-header);
-  z-index: 1001;
+    .main-content .product {
+        flex-direction: column; /* Stack product info vertically */
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .main-content .product .img-product {
+        width: 100px;
+        height: auto;
+    }
+
+    .main-content .group-btn {
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .add-edit-product-form {
+        width: 90%; /* Wider form on tablet */
+        max-width: 600px;
+    }
+
+    .historyOrder table th,
+    .historyOrder table td {
+        padding: 15px 5px; /* Reduce padding */
+        font-size: 14px; /* Smaller text */
+    }
+
+    .userTable th,
+    .userTable td {
+        padding: 15px 5px;
+        font-size: 14px;
+    }
 }
 
-.header-mobile .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px;
+/* Mobile (below 768px) */
+@media (max-width: 767px) {
+    .container {
+        max-width: calc(100% - 20px); /* Minimal padding */
+    }
+
+    .header .container {
+        flex-direction: column; /* Stack header elements */
+        padding: 15px 0;
+    }
+
+    .header .logo {
+        display: none;
+    }
+
+    .header .div-title {
+        font-size: 20px; /* Smaller title */
+    }
+
+    /* Navbar adjustments: Make it toggleable */
+    .main .navbar {
+        position: fixed;
+        top: 0;
+        left: -100%; /* Hidden by default */
+        width: 80%;
+        height: 100vh;
+        background-color: var(--background-header);
+        transition: left 0.3s ease;
+        margin-top: 0;
+        padding-top: 100px; /* Below header */
+        z-index: 10;
+    }
+
+    .main .navbar.active {
+        left: 0; /* Show when active */
+    }
+
+    .main .navbar ul {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .main .navbar ul li {
+        padding: 15px 0;
+        width: 100%;
+    }
+
+    /* Add hamburger menu icon */
+      #bar {
+         display: block; /* Show on mobile */
+         position: fixed;
+         top: 20px;
+         left: 20px;
+         font-size: 2.4rem;
+      }
+    
+
+    /* Main content full width */
+    .main .main-content {
+        width: 100%;
+        margin-left: 0;
+        padding: 10px;
+    }
+
+    .main-content .add-product-search {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .main-content .search-field {
+        width: 100%;
+    }
+
+    .main-content .product {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 15px;
+    }
+
+    .main-content .product .img-product {
+        width: 80px;
+        height: auto;
+    }
+
+    .main-content .group-btn {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .main-content .add-btn,
+    .main-content .edit-btn,
+    .main-content .hide-btn,
+    .main-content .delete-btn {
+        width: 100%;
+        padding: 10px;
+        font-size: 18px;
+    }
+
+    .add-edit-product-form {
+        width: 95%;
+        max-width: none;
+        padding: 20px;
+    }
+
+    .form-group .form-input,
+    .form-group .form-select {
+        font-size: 1.4rem;
+    }
+
+    .btn-save {
+        font-size: 16px;
+    }
+
+    /* Tables: Make them scrollable horizontally */
+    .historyOrder table,
+    .userTable {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .historyOrder table th,
+    .historyOrder table td,
+    .userTable th,
+    .userTable td {
+        padding: 10px 5px;
+        font-size: 12px;
+    }
+
+    .helloUser-Order {
+        flex-direction: column;
+        gap: 10px;
+        font-size: 20px;
+    }
+
+    .helloUser-Order .sub-hello {
+        gap: 0;
+        flex-direction: column;
+    }
+
+    .handleAcceptOrder {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .adminAcceptOrder,
+    .adminRejectOrder {
+        width: 100%;
+        font-size: 18px;
+    }
+
+    /* Form inputs for statistics */
+    .form-input-startics form {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .form-input-startics .btn-submit,
+    .form-input-startics .btn-sale,
+    .form-input-startics .btn-customer {
+        width: 100%;
+        height: auto;
+        padding: 10px;
+    }
+
+    /* Toast notification */
+    .toast {
+        left: 10px;
+        right: 10px;
+        bottom: 20px;
+        width: calc(100% - 20px);
+    }
 }
 
-@media screen and (min-width: 992px) {
-  .header-mobile {
-    display: none;
-  }
-  .menu-overlay,
-  .menu-content {
-    display: none;
-  }
+/* Hide on tablet class from safety instructions, but adjust if needed */
+.hide-on-tablet {
+    display: none; /* Already in HTML, keep hidden on tablet/mobile if specified */
 }

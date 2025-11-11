@@ -19,9 +19,7 @@
     .header .nav {
         display: none;
     }
-    /* Chỉ ẩn navbar desktop */
-    .main .navbar {
-        display: none;
+    /* Chỉ ẩn navbar desktop *
     }
     /* Hiện navbar trong menu mobile */
     .header-mobile .navbar {
@@ -49,6 +47,9 @@
         width: 30px;
         height: 30px;
         color: #666;
+    }
+    .bar {
+        display: block;
     }
 
     .header-mobile .logo {
@@ -268,6 +269,9 @@
         opacity: 0;
         visibility: hidden;
     }
+    .navbar {
+        display: none;
+    }
 
     .list-show-product .cart .img-cart {
         width: 400px;
@@ -279,6 +283,9 @@
         width: 600px;
         max-height: 560px;
     }
+    .bar {
+        display: block;
+    }
 }
 
 /* ============ Mobile =========== */
@@ -289,7 +296,9 @@
         visibility: hidden;
     }
     
-
+    .header {
+        display: block;
+    }
     .menu-content .container {
         padding: 25px;
         margin: 0px;
