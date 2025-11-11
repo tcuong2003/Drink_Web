@@ -469,7 +469,6 @@ a {
     height: 374px;
     width: 100%;
     border-radius: 20px;
-    object-fit: cover;
     image-rendering: crisp-edges;
     /* object-fit: contain; */
 }

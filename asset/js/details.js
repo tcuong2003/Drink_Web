@@ -668,9 +668,35 @@ function addToCart(productId) {
             }
             localStorage.setItem("DataUsers", JSON.stringify(dataUsers));
             renderCartUI();
+            updateCartQuantity(); // thêm dòng này
         }
     }
 }
+
+// Hàm cập nhật cart quantity ở header mobile
+function updateCartQuantity() {
+    const login = JSON.parse(localStorage.getItem("loginUser"));
+    if (!login) return;
+    
+    const dataUsers = JSON.parse(localStorage.getItem("DataUsers"));
+    const userIndex = dataUsers.findIndex((user) => user.id == login.id);
+    
+    if (userIndex !== -1) {
+        const cartItems = dataUsers[userIndex].cartItems;
+        const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+        
+        const cartQuantity = document.querySelector(".cart-quantity");
+        if (cartQuantity) {
+            cartQuantity.textContent = totalQuantity;
+            cartQuantity.style.display = totalQuantity > 0 ? "block" : "none";
+        }
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    updateCartQuantity();
+    // ...existing code...
+});
 
 // ============ render UI layout Cart ==============
 function renderCartUI() {
@@ -754,6 +780,7 @@ function renderNumberCart(cartItems) {
 // ============ render tên người dùng khi đăng nhập ===============
 function renderName() {
     const name = document.querySelector(".hello-name");
+    if (!name) return; // bảo vệ nếu selector không tồn tại trên trang này
     if (login) {
         name.textContent = login.name;
     }
@@ -761,13 +788,66 @@ function renderName() {
 renderName();
 
 // ============ Khi người dùng nhấn vào nút Product ========
-const productLink = document.querySelector(".btn-product-all");
-if (productLink) {
-  productLink.addEventListener("click", (e) => {
+// Use safer close+delay navigation to avoid overlays stealing the click
+document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".btn-product-all");
+    if (!btn) return;
     e.preventDefault();
-    // Lưu trạng thái muốn mở product
+
+    // Lưu flag hiển thị trang Product
     localStorage.setItem("showProductPage", "true");
-    // Quay lại trang index
-    window.location.href = "index.html";
-  });
-}
+
+    // Đóng/ẩn các overlay/modal nếu tồn tại và tắt pointer-events
+    [".loginBackground", ".loginBlock", ".menu-overlay", ".menu-content"].forEach((sel) => {
+        const el = document.querySelector(sel);
+        if (!el) return;
+        el.style.pointerEvents = "none";
+        if (sel === ".loginBlock" || sel === ".menu-content") {
+            el.style.display = "none";
+        } else {
+            el.style.visibility = "hidden";
+            el.style.opacity = "0";
+        }
+    });
+
+    // Chờ 1 frame để browser áp dụng style rồi điều hướng (history sạch)
+    setTimeout(() => window.location.replace("./index.html#product"), 40);
+});
+
+// ============ Header links (product / sale / about / contact) ============
+document.addEventListener("click", (e) => {
+    const btnProduct = e.target.closest(".btn-product-all");
+    const btnSale = e.target.closest(".btn-sale");
+    const btnAbout = e.target.closest(".btn-about");
+    const btnContact = e.target.closest(".btn-contact");
+    if (!btnProduct && !btnSale && !btnAbout && !btnContact) return;
+    e.preventDefault();
+
+    // đóng overlays nếu có (giúp tránh che khuất trên mobile/tablet)
+    [".loginBackground", ".loginBlock", ".menu-overlay", ".menu-content"].forEach((sel) => {
+        const el = document.querySelector(sel);
+        if (!el) return;
+        el.style.pointerEvents = "none";
+        if (sel === ".loginBlock" || sel === ".menu-content") el.style.display = "none";
+        else { el.style.visibility = "hidden"; el.style.opacity = "0"; }
+    });
+    document.body.style.pointerEvents = "auto";
+
+    // Product riêng (flag cũ)
+    if (btnProduct) {
+        localStorage.setItem("showProductPage", "true");
+        setTimeout(() => window.location.replace("./index.html#product"), 40);
+        return;
+    }
+
+    // Map các nút còn lại -> section trên index
+    let target = null;
+    if (btnSale) target = "#sale";
+    if (btnAbout) target = "#about";
+    if (btnContact) target = "#footer";
+
+    if (target) {
+        localStorage.setItem("navigateTo", target);
+        setTimeout(() => window.location.replace(`./index.html${target}`), 40);
+    }
+});
