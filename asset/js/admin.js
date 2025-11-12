@@ -1069,6 +1069,11 @@ function renderOrderItem(arr, orderid) {
   let number = 0;
   arr.forEach((item) => {
     number++;
+    // Format time in Vietnam timezone dd/mm/yyyy, hh:mm:ss
+    const formattedTime = new Date(item.time).toLocaleString('vi-VN', {
+      timeZone: 'Asia/Ho_Chi_Minh',
+      hour12: false
+    });
     const orderTr = document.createElement("tr");
     orderTr.innerHTML = `
             <td>${number}</td>
@@ -1076,7 +1081,7 @@ function renderOrderItem(arr, orderid) {
             <td>${item.nameProduct}</td>
             <td>${item.quantity}</td>
             <td>$${item.price}</td>
-            <td>${item.time}</td>
+            <td>${formattedTime}</td>
             <td>${status(item.check)}</td>
         `;
     orderManagementTbody.appendChild(orderTr);
@@ -1487,22 +1492,24 @@ function filterOrdersByTime() {
   // Clear the previous filtered list
   listFilter = [];
 
-  const startDateTime = new Date(startDate.value);
-  let endDateTime;
-
-  // If the end date is not specified, set it to the current date
-  if (endDate.value === '') {
-    endDateTime = new Date();
-  } else {
-    endDateTime = new Date(endDate.value);
-    // Adjust the end date to include the entire day
-    endDateTime.setDate(endDateTime.getDate() + 1);
+  // Helper: create Date at VN timezone for a date input (start or end of day)
+  function vnDateFromInput(dateStr, endOfDay = false) {
+    if (!dateStr) return null;
+    // Build an ISO string with Vietnam offset +07:00 so Date parses at VN local time
+    return new Date(`${dateStr}T${endOfDay ? '23:59:59' : '00:00:00'}+07:00`);
   }
+
+  // start at VN midnight of startDate, or earliest if empty
+  const startDateTime = startDate.value ? vnDateFromInput(startDate.value, false) : new Date(0);
+  // end at VN now if end empty, else VN end of selected day
+  const endDateTime = endDate.value ? vnDateFromInput(endDate.value, true) :
+    // get current time in VN timezone
+    new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Ho_Chi_Minh' }));
 
   listOrders.forEach((item) => {
     const filteredOrders = item.order.filter((order) => {
       const orderTime = new Date(order.time);
-      return orderTime >= startDateTime && orderTime < endDateTime;
+      return orderTime >= startDateTime && orderTime <= endDateTime;
     });
 
     // Get orders that match the selected type
@@ -1527,7 +1534,7 @@ function filterOrdersByTime() {
         };
         listFilter.push(filteredItem);
     }
-});
+  });
 
   console.log("Filtered Orders:");
   console.log(listFilter);
@@ -1542,6 +1549,10 @@ function renderOrderStartictisProduct() {
     for (let j = 0; j < listFilter[i].order.length; j++) {
       if (listFilter[i].order[j].check == 1) {
         count++;
+        const vnTime = new Date(listFilter[i].order[j].time).toLocaleString('vi-VN', {
+          timeZone: 'Asia/Ho_Chi_Minh',
+          hour12: false
+        });
         let row = `<tr>
           <td>${count}</td>
           <td>${listFilter[i].email}</td>
@@ -1549,7 +1560,7 @@ function renderOrderStartictisProduct() {
           <td>${listFilter[i].order[j].nameProduct}</td>
           <td>${listFilter[i].order[j].quantity}</td>
           <td>$${listFilter[i].order[j].price}</td>
-          <td>${listFilter[i].order[j].time}</td>
+          <td>${vnTime}</td>
       </tr>`;
         bodyOrderStartics.innerHTML += row;
       }

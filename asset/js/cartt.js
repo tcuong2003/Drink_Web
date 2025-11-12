@@ -210,15 +210,16 @@ function afterUpdate(){
     localStorage.setItem("DataUsers", JSON.stringify(dataUsersNow));
     window.location = "./index.html"
 }
-// render tên người dùng khi đăng nhập
+// render tên người dùng khi đăng nhập (cả desktop + mobile)
 function renderName() {
-    const nameElement = document.querySelector(".hello-name");
+    const desktopNameEl = document.querySelector(".hello-name");
+    const mobileNameEl = document.querySelector(".hello-mobile-name");
     const loginUser = JSON.parse(localStorage.getItem("loginUser"));
 
     if (loginUser && loginUser.name) {
-        nameElement.textContent = loginUser.name;
-    } else {
-        nameElement.textContent = "everybody";
+        const text = `Welcome back, "${loginUser.name}"`;
+        if (desktopNameEl) desktopNameEl.textContent = text;
+        if (mobileNameEl) mobileNameEl.textContent = text;
     }
 }
 renderName();
