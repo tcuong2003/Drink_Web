@@ -2,47 +2,54 @@ let login = JSON.parse(localStorage.getItem("loginUser"));
 let dataUsers = JSON.parse(localStorage.getItem("DataUsers"));
 
 document.addEventListener("DOMContentLoaded", function () {
+    // Cập nhật biến login từ localStorage (để lấy giá trị mới nhất sau khi đăng nhập)
+    let login = JSON.parse(localStorage.getItem("loginUser"));
+    let dataUsers = JSON.parse(localStorage.getItem("DataUsers"));
 
-//Hiển thị danh sách sản phẩm trong giỏ hàng ra giao diện
+    // Kiểm tra nếu chưa đăng nhập, redirect về index
+    if (!login) {
+        alert("Bạn phải đăng nhập để xem giỏ hàng");
+        window.location.href = "./index.html";
+        return;
+    }
+
+    let dataUsersNow = dataUsers;
+    let userIndex = dataUsersNow.findIndex((user) => user.id == login.id);
+
+    if (userIndex === -1) {
+        alert("Không tìm thấy người dùng");
+        window.location.href = "./index.html";
+        return;
+    }
+
+    //Hiển thị danh sách sản phẩm trong giỏ hàng ra giao diện
     function render(arr) {
         const productListContainer = document.querySelector(".main-left__product");
         productListContainer.innerHTML = "";
 
         arr.forEach((product) => {
             const productDiv = document.createElement("div");
-            productDiv.classList.add("main-product"); // Add the "product" class
+            productDiv.classList.add("main-product");
 
             productDiv.innerHTML = `
-            <img
-            class="image"
-            src=".${product.image}"
-            alt=""
-        />
-        <div class="info-product">
-            <div class="info-product__title">
-                <h3 class="heading">
-                    ${product.nameProduct}
-                </h3>
-                <div class="price">$${product.price}</div>
-            </div>
-            <div class="info-product__action">
-                <div class="amount-aciton">
-                    <button class="up-and-down btn-down" onclick = "down(${product.idProduct})">
-                        -
-                    </button>
-                    <div class="amount" id="amount-${product.idProduct}">${product.quantity}</div>
-                    <button class="up-and-down btn-up" onclick = "up(${product.idProduct})">
-                        +
-                    </button>
+            <img class="image" src=".${product.image}" alt="" />
+            <div class="info-product">
+                <div class="info-product__title">
+                    <h3 class="heading">${product.nameProduct}</h3>
+                    <div class="price">$${product.price}</div>
                 </div>
-                <div class="delete-action" onclick="deleteProduct(${product.idProduct})">
-                        <img
-                            src="./asset/img/Delete.svg"
-                            alt="Delete"/>
-                    <div class="title">Delete</div>
+                <div class="info-product__action">
+                    <div class="amount-aciton">
+                        <button class="up-and-down btn-down" onclick="up${userIndex}(${product.idProduct})">-</button>
+                        <div class="amount" id="amount-${product.idProduct}">${product.quantity}</div>
+                        <button class="up-and-down btn-up" onclick="down${userIndex}(${product.idProduct})">+</button>
+                    </div>
+                    <div class="delete-action" onclick="deleteProduct${userIndex}(${product.idProduct})">
+                        <img src="./asset/img/Delete.svg" alt="Delete"/>
+                        <div class="title">Delete</div>
+                    </div>
                 </div>
             </div>
-        </div>
             `;
 
             productListContainer.appendChild(productDiv);
@@ -295,14 +302,37 @@ function renderNumberCart(cartItems) {
     feeTotal.textContent = cartTotal.textContent;
 }
 
-// Khi người dùng nhấn vào nút Product 
-const productLink = document.querySelector(".btn-product-all");
-if (productLink) {
-  productLink.addEventListener("click", (e) => {
+// Nếu người dùng nhấn nút "Product" trên trang Cart: lưu flag và chuyển về index#product
+document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".btn-product-all");
+    if (!btn) return;
     e.preventDefault();
-    // Lưu trạng thái muốn mở product
     localStorage.setItem("showProductPage", "true");
-    // Quay lại trang index
-    window.location.href = "index.html";
-  });
-}
+    window.location.href = "./index.html#product";
+});
+
+// Header links handling (Product / Sale / About / Contact)
+document.addEventListener("click", (e) => {
+    const btnProduct = e.target.closest(".btn-product-all");
+    const btnSale = e.target.closest(".btn-sale");
+    const btnAbout = e.target.closest(".btn-about");
+    const btnContact = e.target.closest(".btn-contact");
+    if (!btnProduct && !btnSale && !btnAbout && !btnContact) return;
+    e.preventDefault();
+
+    if (btnProduct) {
+        localStorage.setItem("showProductPage", "true");
+        window.location.replace("./index.html#product");
+        return;
+    }
+
+    let target = null;
+    if (btnSale) target = "#sale";
+    if (btnAbout) target = "#about";
+    if (btnContact) target = "#footer";
+
+    if (target) {
+        localStorage.setItem("navigateTo", target);
+        window.location.replace(`./index.html${target}`);
+    }
+});

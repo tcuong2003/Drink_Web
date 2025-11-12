@@ -427,9 +427,10 @@ function checkLogin(data) {
 
  }
  // ============ render tên người dùng khi đăng nhập ===============
-function renderName() {
+function renderName(){
     const name = document.querySelector(".hello-name");
-    if (loginUser) {
+    if(!name) return; // tránh lỗi khi phần tử không có trên trang
+    if(loginUser){
         name.textContent = loginUser.name;
     }
 }
