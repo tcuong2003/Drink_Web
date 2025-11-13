@@ -51,7 +51,7 @@
                 <path fill="currentColor"
                     d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
             </svg>
-            <a href="./index.html"><img src="./asset/img/logo-coffe.png" alt="" class="logo" /></a>
+            <a href="./index.html"><img src="./asset/img/logo-coffe.png" alt="" class="logo hide-on-tablet" /></a>
             <nav class="nav">
                 <ul>
                     <li class="header-product">
@@ -69,11 +69,8 @@
                 </ul>
             </nav>
             <div class="last-icon">
-                <!-- Hiển thị tên người dùng sau khi đăng nhập -->
-                <div class="hello">
-                    <span class="hello-name"></span>
-                </div>
 
+                <!-- HELLO USER -->
                 <!-- XEM NHANH GIỎ HÀNG -->
                 <div class="buy-cart hide-on-mobile">
                     <img src="./asset/img/header-buy.svg" alt="" />
@@ -85,7 +82,6 @@
                                 <p class="you-have">You have 0 item </p>
                             </div>
                             <div class="row-2">
-                                
                             </div>
                             <div class="separate"></div>
                             <div class="row-3 row">
@@ -106,11 +102,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="history  hide-on-mobile">
+                <div class="history hide-on-mobile">
                     <img src="./asset/img/header-list-order.png" alt="" class="icon-list-order">
                 </div>
                 <div class="iconUser">
-
                 </div>
             </div>
         </div>
@@ -122,37 +117,32 @@
         <div class="menu-overlay"></div>
         <div class="menu-content">
             <div class="container">
-            
+                <a href="#"><img src="./asset/img/logo-coffe.png" alt="" class="logo hide-on-mobile" /></a>
                 <div class="group-cart hide-on-tablet">
                     <a href="./cart.html"><img src="./asset/img/header-buy.svg" alt="" class="buy-cart" /></a>
-                    <span class="cart-text"><a href="./cart.html">Cart</a></span>
+                    <span class="cart-text"><a href="./cart.html">cart</a></span>
                     <span class="cart-quantity"></span>
                 </div>
                 <div class="group-history hide-on-tablet">
                     <img src="./asset/img/header-list-order.png" alt="" class="icon-list-order">
-                    <span class="cart-text">Ordered</span>
+                    <span class="cart-text">ordered</span>
                 </div>
                 <nav class="nav">
-                    <ul>
-                        <li class="header-product">
-                        <a href="./index.html#product" class="btn-product-all">Product</a>
-                        </li>
-                        <li>
+                <ul>
+                    <li class="header-product">
+                        <a href="./index.html#product" class="btn-product-all" id="btn-product-all">Product</a>
+                    </li>
+                    <li>
                         <a href="./index.html#sale" class="btn-sale">Sale</a>
-                        </li>
-                        <li id="aboutLinkmobile">
-                            <a href="#about">About</a>
-                        </li>
-                        <li>
-                            <a href="#footer">Contact us</a>
-                        </li>
-                    </ul>
-                </nav>
-
-                <!-- Hello for mobile/tablet (shown inside mobile menu, after Contact us) -->
-                <div class="hello-mobile">
-                    <span class="hello-mobile-name"></span>
-                </div>
+                    </li>
+                    <li>
+                        <a href="./index.html#about" class="btn-about">About</a>
+                    </li>
+                    <li>
+                        <a href="./index.html#footer" class="btn-contact">Contact us</a>
+                    </li>
+                </ul>
+            </nav>
             </div>
         </div>
     </header>
@@ -166,16 +156,15 @@
                             <div class="main-product">
                                 <img
                                     class="image"
-                                    src="./asset/img/cart-1.avif"
+                                    src="./asset/img/logo-coffe.png"
                                     alt=""
                                 />
                                 <div class="info-product">
                                     <div class="info-product__title">
                                         <h3 class="heading">
-                                            Coffee Beans - Espresso Arabica and
-                                            Robusta Beans
+                                            Coffee Beans
                                         </h3>
-                                        <div class="price">$47.00</div>
+                                        <div class="price">$4.00</div>
                                     </div>
                                     <div class="info-product__action">
                                         <div class="amount-aciton">
@@ -209,7 +198,7 @@
                                 <div class="title">
                                     <strong>Subtotal</strong> (items)
                                 </div>
-                                <div class="show-number total-quantity">3</div>
+                                <div class="show-number total-quantity"> 0 </div>
                             </div>
 
                             <div class="show-info">
@@ -217,7 +206,7 @@
                                     <strong>Price</strong> (Total)
                                 </div>
                                 <div class="show-number price-checkout">
-                                    $191.65
+                                    $0.00
                                 </div>
                             </div>
 
@@ -225,7 +214,7 @@
                                 <div class="title">
                                     <strong>Shipping</strong>
                                 </div>
-                                <div class="show-number price-ship">$10.00</div>
+                                <div class="show-number price-ship">$0.00</div>
                             </div>
 
                             <div class="show-info total">
@@ -233,7 +222,7 @@
                                     <strong>Estimated Total</strong>
                                 </div>
                                 <div class="show-number total-price-full">
-                                    $201.65
+                                    $0.00
                                 </div>
                             </div>
                             <button class="action-checkout">
