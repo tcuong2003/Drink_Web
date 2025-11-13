@@ -929,7 +929,7 @@ function renderWaitOrder(arr) {
       <p>User: ${order.email}</p>
       <p class="total">Total: $${renderTotalPriceAdmin(order.order)}</p>
     </div>
-      <span class = "fee_shipping fee_shipping${order.id}" >Fee shipping: $10</span>
+      <span class = "fee_shipping fee_shipping${order.id}" >Shipping Fee: $10</span>
   </div>
         <div class="container">
             <table>
@@ -979,7 +979,7 @@ function renderAcceptedOrder(arr) {
             <p>User: ${order.email}</p>
             <p class="total">Total: $${renderTotalPriceAdmin(order.order)}</p>
           </div>
-            <span class = "fee_shipping fee_shipping${order.id}" >Fee shipping: $10</span>
+            <span class = "fee_shipping fee_shipping${order.id}" >Shipping Fee: $10</span>
         </div>
         <div class="container">
             <table>
@@ -1021,7 +1021,7 @@ function renderRejectedOrder(arr) {
           <p>User: ${order.email}</p>
           <p class="total">Total: $${renderTotalPriceAdmin(order.order)}</p>
         </div>
-          <span class = "fee_shipping fee_shipping${order.id}" >Fee shipping: $10</span>
+          <span class = "fee_shipping fee_shipping${order.id}" >Shipping Fee: $10</span>
       </div>
         <div class="container">
             <table>
@@ -1065,7 +1065,7 @@ function renderOrderItem(arr, orderid) {
     .getElementById(orderid)
     .querySelector(".tableHistory");
   var variableNeed = ".fee_shipping" + orderid
-  document.querySelector(variableNeed).textContent = "Fee shipping: $" + renderTotalShipAdmin(arr);
+  document.querySelector(variableNeed).textContent = "Shipping Fee: $" + renderTotalShipAdmin(arr);
   let number = 0;
   arr.forEach((item) => {
     number++;
