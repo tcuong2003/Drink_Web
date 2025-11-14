@@ -70,7 +70,7 @@ dotContainer.addEventListener("click", function (e) {
     }
 });
 const startAutoSlide = function () {
-    setInterval(nextSlide, 3000);
+    setInterval(nextSlide, 6000);
 };
 startAutoSlide();
 
@@ -125,77 +125,127 @@ document.querySelectorAll(".sale-product").forEach(item => {
 });
 
 
-// ==============Hiển thị Producrt - link đến các nội dung main==============
-document.addEventListener("DOMContentLoaded", () => {
+// ==============Hiển thị Product - link đến các nội dung main==============
+
+// Hàm xử lý chuyển đến section tương ứng
+function handleNavigation(hash) {
   const mainPage = document.querySelector("#main");
   const productPage = document.querySelector("#product");
+  const menuOverlay = document.querySelector(".menu-overlay");
+  const menuContent = document.querySelector(".menu-content");
 
-  // Kiểm tra nếu được yêu cầu mở product từ trang khác
-  if (localStorage.getItem("showProductPage") === "true") {
+  // Đóng menu mobile/tablet nếu đang mở
+  if (menuOverlay) {
+    menuOverlay.style.visibility = "hidden";
+    menuOverlay.style.opacity = "0";
+    menuOverlay.style.pointerEvents = "none";
+  }
+  if (menuContent) {
+    menuContent.style.transform = "translateX(-100%)";
+    menuContent.style.pointerEvents = "none";
+  }
+
+  if (hash === "#product") {
     mainPage.classList.add("hidden");
     productPage.classList.remove("hidden");
     window.scrollTo({ top: 0, behavior: "smooth" });
-    localStorage.removeItem("showProductPage"); // xóa sau khi xử lý
-  }
-  
-  // Nút xem tất cả product
-  const btnProductAll = document.querySelector(".btn-product-all");
-  if (btnProductAll && mainPage && productPage) {
-    btnProductAll.addEventListener("click", (e) => {
-      e.preventDefault();
-      mainPage.classList.add("hidden");
-      productPage.classList.remove("hidden");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      // Cập nhật URL hash
-      history.pushState(null, "", "#product");
-    });
-  }
-
-  // Hàm chung để hiển thị main, ẩn product và scroll xuống section
-  function showMainScrollTo(sectionId) {
+  } else if (hash === "#sale" || hash === "#about" || hash === "#footer") {
     productPage.classList.add("hidden");
     mainPage.classList.remove("hidden");
-    const section = document.querySelector(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
-    // Cập nhật URL hash
-    history.pushState(null, "", sectionId);
+    const section = document.querySelector(hash);
+    if (section) setTimeout(() => section.scrollIntoView({ behavior: "smooth" }), 100);
+  } else {
+    // Mặc định về main nếu không có hash hoặc hash không xác định
+    productPage.classList.add("hidden");
+    mainPage.classList.remove("hidden");
+  }
+}
+
+// Lắng nghe hashchange (khi click link hash hoặc thay đổi URL)
+window.addEventListener("hashchange", () => {
+  handleNavigation(location.hash);
+});
+
+// Xử lý load lần đầu tiên
+document.addEventListener("DOMContentLoaded", () => {
+  const hash = location.hash || "#main";
+  handleNavigation(hash);
+
+  // Nếu có flag navigateTo từ trang khác (details/cart)
+  const navigateTo = localStorage.getItem("navigateTo");
+  if (navigateTo) {
+    window.location.hash = navigateTo.replace("#", "");
+    localStorage.removeItem("navigateTo");
   }
 
-  // Nút Sale
-  const btnSale = document.querySelector(".btn-sale");
-  if (btnSale) {
-    btnSale.addEventListener("click", (e) => {
-      e.preventDefault();
-      showMainScrollTo("#sale");
-    });
+  // Nếu có flag showProductPage từ trang khác
+  if (localStorage.getItem("showProductPage") === "true") {
+    window.location.hash = "product";
+    localStorage.removeItem("showProductPage");
   }
 
-  // Nút About
-  const btnAbout = document.querySelector(".btn-about");
-  if (btnAbout) {
-    btnAbout.addEventListener("click", (e) => {
-      e.preventDefault();
-      showMainScrollTo("#about");
-    });
-  }
-
-  // Nút Contact
-  const btnContact = document.querySelector(".btn-contact");
-  if (btnContact) {
-    btnContact.addEventListener("click", (e) => {
-      e.preventDefault();
-      showMainScrollTo("#footer");
-    });
+  // render tên người dùng (sau khi form.js đã load loginUser)
+  const desktopNameEl = document.querySelector(".hello-name");
+  const mobileNameEl = document.querySelector(".hello-mobile-name");
+  const login = JSON.parse(localStorage.getItem("loginUser"));
+  if (login) {
+    const text = `Welcome back, ${login.name}`;
+    if (desktopNameEl) desktopNameEl.textContent = text;
+    if (mobileNameEl) mobileNameEl.textContent = text;
   }
 });
-// ============ render tên người dùng khi đăng nhập ===============
-function renderName() {
-    const name = document.querySelector(".hello-name");
-    if (login) {
-        name.textContent = login.name;
+
+// ============ Header links - chuyển đổi hash khi click nút ============
+document.addEventListener("click", (e) => {
+    const btnProduct = e.target.closest(".btn-product-all");
+    const btnSale = e.target.closest(".btn-sale");
+    const btnAbout = e.target.closest(".btn-about");
+    const btnContact = e.target.closest(".btn-contact");
+    if (!btnProduct && !btnSale && !btnAbout && !btnContact) return;
+    e.preventDefault();
+
+    // Đóng menu mobile/tablet nếu đang mở
+    const menuOverlay = document.querySelector(".menu-overlay");
+    const menuContent = document.querySelector(".menu-content");
+    if (menuOverlay) {
+        menuOverlay.style.visibility = "hidden";
+        menuOverlay.style.opacity = "0";
+        menuOverlay.style.pointerEvents = "none";
+    }
+    if (menuContent) {
+        menuContent.style.transform = "translateX(-100%)";
+        menuContent.style.pointerEvents = "none";
+    }
+
+    let hash = "#sale";
+    if (btnProduct) hash = "#product";
+    if (btnAbout) hash = "#about";
+    if (btnContact) hash = "#footer";
+// Hàm cập nhật cart quantity ở header mobile
+function updateCartQuantity() {
+    const login = JSON.parse(localStorage.getItem("loginUser"));
+    if (!login) return;
+    
+    const dataUsers = JSON.parse(localStorage.getItem("DataUsers"));
+    const userIndex = dataUsers.findIndex((user) => user.id == login.id);
+    
+    if (userIndex !== -1) {
+        const cartItems = dataUsers[userIndex].cartItems;
+        const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+        
+        const cartQuantity = document.querySelector(".cart-quantity");
+        if (cartQuantity) {
+            cartQuantity.textContent = totalQuantity;
+            cartQuantity.style.display = totalQuantity > 0 ? "block" : "none";
+        }
     }
 }
-renderName();
+
+    // Nếu đang ở cùng hash rồi, reload trang; nếu không, chỉ set hash
+    if (location.hash === hash) {
+        window.location.reload();
+    } else {
+        window.location.hash = hash;
+    }
+});
 

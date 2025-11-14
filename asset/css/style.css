@@ -190,7 +190,7 @@ a {
     display: flex;
     margin-left: auto;
     position: relative;
-    align-items: center;  /*chỉnh hello nằm giữa theo chiều dọc*/
+    align-items: center;
 }
 
 
@@ -469,7 +469,6 @@ a {
     height: 374px;
     width: 100%;
     border-radius: 20px;
-    object-fit: cover;
     image-rendering: crisp-edges;
     /* object-fit: contain; */
 }
@@ -1443,4 +1442,15 @@ td {
 
 .popup-open {
     overflow: hidden;
+}
+
+.hello {
+    display: flex;
+    gap: 0 8px;
+    align-items: center;
+    font-family: Gordita, sans-serif; /* giống header */
+    font-size: 1.5rem;                /* cùng kích thước với header links */
+    font-weight: 500;                 /* cùng trọng số */
+    color: var(--text-color-dark);
+    margin-right: 12px;
 }

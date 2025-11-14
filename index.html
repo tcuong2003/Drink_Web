@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DoAnWeb</title>
+    <title>Coffee Cup</title>
     <!-- FAVICON -->
     <link rel="apple-touch-icon" sizes="76x76" href="./asset/favicon/apple-touch-icon.png" />
     <!-- LOGO TAB -->
@@ -26,10 +26,14 @@
 
 <body>
 
-    <!-- HEADER DESKTOP -->
+    <!-- HEADER Tablet -->
     <header class="header">
         <div class="container">
-            <a href="./index.html"><img src="./asset/img/logo-coffe.png" alt="" class="logo hide-on-tablet" /></a>
+             <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512" class="bar hide-on-desktop">
+                <path fill="currentColor"
+                    d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+            </svg>
+            <a href="./index.html"><img src="./asset/img/logo-coffe.png" alt="" class="logo" /></a>
             <nav class="nav">
                 <ul>
                     <li class="header-product">
@@ -47,9 +51,12 @@
                 </ul>
             </nav>
             <div class="last-icon">
-                <!-- HELLO USER -->
-                <div class="row hello-filter" id="hello"></div>
-                <p class="hello">Hello <span class="hello-name">everybody</span> . Welcome our website</p> 
+                
+                <!-- Hiển thị tên người dùng sau khi đăng nhập -->
+                <div class="hello">
+                    <span class="hello-name"></span>
+                </div>
+
                 <!-- XEM NHANH GIỎ HÀNG -->
                 <div class="buy-cart hide-on-mobile">
                     <img src="./asset/img/header-buy.svg" alt="" />
@@ -96,37 +103,38 @@
         <div class="menu-overlay"></div>
         <div class="menu-content">
             <div class="container">
-
-                <a href="#"><img src="./asset/img/logo-coffe.png" alt="" class="logo hide-on-mobile" /></a>
-
+              
                 <div class="group-cart hide-on-tablet">
                     <a href="./cart.html"><img src="./asset/img/header-buy.svg" alt="" class="buy-cart" /></a>
-                    <span class="cart-text"><a href="./cart.html">cart</a></span>
+                    <span class="cart-text"><a href="./cart.html">Cart</a></span>
                     <span class="cart-quantity"></span>
                 </div>
                 <div class="group-history hide-on-tablet">
                     <img src="./asset/img/header-list-order.png" alt="" class="icon-list-order">
-                    <span class="cart-text">ordered</span>
+                    <span class="cart-text">Ordered</span>
                 </div>
                 <nav class="nav">
-                    <ul>
-                        <li>
-                            <a href="#hello" class="btn-sweater">Coffee</a>
-                        </li>
-                        <li>
-                            <a href="#hello" class="btn-pants">Juice</a>
-                        </li>
-                        <li>
-                            <a href="#hello" class="btn-pants">smoothie</a>
-                        </li>
-                        <li id="aboutLinkmobile">
-                            <a href="#about">About</a>
-                        </li>
-                        <li>
-                            <a href="#footer">Contact us</a>
-                        </li>
-                    </ul>
+                 <ul>
+                    <li class="header-product">
+                        <a href="#product" class="btn-product-all">Product</a>
+                    </li>
+                    <li>
+                        <a href="#sale" class="btn-sale">Sale</a>
+                    </li>
+                    <li>
+                        <a href="#about" class="btn-about">About</a>
+                    </li>
+                    <li>
+                        <a href="#footer" class="btn-contact">Contact us</a>
+                    </li>
+                </ul>
                 </nav>
+
+                <!-- Hello for mobile/tablet (shown inside mobile menu, after Contact us) -->
+                <div class="hello-mobile">
+                    <span class="hello-mobile-name"></span>
+                </div>
+
             </div>
         </div>
     </header>

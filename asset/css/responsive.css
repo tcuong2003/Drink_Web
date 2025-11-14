@@ -11,10 +11,156 @@
     .hide-on-desktop {
         display: none;
     }
+
+    /* Dịch hello user sang phải */
+    .header .last-icon .hello {
+        margin-left: 20px;
+        padding-left: 20px;
+        border-left: 1px solid #ddd;
+    }
+
+    /* FIX SALE SECTION */
+    .sale .row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        padding: 0 20px;
+    }
+
+    .sale-product {
+        display: flex;
+        flex-direction: column;
+        text-decoration: none;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: transform 0.3s;
+        background-color: #f5f5f5;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .sale-product:hover {
+        transform: translateY(-5px);
+    }
+
+    .sale-product .img-product {
+        width: 100%;
+        height: 250px;
+        object-fit: contain;
+        background-color: #ffffff;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .sale-product .info {
+        padding: 12px;
+        background-color: #f5f5f5;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .sale-product .price {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+        flex-wrap: wrap;
+    }
+
+    .sale-product .old-price {
+        text-decoration: line-through;
+        color: #999;
+        font-size: 1.3rem;
+    }
+
+    .sale-product .discount {
+        background: #ffb700;
+        color: #fff;
+        padding: 3px 6px;
+        border-radius: 4px;
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    .sale-product .new-price {
+        color: #ffb700;
+        font-size: 1.6rem;
+        font-weight: 600;
+    }
+
+    .sale-product .desc {
+        font-size: 1.3rem;
+        color: var(--text-color-light);
+        line-height: 1.3;
+    }
 }
 
 /* ============ Tablet & mobile ============ */
 @media screen and (max-width: 991.98px) {
+    /* Ensure menu-content is positioning context and has room for bottom area */
+    .header-mobile .menu-content {
+        position: fixed;
+        inset: 0 40% 0 0;
+        transform: translateX(-100%);
+        transition: 0.5s;
+        display: block;
+        background-color: #fff;
+        z-index: 100;
+        overflow-y: auto; /* allow scrolling so bottom hello won't overlap content */
+        max-height: 100vh;
+    }
+
+    /* Make container inside menu-content relative so absolute children position correctly
+       and reserve space at bottom so content doesn't get covered by hello-mobile */
+    .menu-content .container {
+        padding: 30px;
+        padding-bottom: 220px; /* tăng để chứa 2+ dòng */
+    }
+
+    /* Unified hello-mobile style (positioned at bottom of menu panel) */
+    .hello-mobile {
+        display: flex;
+        position: absolute;
+        left: 30px;
+        right: 30px;
+        bottom: 20px;
+        min-height: 56px;
+        height: auto; /* cho phép mở rộng theo nội dung */
+        justify-content: center;
+        align-items: center;
+        font-family: Gordita, sans-serif;
+        font-size: 1.8rem;
+        font-weight: 500;
+        color: var(--text-color-dark);
+        padding: 12px 16px;
+        background: #ffffff; /* give background so it's readable and doesn't overlay text */
+        border-radius: 8px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+        box-sizing: border-box;
+        z-index: 200; /* ensure it's above menu content */
+        white-space: normal;       /* cho phép xuống hàng */
+        word-break: break-word;    /* ngắt từ nếu cần */
+        overflow: visible;         /* không ẩn text */
+        text-align: center;
+        line-height: 1.2;
+    }
+
+    /* Hide desktop hello on tablet & mobile */
+    .hello {
+        display: none !important;
+    }
+
+    /* Show hello inside mobile menu */
+    .hello-mobile {
+        display: flex;
+        font-family: Gordita, sans-serif;
+        font-size: 2rem;
+        font-weight: 500;
+        color: var(--text-color-dark);
+        padding: 12px 0;
+    }
+
     /* header */
     .header .nav {
         display: none;
@@ -214,6 +360,93 @@
     #supportPopup .popup-content .nav-popup a {
         font-size: 1.8rem;
     }
+
+    /* Sale section responsive */
+    .sale {
+        padding: 40px 0;
+        background-color: #f5f5f5; /* đặt nền cho section */
+    }
+
+    .sale .title {
+        font-size: 2.4rem;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .sale .row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 0 15px;
+    }
+
+    .sale-product {
+        display: flex;
+        flex-direction: column;
+        text-decoration: none;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: transform 0.3s;
+        background-color: #f5f5f5; /* nền khung */
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .sale-product:hover {
+        transform: translateY(-5px);
+    }
+
+    .sale-product .img-product {
+        width: 100%;
+        height: 220px;
+        object-fit: contain;
+        background-color: #ffffff; /* nền hình ảnh riêng */
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .sale-product .info {
+        padding: 12px;
+        background-color: #f5f5f5; /* cùng màu với khung */
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .sale-product .price {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+        flex-wrap: wrap;
+    }
+
+    .sale-product .old-price {
+        text-decoration: line-through;
+        color: #999;
+        font-size: 1.3rem;
+    }
+
+    .sale-product .discount {
+        background: #ffb700;
+        color: #fff;
+        padding: 3px 6px;
+        border-radius: 4px;
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    .sale-product .new-price {
+        color: #ffb700;
+        font-size: 1.6rem;
+        font-weight: 600;
+    }
+
+    .sale-product .desc {
+        font-size: 1.3rem;
+        color: var(--text-color-light);
+        line-height: 1.3;
+    }
 }
 
 /* ============ Tablet =========== */
@@ -234,6 +467,23 @@
         width: 600px;
         max-height: 560px;
     }
+
+    .sale .row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    .sale-product .img-product {
+        height: 240px;
+        object-fit: contain;
+        background-color: #ffffff;
+        padding: 12px;
+        box-sizing: border-box;
+    }
+
+    .sale-product .info {
+        padding: 14px;
+    }
 }
 
 /* ============ Mobile =========== */
@@ -242,11 +492,6 @@
         display: none;
         opacity: 0;
         visibility: hidden;
-    }
-
-    .menu-content .container {
-        padding: 25px;
-        margin: 0px;
     }
 
     /* header */
@@ -454,121 +699,71 @@
     .loginError {
         margin: 0px;
     }
-}
 
-/* ======== Các điểm break point thêm */
-@media screen and (max-width: 714px) {
-    .list-show-product {
-        grid-template-columns: repeat(2, 1fr);
+    .sale {
+        padding: 25px 0;
+        background-color: #f5f5f5;
+    }
+
+    .sale .title {
+        font-size: 2rem;
+        margin-bottom: 18px;
+    }
+
+    .sale .row {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 12px;
+        padding: 0 10px;
+    }
+
+    .sale-product {
+        background-color: #f5f5f5;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+
+    .sale-product .img-product {
+        height: 160px;
+        object-fit: contain;
+        background-color: #ffffff;
+        padding: 8px;
+        box-sizing: border-box;
+    }
+
+    .sale-product .info {
+        padding: 10px;
+        background-color: #f5f5f5;
+    }
+
+    .sale-product .old-price {
+        font-size: 1.1rem;
+    }
+
+    .sale-product .discount {
+        font-size: 1rem;
+        padding: 2px 5px;
+    }
+
+    .sale-product .new-price {
+        font-size: 1.4rem;
+    }
+
+    .sale-product .desc {
+        font-size: 1.2rem;
     }
 }
 
 @media screen and (max-width: 580px) {
-    .list-show-product {
+    .sale .row {
         grid-template-columns: repeat(1, 1fr);
-    }
-}
-
-@media screen and (max-width: 570px) {
-    .footer .row .column:nth-child(2) {
-        margin-top: 42px;
-    }
-    .hello {
-       display: none;
-    }
-}
-
-@media screen and (min-width: 595px) and (max-width: 752px) {
-    .footer .row .column:nth-child(3) {
-        margin-top: 0px;
-    }
-}
-
-@media screen and (min-width: 768px) and (max-width: 1024px) {
-    #supportPopup .popup-content .header-popup {
-        font-size: 2.4rem;
+        padding: 0 8px;
     }
 
-    #supportPopup .popup-content .nav-popup {
-        display: grid;
-        row-gap: 20px;
-        grid-template-columns: repeat(2, 1fr);
+    .sale-product .img-product {
+        height: 140px;
+        padding: 6px;
     }
 
-    #supportPopup .popup-content .nav-popup a {
-        width: fit-content;
-    }
-
-    #supportPopup .popup-content .nav-popup a:nth-child(even) {
-        margin-left: auto;
-    }
-}
-
-@media screen and (min-width: 375px) and (max-width: 667px) {
-    #supportPopup .popup-content .header-popup {
-        font-size: 1.9rem;
-        word-break: keep-all;
-        text-align: center;
-    }
-
-    #supportPopup .popup-content .nav-popup {
-        display: grid;
-        row-gap: 20px;
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    #supportPopup .popup-content .nav-popup a {
-        width: fit-content;
-        font-size: 1.5rem;
-        text-align: center;
-    }
-
-    #supportPopup .popup-content .nav-popup a:nth-child(even) {
-        margin-left: auto;
-    }
-
-    #supportPopup .popup-content .footer-popup {
-        text-align: center;
-        font-size: 1.4rem;
-    }
-}
-
-@media screen and (min-width: 525px) and (max-width: 682px) {
-    .historyOrder .title {
-        font-size: 2rem;
-    }
-
-    .historyOrder .tableHistoryHead th {
-        font-size: 1.5rem;
-    }
-
-    .historyOrder .tableHistoryBody td {
-        font-weight: 600;
-        font-size: 1.1rem;
-    }
-
-    .historyOrder .img-history {
-        width: 60px;
-        height: 60px;
-    }
-}
-
-@media screen and (min-width: 375px) and (max-width: 525px) {
-    .historyOrder .title {
-        font-size: 1.5rem;
-    }
-
-    .historyOrder .tableHistoryHead th {
-        font-size: 1.3rem;
-    }
-
-    .historyOrder .tableHistoryBody td {
-        font-size: 1rem;
-        font-weight: 700;
-    }
-
-    .historyOrder .img-history {
-        width: 40px;
-        height: 40px;
+    .sale-product .info {
+        padding: 8px;
     }
 }

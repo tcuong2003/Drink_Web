@@ -427,10 +427,14 @@ function checkLogin(data) {
 
  }
  // ============ render tên người dùng khi đăng nhập ===============
-function renderName() {
-    const name = document.querySelector(".hello-name");
-    if (loginUser) {
-        name.textContent = loginUser.name;
+function renderName(){
+    const desktopEl = document.querySelector(".hello-name");
+    const mobileEl = document.querySelector(".hello-mobile-name");
+    if(desktopEl && loginUser){
+        desktopEl.textContent = `Welcome back, "${loginUser.name}"`;
+    }
+    if(mobileEl && loginUser){
+        mobileEl.textContent = `Welcome back, "${loginUser.name}"`;
     }
 }
 renderName();
