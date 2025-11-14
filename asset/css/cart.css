@@ -66,8 +66,7 @@ body {
 }
 
 /* ---------- Main-product ---------- */
-/* .main { */
-/* } */
+
 .body-main {
     display: flex;
     gap: 30px;
@@ -167,7 +166,7 @@ body {
 .main-left .main-product .image {
     width: 175px;
     height: 172px;
-    object-fit: cover;
+    
 }
 
 .your-cart {
@@ -323,7 +322,7 @@ body {
     align-items: center;
     width: 280px;
     margin-top: 30px;
-    border-radius: 50px;
+    border-radius: 20px;
     height: 32px;
     cursor: pointer;
 }
@@ -331,7 +330,6 @@ body {
 .action-checkout .title {
     font-size: 1.5rem;
     color: #1a162e;
-    display: flex;
     justify-content: center;
     align-items: center;
     font-weight: 500;

@@ -235,7 +235,7 @@ function renderName() {
     const loginUser = JSON.parse(localStorage.getItem("loginUser"));
 
     if (loginUser && loginUser.name) {
-        const text = `Welcome back, "${loginUser.name}"`;
+        const text = `Welcome back, ${loginUser.name}`;
         if (desktopNameEl) desktopNameEl.textContent = text;
         if (mobileNameEl) mobileNameEl.textContent = text;
     }
@@ -327,6 +327,7 @@ document.addEventListener("click", (e) => {
     if (!btn) return;
     e.preventDefault();
     localStorage.setItem("showProductPage", "true");
+
     window.location.href = "./index.html#product";
 });
 
@@ -416,3 +417,4 @@ function renderCart() {
         });
     });
 }
+
