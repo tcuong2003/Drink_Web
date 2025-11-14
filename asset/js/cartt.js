@@ -40,11 +40,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
                 <div class="info-product__action">
                     <div class="amount-aciton">
-                        <button class="up-and-down btn-down" onclick="up${userIndex}(${product.idProduct})">-</button>
+                        <button class="up-and-down btn-down" data-id="${product.idProduct}">-</button>
                         <div class="amount" id="amount-${product.idProduct}">${product.quantity}</div>
-                        <button class="up-and-down btn-up" onclick="down${userIndex}(${product.idProduct})">+</button>
+                        <button class="up-and-down btn-up" data-id="${product.idProduct}">+</button>
                     </div>
-                    <div class="delete-action" onclick="deleteProduct${userIndex}(${product.idProduct})">
+                    <div class="delete-action" data-id="${product.idProduct}">
                         <img src="./asset/img/Delete.svg" alt="Delete"/>
                         <div class="title">Delete</div>
                     </div>
@@ -54,31 +54,60 @@ document.addEventListener("DOMContentLoaded", function () {
 
             productListContainer.appendChild(productDiv);
         });
+
+        // Thêm event listeners sau khi render
+        attachEventListeners();
     }
+
+    // Gắn event listeners cho nút tăng/giảm/xóa
+    function attachEventListeners() {
+        // Nút giảm
+        document.querySelectorAll(".btn-down").forEach(btn => {
+            btn.addEventListener("click", function() {
+                const idProduct = parseInt(this.dataset.id);
+                down(idProduct);
+            });
+        });
+
+        // Nút tăng
+        document.querySelectorAll(".btn-up").forEach(btn => {
+            btn.addEventListener("click", function() {
+                const idProduct = parseInt(this.dataset.id);
+                up(idProduct);
+            });
+        });
+
+        // Nút xóa
+        document.querySelectorAll(".delete-action").forEach(btn => {
+            btn.addEventListener("click", function() {
+                const idProduct = parseInt(this.dataset.id);
+                deleteProduct(idProduct);
+            });
+        });
+    }
+
     render(dataUsersNow[userIndex].cartItems);
 //Tính toán và hiển thị tổng tiền, tổng số lượng, phí vận chuyển, và tổng thanh toán
     function renderPrice() {
         const totalQuantity = document.querySelector(".total-quantity");
-        console.log(totalQuantity);
         const price = document.querySelector(".price-checkout");
-        console.log(price);
         const priceShip = document.querySelector(".price-ship");
         const totalPrice = document.querySelector(".total-price-full");
 
         let sumQuantity = 0;
         let sumPrice = 0;
-        let shipTotal = 0;
         dataUsersNow[userIndex].cartItems.forEach((item) => {
             sumQuantity += item.quantity;
             sumPrice += item.price * item.quantity;
-            shipTotal += 2 * item.quantity;
-        })
+        });
+
+        const shipTotal = 2 * sumQuantity;
+        const totalPriceFull = sumPrice + shipTotal;
+
         totalQuantity.textContent = sumQuantity;
-        price.textContent = sumPrice.toFixed(2);
-        priceShip.textContent = shipTotal;
-        let totalPriceFull = sumPrice + shipTotal;
-        console.log(totalPriceFull);
-        totalPrice.textContent = totalPriceFull.toFixed(2);
+        price.textContent = `$${sumPrice.toFixed(2)}`;
+        priceShip.textContent = `$${shipTotal.toFixed(2)}`;
+        totalPrice.textContent = `$${totalPriceFull.toFixed(2)}`;
     }
     renderPrice();
     checkOut();
@@ -92,60 +121,59 @@ let userIndex = dataUsersNow.findIndex((user) => user.id == loginUserNow.id);
 console.log(dataUsersNow[userIndex]);
 console.log(dataUsersNow[userIndex].cartItems);
 
-//Tăng số lượng của sản phẩm có idProduct trong giỏ hàng
+// Tăng số lượng sản phẩm
 function up(idProduct) {
-    const amount = document.getElementById(`amount-${idProduct}`)
-    console.log("fjsadkfasdfdsfsdaf");
+    const amount = document.getElementById(`amount-${idProduct}`);
     dataUsersNow[userIndex].cartItems.forEach((item) => {
         if (item.idProduct == idProduct) {
             item.quantity++;
             localStorage.setItem("DataUsers", JSON.stringify(dataUsersNow));
-            const newQuantity = JSON.parse(localStorage.getItem("DataUsers"));
-            newQuantity[userIndex].cartItems.forEach((item) => {
-                if (item.idProduct == idProduct) {
-                    amount.textContent = item.quantity;
-                    renderPriceAfter(newQuantity[userIndex].cartItems);
-                }
-            })
+            amount.textContent = item.quantity;
+            renderPrice();
         }
-    })
+    });
 }
-//Giảm số lượng sản phẩm (nhưng không nhỏ hơn 1)
+
+// Giảm số lượng sản phẩm (không nhỏ hơn 1)
 function down(idProduct) {
-    const amount = document.getElementById(`amount-${idProduct}`)
+    const amount = document.getElementById(`amount-${idProduct}`);
     dataUsersNow[userIndex].cartItems.forEach((item) => {
         if (item.idProduct == idProduct) {
             if (item.quantity > 1) {
                 item.quantity--;
                 localStorage.setItem("DataUsers", JSON.stringify(dataUsersNow));
-                const newQuantity = JSON.parse(localStorage.getItem("DataUsers"));
-                newQuantity[userIndex].cartItems.forEach((item) => {
-                    if (item.idProduct == idProduct) {
-                        amount.textContent = item.quantity;
-                        renderPriceAfter(newQuantity[userIndex].cartItems);
-                    }
-                })
+                amount.textContent = item.quantity;
+                renderPrice();
             }
         }
-    })
+    });
 }
-//Xoá sản phẩm khỏi giỏ hàng
+
+// Xóa sản phẩm khỏi giỏ hàng
 function deleteProduct(idProduct) {
     const indexToDelete = dataUsersNow[userIndex].cartItems.findIndex(item => item.idProduct === idProduct);
     if (indexToDelete !== -1) {
-        const deletedItem = dataUsersNow[userIndex].cartItems.splice(indexToDelete, 1)[0];
+        dataUsersNow[userIndex].cartItems.splice(indexToDelete, 1);
         localStorage.setItem("DataUsers", JSON.stringify(dataUsersNow));
-        const productDiv = document.querySelector(`.main-product #amount-${idProduct}`).closest(".main-product");
+        
+        // Re-render lại giỏ hàng
+        const productListContainer = document.querySelector(".main-left__product");
+        const productDiv = document.querySelector(`.main-product`);
         if (productDiv) {
             productDiv.remove();
-            renderPriceAfter(deletedItem);
-            render(dataUsersNow[userIndex].cartItems);
-            renderPrice();
         }
+        
+        // Nếu giỏ hàng rỗng
+        if (dataUsersNow[userIndex].cartItems.length === 0) {
+            productListContainer.innerHTML = '<p style="padding: 20px; text-align: center;">Giỏ hàng của bạn trống</p>';
+        }
+        
+        renderPrice();
     }
 }
-//Cập nhật lại tổng giá, số lượng, phí ship sau khi thay đổi giỏ hàng
-function renderPriceAfter(deletedItem) {
+
+// Cập nhật giá sau khi thay đổi giỏ hàng
+function renderPrice() {
     const totalQuantity = document.querySelector(".total-quantity");
     const price = document.querySelector(".price-checkout");
     const priceShip = document.querySelector(".price-ship");
@@ -153,23 +181,21 @@ function renderPriceAfter(deletedItem) {
 
     let sumQuantity = 0;
     let sumPrice = 0;
-    let shipTotal = 0;
     dataUsersNow[userIndex].cartItems.forEach((item) => {
         sumQuantity += item.quantity;
         sumPrice += item.price * item.quantity;
-        shipTotal += 2 * item.quantity;
     });
 
-    totalQuantity.textContent = sumQuantity;
-    price.textContent = sumPrice.toFixed(2);
-    priceShip.textContent = shipTotal;
+    const shipTotal = 2 * sumQuantity;
+    const totalPriceFull = sumPrice + shipTotal;
 
-    let totalPriceFull = sumPrice + shipTotal;
-    console.log(totalPriceFull);
-    sumPrice -= deletedItem.price * deletedItem.quantity;
-    totalPrice.textContent = totalPriceFull.toFixed(2);
+    totalQuantity.textContent = sumQuantity;
+    price.textContent = `$${sumPrice.toFixed(2)}`;
+    priceShip.textContent = `$${shipTotal.toFixed(2)}`;
+    totalPrice.textContent = `$${totalPriceFull.toFixed(2)}`;
 }
-//Xử lý khi người dùng nhấn nút thanh toán
+
+// Xử lý khi người dùng nhấn nút thanh toán
 function checkOut(){
     const checkOutBtn = document.querySelector('.action-checkout')
     checkOutBtn.onclick = function(){
@@ -210,15 +236,16 @@ function afterUpdate(){
     localStorage.setItem("DataUsers", JSON.stringify(dataUsersNow));
     window.location = "./index.html"
 }
-// render tên người dùng khi đăng nhập
+// render tên người dùng khi đăng nhập (cả desktop + mobile)
 function renderName() {
-    const nameElement = document.querySelector(".hello-name");
+    const desktopNameEl = document.querySelector(".hello-name");
+    const mobileNameEl = document.querySelector(".hello-mobile-name");
     const loginUser = JSON.parse(localStorage.getItem("loginUser"));
 
     if (loginUser && loginUser.name) {
-        nameElement.textContent = loginUser.name;
-    } else {
-        nameElement.textContent = "everybody";
+        const text = `Welcome back, "${loginUser.name}"`;
+        if (desktopNameEl) desktopNameEl.textContent = text;
+        if (mobileNameEl) mobileNameEl.textContent = text;
     }
 }
 renderName();

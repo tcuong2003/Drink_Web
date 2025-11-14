@@ -779,10 +779,14 @@ function renderNumberCart(cartItems) {
 
 // ============ render tên người dùng khi đăng nhập ===============
 function renderName() {
-    const name = document.querySelector(".hello-name");
-    if (!name) return; // bảo vệ nếu selector không tồn tại trên trang này
-    if (login) {
-        name.textContent = login.name;
+    const desktopNameEl = document.querySelector(".hello-name");
+    const mobileNameEl = document.querySelector(".hello-mobile-name");
+    const loginUser = JSON.parse(localStorage.getItem("loginUser"));
+
+    if (loginUser && loginUser.name) {
+        const text = `Welcome back, "${loginUser.name}"`;
+        if (desktopNameEl) desktopNameEl.textContent = text;
+        if (mobileNameEl) mobileNameEl.textContent = text;
     }
 }
 renderName();

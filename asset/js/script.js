@@ -185,10 +185,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // render tên người dùng (sau khi form.js đã load loginUser)
-  const name = document.querySelector(".hello-name");
+  const desktopNameEl = document.querySelector(".hello-name");
+  const mobileNameEl = document.querySelector(".hello-mobile-name");
   const login = JSON.parse(localStorage.getItem("loginUser"));
-  if (name && login) {
-    name.textContent = login.name;
+  if (login) {
+    const text = `Welcome back, ${login.name}`;
+    if (desktopNameEl) desktopNameEl.textContent = text;
+    if (mobileNameEl) mobileNameEl.textContent = text;
   }
 });
 
