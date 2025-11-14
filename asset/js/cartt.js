@@ -243,7 +243,7 @@ function renderName() {
     const loginUser = JSON.parse(localStorage.getItem("loginUser"));
 
     if (loginUser && loginUser.name) {
-        const text = `Welcome back, "${loginUser.name}"`;
+        const text = `Welcome back, ${loginUser.name}`;
         if (desktopNameEl) desktopNameEl.textContent = text;
         if (mobileNameEl) mobileNameEl.textContent = text;
     }
