@@ -421,6 +421,15 @@ a {
    font-size: 1.4rem;
 }
 
+.upload-btn {
+   display:block;
+   border: 1px solid #b3b3b3;
+   border-radius: 6px;
+   padding: 10px;  
+}
+
+
+
 .btn-save {
    font-weight: 700;
    width: 100%;
