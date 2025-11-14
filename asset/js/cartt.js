@@ -156,20 +156,12 @@ function deleteProduct(idProduct) {
         dataUsersNow[userIndex].cartItems.splice(indexToDelete, 1);
         localStorage.setItem("DataUsers", JSON.stringify(dataUsersNow));
         
-        // Re-render lại giỏ hàng
-        const productListContainer = document.querySelector(".main-left__product");
-        const productDiv = document.querySelector(`.main-product`);
-        if (productDiv) {
-            productDiv.remove();
-        }
-        
-        // Nếu giỏ hàng rỗng
-        if (dataUsersNow[userIndex].cartItems.length === 0) {
-            productListContainer.innerHTML = '<p style="padding: 20px; text-align: center;">Giỏ hàng của bạn trống</p>';
-        }
-        
+        // Re-render lại giỏ hàng bằng renderCart để render đầy đủ và gắn lại event
+        renderCart();
         renderPrice();
+        renderCartUI(); // cập nhật preview mini-cart
     }
+    
 }
 
 // Cập nhật giá sau khi thay đổi giỏ hàng
@@ -364,4 +356,65 @@ document.addEventListener("click", (e) => {
         window.location.replace(`./index.html${target}`);
     }
 });
+
+// Thêm hàm renderCart (re-render toàn bộ danh sách giỏ hàng và gắn lại event)
+function renderCart() {
+    const productListContainer = document.querySelector(".main-left__product");
+    const cart = (dataUsersNow && dataUsersNow[userIndex] && dataUsersNow[userIndex].cartItems) ? dataUsersNow[userIndex].cartItems : [];
+    productListContainer.innerHTML = "";
+
+    if (!productListContainer) return;
+
+    if (cart.length === 0) {
+        productListContainer.innerHTML = '<p style="padding: 20px; text-align: center;">Giỏ hàng của bạn trống</p>';
+        return;
+    }
+
+    cart.forEach((product) => {
+        const productDiv = document.createElement("div");
+        productDiv.classList.add("main-product");
+
+        productDiv.innerHTML = `
+            <img class="image" src=".${product.image}" alt="" />
+            <div class="info-product">
+                <div class="info-product__title">
+                    <h3 class="heading">${product.nameProduct}</h3>
+                    <div class="price">$${product.price}</div>
+                </div>
+                <div class="info-product__action">
+                    <div class="amount-aciton">
+                        <button class="up-and-down btn-down" data-id="${product.idProduct}">-</button>
+                        <div class="amount" id="amount-${product.idProduct}">${product.quantity}</div>
+                        <button class="up-and-down btn-up" data-id="${product.idProduct}">+</button>
+                    </div>
+                    <div class="delete-action" data-id="${product.idProduct}">
+                        <img src="./asset/img/Delete.svg" alt="Delete"/>
+                        <div class="title">Delete</div>
+                    </div>
+                </div>
+            </div>
+        `;
+        productListContainer.appendChild(productDiv);
+    });
+
+    // Gắn lại event listeners cho các nút sau khi render
+    productListContainer.querySelectorAll(".btn-down").forEach(btn => {
+        btn.addEventListener("click", function() {
+            const idProduct = parseInt(this.dataset.id);
+            down(idProduct);
+        });
+    });
+    productListContainer.querySelectorAll(".btn-up").forEach(btn => {
+        btn.addEventListener("click", function() {
+            const idProduct = parseInt(this.dataset.id);
+            up(idProduct);
+        });
+    });
+    productListContainer.querySelectorAll(".delete-action").forEach(btn => {
+        btn.addEventListener("click", function() {
+            const idProduct = parseInt(this.dataset.id);
+            deleteProduct(idProduct);
+        });
+    });
+}
 

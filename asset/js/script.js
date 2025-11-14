@@ -221,6 +221,25 @@ document.addEventListener("click", (e) => {
     if (btnProduct) hash = "#product";
     if (btnAbout) hash = "#about";
     if (btnContact) hash = "#footer";
+// Hàm cập nhật cart quantity ở header mobile
+function updateCartQuantity() {
+    const login = JSON.parse(localStorage.getItem("loginUser"));
+    if (!login) return;
+    
+    const dataUsers = JSON.parse(localStorage.getItem("DataUsers"));
+    const userIndex = dataUsers.findIndex((user) => user.id == login.id);
+    
+    if (userIndex !== -1) {
+        const cartItems = dataUsers[userIndex].cartItems;
+        const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+        
+        const cartQuantity = document.querySelector(".cart-quantity");
+        if (cartQuantity) {
+            cartQuantity.textContent = totalQuantity;
+            cartQuantity.style.display = totalQuantity > 0 ? "block" : "none";
+        }
+    }
+}
 
     // Nếu đang ở cùng hash rồi, reload trang; nếu không, chỉ set hash
     if (location.hash === hash) {

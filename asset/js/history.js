@@ -93,7 +93,7 @@ function renderHistoryOrderItem(orderId) {
             <div>
                 <img class="close-history" src="./asset/img/back_3114883.png" alt="Quay lại" onclick="handleRenderHistoryOrder()">
             </div>
-            <span class = "fee_shipping" >Shipping Fee: $10</span>
+            <span class = "fee_shipping" >Shipping Fee: $0</span>
 
             <table>
                 <thead class = "tableHistoryHead"> 
@@ -125,7 +125,6 @@ function renderHistoryOrderItem(orderId) {
         if (ListOrders[i].id === orderId) {
             ListOrders[i].order.forEach((item) => {
                 number++;
-                // Format time theo múi giờ Việt Nam
                 const vnTime = new Date(item.time).toLocaleString('vi-VN', {
                     timeZone: 'Asia/Ho_Chi_Minh',
                     hour12: false
@@ -141,6 +140,8 @@ function renderHistoryOrderItem(orderId) {
                 </tr>`;
                 table.innerHTML += row;
             });
+            // ✓ Tính Shipping Fee đúng cách
+            document.querySelector(".fee_shipping").textContent = "Shipping Fee: $" + renderTotalShipUser(ListOrders[i].order)
         }
     }
 }
@@ -272,7 +273,7 @@ function renderHistoryOrderItemMB(orderId) {
             <div>
                 <img class="close-history" src="./asset/img/back_3114883.png" alt="Quay lại" onclick="handleRenderHistoryOrderMB()">
             </div>
-            <span class = "fee_shipping" >Shipping Fee: $10</span>
+            <span class = "fee_shipping" >Shipping Fee: $0</span>
 
             <table>
                 <thead class = "tableHistoryHead"> 
@@ -303,7 +304,6 @@ function renderHistoryOrderItemMB(orderId) {
         if (ListOrdersMB[i].id === orderId) {
             ListOrdersMB[i].order.forEach((item) => {
                 number++;
-                // Format time theo múi giờ Việt Nam
                 const vnTime = new Date(item.time).toLocaleString('vi-VN', {
                     timeZone: 'Asia/Ho_Chi_Minh',
                     hour12: false
@@ -319,6 +319,7 @@ function renderHistoryOrderItemMB(orderId) {
                 </tr>`;
                 table.innerHTML += row;
             });
+            // ✓ Tính Shipping Fee đúng cách
             document.querySelector(".fee_shipping").textContent = "Shipping Fee: $" + renderTotalShipUser(ListOrdersMB[i].order)
         }
     }
