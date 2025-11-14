@@ -421,6 +421,27 @@ a {
    font-size: 1.4rem;
 }
 
+input[type="file"] {
+    color: transparent;
+}
+.preview-image {
+   margin-top:8px;
+   display:flex;
+   gap:10px; 
+   align-items:center
+}
+#previewImg {
+   max-width:80px;
+   max-height:80px; 
+   display:none; 
+   border-radius:6px;
+}
+#previewText {
+   font-size:1.2rem;
+   color:#666;
+   display:none;
+}
+
 .btn-save {
    font-weight: 700;
    width: 100%;
