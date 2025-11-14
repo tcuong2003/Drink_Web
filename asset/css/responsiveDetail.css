@@ -175,6 +175,9 @@
 }
 
 @media screen and (min-width: 360px) and (max-width: 472px) {
+    .bar{
+    display: block;
+}
     .product .body {
         width: 100%;
         display: flex;
@@ -266,6 +269,9 @@
 
 /* Reponsive */
 @media screen and (min-width: 667.98px) and (max-width: 767.98px) {
+    .bar{
+    display: block;
+}
     .product .body {
         margin-top: 30px;
         height: fit-content;
@@ -409,8 +415,15 @@
     }
 }
 
+.bar{
+    display: block;
+}
+
 /* Ipad Pro */
 @media screen and (min-width: 768px) and (max-width: 1024px) {
+    .bar{
+    display: block;
+}
     .product .body {
         display: flex;
         column-gap: 10px;
