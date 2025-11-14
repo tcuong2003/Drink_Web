@@ -822,7 +822,7 @@ function renderProducts(arr) {
 
     // 2. Quyết định text cho nút bấm (Ẩn hoặc Hiện)
     const hideButtonText = product.isHidden ? "Visible" : "Hidden";
-    const hideButtonClass = product.isHidden ? "show-btn" : "hide-btn"; // Để bạn style riêng nếu muốn
+    const hideButtonClass = product.isHidden ? "show-btn" : "hide-btn"; // Để style riêng nếu muốn
     // ---------------
 
     productDiv.innerHTML = `
@@ -878,6 +878,7 @@ function renderOrderManagement() {
   const rejectedBtn = document.getElementById("rejected-order-btn");
   const allButtons = [waitBtn, acceptedBtn, rejectedBtn];
 
+  //======Xóa màu xanh khi chọn vào nút đó=====//
   function setActiveButton(clickedButton) {
     allButtons.forEach(btn => btn.classList.remove('active-filter'));
     clickedButton.classList.add('active-filter');

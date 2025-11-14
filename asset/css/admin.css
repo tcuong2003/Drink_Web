@@ -158,7 +158,7 @@ a {
    padding: 20px;
    display: flex;
    justify-content: space-between;
-   align-items: center;
+   align-items:center;
    background-color: #fff;
    border-radius: 20px;
 }
@@ -255,9 +255,7 @@ a {
    right: 3px;
 }
 
-.add-btn:hover,
-.edit-btn:hover,
-.delete-btn:hover {
+.add-btn:hover {
    box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, .5),
       -4px -4px 6px 0 rgba(116, 125, 136, .5),
       inset -4px -4px 6px 0 rgba(255, 255, 255, .2),
@@ -265,6 +263,13 @@ a {
 }
 
 .main-content .product .edit-btn:hover {
+   box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, .5),
+      -4px -4px 6px 0 rgba(116, 125, 136, .5),
+      inset -4px -4px 6px 0 rgba(255, 255, 255, .2),
+      inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
+}
+
+.main-content .product .hide-btn:hover:hover {
    box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, .5),
       -4px -4px 6px 0 rgba(116, 125, 136, .5),
       inset -4px -4px 6px 0 rgba(255, 255, 255, .2),
@@ -280,21 +285,23 @@ a {
 
 .add-product-search {
    display: flex;
-   justify-content: space-between;
-   margin-bottom: 20px;
+   justify-content:space-between;
+   /* gap: 20px; */
+   margin-bottom: 20px;  
 }
 
 .add-product-search .search {
    display: flex;
+  
    position: relative;
 }
 
 .add-product-search .search .icon-delete {
    position: absolute;
    color: rgb(182, 175, 175);
-   top: 19px;
+   top: 19px; 
    right: 62px;
-
+   
 }
 
 .add-product-search .search-field {
@@ -925,7 +932,7 @@ th {
     background-color: #ea5c66; 
     color: #ffffff;
     /* Bỏ hiệu ứng đổ bóng để trông giống nút đang được nhấn */
-    box-shadow: inset 2px 2px 5px 0 rgba(0, 0, 0, .4);
+    box-shadow: inset 2px 2px 5px 0 rgba(0, 0, 0, 0.4);
 }
 /* CSS phần chuyển màu Order Startictis */
 .form-input-startics .btn-submit.active-filter ,
