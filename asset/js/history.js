@@ -63,11 +63,16 @@ function handleRenderHistoryOrder() {
     ListOrders.forEach((item) => {
         if (dataUsers[userIndex].id == item.userId) {
             number++;
+            // Format time theo múi giờ Việt Nam
+            const vnTime = new Date(item.order[0].time).toLocaleString('vi-VN', {
+                timeZone: 'Asia/Ho_Chi_Minh',
+                hour12: false
+            });
             let row = `
                 <tr> 
-                    <td>${number}</td> // day la doan can them ham render de tinh totalprice // kho hieu
-                    <td>${item.order[0].time}</td> // tai sao lai k hien dc ma qua ham MB ms hien duoc
-                    <td></td>
+                    <td>${number}</td>
+                    <td>${vnTime}</td>
+                    <td>$${renderTotalPriceUser(item.order)}</td>
                     <td>${status(item.order[0].check)}</td>
                     <td onclick = "renderHistoryOrderItem(${item.id})">
                         <img class="showmore" src="./asset/img/showmore.png" alt="">
@@ -77,6 +82,7 @@ function handleRenderHistoryOrder() {
         }
     });
 }
+
 function renderHistoryOrderItem(orderId) {
     const historyOrder = document.querySelector(".historyOrder");
     historyOrder.innerHTML = `
@@ -87,6 +93,8 @@ function renderHistoryOrderItem(orderId) {
             <div>
                 <img class="close-history" src="./asset/img/back_3114883.png" alt="Quay lại" onclick="handleRenderHistoryOrder()">
             </div>
+            <span class = "fee_shipping" >Shipping Fee: $10</span>
+
             <table>
                 <thead class = "tableHistoryHead"> 
             
@@ -106,6 +114,7 @@ function renderHistoryOrderItem(orderId) {
             <th>Name</th>
             <th>Quatity</th>    
             <th>Price</th>
+            <th>Order time</th>
         </tr> 
     `;
     const table = document.querySelector(".tableHistoryBody");
@@ -116,6 +125,11 @@ function renderHistoryOrderItem(orderId) {
         if (ListOrders[i].id === orderId) {
             ListOrders[i].order.forEach((item) => {
                 number++;
+                // Format time theo múi giờ Việt Nam
+                const vnTime = new Date(item.time).toLocaleString('vi-VN', {
+                    timeZone: 'Asia/Ho_Chi_Minh',
+                    hour12: false
+                });
                 let row = `
                 <tr>
                     <td>${number}</td>
@@ -123,6 +137,7 @@ function renderHistoryOrderItem(orderId) {
                     <td>${item.nameProduct}</td>
                     <td>${item.quantity}</td>
                     <td>$${item.price}</td>
+                    <td>${vnTime}</td>
                 </tr>`;
                 table.innerHTML += row;
             });
@@ -228,10 +243,15 @@ function handleRenderHistoryOrderMB() {
     ListOrdersMB.forEach((item) => {
         if (dataUsers[userIndex].id == item.userId) { // kiem tra tk hien thoi
             number++;
+            // Format time theo múi giờ Việt Nam
+            const vnTime = new Date(item.order[0].time).toLocaleString('vi-VN', {
+                timeZone: 'Asia/Ho_Chi_Minh',
+                hour12: false
+            });
             let row = `
                 <tr>
                     <td>${number}</td>
-                    <td>${item.order[0].time}</td>
+                    <td>${vnTime}</td>
                     <td>$${renderTotalPriceUser(item.order)}</td>
                     <td>${status(item.order[0].check)}</td>
                     <td onclick = "renderHistoryOrderItem(${item.id})">
@@ -242,7 +262,7 @@ function handleRenderHistoryOrderMB() {
         }
     });
 }
-function renderHistoryOrderItem(orderId) {
+function renderHistoryOrderItemMB(orderId) {
     const historyOrder = document.querySelector(".historyOrder");
     historyOrder.innerHTML = `
         <div class="table-header">
@@ -252,7 +272,7 @@ function renderHistoryOrderItem(orderId) {
             <div>
                 <img class="close-history" src="./asset/img/back_3114883.png" alt="Quay lại" onclick="handleRenderHistoryOrderMB()">
             </div>
-            <span class = "fee_shipping" >Fee shipping: $10</span>
+            <span class = "fee_shipping" >Shipping Fee: $10</span>
 
             <table>
                 <thead class = "tableHistoryHead"> 
@@ -273,16 +293,21 @@ function renderHistoryOrderItem(orderId) {
             <th>Name</th>
             <th>Quatity</th>    
             <th>Price</th>
+            <th>Order time</th>
         </tr> 
     `;
     const table = document.querySelector(".tableHistoryBody");
     table.innerHTML = "";
     let number = 0;
-    let totalPrice = 0;
     for (var i = 0; i < ListOrdersMB.length; i++) {
         if (ListOrdersMB[i].id === orderId) {
             ListOrdersMB[i].order.forEach((item) => {
                 number++;
+                // Format time theo múi giờ Việt Nam
+                const vnTime = new Date(item.time).toLocaleString('vi-VN', {
+                    timeZone: 'Asia/Ho_Chi_Minh',
+                    hour12: false
+                });
                 let row = `
                 <tr>
                     <td>${number}</td>
@@ -290,10 +315,11 @@ function renderHistoryOrderItem(orderId) {
                     <td>${item.nameProduct}</td>
                     <td>${item.quantity}</td>
                     <td>$${item.price}</td>
+                    <td>${vnTime}</td>
                 </tr>`;
                 table.innerHTML += row;
             });
-           document.querySelector(".fee_shipping").textContent = "Fee shipping: $" + renderTotalShipUser(ListOrdersMB[i].order)
+            document.querySelector(".fee_shipping").textContent = "Shipping Fee: $" + renderTotalShipUser(ListOrdersMB[i].order)
         }
     }
 }
