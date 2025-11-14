@@ -1622,7 +1622,7 @@ function addAnimate() {
   addEditProductForm.classList.add("animate");
 }
 function rmvAnimate() {
-  if (checkEdit == 1) clearForm();
+  clearForm();
   addEditProductBackgroundForm.classList.remove("animate");
   addEditProductForm.classList.remove("animate");
   var allDiv = document.querySelectorAll(".div");
@@ -1831,11 +1831,12 @@ function addProduct(data) {
   const product = {
     id: productId,
     name: productName,
+    ingredients: "có đá",
     price: productPrice,
     image: productImg,
+    isHidden: false,
     star: 4.5,
     nature: {
-      // color: ["white", "black"],
       size: ["S", "M", "L"],
       type: productType,
     },

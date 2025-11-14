@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
             productDiv.classList.add("main-product");
 
             productDiv.innerHTML = `
-            <img class="image" src=".${product.image}" alt="" />
+            <img class="image" src="${product.image}" alt="" />
             <div class="info-product">
                 <div class="info-product__title">
                     <h3 class="heading">${product.nameProduct}</h3>
@@ -374,7 +374,7 @@ function renderCart() {
         productDiv.classList.add("main-product");
 
         productDiv.innerHTML = `
-            <img class="image" src=".${product.image}" alt="" />
+            <img class="image" src="${product.image}" alt="" />
             <div class="info-product">
                 <div class="info-product__title">
                     <h3 class="heading">${product.nameProduct}</h3>
