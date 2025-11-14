@@ -399,6 +399,54 @@ a {
    border-radius: 6px;
 }
 
+/* File input customization: hide browser "no file chosen" and use custom button */
+.file-wrapper {
+   position: relative;
+   display: inline-block;
+}
+.file-wrapper .form-input-file {
+   /* Keep the native file input in the DOM but visually hide it without showing the
+      browser "no file chosen" text. This uses clipping/opacity so programmatic
+      `input.click()` still opens the file picker on all major browsers. */
+   position: absolute;
+   width: 1px;
+   height: 1px;
+   padding: 0;
+   margin: 0;
+   border: 0;
+   overflow: hidden;
+   clip: rect(0 0 0 0);
+   clip-path: inset(50%);
+   white-space: nowrap;
+   opacity: 0;
+   z-index: -1;
+}
+
+/* Hide vendor-specific file button/label UI where supported so no "no file chosen" text appears */
+.file-wrapper .form-input-file::file-selector-button,
+.file-wrapper .form-input-file::-webkit-file-upload-button,
+.file-wrapper .form-input-file::-webkit-file-upload-text,
+.file-wrapper .form-input-file::-ms-browse {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+}
+.choose-btn {
+   display: inline-block;
+   padding: 8px 12px;
+   background-color: #4070f4;
+   color: #fff;
+   border: none;
+   border-radius: 6px;
+   font-size: 1.4rem;
+   cursor: pointer;
+}
+.choose-btn:hover { background-color: #2f5bd6; }
+
 .form-input {
    width: 100%;
    height: 40px;

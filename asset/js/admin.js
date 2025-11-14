@@ -2125,6 +2125,14 @@ if (fileInputEl) {
   });
 }
 
+// Wire up custom choose button to open file picker (so browser default text isn't shown)
+var chooseBtn = document.getElementById('chooseImageBtn');
+if (chooseBtn && fileInputEl) {
+  chooseBtn.addEventListener('click', function() {
+    fileInputEl.click();
+  });
+}
+
 function toggleBlockUser(userId) {
     const user = listUsers.find(user => user.id === userId);
     if (!user) return;
