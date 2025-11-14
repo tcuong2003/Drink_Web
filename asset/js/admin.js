@@ -1643,7 +1643,15 @@ function clearForm() {
   document.getElementById("nameProduct").value = "";
   document.getElementById("price").value = "";
   document.getElementById("type").value = "";
-  document.getElementById("linkImage").value = "";
+  // Clear hidden image, file input and preview
+  var hidden = document.getElementById("linkImage");
+  if (hidden) hidden.value = "";
+  var fileInput = document.getElementById("linkImageFile");
+  if (fileInput) fileInput.value = null;
+  var preview = document.getElementById('previewImg');
+  var previewText = document.getElementById('previewText');
+  if (preview) { preview.src = ''; preview.style.display = 'none'; }
+  if (previewText) { previewText.textContent = ''; previewText.style.display = 'none'; }
 }
 
 // ============= Xu li form an hien ================
@@ -1651,6 +1659,7 @@ let checkEdit = 0;
 const btnCloseForm = document.querySelector(".closeImg");
 const btnAddProduct = document.querySelector(".add-btn");
 function openAddForm() {
+  checkEdit = 0; // Đảm bảo là Add mode
   addAnimate();
   btnCloseForm.addEventListener("click", rmvAnimate);
 }
@@ -1763,6 +1772,9 @@ function openEditForm(productId) {
   const productPrice = document.getElementById("price");
   const productType = document.getElementById("type");
   const productImg = document.getElementById("linkImage");
+  const productImgFile = document.getElementById("linkImageFile");
+  const previewImg = document.getElementById("previewImg");
+  const previewText = document.getElementById("previewText");
 
   for (let i = 0; i < listProducts.length; i++) {
     if (listProducts[i].id === productId) {
@@ -1770,7 +1782,17 @@ function openEditForm(productId) {
       productName.value = product.name;
       productPrice.value = product.price;
       productType.value = product.nature.type;
+      // set hidden input to existing image (could be URL or base64)
       productImg.value = product.image;
+      // clear file input
+      if (productImgFile) productImgFile.value = null;
+      // show preview
+      if (product.image) {
+        if (previewImg) { previewImg.src = product.image; previewImg.style.display = 'block'; }
+        if (previewText) { previewText.textContent = ''; previewText.style.display = 'none'; }
+      } else {
+        if (previewImg) { previewImg.style.display = 'none'; }
+      }
     }
   }
   addAnimate();
@@ -1778,15 +1800,14 @@ function openEditForm(productId) {
 }
 
 // Function to edit a product
-function editProduct() {
-  const productId = parseInt(document.getElementById("idProduct").value);
-  const productName = document.getElementById("nameProduct").value;
-  const productPrice = parseFloat(document.getElementById("price").value);
-  const productType = document.getElementById("type").value;
-  const productImg = document.getElementById("linkImage").value;
-  const productToEdit = listProducts.find(
-    (product) => product.id === productId
-  );
+// editProduct now accepts prepared data (data.linkImage should contain final image string)
+function editProduct(data) {
+  const productId = data ? parseInt(data.idProduct) : parseInt(document.getElementById("idProduct").value);
+  const productName = data ? data.nameProduct : document.getElementById("nameProduct").value;
+  const productPrice = data ? parseFloat(data.price) : parseFloat(document.getElementById("price").value);
+  const productType = data ? data.type : document.getElementById("type").value;
+  const productImg = data ? data.linkImage : document.getElementById("linkImage").value;
+  const productToEdit = listProducts.find((product) => product.id === productId);
   if (productToEdit) {
     productToEdit.name = productName;
     productToEdit.price = productPrice;
@@ -1795,6 +1816,7 @@ function editProduct() {
     localStorage.setItem("listProducts", JSON.stringify(listProducts));
     renderProducts(listProducts);
     rmvAnimate();
+    checkEdit = 0; // Reset để lần sau là Add mode
   } else {
     console.log("Product not found for editing with ID " + productId);
   }
@@ -1819,11 +1841,12 @@ function addProduct(data) {
     },
   };
   listProducts.unshift(product);
-  clearForm();
   localStorage.setItem("listProducts", JSON.stringify(listProducts));
   console.log(listProducts);
   renderProducts(listProducts);
   rmvAnimate();
+  clearForm();
+  checkEdit = 0; // Reset để lần sau là Add mode
 }
 // ======== Ham xu li thong bao khi them san pham ===========
 function addSuccessForm() {
@@ -2019,10 +2042,16 @@ Validator.isRequired = function (selector, message) {
   return {
     selector: selector,
     test: function (value) {
-      return value.trim() ? undefined : message || "Vui lòng nhập trường này";
+      // If selector is file input, check files length
+      var el = document.querySelector(selector);
+      if (el && el.type === 'file') {
+        return el.files && el.files.length > 0 ? undefined : message || "Vui lòng nhập trường này";
+      }
+      return value && String(value).trim() ? undefined : message || "Vui lòng nhập trường này";
     },
   };
 };
+
 runCheckAddForm();
 function runCheckAddForm() {
   Validator({
@@ -2033,18 +2062,66 @@ function runCheckAddForm() {
       Validator.isRequired("#nameProduct", "Vui lòng nhập tên sản phẩm"),
       Validator.isRequired("#price", "Vui lòng nhập đơn giá"),
       Validator.isRequired("#type", "Vui lòng chọn loại sản phẩm"),
-      Validator.isRequired("#linkImage", "Vui lòng chọn link hình ảnh"),
+      // linkImage hidden input or file will be validated in onSubmit as well
+      Validator.isRequired("#linkImage", "Vui lòng chọn hình ảnh"),
     ],
     onSubmit: function (data) {
-      if (checkEdit === 0) {
-        addSuccessForm();
-        console.log(data);
+      // data contains values from inputs (hidden linkImage may hold existing image)
+      var fileInput = document.getElementById('linkImageFile');
+      var hiddenInput = document.getElementById('linkImage');
+
+      function finishSubmit(finalData) {
+        if (checkEdit === 0) {
+          addSuccessForm();
+          addProduct(finalData);
+        } else {
+          // call editProduct with prepared data
+          addSuccessForm(); // Thêm toast thành công cho edit cũng
+          editProduct(finalData);
+        }
         clearForm();
-        addProduct(data);
+      }
+
+      if (fileInput && fileInput.files && fileInput.files[0]) {
+        var file = fileInput.files[0];
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          data.linkImage = e.target.result; // base64 string
+          // also update hidden input for preview/persistence
+          if (hiddenInput) hiddenInput.value = data.linkImage;
+          finishSubmit(data);
+        };
+        reader.readAsDataURL(file);
       } else {
-        editProduct();
+        // No new file selected — use existing hidden input value if present
+        data.linkImage = hiddenInput ? hiddenInput.value : '';
+        finishSubmit(data);
       }
     },
+  });
+}
+
+// Preview selected image immediately
+var fileInputEl = document.getElementById('linkImageFile');
+var previewImgEl = document.getElementById('previewImg');
+var previewTextEl = document.getElementById('previewText');
+var hiddenImageEl = document.getElementById('linkImage');
+if (fileInputEl) {
+  fileInputEl.addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file) {
+      if (previewImgEl) { previewImgEl.style.display = 'none'; }
+      if (previewTextEl) { previewTextEl.style.display = 'none'; }
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      const dataUrl = ev.target.result;
+      if (previewImgEl) { previewImgEl.src = dataUrl; previewImgEl.style.display = 'block'; }
+      if (previewTextEl) { previewTextEl.textContent = file.name; previewTextEl.style.display = 'inline-block'; }
+      if (hiddenImageEl) hiddenImageEl.value = dataUrl;
+    };
+    reader.readAsDataURL(file);
   });
 }
 
@@ -2070,3 +2147,5 @@ function toggleBlockUser(userId) {
 
     renderUser(listUsers);
 }
+
+
