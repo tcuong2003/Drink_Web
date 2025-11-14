@@ -1659,6 +1659,7 @@ let checkEdit = 0;
 const btnCloseForm = document.querySelector(".closeImg");
 const btnAddProduct = document.querySelector(".add-btn");
 function openAddForm() {
+  checkEdit = 0; // Đảm bảo là Add mode
   addAnimate();
   btnCloseForm.addEventListener("click", rmvAnimate);
 }
@@ -1815,6 +1816,7 @@ function editProduct(data) {
     localStorage.setItem("listProducts", JSON.stringify(listProducts));
     renderProducts(listProducts);
     rmvAnimate();
+    checkEdit = 0; // Reset để lần sau là Add mode
   } else {
     console.log("Product not found for editing with ID " + productId);
   }
@@ -1839,11 +1841,12 @@ function addProduct(data) {
     },
   };
   listProducts.unshift(product);
-  clearForm();
   localStorage.setItem("listProducts", JSON.stringify(listProducts));
   console.log(listProducts);
   renderProducts(listProducts);
   rmvAnimate();
+  clearForm();
+  checkEdit = 0; // Reset để lần sau là Add mode
 }
 // ======== Ham xu li thong bao khi them san pham ===========
 function addSuccessForm() {
@@ -2073,6 +2076,7 @@ function runCheckAddForm() {
           addProduct(finalData);
         } else {
           // call editProduct with prepared data
+          addSuccessForm(); // Thêm toast thành công cho edit cũng
           editProduct(finalData);
         }
         clearForm();
