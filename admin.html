@@ -116,9 +116,12 @@
                     <p class="form-error"></p>
                 </div>
                 <div class="form-group">
-                    <label for="linkImage" class="form-label">Link image</label>
+                    <label for="linkImageFile" class="form-label">Image</label>
                     <div class="div">
-                        <input type="file" id="linkImage" name="linkImage" class="form-input" accept="image/*" />
+                        <input type="file" id="linkImageFile" name="linkImageFile" class="form-input-file" accept="image/*" />
+                        <!-- Hidden input to store existing/base64 image string -->
+                        <input type="hidden" id="linkImage" name="linkImage" value="" />
+                        <div class="preview-image" style="margin-top:8px; display:flex; gap:10px; align-items:center;"><img id="previewImg" src="" alt="" style="max-width:80px; max-height:80px; display:none; border-radius:6px;"/><span id="previewText" style="font-size:1.2rem;color:#666;display:none;"></span></div>
                     </div>
                     <p class="form-error"></p>
                 </div>
