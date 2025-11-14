@@ -85,6 +85,12 @@
 }
 
 /*Reponsive*/
+@media screen and (max-width: 991.98px){
+    .header .bar {
+    display: block;
+    
+}
+}
 @media screen and (max-width: 360px) {
     .product .body {
         width: 100%;
