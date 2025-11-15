@@ -7,20 +7,25 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Americano",
       ingredients: "Espresso, nước nóng",
       price: 3.00,
+      cost: 1.50,   
+      quantity: 100,
       image: "./asset/img/product-coffee/coffee-101.jpg",
       isHidden: false,
       star: "4.6",
       nature: {
         size: ["S", "M", "L"],
-        type: "coffee",
+        type: "coffee", 
       }
 
     },
+
     {
       id: 2,
       name: "Bạc xỉu",
       ingredients: "Sữa đặc, cà phê pha, đá",
       price: 2.50,
+      cost: 1.50,   
+      quantity: 100, 
       image: "./asset/img/product-coffee/coffee-102.jpg",
       isHidden: false,
       star: "5",
@@ -35,6 +40,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Cacao latte",
       ingredients: "Bột ca cao, sữa, đường, bọt sữa hấp",
       price: 4.20,
+      cost: 1.65,   
+      quantity: 100, 
       image: "./asset/img/product-coffee/coffee-103.jpg",
       isHidden: false,
       star: "3.5",
@@ -48,6 +55,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Cacao nóng",
       ingredients: "Bột ca cao, sữa nóng, đường",
       price: 4.00,
+      cost: 1.50,   
+      quantity: 100, 
       image: "./asset/img/product-coffee/coffee-104.jpg",
       isHidden: false,
       star: "4.5",
@@ -61,6 +70,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Cafe đen",
       ingredients: "Cà phê Robusta pha mạnh",
       price: 2.00,
+      cost: 0.50,   
+      quantity: 100,
       image: "./asset/img/product-coffee/coffee-105.jpg",
       isHidden: false,
       star: "5",
@@ -74,6 +85,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Cafe muối",
       ingredients: "Cà phê, sữa đặc, kem muối",
       price: 3.2,
+      cost: 1.50,   
+      quantity: 100,
       image: "./asset/img/product-coffee/coffee-106.jpg",
       isHidden: false,
       star: "4.3",
@@ -87,6 +100,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Cafe sữa",
       ingredients: "Cà phê pha mạnh, sữa đặc, đá",
       price: 2.90,
+      cost: 1.40,   
+      quantity: 100,
       image: "./asset/img/product-coffee/coffee-107.jpg",
       isHidden: false,
       star: "4.3",
@@ -101,6 +116,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Capuchino",
       ingredients: "Espresso, sữa hấp, bọt sữa",
       price: 3.80,
+      cost: 1.50,   
+      quantity: 100,
       image: "./asset/img/product-coffee/coffee-108.jpg",
       isHidden: false,
       star: "4.3",
@@ -114,6 +131,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Mocha coffee",
       ingredients: "Espresso, siro sô-cô-la, sữa hấp, kem tươi",
       price: 4.00,
+      cost: 1.50,   
+      quantity: 100,
       image: "./asset/img/product-coffee/coffee-109.jpg",
       isHidden: false,
       star: 4.2,
@@ -127,6 +146,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Matcha latte",
       ingredients: "Bột trà xanh, sữa, đường, đá",
       price: 3.50,
+      cost: 1.50,   
+      quantity: 100,
       image: "./asset/img/product-tea/tea-201.jpg",
       isHidden: false,
       star: 4.2,
@@ -140,6 +161,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Trà bí đao",
       ingredients: "Trà bí đao, đường phèn, đá",
       price: 2.58,
+      cost: 1.10,   
+      quantity: 100,
       image: "./asset/img/product-tea/tea-202.jpg",
       isHidden: false,
       star: 4.2,
@@ -153,6 +176,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Trà đào",
       ingredients: "Trà đen, siro đào, đào cắt lát, đá",
       price: 3.45,
+      cost: 1.50,   
+      quantity: 100,
       image: "./asset/img/product-tea/tea-203.jpg",
       isHidden: false,
       star: 4.2,
@@ -166,6 +191,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Trà dâu ổi hồng",
       ingredients: "Trà đen, siro dâu, nước ép ổi hồng, đá",
       price: 3.4,
+      cost: 1.50,   
+      quantity: 100,
       image: "./asset/img/product-tea/tea-204.jpg",
       isHidden: false,
       star: 4.2,
@@ -179,6 +206,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Trà sen vàng",
       ingredients: "Trà sen, mật ong, đá",
       price: 4.20,
+      cost: 1.65,   
+      quantity: 100,
       image: "./asset/img/product-tea/tea-205.png",
       isHidden: false,
       star: 4.2,
@@ -192,6 +221,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Trà sữa khoai môn",
       ingredients: "Trà đen, sữa tươi, bột khoai môn, đường, đá",
       price: 3.57,
+      cost: 1.50,   
+      quantity: 100,
       image: "./asset/img/product-tea/tea-206.jpg",
       isHidden: false,
       star: 4.2,
@@ -205,6 +236,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Trà sữa socola",
       ingredients: "Trà đen, sữa tươi, siro socola, đá",
       price: 3.57,
+      cost: 1.50,   
+      quantity: 100,
       image: "./asset/img/product-tea/tea-207.jpg",
       isHidden: false,
       star: 4.2,
@@ -218,6 +251,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Trà sữa thái",
       ingredients: "Trà đen Thái, sữa đặc, sữa tươi, đường, đá",
       price: 4.00,
+      cost: 1.50,   
+      quantity: 100,
       image: "./asset/img/product-tea/tea-208.jpg",
       isHidden: false,
       star: 4.2,
@@ -231,6 +266,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Trà sữa truyền thống",
       ingredients: "Trà đen, sữa tươi hoặc sữa đặc, đường, đá",
       price: 3.50,
+      cost: 1.50,   
+      quantity: 100,
       image: "./asset/img/product-tea/tea-209.png",
       isHidden: false,
       star: 4.2,
@@ -244,6 +281,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Trà tắc",
       ingredients: "Trà xanh, nước cốt tắc, mật ong hoặc đường, đá",
       price: 3.20,
+      cost: 1.50,   
+      quantity: 100,
       image: "./asset/img/product-tea/tea-210.jpg",
       isHidden: false,
       star: 4.2,
@@ -257,6 +296,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Trà trái cây nhiệt đới",
       ingredients: "Trà xanh, hỗn hợp trái cây nhiệt đới, đá, đường",
       price: 4.15,
+      cost: 1.60,   
+      quantity: 100,
       image: "./asset/img/product-tea/tea-211.jpg",
       isHidden: false,
       star: 4.2,
@@ -270,6 +311,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Trà vải",
       ingredients: "Trà đen, nước ép vải, đường, đá",
       price: 3.99,
+      cost: 1.50,   
+      quantity: 100,
       image: "./asset/img/product-tea/tea-212.png",
       isHidden: false,
       star: 4.2,
@@ -283,6 +326,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Sinh tố dứa",
       ingredients: "Xoài chín, sữa đặc, sữa tươi, đường, đá xay",
       price: 4.49,
+      cost: 1.90,   
+      quantity: 100,
       image: "./asset/img/product-smoothie/smoothie-301.jpg",
       isHidden: false,
       star: 4.5,
@@ -296,6 +341,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Sinh tố xoài",
       ingredients: "Thơm (dứa), mật ong, sữa tươi, đá viên",
       price: 4.19,
+      cost: 1.60,   
+      quantity: 100,
       image: "./asset/img/product-smoothie/smoothie-302.jpg",
       isHidden: false,
       star: 4.3,
@@ -309,6 +356,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Sinh tố bơ",
       ingredients: "Mãng cầu xiêm, sữa đặc, sữa tươi, đá xay",
       price: 4.59,
+      cost: 1.95,   
+      quantity: 100,
       image: "./asset/img/product-smoothie/smoothie-303.jpg",
       isHidden: false,
       star: 4.6,
@@ -322,6 +371,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Sinh tố chuối",
       ingredients: "Kiwi, táo xanh, mật ong, đá viên",
       price: 4.79,
+      cost: 2.60,   
+      quantity: 100,
       image: "./asset/img/product-smoothie/smoothie-304.jpg",
       isHidden: false,
       star: 4.4,
@@ -335,6 +386,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Sinh tố dâu tây",
       ingredients: "Dâu tây, sữa chua, sữa tươi, đá xay",
       price: 4.69,
+      cost: 2.40,   
+      quantity: 100,
       image: "./asset/img/product-smoothie/smoothie-305.jpg",
       isHidden: false,
       star: 4.7,
@@ -348,6 +401,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Sinh tố kiwi",
       ingredients: "Chuối chín, sữa tươi, mật ong, đá viên",
       price: 3.99,
+      cost: 1.50,   
+      quantity: 100,
       image: "./asset/img/product-smoothie/smoothie-306.jpg",
       isHidden: false,
       star: 4.3,
@@ -361,6 +416,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Sinh tố mãng cầu",
       ingredients: "Bơ sáp, sữa đặc, sữa tươi, đá xay",
       price: 4.89,
+      cost: 1.50,   
+      quantity: 100,
       image: "./asset/img/product-smoothie/smoothie-307.jpg",
       isHidden: false,
       star: 4.8,
@@ -374,6 +431,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Nước ép táo",
       ingredients: "Táo tươi, nước lọc, đường (tuỳ chọn), đá viên",
       price: 3.99,
+      cost: 1.50,   
+      quantity: 100,
       image: "./asset/img/product-juice/juice-401.jpg",
       isHidden: false,
       star: 4.4,
@@ -387,6 +446,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Nước ép cam",
       ingredients: "Rau má tươi, nước lọc, sữa đặc hoặc đường, đá viên",
       price: 3.49,
+      cost: 1.50,   
+      quantity: 100,
       image: "./asset/img/product-juice/juice-402.jpg",
       isHidden: false,
       star: 4.5,
@@ -400,6 +461,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Nước ép cà rốt",
       ingredients: "Ổi hồng, muối, đường, đá xay",
       price: 3.79,
+      cost: 1.50,   
+      quantity: 100,
       image: "./asset/img/product-juice/juice-403.jpg",
       isHidden: false,
       star: 4.3,
@@ -413,6 +476,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Nước ép chanh dây",
       ingredients: "Lựu tươi, mật ong, đá viên",
       price: 4.49,
+      cost: 1.90,   
+      quantity: 100,
       image: "./asset/img/product-juice/juice-404.jpg",
       isHidden: false,
       star: 4.6,
@@ -426,6 +491,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Nước ép dưa hấu",
       ingredients: "Dưa hấu, đường (tuỳ chọn), đá viên",
       price: 3.59,
+      cost: 1.50,   
+      quantity: 100,
       image: "./asset/img/product-juice/juice-405.jpg",
       isHidden: false,
       star: 4.5,
@@ -439,6 +506,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Nước ép lựu",
       ingredients: "Chanh dây, đường, nước lọc, đá viên",
       price: 3.69,
+      cost: 1.50,   
+      quantity: 100,
       image: "./asset/img/product-juice/juice-406.jpg",
       isHidden: false,
       star: 4.7,
@@ -452,6 +521,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Nước ép ổi",
       ingredients: "Cam tươi, mật ong (tuỳ chọn), đá viên",
       price: 3.99,
+      cost: 1.50,   
+      quantity: 100,
       image: "./asset/img/product-juice/juice-407.jpg",
       isHidden: false,
       star: 4.8,
@@ -465,6 +536,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Nước ép rau má",
       ingredients: "Cà rốt tươi, mật ong, đá viên",
       price: 3.89,
+      cost: 1.50,   
+      quantity: 100,
       image: "./asset/img/product-juice/juice-408.jpg",
       isHidden: false,
       star: 4.4,
@@ -478,6 +551,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Cà phê phin",
       ingredients: "Sữa đặc, cà phê rang say, nước nóng",
       price: 4.00,
+      cost: 1.50,   
+      quantity: 100,
       image: "./asset/img/product-coffee/coffee-110.jpg",
       isHidden: false,
       star: "4.3",
@@ -491,6 +566,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Caramel Macchiato",
       ingredients: "Espresso, sữa tươi, sốt caramel, siro vani",
       price: 5.38,
+      cost: 2.70,   
+      quantity: 100,
       image: "./asset/img/product-coffee/coffee-111.jpg",
       isHidden: false,
       star: "3.4",
@@ -504,6 +581,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Espresso con Panna",
       ingredients: "Espresso, kem tươi đánh bông",
       price: 3.50,
+      cost: 1.50,   
+      quantity: 100,
       image: "./asset/img/product-coffee/coffee-112.jpg",
       isHidden: false,
       star: "2.5",
@@ -517,6 +596,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Espresso",
       ingredients: "Cà phê xay mịn, nước nóng",
       price: 3.00,
+      cost: 1.50,   
+      quantity: 100,
       image: "./asset/img/product-coffee/coffee-113.jpg",
       isHidden: false,
       star: "1.5",
@@ -530,6 +611,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Ristretto Bianco",
       ingredients: "Ristretto, sữa tươi đánh bọt",
       price: 4.20,
+      cost: 1.65,   
+      quantity: 100,
       image: "./asset/img/product-coffee/coffee-114.jpg",
       isHidden: false,
       star: "2.6",
@@ -542,7 +625,9 @@ let listProducts = localStorage.getItem("listProducts")
       id: 42,
       name: "Trà olong nhài",
       ingredients: "Trà olong, hoa nhài, đá",
-      price: 4.05,
+      price: 4.15,
+      cost: 1.50,   
+      quantity: 100,
       image: "./asset/img/product-tea/tea-213.jpg",
       isHidden: false,
       star: 4.3,
@@ -556,6 +641,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Trà sữa Oreo",
       ingredients: "Trà đen, sữa tươi, kem Oreo, đá",
       price: 5.70,
+      cost: 3.0,   
+      quantity: 100,
       image: "./asset/img/product-tea/tea-214.jpg",
       isHidden: false,
       star: 3.5,
@@ -569,6 +656,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Trà sữa pudding trứng",
       ingredients: "Trà đen, sữa tươi, pudding trứng, đá",
       price: 6.00,
+      cost: 3.20,   
+      quantity: 100,
       image: "./asset/img/product-tea/tea-215.jpg",
       isHidden: false,
       star: 1.4,
@@ -582,6 +671,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Trà xoài kem cheese",
       ingredients: "Trà xanh, xoài, kem cheese, đá",
       price: 4.80,
+      cost: 1.50,   
+      quantity: 100,
       image: "./asset/img/product-tea/tea-216.jpg",
       isHidden: false,
       star: 4.7,
@@ -595,6 +686,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Trà đào cam sả",
       ingredients: "Trà đen, đào, cam, sả, đá",
       price: 4.50,
+      cost: 2.0,   
+      quantity: 100,
       image: "./asset/img/product-tea/tea-217.jpg",
       isHidden: false,
       star: 3.5,
@@ -608,6 +701,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Sinh tố dưa lưới",
       ingredients: "Dưa lưới chín, sữa tươi, sữa đặc, đá xay",
       price: 4.39,
+      cost: 1.80,   
+      quantity: 100,
       image: "./asset/img/product-smoothie/smoothie-308.jpg",
       isHidden: false,
       star: 4.5,
@@ -620,7 +715,9 @@ let listProducts = localStorage.getItem("listProducts")
       id: 48,
       name: "Sinh tố sầu riêng",
       ingredients: "Sầu riêng, sữa tươi, sữa đặc, đá xay",
-      price: 1.99,
+      price: 2.99,
+      cost: 1.20,   
+      quantity: 100,
       image: "./asset/img/product-smoothie/smoothie-309.jpg",
       isHidden: false,
       star: 4.6,
@@ -634,6 +731,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Sinh tố đu đủ",
       ingredients: "Đu đủ chín, sữa tươi, sữa đặc, đá viên",
       price: 3.89,
+      cost: 1.50,   
+      quantity: 100,
       image: "./asset/img/product-smoothie/smoothie-310.jpg",
       isHidden: false,
       star: 4.4,
@@ -647,6 +746,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Sinh tố việt quất",
       ingredients: "Việt quất, sữa chua, sữa tươi, đá xay",
       price: 4.79,
+      cost: 2.60,   
+      quantity: 100,
       image: "./asset/img/product-smoothie/smoothie-311.jpg",
       isHidden: false,
       star: 4.7,
@@ -660,6 +761,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Sinh tố mít",
       ingredients: "Mít tươi, sữa tươi, sữa đặc, đá viên",
       price: 2.29,
+      cost: 0.90,   
+      quantity: 100,
       image: "./asset/img/product-smoothie/smoothie-312.jpg",
       isHidden: false,
       star: 4.5,
@@ -673,6 +776,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Nước ép nho",
       ingredients: "Nho tím tươi, mật ong, đá viên",
       price: 4.49,
+      cost: 1.90,   
+      quantity: 100,
       image: "./asset/img/product-juice/juice-409.jpg",
       isHidden: false,
       star: 4.6,
@@ -686,6 +791,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Nước ép đào",
       ingredients: "Đào chín, đường (tuỳ chọn), đá viên",
       price: 4.19,
+      cost: 1.60,   
+      quantity: 100,
       image: "./asset/img/product-juice/juice-410.jpg",
       isHidden: false,
       star: 4.4,
@@ -698,7 +805,9 @@ let listProducts = localStorage.getItem("listProducts")
       id: 54,
       name: "Nước ép mận",
       ingredients: "Mận chín, đường, đá xay",
-      price: 4.09,
+      price: 4.19,
+      cost: 1.60,   
+      quantity: 100,
       image: "./asset/img/product-juice/juice-411.jpg",
       isHidden: false,
       star: 4.3,
@@ -712,6 +821,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Nước ép dưa leo",
       ingredients: "Dưa leo tươi, mật ong, đá viên",
       price: 3.79,
+      cost: 1.50,   
+      quantity: 100,
       image: "./asset/img/product-juice/juice-412.jpg",
       isHidden: false,
       star: 1.2,
@@ -725,6 +836,8 @@ let listProducts = localStorage.getItem("listProducts")
       name: "Nước ép cà chua",
       ingredients: "Cà chua tươi, mật ong hoặc đường, đá viên",
       price: 3.69,
+      cost: 1.50,   
+      quantity: 100,
       image: "./asset/img/product-juice/juice-413.jpg",
       isHidden: false,
       star: 2.1,
@@ -762,91 +875,239 @@ function renderAdmin() {
     window.location = "./index.html";
   };
 }
-    //========Product Management========//
+// THAY THẾ hàm renderProductManagement cũ
 function renderProductManagement() {
-  document.querySelector(".div-title").innerHTML = `
+    document.querySelector(".div-title").innerHTML = `
         <h1 class="title">Product Management</h1>
     `;
 
-  document.querySelector(".contain-add-product-search").innerHTML = `
-    <div class="add-product-search">
-        <button class="add-btn" onclick = "openAddForm()">Add Product</button>
+    document.querySelector(".contain-add-product-search").innerHTML = `
+        <div class="add-product-search">
+            <button class="add-btn" onclick="openAddForm()">Add Product</button>
             <div class="search">
                 <input
                     type="text"
-                    name=""
-                    id=""
                     placeholder="Search for..."
                     class="search-field"
                     />
-                <svg
-                    xmlns=""
-                    height="1em"
-                    viewBox="0 0 512 512"
-                    class="icon-delete hidden"
-                >
-                    <path
-                        fill="currentColor"
-                        d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"
-                        ></path>
-                </svg>
-                <button class="btn-search">
-                    <img
-                        src="./asset/img/header-search.svg"
-                        alt=""
-                        class="search-icon"
-                    />
-                </button>
+                <svg xmlns="" height="1em" viewBox="0 0 512 512" class="icon-delete hidden"><path fill="currentColor" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"></path></svg>
+                <button class="btn-search"><img src="./asset/img/header-search.svg" alt="" class="search-icon" /></button>
+            </div>
+        </div>
+
+        <div class="filters-container">
+            <div class="filter-group">
+                <label for="filter-cost">Cost:</label>
+                <select id="filter-cost" class="filter-select">
+                    <option value="all">All</option>
+                    <option value="0.5-1.5">$0.5 - $1.5</option>
+                    <option value="1.6-2.6">$1.60 - $2.60</option>
+                    <option value="2.7-3.5">$2.70 - $3.50</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="filter-price">Price:</label>
+                <select id="filter-price" class="filter-select">
+                    <option value="all">All</option>
+                    <option value="2-3">$2 - $3</option>
+                    <option value="3.1-4">$3.10 - $4</option>
+                    <option value="4.1-5">$4.10 - $5</option>
+                    <option value="5.1-6">$5.10 - $6</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="filter-profit">Profit %:</label>
+                <select id="filter-profit" class="filter-select">
+                    <option value="all">All</option>
+                    <option value="50-150">50% - 150%</option>
+                    <option value="150-250">150% - 250%</option>
+                    <option value="250-350">250% - 350%</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="filter-quantity">Quantity:</label>
+                <select id="filter-quantity" class="filter-select">
+                    <option value="all">All</option>
+                    <option value="1-5">Thấp (1-5)</option>
+                    <option value="6-14">Vừa (6-14)</option>
+                    <option value="15-Infinity">Cao (15+)</option> 
+                </select>
             </div>
             </div>
-            <div class="contain-product">
+
+        <div class="contain-product">
         </div>
     `;
-  renderProducts(listProducts);
-  handleProductManagement();
+    renderProducts(listProducts);
+    handleProductManagement(); 
 }
 
+// THAY THẾ hàm renderProducts cũ
 function renderProducts(arr) {
-  const productListContainer = document.querySelector(".contain-product");
-  productListContainer.innerHTML = "";
+    const productListContainer = document.querySelector(".contain-product");
+    productListContainer.innerHTML = "";
 
-  arr.forEach((product) => {
-    const productDiv = document.createElement("div");
-    productDiv.classList.add("product"); // Add the "product" class
+    arr.forEach((product) => {
+        const productDiv = document.createElement("div");
+        productDiv.classList.add("product");
+        productDiv.setAttribute('id', `product-row-${product.id}`); 
 
-    // --- THÊM MỚI ---
-    // 1. Thêm class "product-hidden" nếu sản phẩm bị ẩn
-    if (product.isHidden) {
-      productDiv.classList.add("product-hidden");
-    }
+        if (product.isHidden) {
+            productDiv.classList.add("product-hidden");
+        }
 
-    // 2. Quyết định text cho nút bấm (Ẩn hoặc Hiện)
-    const hideButtonText = product.isHidden ? "Visible" : "Hidden";
-    const hideButtonClass = product.isHidden ? "show-btn" : "hide-btn"; // Để bạn style riêng nếu muốn
-    // ---------------
+        // --- Logic tính toán ---
+        const hideButtonText = product.isHidden ? "Visible" : "Hidden";
+        const hideButtonClass = product.isHidden ? "show-btn" : "hide-btn";
+        
+        const cost = parseFloat(product.cost) || 0;
+        const price = parseFloat(product.price) || 0;
+        const type = product.nature.type || "N/A";
+        const quantity = parseInt(product.quantity) || 0; 
 
-    productDiv.innerHTML = `
+        let profitDisplay = "0"; 
+        if (cost > 0) {
+            profitDisplay = (((price - cost) / cost) * 100).toFixed(0);
+        } else if (cost === 0 && price > 0) {
+            profitDisplay = "∞";
+        }
+        
+        // ========== LOGIC TÔ MÀU ==========
+        let quantityClass = "";
+        if (quantity >= 1 && quantity <= 5) {
+            quantityClass = "stock-low"; // Đỏ
+        } else if (quantity >= 6 && quantity <= 14) {
+            quantityClass = "stock-medium"; // Vàng
+        } else if (quantity >= 15) {
+            quantityClass = "stock-high"; // Xanh
+        }
+        // ===================================
+
+        // --- HTML MỚI ---
+        productDiv.innerHTML = `
             <img src="${product.image}" alt="" class="img-product" />
-            <h2 class="name">${product.name}</h2>
-            <span class="price">${product.price}</span>
-            <div class="group-btn">
-                <button class="edit-btn" onclick = "openEditForm(${product.id})">
-                    <img src="./asset/img/admin-edit-product.png" alt="" class="icon-edit" />
-                    Edit 
-                </button>
-                    <button class="${hideButtonClass} hide-btn" onclick="toggleHideProduct(${product.id})">
-                    <img src="./asset/img/hide.png" alt="" class="icon-hide" />
-                    ${hideButtonText}
-                </button>
-                <button class="delete-btn" onclick = "deleteProduct(${product.id})">
-                    <img src="./asset/img/admin-delete-product.png" alt="" class="icon-delete" />
-                    Delete 
-                </button>
+
+            <div class="product-info">
+                <h2 class="name">${product.name}</h2>
+                <span class="product-type-badge type-${type}">${type}</span>
             </div>
+
+            <div class="product-pricing">
+                <span class="pricing-label">Cost</span>
+                <span class="pricing-value" id="product-cost-${product.id}">$${cost.toFixed(2)}</span>
+            </div>
+
+            <div class="product-pricing">
+                <span class="pricing-label">Price</span>
+                <input type="number" class="inline-input product-input-price" id="product-price-${product.id}" data-id="${product.id}" value="${price.toFixed(2)}" step="0.01" />
+            </div>
+
+            <div class="product-pricing">
+                <span class="pricing-label">Profit %</span> 
+                <input type="number" class="inline-input product-input-profit" id="product-profit-${product.id}" data-id="${product.id}" value="${profitDisplay}" />
+            </div>
+
+            <div class="product-pricing ${quantityClass}">
+                <span class="pricing-label">Quantity</span>
+                <span class="pricing-value">${quantity}</span>
+            </div>
+
+            <details class="action-menu-container">
+                <summary class="action-menu-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                </summary>
+                
+                <div class="action-menu-dropdown">
+                    <button class="edit-btn" onclick="openEditForm(${product.id})">
+                        <img src="./asset/img/admin-edit-product.png" alt="" class="icon-edit" />
+                        Edit
+                    </button>
+                    <button class="${hideButtonClass} hide-btn" onclick="toggleHideProduct(${product.id})">
+                        <img src="./asset/img/hide.png" alt="" class="icon-hide" />
+                        ${hideButtonText}
+                    </button>
+                    <button class="delete-btn" onclick="deleteProduct(${product.id})">
+                        <img src="./asset/img/admin-delete-product.png" alt="" class="icon-delete" />
+                        Delete 
+                    </button>
+                </div>
+            </details>
         `;
 
-    productListContainer.appendChild(productDiv);
-  });
+        productListContainer.appendChild(productDiv);
+    });
+
+    // Kích hoạt các ô input
+    setupInlineEditing();
+}
+/* DÁN HÀM NÀY VÀO file admin.js
+   (Ngay sau hàm renderProducts)
+*/
+function setupInlineEditing() {
+    // 1. Lấy các ô input
+    const priceInputs = document.querySelectorAll('.product-input-price');
+    const profitInputs = document.querySelectorAll('.product-input-profit');
+
+    // 2. Hàm lưu thay đổi
+    function saveChange(productId, field, value) {
+        const productToUpdate = listProducts.find(p => p.id === productId);
+        if (productToUpdate) {
+            productToUpdate[field] = parseFloat(value);
+            localStorage.setItem("listProducts", JSON.stringify(listProducts));
+        }
+    }
+
+    // 3. Gán sự kiện cho ô Price
+    priceInputs.forEach(input => {
+        // 'change' chỉ kích hoạt khi bạn bấm ra ngoài
+        input.addEventListener('change', (e) => { 
+            const productId = parseInt(e.target.dataset.id);
+            const price = parseFloat(e.target.value) || 0;
+
+            // Tìm các ô liên quan
+            const costElement = document.getElementById(`product-cost-${productId}`);
+            const profitInput = document.getElementById(`product-profit-${productId}`);
+            
+            // Đọc Cost từ văn bản (loại bỏ "$")
+            const cost = parseFloat(costElement.textContent.replace('$', '')) || 0;
+
+            // Tính lại Profit %
+            if (cost > 0 && price >= cost) {
+                const newProfit = ((price - cost) / cost) * 100;
+                profitInput.value = newProfit.toFixed(0);
+            } else {
+                profitInput.value = 0;
+            }
+            // Lưu Price mới
+            saveChange(productId, 'price', price);
+        });
+    });
+
+    // 4. Gán sự kiện cho ô Profit %
+    profitInputs.forEach(input => {
+        input.addEventListener('change', (e) => {
+            const productId = parseInt(e.target.dataset.id);
+            const profit = parseFloat(e.target.value) || 0;
+
+            // Tìm các ô liên quan
+            const costElement = document.getElementById(`product-cost-${productId}`);
+            const priceInput = document.getElementById(`product-price-${productId}`);
+
+            // Đọc Cost từ văn bản
+            const cost = parseFloat(costElement.textContent.replace('$', '')) || 0;
+
+            // Tính lại Price
+            if (cost > 0) {
+                const newPrice = cost + (cost * profit / 100);
+                priceInput.value = newPrice.toFixed(2);
+                // Lưu Price mới
+                saveChange(productId, 'price', newPrice);
+            }
+        });
+    });
 }
   //=============order Management=============//
   // phần order Management đổi màu khi nhấn chọn 
@@ -1575,46 +1836,123 @@ function handleOrderStartictis() {
   renderOrderStartictisProduct();
 }
 
-// Search theo tên sản phẩm
-function handleProductManagement() {
-  const textInput = document.querySelector(".search-field");
-  const iconDelete = document.querySelector(".icon-delete");
-  const searchButton = document.querySelector(".btn-search");
+/**
+ * Hàm 1: Hàm trợ giúp để tính % lợi nhuận
+ */
+function calculateProfitPercent(cost, price) {
+    if (cost <= 0 || price <= 0) return 0;
+    return ((price - cost) / cost) * 100;
+}
 
-  // Hàm tìm kiếm chính
-  function performSearch() {
-    const searchText = textInput.value.trim().toLowerCase();
-    const productSearch = listProducts.filter((product) => {
-      const productName = product.name.trim().toLowerCase();
-      return productName.includes(searchText);
+/**
+ * Hàm 2: Hàm trợ giúp để đọc khoảng giá trị (ví dụ: "1-1.5")
+ */
+ 
+function parseRange(rangeString) {
+    // Nếu là "all", trả về khoảng vô hạn
+    if (!rangeString || rangeString === 'all') {
+        return { min: -Infinity, max: Infinity };
+    }
+    const parts = rangeString.split('-');
+    return { min: parseFloat(parts[0]), max: parseFloat(parts[1]) };
+}
+
+/**
+ * Hàm 3: Hàm "master" để xử lý TẤT CẢ bộ lọc (thay thế performSearch)
+ */
+// THAY THẾ hàm applyAllFilters cũ
+function applyAllFilters() {
+    // 1. Lấy giá trị của tất cả 5 bộ lọc
+    const searchText = document.querySelector(".search-field").value.trim().toLowerCase();
+    const costRangeString = document.querySelector("#filter-cost").value;
+    const priceRangeString = document.querySelector("#filter-price").value;
+    const profitRangeString = document.querySelector("#filter-profit").value;
+    const quantityRangeString = document.querySelector("#filter-quantity").value; // <-- THÊM MỚI
+
+    // 2. Chuyển đổi
+    const costRange = parseRange(costRangeString);
+    const priceRange = parseRange(priceRangeString);
+    const profitRange = parseRange(profitRangeString);
+    const quantityRange = parseRange(quantityRangeString); // <-- THÊM MỚI
+
+    // 3. Lọc
+    const filteredList = listProducts.filter((product) => {
+        const productName = product.name.trim().toLowerCase();
+        const cost = parseFloat(product.cost) || 0;
+        const price = parseFloat(product.price) || 0;
+        const profit = calculateProfitPercent(cost, price);
+        const quantity = parseInt(product.quantity) || 0; // <-- THÊM MỚI
+
+        // --- Kiểm tra ---
+        if (searchText && !productName.includes(searchText)) {
+            return false;
+        }
+        if (cost < costRange.min || cost > costRange.max) {
+            return false;
+        }
+        if (price < priceRange.min || price > priceRange.max) {
+            return false;
+        }
+        if (profit < profitRange.min || profit > profitRange.max) {
+            return false;
+        }
+        
+        // Điều kiện 5: Quantity (đã sửa logic cho chính xác)
+        if (quantity < quantityRange.min || quantity > quantityRange.max) {
+            // Nếu là "all" (min: -Infinity, max: Infinity) thì bỏ qua
+            if (quantityRange.max === Infinity) {
+                // tiếp tục
+            } else {
+                 return false; // Nếu không phải "all" và nằm ngoài khoảng, thì loại
+            }
+        }
+
+        return true; 
     });
 
-    renderProducts(productSearch);
-  }
+    // 4. Render
+    renderProducts(filteredList);
+}
 
-  // --- Gán các sự kiện ---
 
-  //Gán sự kiện 'input' để tìm kiếm ngay khi người dùng gõ chữ
-  textInput.addEventListener("input", performSearch);
+/**
+ * Hàm 4: Cập nhật hàm handleProductManagement
+ */
+function handleProductManagement() {
+    // Lấy các element
+    const textInput = document.querySelector(".search-field");
+    const iconDelete = document.querySelector(".icon-delete");
+    const searchButton = document.querySelector(".btn-search");
+    const costFilter = document.querySelector("#filter-cost");
+    const priceFilter = document.querySelector("#filter-price");
+    const profitFilter = document.querySelector("#filter-profit");
+    const quantityFilter = document.querySelector("#filter-quantity");
 
-  // Vẫn giữ sự kiện 'click' cho nút tìm kiếm cho những ai có thói quen bấm
-  searchButton.addEventListener("click", performSearch);
+    // --- Gán sự kiện (TẤT CẢ đều gọi 1 hàm duy nhất) ---
 
-  // Xử lý hiển thị/ẩn nút xóa 'x'
-  textInput.addEventListener("input", function () {
-    if (textInput.value.length > 0) {
-      iconDelete.classList.remove("hidden");
-    } else {
-      iconDelete.classList.add("hidden");
-    }
-  });
+    // 1. Gán sự kiện cho Search
+    textInput.addEventListener("input", applyAllFilters);
+    searchButton.addEventListener("click", applyAllFilters);
 
-  // Xử lý sự kiện click vào nút xóa 'x'
-  iconDelete.addEventListener("click", function () {
-    textInput.value = "";
-    iconDelete.classList.add("hidden");
-    performSearch();
-  });
+    // 2. Gán sự kiện cho 3 bộ lọc <select>
+    costFilter.addEventListener("change", applyAllFilters);
+    priceFilter.addEventListener("change", applyAllFilters);
+    profitFilter.addEventListener("change", applyAllFilters);
+    quantityFilter.addEventListener("change", applyAllFilters);
+
+    // --- Xử lý nút 'x' (giữ nguyên) ---
+    textInput.addEventListener("input", function () {
+        if (textInput.value.length > 0) {
+            iconDelete.classList.remove("hidden");
+        } else {
+            iconDelete.classList.add("hidden");
+        }
+    });
+    iconDelete.addEventListener("click", function () {
+        textInput.value = "";
+        iconDelete.classList.add("hidden");
+        applyAllFilters(); // Gọi hàm lọc chính
+    });
 }
 
 function addAnimate() {
@@ -1637,11 +1975,55 @@ function rmvAnimate() {
     allFormError[j].innerText = "";
   }
 }
+// hàm tính
+function setupPriceCalculator() {
+    const costInput = document.getElementById("cost");
+    const priceInput = document.getElementById("price");
+    const profitInput = document.getElementById("profitPercent");
 
+    if (!costInput || !priceInput || !profitInput) return; 
+
+    let lockPrice = false;
+    let lockProfit = false; 
+
+    function calculatePrice() {
+        if (lockProfit) return; 
+        lockPrice = true;
+        const cost = parseFloat(costInput.value) || 0;
+        const profit = parseFloat(profitInput.value) || 0;
+        
+        if (cost > 0) {
+            const newPrice = cost + (cost * profit / 100);
+            priceInput.value = newPrice.toFixed(2);
+        }
+        setTimeout(() => { lockPrice = false; }, 100);
+    }
+
+    function calculateProfit() {
+        if (lockPrice) return; 
+        lockProfit = true;
+        const cost = parseFloat(costInput.value) || 0;
+        const price = parseFloat(priceInput.value) || 0;
+
+        if (cost > 0 && price >= cost) {
+            const newProfit = ((price - cost) / cost) * 100;
+            profitInput.value = newProfit.toFixed(0);
+        } else {
+             profitInput.value = 0;
+        }
+        setTimeout(() => { lockProfit = false; }, 100);
+    }
+
+    costInput.addEventListener("input", calculateProfit);
+    priceInput.addEventListener("input", calculateProfit);
+    profitInput.addEventListener("input", calculatePrice);
+}
 // Function to clear the form
 function clearForm() {
   document.getElementById("nameProduct").value = "";
+  document.getElementById("cost").value = "";
   document.getElementById("price").value = "";
+  document.getElementById("profitPercent").value = "";
   document.getElementById("type").value = "";
   // Clear hidden image, file input and preview
   var hidden = document.getElementById("linkImage");
@@ -1661,6 +2043,7 @@ const btnAddProduct = document.querySelector(".add-btn");
 function openAddForm() {
   checkEdit = 0; // Đảm bảo là Add mode
   addAnimate();
+  setupPriceCalculator();
   btnCloseForm.addEventListener("click", rmvAnimate);
 }
 
@@ -1766,88 +2149,116 @@ function deleteUser(userId) {
 }
 // Hàm để hiển thị form chỉnh sửa sản phẩm với thông tin sản phẩm cần chỉnh sửa
 function openEditForm(productId) {
-  document.getElementById("idProduct").value = productId;
-  checkEdit = 1;
-  const productName = document.getElementById("nameProduct");
-  const productPrice = document.getElementById("price");
-  const productType = document.getElementById("type");
-  const productImg = document.getElementById("linkImage");
-  const productImgFile = document.getElementById("linkImageFile");
-  const previewImg = document.getElementById("previewImg");
-  const previewText = document.getElementById("previewText");
+    document.getElementById("idProduct").value = productId;
+    checkEdit = 1;
+    
+    // Lấy các ô input
+    const productName = document.getElementById("nameProduct");
+    const productCost = document.getElementById("cost");
+    const productPrice = document.getElementById("price");
+    const productProfit = document.getElementById("profitPercent");
+    const productType = document.getElementById("type");
+    
+    // (Giữ nguyên code lấy preview image của bạn)
+    const productImg = document.getElementById("linkImage");
+    const productImgFile = document.getElementById("linkImageFile");
+    const previewImg = document.getElementById("previewImg");
+    const previewText = document.getElementById("previewText");
 
-  for (let i = 0; i < listProducts.length; i++) {
-    if (listProducts[i].id === productId) {
-      const product = listProducts[i];
-      productName.value = product.name;
-      productPrice.value = product.price;
-      productType.value = product.nature.type;
-      // set hidden input to existing image (could be URL or base64)
-      productImg.value = product.image;
-      // clear file input
-      if (productImgFile) productImgFile.value = null;
-      // show preview
-      if (product.image) {
-        if (previewImg) { previewImg.src = product.image; previewImg.style.display = 'block'; }
-        if (previewText) { previewText.textContent = ''; previewText.style.display = 'none'; }
-      } else {
-        if (previewImg) { previewImg.style.display = 'none'; }
-      }
+    for (let i = 0; i < listProducts.length; i++) {
+        if (listProducts[i].id === productId) {
+            const product = listProducts[i];
+            
+            const cost = parseFloat(product.cost) || 0;
+            const price = parseFloat(product.price) || 0;
+
+            // Điền dữ liệu
+            productName.value = product.name;
+            productCost.value = cost.toFixed(2);
+            productPrice.value = price.toFixed(2);
+            productType.value = product.nature.type;
+            
+            // Tự động tính % lợi nhuận khi mở form
+            if (cost > 0 && price > cost) {
+                const newProfit = ((price - cost) / cost) * 100;
+                productProfit.value = newProfit.toFixed(0);
+            } else {
+                productProfit.value = 0;
+            }
+
+            // (Giữ nguyên code xử lý image preview của bạn)
+            productImg.value = product.image;
+            if (productImgFile) productImgFile.value = null;
+            if (product.image) {
+                if (previewImg) { previewImg.src = product.image; previewImg.style.display = 'block'; }
+                if (previewText) { previewText.textContent = ''; previewText.style.display = 'none'; }
+            } else {
+                if (previewImg) { previewImg.style.display = 'none'; }
+            }
+        }
     }
-  }
-  addAnimate();
-  btnCloseForm.addEventListener("click", rmvAnimate);
+    addAnimate();
+    setupPriceCalculator(); // <-- KÍCH HOẠT HÀM TÍNH
+    btnCloseForm.addEventListener("click", rmvAnimate);
 }
 
 // Function to edit a product
 // editProduct now accepts prepared data (data.linkImage should contain final image string)
 function editProduct(data) {
-  const productId = data ? parseInt(data.idProduct) : parseInt(document.getElementById("idProduct").value);
-  const productName = data ? data.nameProduct : document.getElementById("nameProduct").value;
-  const productPrice = data ? parseFloat(data.price) : parseFloat(document.getElementById("price").value);
-  const productType = data ? data.type : document.getElementById("type").value;
-  const productImg = data ? data.linkImage : document.getElementById("linkImage").value;
-  const productToEdit = listProducts.find((product) => product.id === productId);
-  if (productToEdit) {
-    productToEdit.name = productName;
-    productToEdit.price = productPrice;
-    productToEdit.nature.type = productType;
-    productToEdit.image = productImg;
-    localStorage.setItem("listProducts", JSON.stringify(listProducts));
-    renderProducts(listProducts);
-    rmvAnimate();
-    checkEdit = 0; // Reset để lần sau là Add mode
-  } else {
-    console.log("Product not found for editing with ID " + productId);
-  }
+    const productId = parseInt(data.idProduct);
+    const productName = data.nameProduct;
+    const productCost = parseFloat(data.cost); // <-- LẤY DỮ LIỆU COST
+    const productPrice = parseFloat(data.price);
+    const productType = data.type;
+    const productImg = data.linkImage;
+    
+    const productToEdit = listProducts.find((product) => product.id === productId);
+    if (productToEdit) {
+        productToEdit.name = productName;
+        productToEdit.cost = productCost; // <-- LƯU DỮ LIỆU COST
+        productToEdit.price = productPrice;
+        productToEdit.nature.type = productType;
+        productToEdit.image = productImg;
+
+        localStorage.setItem("listProducts", JSON.stringify(listProducts));
+        renderProducts(listProducts); // Tải lại danh sách
+        rmvAnimate();
+        checkEdit = 0; 
+    } else {
+        console.log("Product not found for editing with ID " + productId);
+    }
 }
 // ============ Hàm thêm sản phẩm ==================
 function addProduct(data) {
-  const productId = setId();
-  const productName = data.nameProduct;
-  const productPrice = parseFloat(data.price);
-  const productType = data.type;
-  const productImg = data.linkImage;
-  const product = {
-    id: productId,
-    name: productName,
-    ingredients: "có đá",
-    price: productPrice,
-    image: productImg,
-    isHidden: false,
-    star: 4.5,
-    nature: {
-      size: ["S", "M", "L"],
-      type: productType,
-    },
-  };
-  listProducts.unshift(product);
-  localStorage.setItem("listProducts", JSON.stringify(listProducts));
-  console.log(listProducts);
-  renderProducts(listProducts);
-  rmvAnimate();
-  clearForm();
-  checkEdit = 0; // Reset để lần sau là Add mode
+    const productId = setId();
+    const productName = data.nameProduct;
+    const productCost = parseFloat(data.cost); 
+    const productPrice = parseFloat(data.price);
+    const productType = data.type;
+    const productImg = data.linkImage;
+    
+    const product = {
+        id: productId,
+        name: productName,
+        ingredients: data.description || "Chưa có mô tả", // <-- LẤY MÔ TẢ (nếu bạn có ô 'description')
+        price: productPrice,
+        cost: productCost, 
+        quantity: 100,
+        image: productImg,
+        isHidden: false,
+        star: 4.5, 
+        nature: {
+            size: ["S", "M", "L"],
+            type: productType,
+        },
+    };
+    listProducts.unshift(product);
+    localStorage.setItem("listProducts", JSON.stringify(listProducts));
+    console.log(listProducts);
+    renderProducts(listProducts); // Tải lại danh sách
+    rmvAnimate();
+    clearForm();
+    checkEdit = 0; 
 }
 // ======== Ham xu li thong bao khi them san pham ===========
 function addSuccessForm() {
@@ -2054,52 +2465,50 @@ Validator.isRequired = function (selector, message) {
 };
 
 runCheckAddForm();
+
 function runCheckAddForm() {
-  Validator({
-    form: "#add-form",
-    formGroupSelector: ".form-group",
-    errorSelector: ".form-error",
-    rules: [
-      Validator.isRequired("#nameProduct", "Vui lòng nhập tên sản phẩm"),
-      Validator.isRequired("#price", "Vui lòng nhập đơn giá"),
-      Validator.isRequired("#type", "Vui lòng chọn loại sản phẩm"),
-      // linkImage hidden input or file will be validated in onSubmit as well
-      Validator.isRequired("#linkImage", "Vui lòng chọn hình ảnh"),
-    ],
-    onSubmit: function (data) {
-      // data contains values from inputs (hidden linkImage may hold existing image)
-      var fileInput = document.getElementById('linkImageFile');
-      var hiddenInput = document.getElementById('linkImage');
+    Validator({
+        form: "#add-form",
+        formGroupSelector: ".form-group",
+        errorSelector: ".form-error",
+        rules: [
+            Validator.isRequired("#nameProduct", "Vui lòng nhập tên sản phẩm"),
+            Validator.isRequired("#cost", "Vui lòng nhập giá vốn"), 
+            Validator.isRequired("#price", "Vui lòng nhập đơn giá"),
+            Validator.isRequired("#type", "Vui lòng chọn loại sản phẩm"),
+            Validator.isRequired("#linkImage", "Vui lòng chọn hình ảnh"),
+        ],
+        onSubmit: function (data) {
+  
+            var fileInput = document.getElementById('linkImageFile');
+            var hiddenInput = document.getElementById('linkImage');
 
-      function finishSubmit(finalData) {
-        if (checkEdit === 0) {
-          addSuccessForm();
-          addProduct(finalData);
-        } else {
-          // call editProduct with prepared data
-          addSuccessForm(); // Thêm toast thành công cho edit cũng
-          editProduct(finalData);
-        }
-        clearForm();
-      }
+            function finishSubmit(finalData) {
+                if (checkEdit === 0) {
+                    addSuccessForm();
+                    addProduct(finalData);
+                } else {
+                    addSuccessForm(); 
+                    editProduct(finalData);
+                }
+                clearForm();
+            }
 
-      if (fileInput && fileInput.files && fileInput.files[0]) {
-        var file = fileInput.files[0];
-        var reader = new FileReader();
-        reader.onload = function(e) {
-          data.linkImage = e.target.result; // base64 string
-          // also update hidden input for preview/persistence
-          if (hiddenInput) hiddenInput.value = data.linkImage;
-          finishSubmit(data);
-        };
-        reader.readAsDataURL(file);
-      } else {
-        // No new file selected — use existing hidden input value if present
-        data.linkImage = hiddenInput ? hiddenInput.value : '';
-        finishSubmit(data);
-      }
-    },
-  });
+            if (fileInput && fileInput.files && fileInput.files[0]) {
+                var file = fileInput.files[0];
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    data.linkImage = e.target.result; 
+                    if (hiddenInput) hiddenInput.value = data.linkImage;
+                    finishSubmit(data);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                data.linkImage = hiddenInput ? hiddenInput.value : '';
+                finishSubmit(data);
+            }
+        },
+    });
 }
 
 // Preview selected image immediately
