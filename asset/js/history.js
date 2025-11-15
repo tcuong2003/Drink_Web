@@ -5,25 +5,45 @@ function displayHideHistory() {
 }
 function hideHistoryOrder1() {
     const btnHistory = document.querySelector(".history");
+    if (!btnHistory) return;
     btnHistory.addEventListener("click", () => {
         displayHideHistory();
     });
     console.log("JS loaded");
 
-document.querySelector(".history").addEventListener("click", () => {
-  console.log("Đã bấm vào icon lịch sử");
-});
+    document.querySelector(".history").addEventListener("click", () => {
+      console.log("Đã bấm vào icon lịch sử");
+    });
 
 }
 function hideHistoryOrder2() {
-    const btnCloseHistory = document.querySelector(".close-history");
-    btnCloseHistory.addEventListener("click", () => {
-        displayHideHistory();
+    // only bind close action to elements marked with data-action="close"
+    const btnsClose = document.querySelectorAll(".close-history[data-action='close']");
+    if (!btnsClose) return;
+    btnsClose.forEach(btnCloseHistory => {
+        btnCloseHistory.addEventListener("click", () => {
+            displayHideHistory();
+        });
     });
 }
 let ListOrders = localStorage.getItem("listOrders")
     ? JSON.parse(localStorage.getItem("listOrders"))
     : [];
+
+// --- helper escape + format address/payment ---
+function escapeHtml(s='') {
+    return String(s).replace(/[&<>"']/g, (m) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+function formatAddress(addr) {
+    if (!addr) return '';
+    return `${escapeHtml(addr.fullName)} — ${escapeHtml(addr.phone)} — ${escapeHtml(addr.line1)}, ${escapeHtml(addr.city)}`;
+}
+function formatPayment(pm) {
+    if (!pm) return '';
+    if (pm === 'cod') return 'Cash on delivery';
+    if (pm === 'bank') return 'Bank transfer';
+    return escapeHtml(pm);
+}
 
 // render trong historyOrder
 function handleRenderHistoryOrder() {
@@ -34,7 +54,7 @@ function handleRenderHistoryOrder() {
             <h2 class="title">History Order</h2>
         </div>
         <div class="container">
-            <img class="close-history" src="./asset/img/bx-x.svg" alt="">
+            <img class="close-history" data-action="close" src="./asset/img/bx-x.svg" alt="">
             <table>
                 <thead class = "tableHistoryHead"> 
             
@@ -56,20 +76,20 @@ function handleRenderHistoryOrder() {
         </tr> 
     `;
     hideHistoryOrder1();
-    hideHistoryOrder2();
+    // Remove hideHistoryOrder2() - không cần gắn event listener nữa
     const tableBody = document.querySelector(".tableHistoryBody");
     let userIndex = dataUsers.findIndex((user) => user.id == login.id);
     let number = 0;
     ListOrders.forEach((item) => {
         if (dataUsers[userIndex].id == item.userId) {
             number++;
-            // Format time theo múi giờ Việt Nam
             const vnTime = new Date(item.order[0].time).toLocaleString('vi-VN', {
                 timeZone: 'Asia/Ho_Chi_Minh',
                 hour12: false
             });
+
             let row = `
-                <tr> 
+                <tr>
                     <td>${number}</td>
                     <td>${vnTime}</td>
                     <td>$${renderTotalPriceUser(item.order)}</td>
@@ -91,9 +111,13 @@ function renderHistoryOrderItem(orderId) {
         </div>
         <div class="container">
             <div>
-                <img class="close-history" src="./asset/img/back_3114883.png" alt="Quay lại" onclick="handleRenderHistoryOrder()">
+                <img class="close-history" data-action="back" src="./asset/img/back_3114883.png" alt="Quay lại" onclick="handleRenderHistoryOrder()">
             </div>
-            <span class = "fee_shipping" >Shipping Fee: $0</span>
+            <div class="order-details-header">
+                <div class="order-info-row"><strong>Payment:</strong> <span class="payment-info"></span></div>
+                <div class="order-info-row"><strong>Shipping address:</strong> <span class="address-info"></span></div>
+                <div class="order-info-row"><strong>Shipping Fee:</strong> <span class="fee_shipping">$0</span></div>
+            </div>
 
             <table>
                 <thead class = "tableHistoryHead"> 
@@ -106,6 +130,7 @@ function renderHistoryOrderItem(orderId) {
         </div>
     `;
     hideHistoryOrder1();
+    // Note: do NOT call hideHistoryOrder2() here because back button should not close overlay.
     const tableHead = document.querySelector(".tableHistoryHead");
     tableHead.innerHTML = `
         <tr>
@@ -120,9 +145,14 @@ function renderHistoryOrderItem(orderId) {
     const table = document.querySelector(".tableHistoryBody");
     table.innerHTML = "";
     let number = 0;
-    let totalPrice = 0;
     for (var i = 0; i < ListOrders.length; i++) {
         if (ListOrders[i].id === orderId) {
+            const order = ListOrders[i];
+            
+            // Hiển thị payment và address luôn (không cần dropdown)
+            document.querySelector('.payment-info').textContent = formatPayment(order.paymentMethod);
+            document.querySelector('.address-info').textContent = order.shippingAddress ? formatAddress(order.shippingAddress) : 'N/A';
+
             ListOrders[i].order.forEach((item) => {
                 number++;
                 const vnTime = new Date(item.time).toLocaleString('vi-VN', {
@@ -140,12 +170,16 @@ function renderHistoryOrderItem(orderId) {
                 </tr>`;
                 table.innerHTML += row;
             });
-            // ✓ Tính Shipping Fee đúng cách
             document.querySelector(".fee_shipping").textContent = "Shipping Fee: $" + renderTotalShipUser(ListOrders[i].order)
         }
     }
 }
-handleRenderHistoryOrder();
+
+function toggleOrderDetails(btn) {
+    const dropdown = btn.parentElement.nextElementSibling;
+    dropdown.classList.toggle('hidden');
+}
+
 function status(check) {
     if (check == 0) {
       return "Đang chờ...";
@@ -167,14 +201,19 @@ function displayHideHistoryMB() {
 }
 function hideHistoryOrderMB1() {
     const btnHistoryMB = document.querySelector(".group-history");
+    if (!btnHistoryMB) return;
     btnHistoryMB.addEventListener("click", () => {
         displayHideHistoryMB();
     });
 }
 function hideHistoryOrderMB2() {
-    const btnCloseHistoryMB = document.querySelector(".close-history");
-    btnCloseHistoryMB.addEventListener("click", () => {
-        displayHideHistoryMB();
+    // only bind close action to elements marked with data-action="close"
+    const btnsClose = document.querySelectorAll(".close-history[data-action='close']");
+    if (!btnsClose) return;
+    btnsClose.forEach(btnCloseHistory => {
+        btnCloseHistory.addEventListener("click", () => {
+            displayHideHistoryMB();
+        });
     });
 }
 let ListOrdersMB = localStorage.getItem("listOrders")
@@ -213,7 +252,7 @@ function handleRenderHistoryOrderMB() {
             <h2 class="title">History Order</h2>
         </div>
         <div class="container">
-            <img class="close-history" src="./asset/img/bx-x.svg" alt="">
+            <img class="close-history" data-action="close" src="./asset/img/bx-x.svg" alt="">
             <table>
                 <thead class = "tableHistoryHead"> 
             
@@ -242,13 +281,13 @@ function handleRenderHistoryOrderMB() {
     console.log("day la nhiem vu: ");
     console.log(ListOrdersMB);
     ListOrdersMB.forEach((item) => {
-        if (dataUsers[userIndex].id == item.userId) { // kiem tra tk hien thoi
+        if (dataUsers[userIndex].id == item.userId) {
             number++;
-            // Format time theo múi giờ Việt Nam
             const vnTime = new Date(item.order[0].time).toLocaleString('vi-VN', {
                 timeZone: 'Asia/Ho_Chi_Minh',
                 hour12: false
             });
+
             let row = `
                 <tr>
                     <td>${number}</td>
@@ -271,9 +310,13 @@ function renderHistoryOrderItemMB(orderId) {
         </div>
         <div class="container">
             <div>
-                <img class="close-history" src="./asset/img/back_3114883.png" alt="Quay lại" onclick="handleRenderHistoryOrderMB()">
+                <img class="close-history" data-action="back" src="./asset/img/back_3114883.png" alt="Quay lại" onclick="handleRenderHistoryOrderMB()">
             </div>
-            <span class = "fee_shipping" >Shipping Fee: $0</span>
+            <div class="order-details-header">
+                <div class="order-info-row"><strong>Payment:</strong> <span class="payment-info"></span></div>
+                <div class="order-info-row"><strong>Shipping address:</strong> <span class="address-info"></span></div>
+                <div class="order-info-row"><strong>Shipping Fee:</strong> <span class="fee_shipping">$0</span></div>
+            </div>
 
             <table>
                 <thead class = "tableHistoryHead"> 
@@ -302,6 +345,12 @@ function renderHistoryOrderItemMB(orderId) {
     let number = 0;
     for (var i = 0; i < ListOrdersMB.length; i++) {
         if (ListOrdersMB[i].id === orderId) {
+            const order = ListOrdersMB[i];
+            
+            // Hiển thị payment và address luôn
+            document.querySelector('.payment-info').textContent = formatPayment(order.paymentMethod);
+            document.querySelector('.address-info').textContent = order.shippingAddress ? formatAddress(order.shippingAddress) : 'N/A';
+
             ListOrdersMB[i].order.forEach((item) => {
                 number++;
                 const vnTime = new Date(item.time).toLocaleString('vi-VN', {
@@ -319,7 +368,6 @@ function renderHistoryOrderItemMB(orderId) {
                 </tr>`;
                 table.innerHTML += row;
             });
-            // ✓ Tính Shipping Fee đúng cách
             document.querySelector(".fee_shipping").textContent = "Shipping Fee: $" + renderTotalShipUser(ListOrdersMB[i].order)
         }
     }
@@ -339,6 +387,7 @@ function status(check) {
   }
 
 
+
 // btnCancelAdvance.onclick = cancelAfterSearched;
 // ========== hàm dùng để huỷ các giá trị và ẩn form
 function cancelAfterSearched(e) {
@@ -353,3 +402,45 @@ function cancelAfterSearched(e) {
     iconDeleteAdvance.classList.add("hidden");
     isFormVisible = false;
 }
+
+// Gắn một lần khi page load
+document.addEventListener('DOMContentLoaded', () => {
+    // Sử dụng event delegation - sẽ hoạt động cho tất cả element hiện tại và tương lai
+    document.addEventListener("click", (e) => {
+        // Mở history khi bấm icon
+        if (e.target.closest(".history")) {
+            e.preventDefault();
+            displayHideHistory();
+            handleRenderHistoryOrder();
+            return;
+        }
+        
+        // Đóng overlay khi bấm dấu X
+        if (e.target.closest(".close-history[data-action='close']")) {
+            e.preventDefault();
+            e.stopPropagation();
+            displayHideHistory();
+            return;
+        }
+        
+        // Quay lại danh sách khi bấm mũi tên back
+        if (e.target.closest(".close-history[data-action='back']")) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (window.innerWidth <= 768) {
+                handleRenderHistoryOrderMB();
+            } else {
+                handleRenderHistoryOrder();
+            }
+            return;
+        }
+        
+        // Mở history mobile
+        if (e.target.closest(".group-history")) {
+            e.preventDefault();
+            displayHideHistoryMB();
+            handleRenderHistoryOrderMB();
+            return;
+        }
+    });
+});
