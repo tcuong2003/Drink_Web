@@ -22,6 +22,26 @@ window.initCheckoutView = function() {
     const userIndex = dataUsers.findIndex(u => u.id == login.id);
     const user = dataUsers[userIndex] || {};
 
+    // Hàm kiểm tra validation cho địa chỉ
+    function validateAddress(addr) {
+        if (!addr || typeof addr !== 'object') return false;
+        const { fullName, phone, line1, city } = addr;
+        
+        // Kiểm tra các trường bắt buộc
+        if (!fullName || !phone || !line1 || !city) return false;
+        
+        // Kiểm tra độ dài
+        if (fullName.trim().length < 3) return false;
+        if (phone.trim().length < 10) return false;
+        if (line1.trim().length < 5) return false;
+        if (city.trim().length < 2) return false;
+        
+        // Kiểm tra phone chỉ chứa số
+        if (!/^\d{10,}$/.test(phone.trim().replace(/\s+/g, ''))) return false;
+        
+        return true;
+    }
+
     // Render saved addresses (moved to function so we can re-render after delete)
     const savedEl = document.getElementById('saved-addresses');
 
@@ -171,11 +191,14 @@ window.initCheckoutView = function() {
             const line1 = document.getElementById('addr-line1').value.trim();
             const city = document.getElementById('addr-city').value.trim();
 
-            if (!fullName || !phone || !line1 || !city) {
-                alert('Please fill all address fields or choose a saved address.');
+            // ← THÊM: Kiểm tra validation dữ liệu địa chỉ
+            const newAddress = { fullName, phone, line1, city };
+            if (!validateAddress(newAddress)) {
+                alert('Please fill all address fields correctly:\n- Full Name: at least 3 characters\n- Phone: at least 10 digits\n- Address: at least 5 characters\n- City: at least 2 characters');
                 return;
             }
-            selectedAddress = { fullName, phone, line1, city };
+
+            selectedAddress = newAddress;
 
             // LƯU địa chỉ mới vào user.addresses và cập nhật localStorage
             user.addresses = user.addresses || [];
