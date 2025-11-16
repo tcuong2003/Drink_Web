@@ -129,6 +129,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     renderPrice();
     checkOut();
+    // Wire up select-all checkbox (if present) and initialize its state
+    const selectAllEl = document.getElementById('select-all');
+    if (selectAllEl) {
+        selectAllEl.addEventListener('change', function () {
+            const checked = this.checked;
+            toggleAllSelection(checked);
+        });
+        // initialize state
+        updateSelectAllState();
+    }
 });
 let listOrders = localStorage.getItem('listOrders') ? JSON.parse(localStorage.getItem('listOrders')): [];
 
@@ -219,6 +229,7 @@ function toggleProductSelection(idProduct, isChecked) {
             localStorage.setItem("DataUsers", JSON.stringify(dataUsersNow));
             renderPrice();
             renderCartUI();
+            updateSelectAllState();
         }
     });
 }
@@ -519,5 +530,43 @@ function renderCart() {
 
     // Gắn lại event listeners
     attachCartEventListeners();
+    // update master select-all checkbox state
+    updateSelectAllState();
+}
+
+// Toggle all products selection. If isChecked true => select all (check=0), else unselect all (check=1)
+function toggleAllSelection(isChecked) {
+    if (!dataUsersNow || !dataUsersNow[userIndex] || !Array.isArray(dataUsersNow[userIndex].cartItems)) return;
+    dataUsersNow[userIndex].cartItems.forEach(item => {
+        item.check = isChecked ? 0 : 1;
+    });
+    localStorage.setItem("DataUsers", JSON.stringify(dataUsersNow));
+    // Re-render main views
+    renderCart();
+    renderPrice();
+    renderCartUI();
+}
+
+// Update the master select-all checkbox to reflect current selection state
+function updateSelectAllState() {
+    const selectAll = document.getElementById('select-all');
+    if (!selectAll) return;
+    const cart = (dataUsersNow && dataUsersNow[userIndex] && dataUsersNow[userIndex].cartItems) ? dataUsersNow[userIndex].cartItems : [];
+    if (cart.length === 0) {
+        selectAll.checked = false;
+        selectAll.indeterminate = false;
+        return;
+    }
+    const selectedCount = cart.filter(item => item.check === 0).length;
+    if (selectedCount === 0) {
+        selectAll.checked = false;
+        selectAll.indeterminate = false;
+    } else if (selectedCount === cart.length) {
+        selectAll.checked = true;
+        selectAll.indeterminate = false;
+    } else {
+        selectAll.checked = false;
+        selectAll.indeterminate = true;
+    }
 }
 
