@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
             sumPrice += item.price * item.quantity;
         });
 
-        const shipTotal = 2 * sumQuantity;
+        const shipTotal = 5;
         const totalPriceFull = sumPrice + shipTotal;
 
         totalQuantity.textContent = sumQuantity;
@@ -202,7 +202,7 @@ function renderPrice() {
         sumPrice += item.price * item.quantity;
     });
 
-    const shipTotal = 2 * sumQuantity;
+    const shipTotal = 5;
     const totalPriceFull = sumPrice + shipTotal;
 
     totalQuantity.textContent = sumQuantity;
