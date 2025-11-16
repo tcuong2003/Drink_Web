@@ -124,9 +124,8 @@ window.initCheckoutView = function() {
         itemsEl.appendChild(line);
     });
 
-    const shippingPerItem = 2;
     const totalQty = draft.cartItems.reduce((s,i)=>s+(i.quantity||0),0);
-    const shipping = shippingPerItem * totalQty;
+    const shipping = 5;
     const total = subtotal + shipping;
 
     document.getElementById('summary-subtotal').textContent = `$${subtotal.toFixed(2)}`;
@@ -340,7 +339,7 @@ window.initCheckoutView = function() {
         // compute totals (reuse existing subtotal/shipping)
         const subtotalVal = draft.cartItems.reduce((s, it) => s + ((it.price || 0) * (it.quantity || 0)), 0);
         const totalQty = draft.cartItems.reduce((s,i)=>s+(i.quantity||0),0);
-        const shippingVal = 2 * totalQty;
+        const shippingVal = 5;
         const totalVal = subtotalVal + shippingVal;
 
         // populate modal content

@@ -1088,7 +1088,7 @@ function renderNumberCart(cartItems) {
 
     let totalQuantity = 0;
     let totalPrice = 0;
-    let shippingPrice = 2;
+    let shippingPrice = 5;
 
     cartItems.forEach((item) => {
         // ← Bỏ điều kiện item.check == 0
@@ -1098,8 +1098,8 @@ function renderNumberCart(cartItems) {
 
     cartQuantity.textContent = `You have ${totalQuantity} item`;
     subtotal.textContent = `$${totalPrice.toFixed(2)}`;
-    shipping.textContent = `$${shippingPrice * totalQuantity}`;
-    cartTotal.textContent = `$${(totalPrice + shippingPrice * totalQuantity).toFixed(2)}`;
+    shipping.textContent = `$${shippingPrice}`;
+    cartTotal.textContent = `$${(totalPrice + shippingPrice).toFixed(2)}`;
     feeTotal.textContent = cartTotal.textContent;
 }
 // ============ render tên người dùng khi đăng nhập ===============

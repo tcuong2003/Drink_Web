@@ -1445,7 +1445,7 @@ function renderTotalPriceAdmin(arrOfOrderInListOrder) {
   arrOfOrderInListOrder.forEach((item) => {
     sumQuantity += item.quantity;
     sumPrice += item.price * item.quantity;
-    shipTotal += 5 * item.quantity;
+    shipTotal = 5;
   })
   let totalPriceFull = sumPrice + shipTotal;
   return totalPriceFull.toFixed(2);
@@ -1505,7 +1505,7 @@ function renderAcceptedOrder(arr) {
   const orderManagementBody = document.querySelector(".orderManagementBody")
   orderManagementBody.innerHTML = "";
   arr.forEach((order) => {
-    if (order.order[0].check === 1) {
+    if (order.order[0].check === 1 || order.order[0].check === 3 || order.order[0].check === 4) {
       const orderDiv = document.createElement("div");
       orderDiv.classList.add("historyOrder");
       var orderid = order.id;
@@ -1592,7 +1592,7 @@ function renderTotalShipAdmin(arrOfOrderInListOrder) {
   arrOfOrderInListOrder.forEach((item) => {
     sumQuantity += item.quantity;
     sumPrice += item.price * item.quantity;
-    shipTotal += 5 * item.quantity;
+    shipTotal = 5;
   })
   return shipTotal;
 }
@@ -1604,7 +1604,7 @@ function renderOrderItem(arr, orderid) {
   var variableNeed = ".fee_shipping" + orderid
   document.querySelector(variableNeed).textContent = "Shipping Fee: $" + renderTotalShipAdmin(arr);
   let number = 0;
-  arr.forEach((item) => {
+  arr.forEach((item, index) => {
     number++;
     // Format time in Vietnam timezone dd/mm/yyyy, hh:mm:ss
     const formattedTime = new Date(item.time).toLocaleString('vi-VN', {
@@ -1612,30 +1612,47 @@ function renderOrderItem(arr, orderid) {
       hour12: false
     });
     const orderTr = document.createElement("tr");
-    orderTr.innerHTML = `
-            <td>${number}</td>
-            <td><img class="img-history" src="${item.image}" alt=""></td>
-            <td>${item.nameProduct}</td>
-            <td>${item.quantity}</td>
-            <td>$${item.price}</td>
-            <td>${formattedTime}</td>
-            <td>${status(item.check)}</td>
-        `;
+    
+    // CHỈ HIỂN THỊ THÔNG TIN ĐẦY ĐỦ TRÊN HÀNG ĐẦU TIÊN
+    if (index === 0) {
+      orderTr.innerHTML = `
+        <td>${number}</td>
+        <td><img class="img-history" src="${item.image}" alt=""></td>
+        <td>${item.nameProduct}</td>
+        <td>${item.quantity}</td>
+        <td>$${item.price}</td>
+        <td>${formattedTime}</td>
+        <td>${status(item.check)}</td>
+      `;
+    } else {
+      // CÁC HÀNG SAU CHỈ HIỂN THỊ THÔNG TIN SẢN PHẨM
+      orderTr.innerHTML = `
+        <td>${number}</td>
+        <td><img class="img-history" src="${item.image}" alt=""></td>
+        <td>${item.nameProduct}</td>
+        <td>${item.quantity}</td>
+        <td>$${item.price}</td>
+        <td>-</td>
+        <td>-</td>
+      `;
+    }
     orderManagementTbody.appendChild(orderTr);
   });
 }
 //======== Status=========//
 function status(check) {
-  if (check == 0) {
+  if (check === 0) {
     return "Đang chờ...";
-  } else {
-    if (check == 1) {
-      return "Đã xác nhận!";
-    }
-    else {
-      return "Đã hủy";
-    }
+  } else if (check === 1) {
+    return "Đã xác nhận!";
+  } else if (check === 2) {
+    return "Đã hủy";
+  } else if (check === 3) {
+    return "Đang vận chuyển";
+  } else if (check === 4) {
+    return "Hoàn thành";
   }
+  return "Không xác định"; // Default case
 }
 
 //-----------------------------------------------------------------------------------------------------//
@@ -2221,7 +2238,7 @@ function handleProductManagement() {
             const value = parseFloat(e.target.value);
             
             // Check 1: Phải lớn hơn 0 (áp dụng cho tất cả 8 ô)
-            if (value <= 0) { 
+            if (value <= 0) {
                 alert("Giá trị lọc phải lớn hơn 0."); 
                 e.target.value = ""; // Xóa giá trị
                 applyAllFilters(); // Lọc lại
