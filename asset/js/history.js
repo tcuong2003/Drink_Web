@@ -54,10 +54,7 @@ function renderTotalPriceUser(arrOfOrderInListOrder) {
 }
 
 function renderTotalShipUser(arrOfOrderInListOrder) {
-    let shipTotal = 0;
-    arrOfOrderInListOrder.forEach((item) => {
-        shipTotal += 2 * item.quantity;
-    });
+    let shipTotal = 5;
     return shipTotal;
 }
 
