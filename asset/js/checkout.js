@@ -332,7 +332,7 @@ window.initCheckoutView = function() {
 
         // Kiểm tra payment
         if ((payment === 'bank' || payment === 'online') && !paymentInput.closest('.payment-option').confirmed) {
-            const statusEl = paymentInput.closest('.payment-option').querySelector('.payment-status');
+            // const statusEl = paymentInput.closest('.payment-option').querySelector('.payment-status');
             alert('Vui lòng hoàn tất thanh toán!');
             return; 
         }
