@@ -8,7 +8,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Espresso, nước nóng",
       price: 3.00,
       cost: 1.50,   
-      quantity: 100,
+      quantity: 10,
       image: "./asset/img/product-coffee/coffee-101.jpg",
       isHidden: false,
       star: "4.6",
@@ -871,11 +871,233 @@ function renderAdmin() {
   document.querySelector(".orderStartictis").onclick = function () {
     renderOrderStartictis();
   };
+  document.querySelector(".importReceipt").onclick = function () {
+    renderImportReceipt();
+  };
   document.querySelector(".logout").onclick = function () {
     window.location = "./index.html";
   };
 }
-// THAY THẾ hàm renderProductManagement cũ
+
+function renderImportReceipt() {
+  document.querySelector(".div-title").innerHTML = `
+        <h1 class="title">Import Receipt</h1>
+    `;
+  // build product options from listProducts (from localStorage)
+  let productOptions = '';
+  if (Array.isArray(listProducts) && listProducts.length > 0) {
+
+  // Chỉ lấy sản phẩm KHÔNG ẩn
+  const visibleProducts = listProducts.filter(p => !p.isHidden);
+
+  if (visibleProducts.length > 0) {
+    productOptions = visibleProducts
+      .map(p => `<option value="${p.id}">${p.name}</option>`)
+      .join('');
+  } else {
+    productOptions = '<option value="">-- No visible products --</option>';
+  }
+
+  } else {
+    productOptions = '<option value="">-- No products --</option>';
+  }
+
+  document.querySelector(".contain-add-product-search").innerHTML = `
+    <div class="import-container">
+
+      <div class="import-form">
+        <label>Date:</label>
+        <input type="date" id="importDate">
+
+        <label>Product:</label>
+        <select id="importProduct">
+          <option value="" selected disabled>-- Select Product --</option>
+          ${productOptions}
+        </select>
+
+        <label>Cost Price:</label>
+        <input type="number" id="importPrice" placeholder="Cost price" readonly>
+
+        <label>Quantity:</label>
+        <input type="number" id="importQty" placeholder="Qty">
+
+        <button id="btnAddItem">Add Item</button>
+      </div>
+
+      <table class="import-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Cost Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="importTableBody"></tbody>
+      </table>
+
+      <div class="import-bottom">
+        <p id="displayDate">Date: <span id="displayDateValue">-</span></p>
+        <h3 class="total-title">Total: $<span id="importTotal">0.00</span></h3>
+      </div>
+
+      <button id="btnCompleteReceipt" class="complete-btn">Complete Receipt</button>
+    </div>
+  `;
+
+  // ==== LOGIC ====
+
+  let trangThai = "chuahoanthanh";
+
+  // when product selection changes, populate cost price from listProducts and make it read-only
+  const importProductSelect = document.getElementById('importProduct');
+  const importPriceInput = document.getElementById('importPrice');
+  const importQtyInput = document.getElementById('importQty');
+  const importDateInput = document.getElementById('importDate');
+
+  importProductSelect.addEventListener('change', function () {
+    const pid = parseInt(this.value);
+    const prod = Array.isArray(listProducts) ? listProducts.find(p => p.id === pid) : null;
+    if (prod) {
+      importPriceInput.value = (parseFloat(prod.cost) || 0).toFixed(2);
+    } else {
+      importPriceInput.value = '';
+    }
+  });
+
+  document.getElementById("btnAddItem").onclick = function () {
+    if (trangThai === "hoanthanh")
+      return alert("Receipt has already completed!");
+    const productSelect = importProductSelect;
+    const productId = productSelect.value;
+    const productName = productSelect.options[productSelect.selectedIndex]
+      ? productSelect.options[productSelect.selectedIndex].text
+      : '';
+    const qty = importQtyInput.value;
+    const day = importDateInput.value;
+
+    if (!day || !productId || !qty) return alert("Please fill in all fields!");
+    if (qty <= 0) return alert("Please enter a Quantity greater than 0");
+
+    // get cost price from listProducts (localStorage source)
+    const pidNum = parseInt(productId);
+    const productObj = Array.isArray(listProducts) ? listProducts.find(p => p.id === pidNum) : null;
+    if (!productObj) return alert('Selected product not found in products list');
+    const price = parseFloat(productObj.cost) || 0;
+    if (price <= 0) return alert('Cost price for this product is invalid');
+    const tbody = document.getElementById("importTableBody");
+    const row = document.createElement("tr");
+    row.setAttribute('data-product-id', productId);
+    const qtyNum = parseInt(qty);
+
+    row.innerHTML = `
+      <td>${productName}</td>
+      <td class="costCell">$${price.toFixed(2)}</td>
+      <td><input type="number" value="${qtyNum}" class="editInput qtyInput"></td>
+      <td class="rowTotal">${(price * qtyNum).toFixed(2)}</td>
+      <td>
+        <button class="editRow">Edit</button>
+        <button class="deleteRow">Delete</button>
+      </td>
+    `;
+
+    tbody.appendChild(row);
+    // update displayed date under table
+    document.getElementById('displayDateValue').innerText = day;
+
+    updateTotal();
+    attachRowEvents(row);
+
+    // reset input fields for next item (keep date)
+    importProductSelect.selectedIndex = 0;
+    importPriceInput.value = '';
+    importQtyInput.value = '';
+  };
+
+  function attachRowEvents(row) {
+    row.querySelector(".editRow").onclick = function () {
+      if (trangThai === "hoanthanh")
+        return alert("Receipt is completed. Cannot edit!");
+
+      // cost is fixed (cell index 1), quantity editable (cell index 2)
+      const costText = row.children[1].textContent || '';
+      const cost = parseFloat(costText.replace('$','')) || 0;
+      const qtyInput = row.querySelector('.qtyInput');
+      const qty = parseInt(qtyInput.value) || 0;
+      row.querySelector('.rowTotal').innerText = (cost * qty).toFixed(2);
+      updateTotal();
+    };
+
+    row.querySelector(".deleteRow").onclick = function () {
+      if (trangThai === "hoanthanh")
+        return alert("Cannot delete after completion!");
+
+      if (confirm("Delete this item?")) {
+        row.remove();
+        updateTotal();
+      }
+    };
+  }
+
+  function updateTotal() {
+    let total = 0;
+    document.querySelectorAll(".rowTotal").forEach(item => {
+      const v = parseFloat(item.innerText) || 0;
+      total += v;
+    });
+    document.getElementById("importTotal").innerText = total.toFixed(2);
+  }
+
+  document.getElementById("btnCompleteReceipt").onclick = function () {
+    if (trangThai === "hoanthanh") return;
+
+    const tbody = document.getElementById('importTableBody');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+    if (rows.length === 0) return alert('No items to complete!');
+
+    if (!confirm("Confirm completing the import receipt? After completing, the receipt will be saved.")) return;
+
+    // Build receipt object
+    const items = rows.map(row => {
+      const productId = parseInt(row.getAttribute('data-product-id')) || null;
+      const name = row.children[0].innerText;
+      const costText = row.children[1].textContent || '';
+      const price = parseFloat(costText.replace('$','')) || 0;
+      const quantity = parseInt(row.querySelector('.qtyInput').value) || 0;
+      const total = parseFloat((price * quantity).toFixed(2));
+      return { productId, nameProduct: name, price, quantity, total };
+    });
+
+    const receiptTotal = items.reduce((s, it) => s + it.total, 0);
+    const receipt = {
+      id: Date.now(),
+      date: document.getElementById('importDate').value || new Date().toISOString(),
+      items,
+      total: parseFloat(receiptTotal.toFixed(2)),
+      status: 'completed'
+    };
+
+    // Save to localStorage under key 'importReceipts'
+    const stored = localStorage.getItem('importReceipts');
+    const importReceipts = stored ? JSON.parse(stored) : [];
+    importReceipts.push(receipt);
+    localStorage.setItem('importReceipts', JSON.stringify(importReceipts));
+
+    // Reset the form for new receipt (keep product list intact)
+    tbody.innerHTML = '';
+    document.getElementById('importDate').value = '';
+    document.getElementById('displayDateValue').innerText = '-';
+    document.getElementById('importPrice').value = '';
+    document.getElementById('importQty').value = '';
+    document.getElementById('importTotal').innerText = '0.00';
+    trangThai = 'chuahoanthanh';
+
+    alert('Receipt saved to localStorage and form reset for a new receipt.');
+  };
+}
+
+    //========Product Management========//
 function renderProductManagement() {
     document.querySelector(".div-title").innerHTML = `
         <h1 class="title">Product Management</h1>
@@ -1017,7 +1239,7 @@ function renderProducts(arr) {
 
             <details class="action-menu-container">
                 <summary class="action-menu-toggle">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
                 </summary>
                 
                 <div class="action-menu-dropdown">
