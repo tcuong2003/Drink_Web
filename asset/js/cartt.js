@@ -119,7 +119,10 @@ document.addEventListener("DOMContentLoaded", function () {
             sumPrice += item.price * item.quantity;
         });
 
-        const shipTotal = 5;
+        let shipTotal = 0;
+        if (sumQuantity > 0) {
+            shipTotal = 5;
+        }
         const totalPriceFull = sumPrice + shipTotal;
 
         totalQuantity.textContent = sumQuantity;
@@ -202,7 +205,10 @@ function renderPrice() {
         sumPrice += item.price * item.quantity;
     });
 
-    const shipTotal = 5;
+    let shipTotal = 0;
+    if (sumQuantity > 0) {
+        shipTotal = 5;
+    }
     const totalPriceFull = sumPrice + shipTotal;
 
     totalQuantity.textContent = sumQuantity;
@@ -384,7 +390,7 @@ function renderNumberCart(cartItems) {
 
     let totalQuantity = 0;
     let totalPrice = 0;
-    let shippingPrice = 2;
+    let shippingPrice = 0;
 
     cartItems.forEach((item) => {
         // Bỏ điều kiện check - tính tất cả sản phẩm
@@ -394,10 +400,13 @@ function renderNumberCart(cartItems) {
     
     cartQuantity.textContent = `You have ${totalQuantity} item`;
     subtotal.textContent = `$${totalPrice.toFixed(2)}`;
-    shipping.textContent = `$${shippingPrice * totalQuantity}`;
+      if (totalQuantity > 0) {
+        shippingPrice = 5;
+    }
+    shipping.textContent = `$${shippingPrice}`;
     cartTotal.textContent = `$${(
         totalPrice +
-        shippingPrice * totalQuantity
+        shippingPrice
     ).toFixed(2)}`;
     feeTotal.textContent = cartTotal.textContent;
 }
