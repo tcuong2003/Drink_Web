@@ -626,14 +626,7 @@ let login = JSON.parse(localStorage.getItem("loginUser"));
 function addToCart(productId) {
     if (!login) {
         alert("Bạn phải đăng nhập để mua hàng");
-        //sau đó hiện hộp thoại đăng nhập
-        Object.assign(document.querySelector(".loginBackground").style, {
-            visibility: "visible",
-            "animation-name": "backgroundeffect1",
-        });
-        Object.assign(document.querySelector(".loginBlock").style, {
-            display: "block",
-        });
+        // ...hiển thị login dialog...
         return;
     }
     let userIndex = dataUsers.findIndex((user) => user.id == login.id);
@@ -644,16 +637,14 @@ function addToCart(productId) {
         );
 
         if (productToAdd) {
-            const existingCartItemIndex = dataUsers[
-                userIndex
-            ].cartItems.findIndex((item) => item.idProduct == productId);
+            // ← Sửa: Chỉ gộp nếu cùng idProduct VÀ check == 0
+            // Sửa: tìm theo idProduct (bỏ điều kiện check)
+            const existingCartItemIndex = dataUsers[userIndex].cartItems.findIndex(
+                (item) => item.idProduct == productId
+            );
 
-            if (
-                existingCartItemIndex !== -1 &&
-                dataUsers[userIndex].cartItems[existingCartItemIndex].check == 0
-            ) {
-                dataUsers[userIndex].cartItems[existingCartItemIndex]
-                    .quantity++;
+            if (existingCartItemIndex !== -1) {
+                dataUsers[userIndex].cartItems[existingCartItemIndex].quantity++;
             } else {
                 let cartItem = {
                     idProduct: productToAdd.id,
@@ -668,7 +659,7 @@ function addToCart(productId) {
             }
             localStorage.setItem("DataUsers", JSON.stringify(dataUsers));
             renderCartUI();
-            updateCartQuantity(); // thêm dòng này
+            updateCartQuantity();
         }
     }
 }
@@ -727,15 +718,13 @@ function renderImageCart(cartItems) {
     let itemCount = 1;
 
     cartItems.forEach((item) => {
-        if (itemCount <= 3 && item.check == 0) {
+        if (itemCount <= 3) {  // ← Bỏ điều kiện item.check == 0
             const cartItem = document.createElement("div");
             cartItem.className = "block-each-preview";
             cartItem.innerHTML = `
                 <img src="${item.image}" alt="" class="img-preview">
                 <h2 class="title">${item.nameProduct}</h2>
-                <span class="price">$${(item.price * item.quantity).toFixed(
-                    2
-                )}</span>
+                <span class="price">$${(item.price * item.quantity).toFixed(2)}</span>
                 <span class="quantity">x ${item.quantity}</span>
             `;
             cartItemsList.appendChild(cartItem);
@@ -751,29 +740,26 @@ function renderImageCart(cartItems) {
 
 // ============ render UI Cart về số liệu =============
 function renderNumberCart(cartItems) {
-    const cartQuantity = document.querySelector(".you-have"); // Số lượng sản phẩm trong giỏ hàng
-    const cartTotal = document.querySelector("#price-total"); // Tổng giá trị cuối cùng
-    const subtotal = document.querySelector(".price-subtotal"); // Tổng giá trị trước khi tính phí vận chuyển
-    const shipping = document.querySelector(".price-shipping"); // Phí vận chuyển
-    const feeTotal = document.querySelector(".price-buy-cart"); // Tổng giá trị cuối cùng trong giỏ hàng
+    const cartQuantity = document.querySelector(".you-have");
+    const cartTotal = document.querySelector("#price-total");
+    const subtotal = document.querySelector(".price-subtotal");
+    const shipping = document.querySelector(".price-shipping");
+    const feeTotal = document.querySelector(".price-buy-cart");
 
-    let totalQuantity = 0; // Tổng số lượng tất cả sản phẩm
-    let totalPrice = 0; // Tổng giá tiền tất cả sản phẩm
-    let shippingPrice = 2; // Giá vận chuyển cho mỗi sản phẩm
+    let totalQuantity = 0;
+    let totalPrice = 0;
+    let shippingPrice = 2;
 
     cartItems.forEach((item) => {
-        if (item.check == 0) {
-            totalQuantity += item.quantity;
-            totalPrice += item.price * item.quantity;
-        }
+        // ← Bỏ điều kiện item.check == 0
+        totalQuantity += item.quantity;
+        totalPrice += item.price * item.quantity;
     });
+    
     cartQuantity.textContent = `You have ${totalQuantity} item`;
     subtotal.textContent = `$${totalPrice.toFixed(2)}`;
     shipping.textContent = `$${shippingPrice * totalQuantity}`;
-    cartTotal.textContent = `$${(
-        totalPrice +
-        shippingPrice * totalQuantity
-    ).toFixed(2)}`;
+    cartTotal.textContent = `$${(totalPrice + shippingPrice * totalQuantity).toFixed(2)}`;
     feeTotal.textContent = cartTotal.textContent;
 }
 

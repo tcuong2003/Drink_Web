@@ -249,10 +249,12 @@ Validator.isEmail = function (selector, message) {
    return {
        selector: selector,
        test: function (value) {
-           var regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        //    var regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; //cho phép tất cả tên miền
+           var regex = /^\w+([\.-]?\w+)*@(sgu|gmail|yahoo)(\.\w{2,3})?$/; //cho phép tên 3 miền sgu, gmail, yahoo
            return regex.test(value)
                ? undefined
                : message || "Trường này phải là email";
+            
        },
    };
 };

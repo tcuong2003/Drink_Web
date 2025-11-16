@@ -4,41 +4,23 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Cart</title>
-        <link rel="stylesheet" href="./asset/css/style.css" />
-        <link rel="stylesheet" href="./asset/css/responsive.css">
-        <!-- FAVICON -->
-        <link
-            rel="apple-touch-icon"
-            sizes="76x76"
-            href="./asset/favicon/apple-touch-icon.png"
-        />
-        <!-- LOGO TAB -->
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="./asset/favicon/logonew-tab-32x32.png"
-        />
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="16x16"
-            href="./asset/favicon/favicon-16x16.png"
-        />
-        <link rel="manifest" href="./asset/favicon/site.webmanifest" />
-        <link
-            rel="mask-icon"
-            href="./asset/favicon/safari-pinned-tab.svg"
-            color="#5bbad5"
-        />
-        <meta name="msapplication-TileColor" content="#da532c" />
-        <meta name="theme-color" content="#ffffff" />
-        <!-- RESET CSS -->
+
+        <!-- RESET first -->
         <link rel="stylesheet" href="./asset/css/reset.css" />
+
+        <!-- Base styles -->
         <link rel="stylesheet" href="./asset/css/style.css" />
-        
+
+        <!-- Cart specific -->
         <link rel="stylesheet" href="./asset/css/cart.css" />
+
+        <!-- Checkout (must come after base/cart so it can override) -->
+        <link rel="stylesheet" href="./asset/css/checkout.css" />
+
+        <!-- Responsive last -->
+        <link rel="stylesheet" href="./asset/css/responsive.css" />
         <link rel="stylesheet" href="./asset/css/responsiveCart.css" />
+
         <!-- FONT -->
         <link rel="stylesheet" href="./asset/font/stylesheet.css" />
     </head>
@@ -156,112 +138,206 @@
         </div>
     </header>
         <main class="main">
-            <div class="container">
-                <div class="body-main">
-                    <!-- LEFT -->
-                    <div class="main-left">
-                        <div class="main-left__product">
-                            <!-- PRODUCT 1  -->
-                            <div class="main-product">
-                                <img
-                                    class="image"
-                                    src="./asset/img/logo-coffe.png"
-                                    alt=""
-                                />
-                                <div class="info-product">
-                                    <div class="info-product__title">
-                                        <h3 class="heading">
-                                            Coffee Beans
-                                        </h3>
-                                        <div class="price">$4.00</div>
-                                    </div>
-                                    <div class="info-product__action">
-                                        <div class="amount-aciton">
-                                            <button class="up-and-down">
-                                                -
-                                            </button>
-                                            <div class="amount">1</div>
-                                            <button class="up-and-down">
-                                                +
-                                            </button>
-                                        </div>
-                                        <div class="delete-action">
-                                            <a
-                                                ><img
-                                                    src="./asset/img/Delete.svg"
-                                                    alt="Delete"
-                                            /></a>
-                                            <div class="title">Delete</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- RIGHT -->
-                    <div class="main-sidebar">
-                        <div class="main-sidebar__checkout">
-                            <div class="show-info">
-                                <div class="title">
-                                    <strong>Subtotal</strong> (items)
-                                </div>
-                                <div class="show-number total-quantity"> 0 </div>
-                            </div>
-
-                            <div class="show-info">
-                                <div class="title">
-                                    <strong>Price</strong> (Total)
-                                </div>
-                                <div class="show-number price-checkout">
-                                    $0.00
-                                </div>
-                            </div>
-
-                            <div class="show-info">
-                                <div class="title">
-                                    <strong>Shipping</strong>
-                                </div>
-                                <div class="show-number price-ship">$0.00</div>
-                            </div>
-
-                            <div class="show-info total">
-                                <div class="title">
-                                    <strong>Estimated Total</strong>
-                                </div>
-                                <div class="show-number total-price-full">
-                                    $0.00
-                                </div>
-                            </div>
-                            <button class="action-checkout">
-                                <div class="title">Continue to checkout</div>
-                            </button>
-                        </div>
-
-                        <div class="main-sidebar__gift">
-                            <img src="./asset/img/gift.svg" alt="" />
-                            <div class="main-sidebar__gift-info">
-                                <div class="title">
-                                    Send this order as a gift.
-                                </div>
-                                <div class="desc line-clamp break-all">
-                                    Available items will be shipped to your gift
-                                    recipient.
-                                </div>
-                            </div>
-                        </div>
+    <div class="container">
+        <div class="body-main">
+            <!-- CART VIEW -->
+            <div id="cart-view" class="cart-view-section">
+                <!-- LEFT - CHỈ SẢN PHẨM -->
+                <div class="main-left">
+                    <div class="main-left__product">
+                        <!-- Products will be rendered here -->
                     </div>
                 </div>
+
+                <!-- RIGHT - GIÁ + GIFT -->
+                <div class="main-sidebar">
+                    <!-- PRICING TABLE -->
+                    <div class="main-sidebar__checkout">
+                        <div class="show-info">
+                            <div class="title">Subtotal (items)</div>
+                            <div class="show-number total-quantity">0</div>
+                        </div>
+
+                        <div class="show-info">
+                            <div class="title">Price (Total)</div>
+                            <div class="show-number price-checkout">$0.00</div>
+                        </div>
+
+                        <div class="show-info">
+                            <div class="title">Shipping</div>
+                            <div class="show-number price-ship">$0.00</div>
+                        </div>
+
+                        <div class="show-info total">
+                            <div class="title">Estimated Total</div>
+                            <div class="show-number total-price-full">$0.00</div>
+                        </div>
+
+                        <button class="action-checkout">
+                            <div class="title">Continue to checkout</div>
+                        </button>
+                    </div>
+
+                    <!-- GIFT BOX REMOVED -->
+                </div>
             </div>
-        </main>
-    </body>
-    <!-- HISTORY ORDER -->
-        <div id="historyOrder" class="historyOrder">
+
+            <!-- CHECKOUT VIEW -->
+            <div id="checkout-view" class="checkout-view-section" style="display: none;">
+                <!-- WRAPPER uses checkout.css grid layout -->
+                <div class="checkout-page container">
+                    <section class="checkout-left">
+                        <h1>Checkout</h1>
+
+                        <div>
+                            <h2>1. Shipping address</h2>
+                            <div id="saved-addresses"></div>
+                            <div class="or-sep">OR</div>
+
+                            <form id="new-address-form" class="address-form">
+                                <div add-group>
+                                    <label>Full name
+                                        <input type="text" name="fullName" id="addr-fullname" required />
+                                    </label>
+                                    <span id="err-fullname" class="err-message">sai         </span>
+                                </div>
+                                
+                                <div add-group>
+                                    <label>Phone
+                                        <input type="tel" name="phone" id="addr-phone" required />
+                                    </label>
+                                    <span id="err-phone" class="err-message">sai</span>
+                                </div>
+
+                                <div add-group>
+                                    <label>Address line
+                                        <input type="text" name="line1" id="addr-line1" required />
+                                    </label>
+                                    <span id="err-line1" class="err-message">sai</span>
+                                </div>
+                               
+                                <div add-group>
+                                    <label>City
+                                        <input type="text" name="city" id="addr-city" required />
+                                    </label>
+                                    <span id="err-city" class="err-message">sai</span>
+                                </div>
+
+                                <label style="grid-column: 1 / -1; flex-direction: row; align-items: center; gap: 8px;">
+                                    <input type="checkbox" id="save-as-default" />
+                                    Save this address to my account
+                                </label>
+                            </form>
+                        </div>
+
+                        <div>
+                            <h2>2. Payment method</h2>
+                            <div class="payment-methods">
+                                <!-- COD -->
+                                <label>
+                                    <input type="radio" name="payment" value="cod" checked /> Cash on delivery
+                                </label>
+                                <!-- BANK TRANSHER -->
+                                <label class="payment-option">
+                                    <input type="radio" name="payment" value="bank" /> Bank transfer
+                                    <span class="payment-status"></span>
+                                    <div class="payment-details" style="display:none; margin-top:10px;">
+                                        <div class="bank-qr">
+                                            <img src="./asset/img/qr.jpg" alt="QR Code" />
+                                        </div>
+                                        <div class="bank-buttons">
+                                            <button class="bank-btn cancel-btn">Cancel</button>
+                                            <button class="bank-btn sent-btn">Sent</button>
+                                        </div>
+                                    </div>
+                                </label>
+                                <!-- ONLINE PAYMENT -->
+                                <label class="payment-option">
+                                    <input type="radio" name="payment" value="online" /> Online payment
+                                    <span class="payment-status"></span>
+                                    <div class="payment-details" style="display:none; margin-top:10px;">
+                                        <div class="bank-qr">
+                                            <img src="./asset/img/qr.jpg" alt="QR Code" />
+                                        </div>
+                                        <div class="bank-buttons">
+                                            <button class="bank-btn cancel-btn">Cancel</button>
+                                            <button class="bank-btn sent-btn">Sent</button>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                    </section>
+
+                    <aside class="checkout-right">
+                        <h2>3. Review order</h2>
+                        <div id="order-items"></div>
+                        <div class="summary">
+                            <div class="row">
+                                <span>Subtotal:</span>
+                                <span id="summary-subtotal">$0.00</span>
+                            </div>
+                            <div class="row">
+                                <span>Shipping:</span>
+                                <span id="summary-shipping">$0.00</span>
+                            </div>
+                            <div class="total-line">
+                                <strong>Total:</strong>
+                                <strong id="summary-total">$0.00</strong>
+                            </div>
+                        </div>
+
+                        <button id="confirm-order" class="action-checkout">Confirm order</button>
+                        <button id="cancel-order" class="action-cancel">Cancel</button>
+                    </aside>
+                </div>
+            </div>
         </div>
-    
+    </div>
+</main>
+
+    <!-- Confirm modal (hidden inline to avoid FOUC) -->
+    <div id="confirm-modal" class="confirm-modal" aria-hidden="true" style="display: none;">
+        <div class="confirm-modal__overlay" id="modal-overlay"></div>
+        <div class="confirm-modal__content" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
+            <button id="modal-close" class="confirm-modal__close" aria-label="Close">×</button>
+            <h3 id="confirm-title">Xác nhận đơn hàng</h3>
+
+            <div class="confirm-block">
+                <h4>Địa chỉ giao hàng</h4>
+                <div id="modal-address" class="modal-section"></div>
+            </div>
+
+            <div class="confirm-block">
+                <h4>Phương thức thanh toán</h4>
+                <div id="modal-payment" class="modal-section"></div>
+            </div>
+
+            <div class="confirm-block">
+                <h4>Sản phẩm</h4>
+                <div id="modal-items" class="modal-items"></div>
+            </div>
+
+            <div class="confirm-block confirm-totals">
+                <div class="row"><span>Subtotal:</span><span id="modal-subtotal">$0.00</span></div>
+                <div class="row"><span>Shipping:</span><span id="modal-shipping">$0.00</span></div>
+                <div class="row total-line"><strong>Total:</strong><strong id="modal-total">$0.00</strong></div>
+            </div>
+
+            <div class="confirm-actions">
+                <button id="modal-place-order" class="action-checkout">Place order</button>
+                <button id="modal-cancel" class="action-cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- HISTORY ORDER -->
+    <div id="historyOrder" class="historyOrder">
+    </div>
+
     <script src="./asset/js/form.js"></script>
     <script src="./asset/js/cartt.js"></script>
+    <script src="./asset/js/checkout.js"></script>
     <script src="./asset/js/history.js"></script> 
     <script src="./asset/js/responsive.js"></script>
+</body>
 </html>

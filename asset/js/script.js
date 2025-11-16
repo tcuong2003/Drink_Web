@@ -249,3 +249,37 @@ function updateCartQuantity() {
     }
 });
 
+// Remove any header nodes that contain Payment / Shipping info and block future inserts
+(function removeHeaderOrderInfo() {
+    const keywords = ['Payment:', 'Shipping address', 'paymentMethod', 'shippingAddress'];
+    const headerRoot = document.querySelector('header') || document.body;
+
+    function nodeHasKeyword(el) {
+        const txt = (el.textContent || '').trim();
+        if (!txt) return false;
+        return keywords.some(k => txt.includes(k));
+    }
+
+    function removeMatching(root) {
+        root.querySelectorAll('*').forEach(el => {
+            if (nodeHasKeyword(el)) el.remove();
+        });
+    }
+
+    // initial cleanup
+    removeMatching(headerRoot);
+
+    // prevent future injection
+    const mo = new MutationObserver(muts => {
+        muts.forEach(m => {
+            m.addedNodes.forEach(node => {
+                if (node.nodeType !== 1) return;
+                if (nodeHasKeyword(node)) node.remove();
+                // also check subtree
+                try { removeMatching(node); } catch(e){/* ignore */ }
+            });
+        });
+    });
+    mo.observe(headerRoot, { childList: true, subtree: true });
+})();
+
