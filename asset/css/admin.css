@@ -1333,3 +1333,58 @@ th {
 #importTableBody{
    margin-left: -10px;
 }
+/* CSS cho bộ lọc Min-Max mới */
+.filters-container {
+    display: flex;
+    flex-wrap: wrap; /* Cho phép xuống dòng nếu không đủ chỗ */
+    gap: 16px;
+    align-items: flex-end; /* Căn chỉnh các nhóm lọc theo đáy */
+    width: 100%;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.filter-group label {
+    font-weight: 600;
+    font-size: 14px;
+    white-space: nowrap; /* Không ngắt dòng label */
+}
+
+.filter-group span {
+    font-size: 14px;
+    color: #888;
+}
+
+/* Định dạng chung cho các ô input lọc */
+.filter-input {
+    width: 80px; /* Độ rộng cho ô Min/Max */
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box; /* Quan trọng */
+}
+
+/* Ẩn mũi tên lên/xuống của input type=number */
+.filter-input::-webkit-outer-spin-button,
+.filter-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.filter-input[type=number] {
+  -moz-appearance: textfield;
+}
+/* CSS cho thông báo không tìm thấy sản phẩm */
+.no-products-found {
+    width: 100%;
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 18px;
+    color: #888;
+    font-style: italic;
+    grid-column: 1 / -1; /* Đảm bảo nó chiếm toàn bộ chiều rộng nếu bạn dùng grid */
+}
