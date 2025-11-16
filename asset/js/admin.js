@@ -8,7 +8,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Espresso, nước nóng",
       price: 3.00,
       cost: 1.50,   
-      quantity: 10,
+      quantity: 1,
       image: "./asset/img/product-coffee/coffee-101.jpg",
       isHidden: false,
       star: "4.6",
@@ -25,7 +25,7 @@ let listProducts = localStorage.getItem("listProducts")
       ingredients: "Sữa đặc, cà phê pha, đá",
       price: 2.50,
       cost: 1.50,   
-      quantity: 100, 
+      quantity: 10, 
       image: "./asset/img/product-coffee/coffee-102.jpg",
       isHidden: false,
       star: "5",
@@ -1119,46 +1119,33 @@ function renderProductManagement() {
 
         <div class="filters-container">
             <div class="filter-group">
-                <label for="filter-cost">Cost:</label>
-                <select id="filter-cost" class="filter-select">
-                    <option value="all">All</option>
-                    <option value="0.5-1.5">$0.5 - $1.5</option>
-                    <option value="1.6-2.6">$1.60 - $2.60</option>
-                    <option value="2.7-3.5">$2.70 - $3.50</option>
-                </select>
+                <label for="filter-cost-min">Cost ($):</label>
+                <input type="number" id="filter-cost-min" placeholder="Min" class="filter-input filter-input-min" step="0.1">
+                <span>-</span>
+                <input type="number" id="filter-cost-max" placeholder="Max" class="filter-input filter-input-max" step="0.1">
             </div>
             
             <div class="filter-group">
-                <label for="filter-price">Price:</label>
-                <select id="filter-price" class="filter-select">
-                    <option value="all">All</option>
-                    <option value="2-3">$2 - $3</option>
-                    <option value="3.1-4">$3.10 - $4</option>
-                    <option value="4.1-5">$4.10 - $5</option>
-                    <option value="5.1-6">$5.10 - $6</option>
-                </select>
+                <label for="filter-price-min">Price ($):</label>
+                <input type="number" id="filter-price-min" placeholder="Min" class="filter-input filter-input-min" step="0.1">
+                <span>-</span>
+                <input type="number" id="filter-price-max" placeholder="Max" class="filter-input filter-input-max" step="0.1">
             </div>
 
             <div class="filter-group">
-                <label for="filter-profit">Profit %:</label>
-                <select id="filter-profit" class="filter-select">
-                    <option value="all">All</option>
-                    <option value="50-150">50% - 150%</option>
-                    <option value="150-250">150% - 250%</option>
-                    <option value="250-350">250% - 350%</option>
-                </select>
+                <label for="filter-profit-min">Profit (%):</label>
+                <input type="number" id="filter-profit-min" placeholder="Min" class="filter-input filter-input-min">
+                <span>-</span>
+                <input type="number" id="filter-profit-max" placeholder="Max" class="filter-input filter-input-max">
             </div>
 
             <div class="filter-group">
-                <label for="filter-quantity">Quantity:</label>
-                <select id="filter-quantity" class="filter-select">
-                    <option value="all">All</option>
-                    <option value="1-5">Thấp (1-5)</option>
-                    <option value="6-14">Vừa (6-14)</option>
-                    <option value="15-Infinity">Cao (15+)</option> 
-                </select>
+                <label for="filter-quantity-min">Quantity:</label>
+                <input type="number" id="filter-quantity-min" placeholder="Min" class="filter-input filter-input-min">
+                <span>-</span>
+                <input type="number" id="filter-quantity-max" placeholder="Max" class="filter-input filter-input-max">
             </div>
-            </div>
+        </div>
 
         <div class="contain-product">
         </div>
@@ -1170,7 +1157,7 @@ function renderProductManagement() {
 // THAY THẾ hàm renderProducts cũ
 function renderProducts(arr) {
     const productListContainer = document.querySelector(".contain-product");
-    productListContainer.innerHTML = "";
+    productListContainer.innerHTML = ""; // Xóa nội dung cũ
 
     arr.forEach((product) => {
         const productDiv = document.createElement("div");
@@ -1219,7 +1206,7 @@ function renderProducts(arr) {
 
             <div class="product-pricing">
                 <span class="pricing-label">Cost</span>
-                <span class="pricing-value" id="product-cost-${product.id}">$${cost.toFixed(2)}</span>
+                <input type="number" class="inline-input product-input-cost" id="product-cost-${product.id}" data-id="${product.id}" value="${cost.toFixed(2)}" step="0.01" />
             </div>
 
             <div class="product-pricing">
@@ -1239,7 +1226,7 @@ function renderProducts(arr) {
 
             <details class="action-menu-container">
                 <summary class="action-menu-toggle">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
                 </summary>
                 
                 <div class="action-menu-dropdown">
@@ -1264,12 +1251,25 @@ function renderProducts(arr) {
 
     // Kích hoạt các ô input
     setupInlineEditing();
+
+    // ==============================================================
+    // === THÊM MỚI: KIỂM TRA KẾT QUẢ RỖNG ĐỂ HIỆN THÔNG BÁO ===
+    // ==============================================================
+    if (arr.length === 0) {
+        const notFoundMessage = document.createElement("div");
+        notFoundMessage.classList.add("no-products-found"); 
+        notFoundMessage.textContent = "Không tìm thấy sản phẩm nào phù hợp với điều kiện lọc.";
+        productListContainer.appendChild(notFoundMessage);
+    }
 }
-/* DÁN HÀM NÀY VÀO file admin.js
+
+
+/* THAY THẾ HÀM NÀY VÀO file admin.js
    (Ngay sau hàm renderProducts)
 */
 function setupInlineEditing() {
     // 1. Lấy các ô input
+    const costInputs = document.querySelectorAll('.product-input-cost');
     const priceInputs = document.querySelectorAll('.product-input-price');
     const profitInputs = document.querySelectorAll('.product-input-profit');
 
@@ -1282,19 +1282,25 @@ function setupInlineEditing() {
         }
     }
 
-    // 3. Gán sự kiện cho ô Price
+    // 3. Gán sự kiện cho ô Price (Cập nhật Profit)
     priceInputs.forEach(input => {
-        // 'change' chỉ kích hoạt khi bạn bấm ra ngoài
         input.addEventListener('change', (e) => { 
             const productId = parseInt(e.target.dataset.id);
             const price = parseFloat(e.target.value) || 0;
 
+            // === LOGIC VALIDATE MỚI (Request 2) ===
+            if (price <= 0) {
+                alert("Price (giá bán) phải lớn hơn 0.");
+                const product = listProducts.find(p => p.id === productId);
+                e.target.value = (product.price || 0).toFixed(2); // Trả lại giá trị cũ
+                return; // Dừng
+            }
+            // ======================================
+
             // Tìm các ô liên quan
-            const costElement = document.getElementById(`product-cost-${productId}`);
+            const costInput = document.getElementById(`product-cost-${productId}`);
             const profitInput = document.getElementById(`product-profit-${productId}`);
-            
-            // Đọc Cost từ văn bản (loại bỏ "$")
-            const cost = parseFloat(costElement.textContent.replace('$', '')) || 0;
+            const cost = parseFloat(costInput.value) || 0;
 
             // Tính lại Profit %
             if (cost > 0 && price >= cost) {
@@ -1308,18 +1314,32 @@ function setupInlineEditing() {
         });
     });
 
-    // 4. Gán sự kiện cho ô Profit %
+    // 4. Gán sự kiện cho ô Profit % (Cập nhật Price)
     profitInputs.forEach(input => {
         input.addEventListener('change', (e) => {
             const productId = parseInt(e.target.dataset.id);
             const profit = parseFloat(e.target.value) || 0;
+            
+            // === LOGIC VALIDATE MỚI (Request 2) ===
+            if (profit <= 0) {
+                alert("Profit % (lợi nhuận) phải lớn hơn 0.");
+                // Tìm và tính lại profit cũ
+                const product = listProducts.find(p => p.id === productId);
+                const oldCost = product.cost || 0;
+                const oldPrice = product.price || 0;
+                let oldProfitDisplay = 0;
+                if(oldCost > 0) {
+                    oldProfitDisplay = (((oldPrice - oldCost) / oldCost) * 100).toFixed(0);
+                }
+                e.target.value = oldProfitDisplay; // Trả lại giá trị cũ
+                return; // Dừng
+            }
+            // ======================================
 
             // Tìm các ô liên quan
-            const costElement = document.getElementById(`product-cost-${productId}`);
+            const costInput = document.getElementById(`product-cost-${productId}`);
             const priceInput = document.getElementById(`product-price-${productId}`);
-
-            // Đọc Cost từ văn bản
-            const cost = parseFloat(costElement.textContent.replace('$', '')) || 0;
+            const cost = parseFloat(costInput.value) || 0;
 
             // Tính lại Price
             if (cost > 0) {
@@ -1330,7 +1350,41 @@ function setupInlineEditing() {
             }
         });
     });
+
+    // 5. Gán sự kiện cho ô Cost (Cập nhật Profit)
+    costInputs.forEach(input => {
+        input.addEventListener('change', (e) => {
+            const productId = parseInt(e.target.dataset.id);
+            const cost = parseFloat(e.target.value) || 0;
+
+            // === LOGIC VALIDATE MỚI (Request 2) ===
+            if (cost <= 0) {
+                alert("Cost (giá vốn) phải lớn hơn 0.");
+                const product = listProducts.find(p => p.id === productId);
+                e.target.value = (product.cost || 0).toFixed(2); // Trả lại giá trị cũ
+                return; // Dừng
+            }
+            // ======================================
+
+            // Tìm các ô liên quan
+            const priceInput = document.getElementById(`product-price-${productId}`);
+            const profitInput = document.getElementById(`product-profit-${productId}`);
+            const price = parseFloat(priceInput.value) || 0;
+
+            // Tính lại Profit %
+            if (cost > 0 && price >= cost) {
+                const newProfit = ((price - cost) / cost) * 100;
+                profitInput.value = newProfit.toFixed(0);
+            } else {
+                profitInput.value = 0;
+            }
+            
+            // Lưu Cost mới
+            saveChange(productId, 'cost', cost);
+        });
+    });
 }
+
   //=============order Management=============//
   // phần order Management đổi màu khi nhấn chọn 
 function renderOrderManagement() {
@@ -2079,54 +2133,51 @@ function parseRange(rangeString) {
     return { min: parseFloat(parts[0]), max: parseFloat(parts[1]) };
 }
 
-/**
- * Hàm 3: Hàm "master" để xử lý TẤT CẢ bộ lọc (thay thế performSearch)
- */
-// THAY THẾ hàm applyAllFilters cũ
-function applyAllFilters() {
-    // 1. Lấy giá trị của tất cả 5 bộ lọc
-    const searchText = document.querySelector(".search-field").value.trim().toLowerCase();
-    const costRangeString = document.querySelector("#filter-cost").value;
-    const priceRangeString = document.querySelector("#filter-price").value;
-    const profitRangeString = document.querySelector("#filter-profit").value;
-    const quantityRangeString = document.querySelector("#filter-quantity").value; // <-- THÊM MỚI
 
-    // 2. Chuyển đổi
-    const costRange = parseRange(costRangeString);
-    const priceRange = parseRange(priceRangeString);
-    const profitRange = parseRange(profitRangeString);
-    const quantityRange = parseRange(quantityRangeString); // <-- THÊM MỚI
+/**
+ * Hàm 3: Hàm "master" để xử lý TẤT CẢ bộ lọc (Phiên bản Min/Max)
+ */
+
+function applyAllFilters() {
+    // 1. Lấy giá trị của tất cả bộ lọc
+    const searchText = document.querySelector(".search-field").value.trim().toLowerCase();
+    
+    // Đọc giá trị Min/Max. Nếu rỗng (NaN), dùng -Infinity hoặc Infinity
+    const costMin = parseFloat(document.querySelector("#filter-cost-min").value) || -Infinity;
+    const costMax = parseFloat(document.querySelector("#filter-cost-max").value) || Infinity;
+
+    const priceMin = parseFloat(document.querySelector("#filter-price-min").value) || -Infinity;
+    const priceMax = parseFloat(document.querySelector("#filter-price-max").value) || Infinity;
+    
+    const profitMin = parseFloat(document.querySelector("#filter-profit-min").value) || -Infinity;
+    const profitMax = parseFloat(document.querySelector("#filter-profit-max").value) || Infinity;
+
+    const quantityMin = parseFloat(document.querySelector("#filter-quantity-min").value) || -Infinity;
+    const quantityMax = parseFloat(document.querySelector("#filter-quantity-max").value) || Infinity;
 
     // 3. Lọc
     const filteredList = listProducts.filter((product) => {
         const productName = product.name.trim().toLowerCase();
         const cost = parseFloat(product.cost) || 0;
         const price = parseFloat(product.price) || 0;
-        const profit = calculateProfitPercent(cost, price);
-        const quantity = parseInt(product.quantity) || 0; // <-- THÊM MỚI
+        const profit = calculateProfitPercent(cost, price); // Dùng lại hàm cũ
+        const quantity = parseInt(product.quantity) || 0;
 
         // --- Kiểm tra ---
         if (searchText && !productName.includes(searchText)) {
             return false;
         }
-        if (cost < costRange.min || cost > costRange.max) {
+        if (cost < costMin || cost > costMax) {
             return false;
         }
-        if (price < priceRange.min || price > priceRange.max) {
+        if (price < priceMin || price > priceMax) {
             return false;
         }
-        if (profit < profitRange.min || profit > profitRange.max) {
+        if (profit < profitMin || profit > profitMax) {
             return false;
         }
-        
-        // Điều kiện 5: Quantity (đã sửa logic cho chính xác)
-        if (quantity < quantityRange.min || quantity > quantityRange.max) {
-            // Nếu là "all" (min: -Infinity, max: Infinity) thì bỏ qua
-            if (quantityRange.max === Infinity) {
-                // tiếp tục
-            } else {
-                 return false; // Nếu không phải "all" và nằm ngoài khoảng, thì loại
-            }
+        if (quantity < quantityMin || quantity > quantityMax) {
+            return false;
         }
 
         return true; 
@@ -2136,19 +2187,17 @@ function applyAllFilters() {
     renderProducts(filteredList);
 }
 
-
 /**
- * Hàm 4: Cập nhật hàm handleProductManagement
+ * Hàm 4: Cập nhật hàm handleProductManagement (Đã thêm validate SỐ NGUYÊN cho Quantity)
  */
 function handleProductManagement() {
     // Lấy các element
     const textInput = document.querySelector(".search-field");
     const iconDelete = document.querySelector(".icon-delete");
     const searchButton = document.querySelector(".btn-search");
-    const costFilter = document.querySelector("#filter-cost");
-    const priceFilter = document.querySelector("#filter-price");
-    const profitFilter = document.querySelector("#filter-profit");
-    const quantityFilter = document.querySelector("#filter-quantity");
+
+    // Lấy TẤT CẢ các ô input lọc (với class .filter-input)
+    const allFilterInputs = document.querySelectorAll('.filter-input');
 
     // --- Gán sự kiện (TẤT CẢ đều gọi 1 hàm duy nhất) ---
 
@@ -2156,11 +2205,41 @@ function handleProductManagement() {
     textInput.addEventListener("input", applyAllFilters);
     searchButton.addEventListener("click", applyAllFilters);
 
-    // 2. Gán sự kiện cho 3 bộ lọc <select>
-    costFilter.addEventListener("change", applyAllFilters);
-    priceFilter.addEventListener("change", applyAllFilters);
-    profitFilter.addEventListener("change", applyAllFilters);
-    quantityFilter.addEventListener("change", applyAllFilters);
+    // 2. Gán sự kiện cho TẤT CẢ 8 ô input Min/Max
+    allFilterInputs.forEach(input => {
+        // Dùng 'input' để nó lọc ngay khi gõ
+        input.addEventListener('input', applyAllFilters); 
+
+        // === LOGIC VALIDATE MỚI ===
+        // Dùng 'change' để validate khi người dùng bấm ra ngoài
+        input.addEventListener('change', (e) => {
+            // Kiểm tra xem ô input có rỗng không
+            if (!e.target.value) {
+                return; // Nếu rỗng thì không cần validate, cho qua
+            }
+
+            const value = parseFloat(e.target.value);
+            
+            // Check 1: Phải lớn hơn 0 (áp dụng cho tất cả 8 ô)
+            if (value <= 0) { 
+                alert("Giá trị lọc phải lớn hơn 0."); 
+                e.target.value = ""; // Xóa giá trị
+                applyAllFilters(); // Lọc lại
+                return; // Dừng
+            }
+
+            // Check 2: Phải là số nguyên (CHỈ ÁP DỤNG CHO QUANTITY)
+            const isQuantityInput = e.target.id === 'filter-quantity-min' || e.target.id === 'filter-quantity-max';
+            
+            // (value % 1 !== 0) là cách đơn giản để kiểm tra số có phần thập phân không
+            if (isQuantityInput && (value % 1 !== 0)) {
+                alert("Giá trị Quantity (số lượng) phải là số nguyên.");
+                e.target.value = ""; // Xóa giá trị
+                applyAllFilters(); // Lọc lại
+            }
+        });
+        // ============================
+    });
 
     // --- Xử lý nút 'x' (giữ nguyên) ---
     textInput.addEventListener("input", function () {
@@ -2176,6 +2255,7 @@ function handleProductManagement() {
         applyAllFilters(); // Gọi hàm lọc chính
     });
 }
+
 
 function addAnimate() {
   addEditProductBackgroundForm.classList.add("animate");
