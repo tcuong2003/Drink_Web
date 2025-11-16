@@ -1,50 +1,217 @@
-// ========= chức năng xem lại đơn hàng đã mua =============
+// ========= Các hàm helper ==========
 function displayHideHistory() {
     const history = document.querySelector(".historyOrder");
     history.classList.toggle("active");
 }
+
+function displayHideHistoryMB() {
+    const history = document.querySelector(".historyOrder");
+    history.classList.toggle("active");
+}
+
+function escapeHtml(s='') {
+    return String(s).replace(/[&<>"']/g, (m) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+function formatAddress(addr) {
+    if (!addr) return '';
+    return `${escapeHtml(addr.fullName)} — ${escapeHtml(addr.phone)} — ${escapeHtml(addr.line1)}, ${escapeHtml(addr.city)}`;
+}
+
+function formatPayment(pm) {
+    if (!pm) return '';
+    if (pm === 'cod') return 'Cash on delivery';
+    if (pm === 'bank') return 'Bank transfer';
+    return escapeHtml(pm);
+}
+
+function getAppState() {
+    return {
+        DataUsers: JSON.parse(localStorage.getItem('DataUsers')) || [],
+        loginUser: JSON.parse(localStorage.getItem('loginUser')) || null,
+        ListOrders: JSON.parse(localStorage.getItem('listOrders')) || []
+    };
+}
+
+function status(check) {
+    if (check === 0) return "Đang chờ...";
+    if (check === 1) return "Đã xác nhận!";
+    if (check === 2) return "Đã hủy";
+    if (check === 3) return "Đang vận chuyển";
+    if (check === 4) return "Hoàn thành";
+    return "Không xác định";
+}
+
+// ========= Các hàm tính toán ==========
+function renderTotalPriceUser(arrOfOrderInListOrder) {
+    let sumPrice = 0;
+    let shipTotal = 0;
+    arrOfOrderInListOrder.forEach((item) => {
+        sumPrice += item.price * item.quantity;
+        shipTotal += 2 * item.quantity;
+    });
+    return (sumPrice + shipTotal).toFixed(2);
+}
+
+function renderTotalShipUser(arrOfOrderInListOrder) {
+    let shipTotal = 5;
+    return shipTotal;
+}
+
+// ========= Lưu/Load trạng thái ==========
+function saveOrderStatus(orderId, newStatus) {
+    const { ListOrders } = getAppState();
+    const order = ListOrders.find(o => o.id === orderId);
+    if (!order || !order.order) return;
+    order.order.forEach(item => item.check = newStatus);
+    localStorage.setItem('listOrders', JSON.stringify(ListOrders));
+    console.log(`[DEBUG] saved order ${orderId} -> check=${newStatus}`);
+}
+
+// ========= Timeline ==========
+function initOrderTimeline(orderId, currentStatus) {
+    const timelineSteps = document.querySelectorAll('.timeline-step');
+    const actionsContainer = document.getElementById('timeline-actions');
+    timelineSteps.forEach(step => step.classList.remove('active','completed','cancelled'));
+
+    const mapCheckToIndex = (check) => {
+        if (check === 0) return 0;
+        if (check === 1) return 1;
+        if (check === 3) return 2;
+        if (check === 4) return 3;
+        if (check === 2) return -1;
+        return 0;
+    };
+
+    if (currentStatus === 2) {
+        timelineSteps.forEach(step => step.classList.add('cancelled'));
+        const cancelledStep = document.querySelector('.timeline-step[data-step="0"]');
+        if (cancelledStep) cancelledStep.querySelector('.timeline-dot').textContent = '✕';
+        actionsContainer.innerHTML = '';
+        return;
+    }
+
+    const activeIndex = mapCheckToIndex(currentStatus);
+    timelineSteps.forEach((step, index) => {
+        if (index < activeIndex) step.classList.add('completed');
+        else if (index === activeIndex) step.classList.add('active');
+    });
+
+    actionsContainer.innerHTML = '';
+    if (currentStatus === 0) {
+        const cancelBtn = document.createElement('button');
+        cancelBtn.className = 'btn-cancel-order';
+        cancelBtn.textContent = 'Hủy đơn hàng';
+        cancelBtn.onclick = () => handleCancelOrderFromTimeline(orderId);
+        actionsContainer.appendChild(cancelBtn);
+    }
+}
+
+function handleCancelOrderFromTimeline(orderId) {
+    const confirmed = confirm('Bạn có chắc chắn muốn hủy đơn hàng này?');
+    if (!confirmed) return;
+    
+    saveOrderStatus(orderId, 2);
+    
+    const timelineSteps = document.querySelectorAll('.timeline-step');
+    timelineSteps.forEach(step => {
+        step.classList.remove('active', 'completed', 'cancelled');
+        step.classList.add('cancelled');
+    });
+    
+    const cancelledStep = document.querySelector('.timeline-step[data-step="0"]');
+    if (cancelledStep) {
+        cancelledStep.querySelector('.timeline-dot').textContent = '✕';
+    }
+    
+    document.getElementById('timeline-actions').innerHTML = '';
+    alert('Đơn hàng đã được hủy');
+    console.log(`Order ${orderId} cancelled and saved`);
+}
+
+function startTimelineAutoProgress(orderId) {
+    const progression = [1, 3, 4];
+    const { ListOrders } = getAppState();
+    const order = ListOrders.find(o => o.id === orderId);
+    if (!order || !order.order) return;
+    
+    let currentCheck = order.order[0].check;
+    console.log(`[DEBUG] start auto-progress order ${orderId} from ${currentCheck}`);
+
+    if (currentCheck === 0 || currentCheck === 2 || currentCheck === 4) return;
+
+    let idx = progression.indexOf(currentCheck);
+    if (idx === -1) {
+        idx = progression.indexOf(1);
+    }
+
+    const interval = setInterval(() => {
+        const fresh = getAppState().ListOrders.find(o => o.id === orderId);
+        if (!fresh) { clearInterval(interval); return; }
+        
+        const freshCheck = fresh.order[0].check;
+        if (freshCheck === 2 || freshCheck === 4) {
+            clearInterval(interval);
+            console.log(`[DEBUG] order ${orderId} cancelled or completed during progress`);
+            return;
+        }
+
+        if (idx < progression.length - 1) {
+            idx++;
+            const nextStatus = progression[idx];
+            initOrderTimeline(orderId, nextStatus);
+            saveOrderStatus(orderId, nextStatus);
+            console.log(`[DEBUG] order ${orderId} progressed to ${nextStatus}`);
+        } else {
+            clearInterval(interval);
+            console.log(`[DEBUG] order ${orderId} finished progression`);
+        }
+    }, 5000);
+}
+
+// ========= Render Desktop ==========
 function hideHistoryOrder1() {
     const btnHistory = document.querySelector(".history");
+    if (!btnHistory) return;
     btnHistory.addEventListener("click", () => {
         displayHideHistory();
     });
-    console.log("JS loaded");
-
-document.querySelector(".history").addEventListener("click", () => {
-  console.log("Đã bấm vào icon lịch sử");
-});
-
 }
+
 function hideHistoryOrder2() {
-    const btnCloseHistory = document.querySelector(".close-history");
-    btnCloseHistory.addEventListener("click", () => {
-        displayHideHistory();
+    const btnsClose = document.querySelectorAll(".close-history[data-action='close']");
+    if (!btnsClose) return;
+    btnsClose.forEach(btnCloseHistory => {
+        btnCloseHistory.addEventListener("click", () => {
+            displayHideHistory();
+        });
     });
 }
-let ListOrders = localStorage.getItem("listOrders")
-    ? JSON.parse(localStorage.getItem("listOrders"))
-    : [];
 
-// render trong historyOrder
 function handleRenderHistoryOrder() {
-    if (login == null) return;
+    const { DataUsers, loginUser, ListOrders } = getAppState();
+    if (!loginUser) {
+        const historyOrder = document.querySelector(".historyOrder");
+        if (historyOrder) {
+            historyOrder.innerHTML = `<div class="table-header"><h2 class="title">Vui lòng đăng nhập để xem lịch sử đơn hàng</h2></div>`;
+        }
+        return;
+    }
+    
     const historyOrder = document.querySelector(".historyOrder");
     historyOrder.innerHTML = `
         <div class="table-header">
             <h2 class="title">History Order</h2>
         </div>
         <div class="container">
-            <img class="close-history" src="./asset/img/bx-x.svg" alt="">
+            <img class="close-history" data-action="close" src="./asset/img/bx-x.svg" alt="">
             <table>
-                <thead class = "tableHistoryHead"> 
-            
-                </thead>
-                <tbody class = "tableHistoryBody">
-
-                </tbody>
+                <thead class="tableHistoryHead"></thead>
+                <tbody class="tableHistoryBody"></tbody>
             </table>
         </div>
     `;
+    
     const tableHead = document.querySelector(".tableHistoryHead");
     tableHead.innerHTML = `
         <tr>
@@ -55,26 +222,31 @@ function handleRenderHistoryOrder() {
             <th></th>
         </tr> 
     `;
+    
     hideHistoryOrder1();
-    hideHistoryOrder2();
     const tableBody = document.querySelector(".tableHistoryBody");
-    let userIndex = dataUsers.findIndex((user) => user.id == login.id);
+    let userIndex = DataUsers.findIndex((user) => user.id == loginUser.id);
     let number = 0;
+    
     ListOrders.forEach((item) => {
-        if (dataUsers[userIndex].id == item.userId) {
+        if (!item || !Array.isArray(item.order) || item.order.length === 0) return;
+        if (DataUsers[userIndex] && DataUsers[userIndex].id == item.userId) {
             number++;
-            // Format time theo múi giờ Việt Nam
-            const vnTime = new Date(item.order[0].time).toLocaleString('vi-VN', {
+            const firstOrder = item.order[0];
+            if (!firstOrder || !firstOrder.time) return;
+            
+            const vnTime = new Date(firstOrder.time).toLocaleString('vi-VN', {
                 timeZone: 'Asia/Ho_Chi_Minh',
                 hour12: false
             });
+
             let row = `
-                <tr> 
+                <tr>
                     <td>${number}</td>
                     <td>${vnTime}</td>
                     <td>$${renderTotalPriceUser(item.order)}</td>
-                    <td>${status(item.order[0].check)}</td>
-                    <td onclick = "renderHistoryOrderItem(${item.id})">
+                    <td>${status(firstOrder.check)}</td>
+                    <td onclick="renderHistoryOrderItem(${item.id})">
                         <img class="showmore" src="./asset/img/showmore.png" alt="">
                     </td>
                 </tr>`;
@@ -84,28 +256,53 @@ function handleRenderHistoryOrder() {
 }
 
 function renderHistoryOrderItem(orderId) {
+    const { ListOrders } = getAppState();
     const historyOrder = document.querySelector(".historyOrder");
     historyOrder.innerHTML = `
         <div class="table-header">
-            <h2 class="title">History Order</h2>
+            <h2 class="title">Order Details</h2>
         </div>
         <div class="container">
             <div>
-                <img class="close-history" src="./asset/img/back_3114883.png" alt="Quay lại" onclick="handleRenderHistoryOrder()">
+                <img class="close-history" data-action="back" src="./asset/img/back_3114883.png" alt="Quay lại" onclick="handleRenderHistoryOrder()">
             </div>
-            <span class = "fee_shipping" >Shipping Fee: $0</span>
+            <div class="order-details-header">
+                <div class="order-info-row"><strong>Payment:</strong> <span class="payment-info"></span></div>
+                <div class="order-info-row"><strong>Shipping address:</strong> <span class="address-info"></span></div>
+                <div class="order-info-row"><strong>Shipping Fee: </strong> <span class="fee_shipping">$0</span></div>
+            </div>
+
+            <div class="order-timeline">
+                <div class="timeline-container">
+                    <div class="timeline-step" data-step="0">
+                        <div class="timeline-dot">1</div>
+                        <div class="timeline-label">Chưa xác nhận</div>
+                    </div>
+                    <div class="timeline-step" data-step="1">
+                        <div class="timeline-dot">2</div>
+                        <div class="timeline-label">Đã xác nhận</div>
+                    </div>
+                    <div class="timeline-step" data-step="2">
+                        <div class="timeline-dot">3</div>
+                        <div class="timeline-label">Đang vận chuyển</div>
+                    </div>
+                    <div class="timeline-step" data-step="3">
+                        <div class="timeline-dot">4</div>
+                        <div class="timeline-label">Hoàn thành</div>
+                    </div>
+                </div>
+                <div class="timeline-actions" id="timeline-actions"></div>
+            </div>
 
             <table>
-                <thead class = "tableHistoryHead"> 
-            
-                </thead>
-                <tbody class = "tableHistoryBody">
-
-                </tbody>
+                <thead class="tableHistoryHead"></thead>
+                <tbody class="tableHistoryBody"></tbody>
             </table>
         </div>
     `;
+    
     hideHistoryOrder1();
+    
     const tableHead = document.querySelector(".tableHistoryHead");
     tableHead.innerHTML = `
         <tr>
@@ -117,113 +314,102 @@ function renderHistoryOrderItem(orderId) {
             <th>Order time</th>
         </tr> 
     `;
+    
     const table = document.querySelector(".tableHistoryBody");
     table.innerHTML = "";
     let number = 0;
-    let totalPrice = 0;
-    for (var i = 0; i < ListOrders.length; i++) {
-        if (ListOrders[i].id === orderId) {
-            ListOrders[i].order.forEach((item) => {
-                number++;
-                const vnTime = new Date(item.time).toLocaleString('vi-VN', {
-                    timeZone: 'Asia/Ho_Chi_Minh',
-                    hour12: false
-                });
-                let row = `
-                <tr>
-                    <td>${number}</td>
-                    <td><img class="img-history" src="${item.image}" alt=""></td>
-                    <td>${item.nameProduct}</td>
-                    <td>${item.quantity}</td>
-                    <td>$${item.price}</td>
-                    <td>${vnTime}</td>
-                </tr>`;
-                table.innerHTML += row;
-            });
-            // ✓ Tính Shipping Fee đúng cách
-            document.querySelector(".fee_shipping").textContent = "Shipping Fee: $" + renderTotalShipUser(ListOrders[i].order)
-        }
+    
+    const order = ListOrders.find(item => item.id === orderId);
+    
+    if (!order || !Array.isArray(order.order)) {
+        console.log("Order not found");
+        return;
     }
-}
-handleRenderHistoryOrder();
-function status(check) {
-    if (check == 0) {
-      return "Đang chờ...";
+    
+    const firstOrderItem = order.order[0];
+    const currentStatus = firstOrderItem.check;
+    
+    document.querySelector('.payment-info').textContent = formatPayment(order.paymentMethod);
+    document.querySelector('.address-info').textContent = order.shippingAddress ? formatAddress(order.shippingAddress) : 'N/A';
+
+    console.log(`Order ${orderId} rendering with status: ${currentStatus}`);
+    
+    if (currentStatus === 2) {
+        const timelineSteps = document.querySelectorAll('.timeline-step');
+        timelineSteps.forEach(step => {
+            step.classList.remove('active', 'completed');
+            step.classList.add('cancelled');
+        });
+        timelineSteps[0].querySelector('.timeline-dot').textContent = '✕';
+        document.getElementById('timeline-actions').innerHTML = '';
     } else {
-        if(check == 1){
-          return "Đã xác nhận!";
+        initOrderTimeline(orderId, currentStatus);
+        
+        if (currentStatus >= 1 && currentStatus < 4) {
+            console.log(`Starting auto-progress for order ${orderId}`);
+            startTimelineAutoProgress(orderId);
         }
-        else{
-          return "Đã hủy";
-      }
     }
-  }
 
-
-// ========= chức năng xem lại đơn hàng đã mua Mobile =============
-function displayHideHistoryMB() {
-    const history = document.querySelector(".historyOrder");
-    history.classList.toggle("active");
+    order.order.forEach((item) => {
+        if (!item || !item.time) return;
+        number++;
+        const vnTime = new Date(item.time).toLocaleString('vi-VN', {
+            timeZone: 'Asia/Ho_Chi_Minh',
+            hour12: false
+        });
+        let row = `
+        <tr>
+            <td>${number}</td>
+            <td><img class="img-history" src="${item.image}" alt=""></td>
+            <td>${item.nameProduct}</td>
+            <td>${item.quantity}</td>
+            <td>$${item.price}</td>
+            <td>${vnTime}</td>
+        </tr>`;
+        table.innerHTML += row;
+    });
+    
+    document.querySelector(".fee_shipping").textContent = "$" + renderTotalShipUser(order.order);
 }
+
+// ========= Render Mobile ==========
 function hideHistoryOrderMB1() {
     const btnHistoryMB = document.querySelector(".group-history");
+    if (!btnHistoryMB) return;
     btnHistoryMB.addEventListener("click", () => {
         displayHideHistoryMB();
     });
 }
+
 function hideHistoryOrderMB2() {
-    const btnCloseHistoryMB = document.querySelector(".close-history");
-    btnCloseHistoryMB.addEventListener("click", () => {
-        displayHideHistoryMB();
+    const btnsClose = document.querySelectorAll(".close-history[data-action='close']");
+    if (!btnsClose) return;
+    btnsClose.forEach(btnCloseHistory => {
+        btnCloseHistory.addEventListener("click", () => {
+            displayHideHistoryMB();
+        });
     });
 }
-let ListOrdersMB = localStorage.getItem("listOrders")
-    ? JSON.parse(localStorage.getItem("listOrders"))
-    : [];
 
-    function renderTotalPriceUser(arrOfOrderInListOrder) {
-        let sumQuantity = 0;
-        let sumPrice = 0;
-        let shipTotal = 0;
-        arrOfOrderInListOrder.forEach((item) => {
-            sumQuantity += item.quantity;
-            sumPrice += item.price * item.quantity;
-            shipTotal += 2 * item.quantity;
-        })
-        let totalPriceFull = sumPrice + shipTotal;
-        return totalPriceFull.toFixed(2);
-    }
-    function renderTotalShipUser(arrOfOrderInListOrder) {
-        let sumQuantity = 0;
-        let sumPrice = 0;
-        let shipTotal = 0;
-        arrOfOrderInListOrder.forEach((item) => {
-            sumQuantity += item.quantity;
-            sumPrice += item.price * item.quantity;
-            shipTotal += 2 * item.quantity;
-        })
-        return shipTotal;
-    }
-// render trong historyOrder
 function handleRenderHistoryOrderMB() {
-    if (login == null) return;
+    const { DataUsers, loginUser, ListOrders } = getAppState();
+    if (!loginUser) return;
+    
     const historyOrder = document.querySelector(".historyOrder");
     historyOrder.innerHTML = `
         <div class="table-header">
             <h2 class="title">History Order</h2>
         </div>
         <div class="container">
-            <img class="close-history" src="./asset/img/bx-x.svg" alt="">
+            <img class="close-history" data-action="close" src="./asset/img/bx-x.svg" alt="">
             <table>
-                <thead class = "tableHistoryHead"> 
-            
-                </thead>
-                <tbody class = "tableHistoryBody">
-
-                </tbody>
+                <thead class="tableHistoryHead"></thead>
+                <tbody class="tableHistoryBody"></tbody>
             </table>
         </div>
     `;
+    
     const tableHead = document.querySelector(".tableHistoryHead");
     tableHead.innerHTML = `
         <tr>
@@ -234,28 +420,32 @@ function handleRenderHistoryOrderMB() {
             <th></th>
         </tr> 
     `;
+    
     hideHistoryOrderMB1();
     hideHistoryOrderMB2();
     const tableBody = document.querySelector(".tableHistoryBody");
-    let userIndex = dataUsers.findIndex((user) => user.id == login.id);
+    let userIndex = DataUsers.findIndex((user) => user.id == loginUser.id);
     let number = 0;
-    console.log("day la nhiem vu: ");
-    console.log(ListOrdersMB);
-    ListOrdersMB.forEach((item) => {
-        if (dataUsers[userIndex].id == item.userId) { // kiem tra tk hien thoi
+    
+    ListOrders.forEach((item) => {
+        if (!item || !Array.isArray(item.order) || item.order.length === 0) return;
+        if (DataUsers[userIndex] && DataUsers[userIndex].id == item.userId) {
             number++;
-            // Format time theo múi giờ Việt Nam
-            const vnTime = new Date(item.order[0].time).toLocaleString('vi-VN', {
+            const firstOrder = item.order[0];
+            if (!firstOrder || !firstOrder.time) return;
+            
+            const vnTime = new Date(firstOrder.time).toLocaleString('vi-VN', {
                 timeZone: 'Asia/Ho_Chi_Minh',
                 hour12: false
             });
+
             let row = `
                 <tr>
                     <td>${number}</td>
                     <td>${vnTime}</td>
                     <td>$${renderTotalPriceUser(item.order)}</td>
-                    <td>${status(item.order[0].check)}</td>
-                    <td onclick = "renderHistoryOrderItem(${item.id})">
+                    <td>${status(firstOrder.check)}</td>
+                    <td onclick="renderHistoryOrderItemMB(${item.id})">
                         <img class="showmore" src="./asset/img/showmore.png" alt="">
                     </td>
                 </tr>`;
@@ -263,7 +453,9 @@ function handleRenderHistoryOrderMB() {
         }
     });
 }
+
 function renderHistoryOrderItemMB(orderId) {
+    const { ListOrders } = getAppState();
     const historyOrder = document.querySelector(".historyOrder");
     historyOrder.innerHTML = `
         <div class="table-header">
@@ -271,21 +463,45 @@ function renderHistoryOrderItemMB(orderId) {
         </div>
         <div class="container">
             <div>
-                <img class="close-history" src="./asset/img/back_3114883.png" alt="Quay lại" onclick="handleRenderHistoryOrderMB()">
+                <img class="close-history" data-action="back" src="./asset/img/back_3114883.png" alt="Quay lại" onclick="handleRenderHistoryOrderMB()">
             </div>
-            <span class = "fee_shipping" >Shipping Fee: $0</span>
+            <div class="order-details-header">
+                <div class="order-info-row"><strong>Payment:</strong> <span class="payment-info"></span></div>
+                <div class="order-info-row"><strong>Shipping address:</strong> <span class="address-info"></span></div>
+                <div class="order-info-row"><strong>Shipping Fee: </strong> <span class="fee_shipping">$0</span></div>
+            </div>
+
+            <div class="order-timeline">
+                <div class="timeline-container">
+                    <div class="timeline-step" data-step="0">
+                        <div class="timeline-dot">1</div>
+                        <div class="timeline-label">Chưa xác nhận</div>
+                    </div>
+                    <div class="timeline-step" data-step="1">
+                        <div class="timeline-dot">2</div>
+                        <div class="timeline-label">Đã xác nhận</div>
+                    </div>
+                    <div class="timeline-step" data-step="2">
+                        <div class="timeline-dot">3</div>
+                        <div class="timeline-label">Đang vận chuyển</div>
+                    </div>
+                    <div class="timeline-step" data-step="3">
+                        <div class="timeline-dot">4</div>
+                        <div class="timeline-label">Hoàn thành</div>
+                    </div>
+                </div>
+                <div class="timeline-actions" id="timeline-actions"></div>
+            </div>
 
             <table>
-                <thead class = "tableHistoryHead"> 
-            
-                </thead>
-                <tbody class = "tableHistoryBody">
-
-                </tbody>
+                <thead class="tableHistoryHead"></thead>
+                <tbody class="tableHistoryBody"></tbody>
             </table>
         </div>
     `;
+    
     hideHistoryOrderMB1();
+    
     const tableHead = document.querySelector(".tableHistoryHead");
     tableHead.innerHTML = `
         <tr>
@@ -297,59 +513,239 @@ function renderHistoryOrderItemMB(orderId) {
             <th>Order time</th>
         </tr> 
     `;
+    
     const table = document.querySelector(".tableHistoryBody");
     table.innerHTML = "";
     let number = 0;
-    for (var i = 0; i < ListOrdersMB.length; i++) {
-        if (ListOrdersMB[i].id === orderId) {
-            ListOrdersMB[i].order.forEach((item) => {
-                number++;
-                const vnTime = new Date(item.time).toLocaleString('vi-VN', {
-                    timeZone: 'Asia/Ho_Chi_Minh',
-                    hour12: false
-                });
-                let row = `
-                <tr>
-                    <td>${number}</td>
-                    <td><img class="img-history" src="${item.image}" alt=""></td>
-                    <td>${item.nameProduct}</td>
-                    <td>${item.quantity}</td>
-                    <td>$${item.price}</td>
-                    <td>${vnTime}</td>
-                </tr>`;
-                table.innerHTML += row;
-            });
-            // ✓ Tính Shipping Fee đúng cách
-            document.querySelector(".fee_shipping").textContent = "Shipping Fee: $" + renderTotalShipUser(ListOrdersMB[i].order)
+    
+    const order = ListOrders.find(item => item.id === orderId);
+    
+    if (!order || !Array.isArray(order.order)) {
+        console.log("Order not found");
+        return;
+    }
+    
+    const firstOrderItem = order.order[0];
+    const currentStatus = firstOrderItem.check;
+    
+    document.querySelector('.payment-info').textContent = formatPayment(order.paymentMethod);
+    document.querySelector('.address-info').textContent = order.shippingAddress ? formatAddress(order.shippingAddress) : 'N/A';
+
+    console.log(`Order ${orderId} (MB) rendering with status: ${currentStatus}`);
+    
+    if (currentStatus === 2) {
+        const timelineSteps = document.querySelectorAll('.timeline-step');
+        timelineSteps.forEach(step => {
+            step.classList.remove('active', 'completed', 'cancelled');
+            step.classList.add('cancelled');
+        });
+        timelineSteps[0].querySelector('.timeline-dot').textContent = '✕';
+        document.getElementById('timeline-actions').innerHTML = '';
+    } else {
+        initOrderTimeline(orderId, currentStatus);
+        
+        if (currentStatus >= 1 && currentStatus < 4) {
+            startTimelineAutoProgress(orderId);
         }
+    }
+
+    order.order.forEach((item) => {
+        if (!item || !item.time) return;
+        number++;
+        const vnTime = new Date(item.time).toLocaleString('vi-VN', {
+            timeZone: 'Asia/Ho_Chi_Minh',
+            hour12: false
+        });
+        let row = `
+        <tr>
+            <td>${number}</td>
+            <td><img class="img-history" src="${item.image}" alt=""></td>
+            <td>${item.nameProduct}</td>
+            <td>${item.quantity}</td>
+            <td>$${item.price}</td>
+            <td>${vnTime}</td>
+        </tr>`;
+        table.innerHTML += row;
+    });
+    
+    document.querySelector(".fee_shipping").textContent = "$" + renderTotalShipUser(order.order);
+}
+
+// ========= Event Delegation ==========
+document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener("click", (e) => {
+        if (e.target.closest(".history")) {
+            e.preventDefault();
+            displayHideHistory();
+            handleRenderHistoryOrder();
+            return;
+        }
+        
+        if (e.target.closest(".close-history[data-action='close']")) {
+            e.preventDefault();
+            e.stopPropagation();
+            displayHideHistory();
+            return;
+        }
+        
+        if (e.target.closest(".close-history[data-action='back']")) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (window.innerWidth <= 768) {
+                handleRenderHistoryOrderMB();
+            } else {
+                handleRenderHistoryOrder();
+            }
+            return;
+        }
+        
+        if (e.target.closest(".group-history")) {
+            e.preventDefault();
+            displayHideHistoryMB();
+            handleRenderHistoryOrderMB();
+            return;
+        }
+    });
+});
+
+// ========== THÊM HÀM LƯU TRẠNG THÁI ==========
+function saveOrderStatus(orderId, newStatus) {
+    const { ListOrders } = getAppState();
+    const order = ListOrders.find(o => o.id === orderId);
+    if (!order || !order.order) return;
+    order.order.forEach(item => item.check = newStatus);
+    localStorage.setItem('listOrders', JSON.stringify(ListOrders));
+    console.log(`[DEBUG] saved order ${orderId} -> check=${newStatus}`);
+}
+
+// ========== CẬP NHẬT HÀM initOrderTimeline ==========
+function initOrderTimeline(orderId, currentStatus) {
+    const timelineSteps = document.querySelectorAll('.timeline-step');
+    const actionsContainer = document.getElementById('timeline-actions');
+    // reset
+    timelineSteps.forEach(step => step.classList.remove('active','completed','cancelled'));
+
+    // mapping order.check -> timeline index
+    // timeline indices: 0: pending, 1: confirmed, 2: shipping, 3: completed
+    const mapCheckToIndex = (check) => {
+        if (check === 0) return 0;
+        if (check === 1) return 1;
+        if (check === 3) return 2;
+        if (check === 4) return 3;
+        // cancelled (2) is special: mark first step cancelled
+        if (check === 2) return -1;
+        return 0;
+    };
+
+    if (currentStatus === 2) {
+        // cancelled
+        timelineSteps.forEach(step => step.classList.add('cancelled'));
+        const cancelledStep = document.querySelector('.timeline-step[data-step="0"]');
+        if (cancelledStep) cancelledStep.querySelector('.timeline-dot').textContent = '✕';
+        actionsContainer.innerHTML = '';
+        return;
+    }
+
+    const activeIndex = mapCheckToIndex(currentStatus);
+    timelineSteps.forEach((step, index) => {
+        if (index < activeIndex) step.classList.add('completed');
+        else if (index === activeIndex) step.classList.add('active');
+    });
+
+    // show cancel button only when pending (check === 0)
+    actionsContainer.innerHTML = '';
+    if (currentStatus === 0) {
+        const cancelBtn = document.createElement('button');
+        cancelBtn.className = 'btn-cancel-order';
+        cancelBtn.textContent = 'Hủy đơn hàng';
+        cancelBtn.onclick = () => handleCancelOrderFromTimeline(orderId);
+        actionsContainer.appendChild(cancelBtn);
     }
 }
-handleRenderHistoryOrderMB();
-function status(check) {
-    if (check == 0) {
-      return "Đang chờ...";
-    } else {
-        if(check == 1){
-          return "Đã xác nhận!";
-        }
-        else{
-          return "Đã hủy";
-      }
+
+// ========== CẬP NHẬT HÀM handleCancelOrderFromTimeline ==========
+function handleCancelOrderFromTimeline(orderId) {
+    const confirmed = confirm('Bạn có chắc chắn muốn hủy đơn hàng này?');
+    if (!confirmed) return;
+    
+    // Lưu trạng thái hủy (check = 2)
+    saveOrderStatus(orderId, 2);
+    
+    // ✅ CẬP NHẬT UI NGAY LẬP TỨC
+    const timelineSteps = document.querySelectorAll('.timeline-step');
+    timelineSteps.forEach(step => {
+        step.classList.remove('active', 'completed', 'cancelled');
+        step.classList.add('cancelled');
+    });
+    
+    const cancelledStep = document.querySelector('.timeline-step[data-step="0"]');
+    if (cancelledStep) {
+        cancelledStep.querySelector('.timeline-dot').textContent = '✕';
     }
-  }
+    
+    document.getElementById('timeline-actions').innerHTML = '';
+    alert('Đơn hàng đã được hủy');
+    console.log(`Order ${orderId} cancelled and saved`);
+}
 
+// ========== CẬP NHẬT hàm saveOrderStatus ==========
+function saveOrderStatus(orderId, newStatus) {
+    const { ListOrders } = getAppState();
+    const order = ListOrders.find(o => o.id === orderId);
+    if (!order || !order.order) return;
+    order.order.forEach(item => item.check = newStatus);
+    localStorage.setItem('listOrders', JSON.stringify(ListOrders));
+    console.log(`[DEBUG] saved order ${orderId} -> check=${newStatus}`);
+}
 
-// btnCancelAdvance.onclick = cancelAfterSearched;
-// ========== hàm dùng để huỷ các giá trị và ẩn form
-function cancelAfterSearched(e) {
-    const iconDeleteAdvance = document.querySelector(".icon-delete-advance");
-    if (e) e.preventDefault(); // nếu không có if(e) thì chương trình bị lỗi
-    textInputAdvance.value = "";
-    type.value = "";
-    color.value = "";
-    minPrice.value = "";
-    maxPrice.value = "";
-    btnForm.classList.remove("active");
-    iconDeleteAdvance.classList.add("hidden");
-    isFormVisible = false;
+// ========== CẬP NHẬT HÀM AUTO-PROGRESS TIMELINE ==========
+function startTimelineAutoProgress(orderId) {
+    // define progression path explicitly (skip 2 which means cancelled)
+    const progression = [1, 3, 4]; // từ đã xác nhận -> đang vận chuyển -> hoàn thành
+    const { ListOrders } = getAppState();
+    const order = ListOrders.find(o => o.id === orderId);
+    if (!order || !order.order) return;
+    let currentCheck = order.order[0].check;
+    console.log(`[DEBUG] start auto-progress order ${orderId} from ${currentCheck}`);
+
+    // if pending (0) or cancelled (2) or already completed (4) => do nothing
+    if (currentCheck === 0 || currentCheck === 2 || currentCheck === 4) return;
+
+    // find current position in progression array
+    let idx = progression.indexOf(currentCheck);
+    // if currentCheck not in progression (e.g. 1), ensure idx valid
+    if (idx === -1) {
+        // if currently 1 (confirmed) set idx = 0 (start from first)
+        idx = progression.indexOf(1);
+    }
+
+    const interval = setInterval(() => {
+        // read fresh state (detect external cancel)
+        const fresh = getAppState().ListOrders.find(o => o.id === orderId);
+        if (!fresh) { clearInterval(interval); return; }
+        const freshCheck = fresh.order[0].check;
+        if (freshCheck === 2) { // cancelled externally
+            clearInterval(interval);
+            console.log(`[DEBUG] order ${orderId} cancelled during progress`);
+            return;
+        }
+        if (freshCheck === 4) { // already completed
+            clearInterval(interval);
+            console.log(`[DEBUG] order ${orderId} already completed`);
+            return;
+        }
+
+        // advance to next progression step
+        if (idx < progression.length - 1) {
+            idx++;
+            const nextStatus = progression[idx];
+            // update UI and persist
+            initOrderTimeline(orderId, nextStatus);
+            saveOrderStatus(orderId, nextStatus);
+            console.log(`[DEBUG] order ${orderId} progressed to ${nextStatus}`);
+        } else {
+            clearInterval(interval);
+            console.log(`[DEBUG] order ${orderId} finished progression`);
+        }
+    }, 5000);
 }
