@@ -196,18 +196,33 @@
                             <div class="or-sep">OR</div>
 
                             <form id="new-address-form" class="address-form">
-                                <label>Full name
-                                    <input type="text" name="fullName" id="addr-fullname" required />
-                                </label>
-                                <label>Phone
-                                    <input type="tel" name="phone" id="addr-phone" required />
-                                </label>
-                                <label>Address line
-                                    <input type="text" name="line1" id="addr-line1" required />
-                                </label>
-                                <label>City
-                                    <input type="text" name="city" id="addr-city" required />
-                                </label>
+                                <div add-group>
+                                    <label>Full name
+                                        <input type="text" name="fullName" id="addr-fullname" required />
+                                    </label>
+                                    <span id="err-fullname" class="err-message">sai         </span>
+                                </div>
+                                
+                                <div add-group>
+                                    <label>Phone
+                                        <input type="tel" name="phone" id="addr-phone" required />
+                                    </label>
+                                    <span id="err-phone" class="err-message">sai</span>
+                                </div>
+
+                                <div add-group>
+                                    <label>Address line
+                                        <input type="text" name="line1" id="addr-line1" required />
+                                    </label>
+                                    <span id="err-line1" class="err-message">sai</span>
+                                </div>
+                               
+                                <div add-group>
+                                    <label>City
+                                        <input type="text" name="city" id="addr-city" required />
+                                    </label>
+                                    <span id="err-city" class="err-message">sai</span>
+                                </div>
 
                                 <label style="grid-column: 1 / -1; flex-direction: row; align-items: center; gap: 8px;">
                                     <input type="checkbox" id="save-as-default" />

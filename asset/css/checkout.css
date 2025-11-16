@@ -1105,3 +1105,16 @@ label:focus-visible {
     .checkout-page .order-item .item-name { font-size: 18px !important; }
     .checkout-page .summary .row { font-size: 15px !important; }
 }
+
+.err-message {
+    display: none;
+    color: red;
+    font-size: 1.5rem;
+    margin-top: 3px;
+}
+
+.add-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+}

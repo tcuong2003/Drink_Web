@@ -23,24 +23,24 @@ window.initCheckoutView = function() {
     const user = dataUsers[userIndex] || {};
 
     // Hàm kiểm tra validation cho địa chỉ
-    function validateAddress(addr) {
-        if (!addr || typeof addr !== 'object') return false;
-        const { fullName, phone, line1, city } = addr;
+    // function validateAddress(addr) {
+    //     if (!addr || typeof addr !== 'object') return false;
+    //     const { fullName, phone, line1, city } = addr;
         
-        // Kiểm tra các trường bắt buộc
-        if (!fullName || !phone || !line1 || !city) return false;
+    //     // Kiểm tra các trường bắt buộc
+    //     if (!fullName || !phone || !line1 || !city) return false;
         
-        // Kiểm tra độ dài
-        if (fullName.trim().length < 3) return false;
-        if (phone.trim().length < 10) return false;
-        if (line1.trim().length < 5) return false;
-        if (city.trim().length < 2) return false;
+    //     // Kiểm tra độ dài
+    //     if (fullName.trim().length < 3) return false;
+    //     if (phone.trim().length < 10) return false;
+    //     if (line1.trim().length < 5) return false;
+    //     if (city.trim().length < 2) return false;
         
-        // Kiểm tra phone chỉ chứa số
-        if (!/^\d{10,}$/.test(phone.trim().replace(/\s+/g, ''))) return false;
+    //     // Kiểm tra phone chỉ chứa số
+    //     if (!/^\d{10,}$/.test(phone.trim().replace(/\s+/g, ''))) return false;
         
-        return true;
-    }
+    //     return true;
+    // }
 
     // Render saved addresses (moved to function so we can re-render after delete)
     const savedEl = document.getElementById('saved-addresses');
@@ -178,6 +178,73 @@ window.initCheckoutView = function() {
         pendingConfirmation = null;
     }
 
+    // Hiển thị lỗi
+    function showError(id, message) {
+        const el = document.getElementById(id);
+        el.textContent = message;
+        el.style.display = 'block';
+    }
+
+    // Cuộn đến lỗi
+    function scrollToError(idError) {
+        const el = document.getElementById(idError);
+        if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+    }
+
+    // Hàm validate chung cho từng trường
+    function validateField(idInput, idError, validatorFn) {
+        const input = document.getElementById(idInput);
+        const err = document.getElementById(idError);
+
+        input.addEventListener("blur", () => {
+            const msg = validatorFn(input.value.trim());
+            err.textContent = msg || "";
+            err.style.display = msg ? "block" : "none";
+        });
+
+        input.addEventListener("input", () => {
+            err.textContent = "";
+            err.style.display = "none";
+        });
+    }
+
+    //Định nghĩa rules cho từng trường
+    const rules = {
+        fullName: value => {
+            if (!value.trim()) return "Full name is required";
+            if (value.trim().length < 3) return "Full name must be at least 3 characters";
+            return "";
+        },
+
+        phone: value => {
+            if (!value.trim()) return "Phone is required";
+            if (!/^\d+$/.test(value)) return "Phone must contain digits only";
+            if (value.trim().length < 10) return "Phone must be at least 10 digits";
+            return "";
+        },
+
+        line1: value => {
+            if (!value.trim()) return "Address is required";
+            if (value.trim().length < 5) return "Address must be at least 5 characters";
+            return "";
+        },
+
+        city: value => {
+            if (!value.trim()) return "City is required";
+            if (value.trim().length < 2) return "City must be at least 2 characters";
+            return "";
+        }
+    };
+
+
+    //Gắn validation cho từng input
+    validateField("addr-fullname", "err-fullname", rules.fullName);
+    validateField("addr-phone", "err-phone", rules.phone);
+    validateField("addr-line1", "err-line1", rules.line1);
+    validateField("addr-city", "err-city", rules.city);
+
     confirmBtn.addEventListener('click', () => {
         // gather address (saved or new)
         const addrRadio = document.querySelector('input[name="address"]:checked');
@@ -191,14 +258,38 @@ window.initCheckoutView = function() {
             const line1 = document.getElementById('addr-line1').value.trim();
             const city = document.getElementById('addr-city').value.trim();
 
-            // ← THÊM: Kiểm tra validation dữ liệu địa chỉ
-            const newAddress = { fullName, phone, line1, city };
-            if (!validateAddress(newAddress)) {
-                alert('Please fill all address fields correctly:\n- Full Name: at least 3 characters\n- Phone: at least 10 digits\n- Address: at least 5 characters\n- City: at least 2 characters');
-                return;
-            }
+        // validate new address
+        let hasError = false;
+        let firstError = null;
 
-            selectedAddress = newAddress;
+        if (rules.fullName(fullName)) {
+            showError('err-fullname', rules.fullName(fullName));
+            hasError = true;
+            if (!firstError) firstError = 'err-fullname';
+        }
+        if (rules.phone(phone)) {
+            showError('err-phone', rules.phone(phone));
+            hasError = true;
+            if (!firstError) firstError = 'err-phone';
+        }
+        if (rules.line1(line1)) {
+            showError('err-line1', rules.line1(line1));
+            hasError = true;
+            if (!firstError) firstError = 'err-line1';
+        }
+        if (rules.city(city)) {
+            showError('err-city', rules.city(city));
+            hasError = true;
+            if (!firstError) firstError = 'err-city';
+        }
+
+        if (hasError) {
+            scrollToError(firstError);  // ← Scroll tới lỗi đầu tiên
+            return;
+        }
+
+        selectedAddress = { fullName, phone, line1, city };
+
 
             // LƯU địa chỉ mới vào user.addresses và cập nhật localStorage
             user.addresses = user.addresses || [];
