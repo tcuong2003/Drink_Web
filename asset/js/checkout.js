@@ -22,26 +22,6 @@ window.initCheckoutView = function() {
     const userIndex = dataUsers.findIndex(u => u.id == login.id);
     const user = dataUsers[userIndex] || {};
 
-    // Hàm kiểm tra validation cho địa chỉ
-    // function validateAddress(addr) {
-    //     if (!addr || typeof addr !== 'object') return false;
-    //     const { fullName, phone, line1, city } = addr;
-        
-    //     // Kiểm tra các trường bắt buộc
-    //     if (!fullName || !phone || !line1 || !city) return false;
-        
-    //     // Kiểm tra độ dài
-    //     if (fullName.trim().length < 3) return false;
-    //     if (phone.trim().length < 10) return false;
-    //     if (line1.trim().length < 5) return false;
-    //     if (city.trim().length < 2) return false;
-        
-    //     // Kiểm tra phone chỉ chứa số
-    //     if (!/^\d{10,}$/.test(phone.trim().replace(/\s+/g, ''))) return false;
-        
-    //     return true;
-    // }
-
     // Render saved addresses (moved to function so we can re-render after delete)
     const savedEl = document.getElementById('saved-addresses');
 
@@ -245,6 +225,53 @@ window.initCheckoutView = function() {
     validateField("addr-line1", "err-line1", rules.line1);
     validateField("addr-city", "err-city", rules.city);
 
+
+    // --- Khởi tạo trạng thái cho từng payment option ---
+    document.querySelectorAll('.payment-option').forEach(label => {
+        label.confirmed = false; // default chưa confirm
+
+        const details = label.querySelector('.payment-details');
+        const status = label.querySelector('.payment-status');
+
+        const cancelBtn = details.querySelector('.cancel-btn');
+        const sentBtn = details.querySelector('.sent-btn');
+
+        cancelBtn.onclick = () => {
+            label.confirmed = false;
+            status.innerHTML = '<span style="color:red;">&#10006; Cancelled</span>';
+        };
+        sentBtn.onclick = () => {
+            label.confirmed = true;
+            status.innerHTML = '<span style="color:green;">&#10004; Confirmed</span>';
+        };
+    });
+
+    // --- Hàm hiển thị phần chi tiết payment ---
+    function handlePaymentSections(payment) {
+        document.querySelectorAll('.payment-option').forEach(label => {
+            const details = label.querySelector('.payment-details');
+            const input = label.querySelector('input[name="payment"]');
+            const status = label.querySelector('.payment-status');
+
+            // Reset trạng thái mỗi khi chọn bất kỳ phương thức nào
+            label.confirmed = false;
+            status.innerHTML = '';
+
+            if (input.value === payment && (payment === 'bank' || payment === 'online')) {
+                details.style.display = 'block';
+            } else {
+                details.style.display = 'none';
+            }
+        });
+    }
+
+    // --- Gắn sự kiện radio ---
+    document.querySelectorAll('input[name="payment"]').forEach(radio => {
+        radio.addEventListener('change', () => handlePaymentSections(radio.value));
+    });
+
+
+    // Xử lý khi người dùng nhấn nút "Confirm Order"
     confirmBtn.addEventListener('click', () => {
         // gather address (saved or new)
         const addrRadio = document.querySelector('input[name="address"]:checked');
@@ -300,9 +327,16 @@ window.initCheckoutView = function() {
         }
 
         // payment
-        const payment = document.querySelector('input[name="payment"]:checked') ?
-                        document.querySelector('input[name="payment"]:checked').value : 'cod';
+        const paymentInput = document.querySelector('input[name="payment"]:checked');
+        const payment = paymentInput ? paymentInput.value : 'cod';
 
+        // Kiểm tra payment
+        if ((payment === 'bank' || payment === 'online') && !paymentInput.closest('.payment-option').confirmed) {
+            const statusEl = paymentInput.closest('.payment-option').querySelector('.payment-status');
+            alert('Vui lòng hoàn tất thanh toán!');
+            return; 
+        }
+    
         // compute totals (reuse existing subtotal/shipping)
         const subtotalVal = draft.cartItems.reduce((s, it) => s + ((it.price || 0) * (it.quantity || 0)), 0);
         const totalQty = draft.cartItems.reduce((s,i)=>s+(i.quantity||0),0);

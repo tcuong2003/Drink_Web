@@ -234,11 +234,39 @@
                         <div>
                             <h2>2. Payment method</h2>
                             <div class="payment-methods">
-                                <label><input type="radio" name="payment" value="cod" checked /> Cash on delivery</label>
-                                <label><input type="radio" name="payment" value="bank" /> Bank transfer</label>
-                                <label><input type="radio" name="payment" value="online" /> Online payment</label>
+                                <!-- COD -->
+                                <label>
+                                    <input type="radio" name="payment" value="cod" checked /> Cash on delivery
+                                </label>
+                                <!-- BANK TRANSHER -->
+                                <label class="payment-option">
+                                    <input type="radio" name="payment" value="bank" /> Bank transfer
+                                    <span class="payment-status"></span>
+                                    <div class="payment-details" style="display:none; margin-top:10px;">
+                                        <div class="bank-qr">
+                                            <img src="./asset/img/qr.jpg" alt="QR Code" />
+                                        </div>
+                                        <div class="bank-buttons">
+                                            <button class="bank-btn cancel-btn">Cancel</button>
+                                            <button class="bank-btn sent-btn">Sent</button>
+                                        </div>
+                                    </div>
+                                </label>
+                                <!-- ONLINE PAYMENT -->
+                                <label class="payment-option">
+                                    <input type="radio" name="payment" value="online" /> Online payment
+                                    <span class="payment-status"></span>
+                                    <div class="payment-details" style="display:none; margin-top:10px;">
+                                        <div class="bank-qr">
+                                            <img src="./asset/img/qr.jpg" alt="QR Code" />
+                                        </div>
+                                        <div class="bank-buttons">
+                                            <button class="bank-btn cancel-btn">Cancel</button>
+                                            <button class="bank-btn sent-btn">Sent</button>
+                                        </div>
+                                    </div>
+                                </label>
                             </div>
-                        </div>
                     </section>
 
                     <aside class="checkout-right">

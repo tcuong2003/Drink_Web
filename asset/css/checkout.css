@@ -450,9 +450,9 @@ h2 {
 }
 
 .payment-methods label {
-    display: flex;
-    align-items: center;
-    gap: 14px;
+    /* display: flex; */
+    /* align-items: center; */
+    /* gap: 14px; */
     padding: 14px;
     background: var(--card);
     border: 2px solid var(--border);
@@ -1106,6 +1106,7 @@ label:focus-visible {
     .checkout-page .summary .row { font-size: 15px !important; }
 }
 
+ /* Error message styling */
 .err-message {
     display: none;
     color: red;
@@ -1117,4 +1118,66 @@ label:focus-visible {
     display: flex;
     flex-direction: column;
     margin-bottom: 12px;
+}
+
+/* banking tranfer */
+.payment-option input {
+    margin-right: 5px;
+}
+
+.payment-status {
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.payment-details {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.payment-details .bank-qr img {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 10px;
+}
+
+.bank-buttons {
+    margin: 10px 0;
+}
+
+.bank-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0 5px;
+    transition: all 0.2s;
+}
+
+.cancel-btn {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.cancel-btn:hover {
+    background-color: #f5c6cb;
+}
+
+.sent-btn {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.sent-btn:hover {
+    background-color: #c3e6cb;
+}
+
+.bank-status {
+    margin-top: 8px;
+    font-size: 16px;
+    font-weight: bold;
 }
