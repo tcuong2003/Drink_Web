@@ -437,93 +437,86 @@ document.addEventListener("click", (e) => {
     }
 });
 
-// Thêm hàm renderCart (re-render toàn bộ danh sách giỏ hàng và gắn lại event)
+// Gắn event listeners cho các nút sau khi render
+function attachCartEventListeners() {
+    const productListContainer = document.querySelector(".main-left__product");
+    
+    // Checkbox
+    productListContainer.querySelectorAll(".main-product__checkbox").forEach(checkbox => {
+        checkbox.addEventListener("change", (e) => {
+            const productId = parseInt(e.target.dataset.id);
+            toggleProductSelection(productId, e.target.checked);
+        });
+    });
+
+    // Nút giảm
+    productListContainer.querySelectorAll(".btn-down").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            const productId = parseInt(e.target.dataset.id);
+            down(productId);
+        });
+    });
+
+    // Nút tăng
+    productListContainer.querySelectorAll(".btn-up").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            const productId = parseInt(e.target.dataset.id);
+            up(productId);
+        });
+    });
+
+    // Nút xóa
+    productListContainer.querySelectorAll(".delete-action").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            const productId = parseInt(e.target.closest(".delete-action").dataset.id);
+            deleteProduct(productId);
+        });
+    });
+}
+
+// Render lại giỏ hàng
 function renderCart() {
     const productListContainer = document.querySelector(".main-left__product");
     const cart = (dataUsersNow && dataUsersNow[userIndex] && dataUsersNow[userIndex].cartItems) ? dataUsersNow[userIndex].cartItems : [];
     productListContainer.innerHTML = "";
 
-    if (!productListContainer)
-        return;
+    if (!productListContainer) return;
 
     if (cart.length === 0) {
-        productListContainer.innerHTML = `
-            <div class="empty-cart">
-                <p>Your cart is empty</p>
-            </div>
-        `;
+        productListContainer.innerHTML = `<div class="empty-cart"><p>Your cart is empty</p></div>`;
         return;
     }
 
     cart.forEach((product) => {
-        const productHTML = `
-            <div class="main-product">
-                <input type="checkbox" class="main-product__checkbox" data-product-id="${product.idProduct}" ${product.check === 0 ? 'checked' : ''}>
-                
-                <img src="${product.image}" alt="${product.nameProduct}" class="image">
-                
-                <div class="info-product">
-                    <div class="info-product__title">
-                        <h3 class="heading">${product.nameProduct}</h3>
-                        <span class="price">$${product.price.toFixed(2)}</span>
+        const productDiv = document.createElement("div");
+        productDiv.classList.add("main-product");
+        const isChecked = product.check === 0 ? 'checked' : '';
+        
+        productDiv.innerHTML = `
+            <input type="checkbox" class="main-product__checkbox" data-id="${product.idProduct}" ${isChecked} />
+            <img class="image" src="${product.image}" alt="" />
+            <div class="info-product">
+                <div class="info-product__title">
+                    <h3 class="heading">${product.nameProduct}</h3>
+                    <div class="price">$${product.price}</div>
+                </div>
+                <div class="info-product__action">
+                    <div class="amount-aciton">
+                        <button class="up-and-down btn-down" data-id="${product.idProduct}">-</button>
+                        <div class="amount" id="amount-${product.idProduct}">${product.quantity}</div>
+                        <button class="up-and-down btn-up" data-id="${product.idProduct}">+</button>
                     </div>
-                    
-                    <div class="info-product__action">
-                        <div class="amount-aciton">
-                            <button class="up-and-down btn-down" data-product-id="${product.idProduct}">−</button>
-                            <span class="amount" id="amount-${product.idProduct}">${product.quantity}</span>
-                            <button class="up-and-down btn-up" data-product-id="${product.idProduct}">+</button>
-                        </div>
-                        
-                        <div class="delete-action" data-product-id="${product.idProduct}">
-                            <img src="./asset/img/delete.svg" alt="delete">
-                            <span class="title">Delete</span>
-                        </div>
+                    <div class="delete-action" data-id="${product.idProduct}">
+                        <img src="./asset/img/Delete.svg" alt="Delete"/>
+                        <div class="title">Delete</div>
                     </div>
                 </div>
             </div>
         `;
-        productListContainer.innerHTML += productHTML;
+        productListContainer.appendChild(productDiv);
     });
 
     // Gắn lại event listeners
-    productListContainer.querySelectorAll(".main-product__checkbox").forEach(checkbox => {
-        checkbox.addEventListener("change", (e) => {
-            const productId = e.target.dataset.productId;
-            toggleProductSelection(productId, e.target.checked);
-            renderPrice();
-            renderNumberCart(dataUsersNow[userIndex].cartItems);
-        });
-    });
-
-    productListContainer.querySelectorAll(".btn-down").forEach(btn => {
-        btn.addEventListener("click", (e) => {
-            const productId = e.target.dataset.productId;
-            down(productId);
-            renderCart();
-            renderPrice();
-            renderNumberCart(dataUsersNow[userIndex].cartItems);
-        });
-    });
-
-    productListContainer.querySelectorAll(".btn-up").forEach(btn => {
-        btn.addEventListener("click", (e) => {
-            const productId = e.target.dataset.productId;
-            up(productId);
-            renderCart();
-            renderPrice();
-            renderNumberCart(dataUsersNow[userIndex].cartItems);
-        });
-    });
-
-    productListContainer.querySelectorAll(".delete-action").forEach(btn => {
-        btn.addEventListener("click", (e) => {
-            const productId = e.target.closest(".delete-action").dataset.productId;
-            deleteProduct(productId);
-            renderCart();
-            renderPrice();
-            renderNumberCart(dataUsersNow[userIndex].cartItems);
-        });
-    });
+    attachCartEventListeners();
 }
 
