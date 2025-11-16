@@ -390,7 +390,7 @@ function renderNumberCart(cartItems) {
 
     let totalQuantity = 0;
     let totalPrice = 0;
-    let shippingPrice = 0;
+    let shippingPrice = 5;
 
     cartItems.forEach((item) => {
         // Bỏ điều kiện check - tính tất cả sản phẩm
@@ -400,9 +400,6 @@ function renderNumberCart(cartItems) {
     
     cartQuantity.textContent = `You have ${totalQuantity} item`;
     subtotal.textContent = `$${totalPrice.toFixed(2)}`;
-      if (totalQuantity > 0) {
-        shippingPrice = 5;
-    }
     shipping.textContent = `$${shippingPrice}`;
     cartTotal.textContent = `$${(
         totalPrice +
