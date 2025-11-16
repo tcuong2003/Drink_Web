@@ -399,6 +399,156 @@ a {
    border-radius: 6px;
 }
 
+/* ===== Import Receipt styles ===== */
+.import-container {
+   background: #ffffff;
+   padding: 28px;
+   border-radius: 16px;
+   box-shadow: 0 8px 30px rgba(30, 30, 30, 0.06);
+   max-width: 1000px;
+   margin: 10px auto 40px;
+}
+
+.import-container .title {
+   font-size: 2.4rem;
+   color: var(--text-color-dark);
+   margin-bottom: 18px;
+}
+
+.import-form {
+   display: grid;
+   grid-template-columns: 1fr 1fr 1fr auto;
+   gap: 12px 16px;
+   align-items: end;
+   margin-bottom: 18px;
+}
+
+.import-form label {
+   display: block;
+   font-weight: 700;
+   font-size: 1.4rem;
+   color: var(--text-color-dark);
+   margin-bottom: 6px;
+}
+
+.import-form input[type="date"],
+.import-form input[type="number"],
+.import-form select {
+   width: 100%;
+   padding: 10px 12px;
+   border-radius: 8px;
+   border: 1px solid #e0e0e0;
+   background: #fafafa;
+   font-size: 1.4rem;
+}
+
+.import-form #btnAddItem {
+   padding: 10px 18px;
+   background: var(--btn-color);
+   color: #111;
+   border: none;
+   border-radius: 8px;
+   cursor: pointer;
+   font-weight: 700;
+   box-shadow: 0 6px 18px rgba(255, 183, 0, 0.18);
+}
+
+.import-table {
+   width: 100%;
+   border-collapse: collapse;
+   margin-top: 6px;
+}
+
+.import-table thead th {
+   text-align: center;
+   padding: 12px 10px;
+   font-weight: 700;
+   background: #f7f7f7;
+   border-bottom: 1px solid #eee;
+}
+
+.import-table tbody td {
+   padding: 12px 10px;
+   border-bottom: 1px solid #f1f1f1;
+   vertical-align: middle;
+}
+
+.import-table tbody td input {
+   width: 100px;
+   padding: 8px;
+   border-radius: 6px;
+   border: 1px solid #ddd;
+}
+
+.rowTotal {
+   font-weight: 700;
+   color: var(--text-color-dark);
+}
+
+.total-title {
+   text-align: right;
+   margin-top: 14px;
+   font-size: 1.8rem;
+   color: var(--text-color-dark);
+}
+
+.complete-btn {
+   margin-top: 14px;
+   padding: 12px 22px;
+   background: #27ae60;
+   color: #fff;
+   border: none;
+   border-radius: 10px;
+   cursor: pointer;
+   font-weight: 800;
+   float: right;
+   box-shadow: 0 8px 24px rgba(39, 174, 96, 0.16);
+}
+
+.complete-btn:disabled {
+   background: #a0a0a0;
+   cursor: not-allowed;
+   box-shadow: none;
+}
+
+.editRow,
+.deleteRow {
+   padding: 8px 12px;
+   border-radius: 8px;
+   border: none;
+   cursor: pointer;
+   margin-right: 6px;
+   font-weight: 700;
+}
+
+.editRow {
+   background: #1976d2;
+   color: #fff;
+}
+
+.deleteRow {
+   background: #e53935;
+   color: #fff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+   .import-form {
+      grid-template-columns: 1fr 1fr;
+   }
+   .import-form #btnAddItem {
+      grid-column: 1 / -1;
+      justify-self: start;
+   }
+   .complete-btn { float: none; display:block; width:100%; }
+}
+
+@media (max-width: 520px) {
+   .import-form {
+      grid-template-columns: 1fr;
+   }
+}
+
 .form-input {
    width: 100%;
    height: 40px;
@@ -1172,4 +1322,14 @@ th {
 }
 .product-pricing.stock-high .pricing-value {
     color: #4caf50; /* Màu xanh lá */
+}
+
+.import-bottom {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+#importTableBody{
+   margin-left: -10px;
 }
