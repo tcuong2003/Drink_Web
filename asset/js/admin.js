@@ -877,7 +877,6 @@ function renderAdmin() {
   document.querySelector(".logout").onclick = function () {
     window.location = "./index.html";
   };
-}
 
 function renderImportReceipt() {
   document.querySelector(".div-title").innerHTML = `
@@ -1078,6 +1077,21 @@ function renderImportReceipt() {
       status: 'completed'
     };
 
+    // Cập nhật quantity cho từng sản phẩm trong listProducts
+    let updated = false;
+    if (Array.isArray(listProducts)) {
+      items.forEach(item => {
+        const prod = listProducts.find(p => p.id === item.productId);
+        if (prod) {
+          prod.quantity = (parseInt(prod.quantity) || 0) + (parseInt(item.quantity) || 0);
+          updated = true;
+        }
+      });
+      if (updated) {
+        localStorage.setItem('listProducts', JSON.stringify(listProducts));
+      }
+    }
+
     // Save to localStorage under key 'importReceipts'
     const stored = localStorage.getItem('importReceipts');
     const importReceipts = stored ? JSON.parse(stored) : [];
@@ -1093,7 +1107,7 @@ function renderImportReceipt() {
     document.getElementById('importTotal').innerText = '0.00';
     trangThai = 'chuahoanthanh';
 
-    alert('Receipt saved to localStorage and form reset for a new receipt.');
+    alert('Receipt saved to localStorage, product quantities updated, and form reset for a new receipt.');
   };
 }
 
@@ -1226,7 +1240,7 @@ function renderProducts(arr) {
 
             <details class="action-menu-container">
                 <summary class="action-menu-toggle">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
                 </summary>
                 
                 <div class="action-menu-dropdown">
@@ -1624,6 +1638,48 @@ function renderOrderItem(arr, orderid) {
     orderManagementTbody.appendChild(orderTr);
   });
 }
+// function renderOrderItem(arr, orderid) {
+//   const orderManagementTbody = document
+//     .getElementById(orderid)
+//     .querySelector(".tableHistory");
+//   var variableNeed = ".fee_shipping" + orderid
+//   document.querySelector(variableNeed).textContent = "Shipping Fee: $" + renderTotalShipAdmin(arr);
+//   let number = 0;
+//   arr.forEach((item, index) => {
+//     number++;
+//     // Format time in Vietnam timezone dd/mm/yyyy, hh:mm:ss
+//     const formattedTime = new Date(item.time).toLocaleString('vi-VN', {
+//       timeZone: 'Asia/Ho_Chi_Minh',
+//       hour12: false
+//     });
+//     const orderTr = document.createElement("tr");
+    
+//     // CHỈ HIỂN THỊ THÔNG TIN ĐẦY ĐỦ TRÊN HÀNG ĐẦU TIÊN
+//     if (index === 0) {
+//       orderTr.innerHTML = `
+//         <td>${number}</td>
+//         <td><img class="img-history" src="${item.image}" alt=""></td>
+//         <td>${item.nameProduct}</td>
+//         <td>${item.quantity}</td>
+//         <td>$${item.price}</td>
+//         <td>${formattedTime}</td>
+//         <td>${status(item.check)}</td>
+//       `;
+//     } else {
+//       // CÁC HÀNG SAU CHỈ HIỂN THỊ THÔNG TIN SẢN PHẨM
+//       orderTr.innerHTML = `
+//         <td>${number}</td>
+//         <td><img class="img-history" src="${item.image}" alt=""></td>
+//         <td>${item.nameProduct}</td>
+//         <td>${item.quantity}</td>
+//         <td>$${item.price}</td>
+//         <td>-</td>
+//         <td>-</td>
+//       `;
+//     }
+//     orderManagementTbody.appendChild(orderTr);
+//   });
+// }
 //======== Status=========//
 function status(check) {
   if (check == 0) {
@@ -1799,75 +1855,247 @@ function saveUserEdit(userId, newName, newPassword) {
 //-----------------------------------------------------------------------------------------------------//
 function renderOrderStartictis() {
   document.querySelector(".div-title").innerHTML = `
-        <h1 class="title">Order Startictis</h1>
+    <h1 class="title">Order Statistics</h1>
+  `;
+  const container = document.querySelector(".contain-add-product-search");
+  container.innerHTML = `
+    <div class="order-statistics-type">
+      <button id="btnImportReceipt">Phiếu nhập</button>
+      <button id="btnExportReceipt">Phiếu xuất</button>
+    </div>
+    <div id="order-statistics-filter"></div>
+    <div id="order-statistics-table"></div>
+    <div id="order-statistics-modal" style="display:none;"></div>
+  `;
+
+  const btnImport = document.getElementById('btnImportReceipt');
+  const btnExport = document.getElementById('btnExportReceipt');
+  const filterDiv = document.getElementById('order-statistics-filter');
+  const tableDiv = document.getElementById('order-statistics-table');
+  const modalDiv = document.getElementById('order-statistics-modal');
+
+  let currentType = null; // 'import' or 'export'
+
+  function renderFilter() {
+    filterDiv.innerHTML = `
+      <div class="order-statistics-filter-row">
+        <label>From: <input type="date" id="fromDate"></label>
+        <label>To: <input type="date" id="toDate"></label>
+        <button id="btnSearchOrder">Search</button>
+      </div>
     `;
-  const orderStartictisContainer = document.querySelector(
-    ".contain-add-product-search"
-  );
-  orderStartictisContainer.innerHTML = `
-  <div class="head">
-  <div class="form-input-startics">
-      <form>
-        <div>
-           <div class="start-date-div">
-            <label for="start-date">From Date:</label>
-            <input type="date" id="start-date" name="start-date" />
-          </div>
-
-          <div class="end-date-div">
-            <label for="end-date">To Date:</label>
-            <input type="date" id="end-date" name="end-date" />
-         </div>
-
-         <div class="form-item">
-              <label for="type">Type</label>
-              <select name="type" id="type">
-                  <option value="">---</option>
-                  <option value="coffee">Coffee</option>
-                  <option value="juice">Juice</option>
-                  <option value="smoothie">Smoothie</option>
-                  <option value="tea">Tea</option>
-              </select>
-          </div>
-
-        </div>
-          <button type = "button" class="btn-submit" id = "handle-Order-Startictis">Submit</button>
-      </form>
-      <button class="btn-sale" id = "handle-Top-Sale">Top Sales</button>
-      <button class="btn-customer" id = "handle-Top-Customer">Top Customers</button>
-  </div>
-</div>
-<div class="body-table"></div>
-`;
-
-  //  Lấy tham chiếu đến các nút vừa tạo
-  const startictisBtn = document.querySelector("#handle-Order-Startictis");
-  const topSaledBtn = document.querySelector("#handle-Top-Sale");
-  const customerdBtn = document.querySelector("#handle-Top-Customer");
-  const allButtons = [startictisBtn, topSaledBtn, customerdBtn];
-
-  //  Hàm xử lý việc chuyển đổi class "active-filter"
-  function handleButtonClick(clickedButton) {
-    // Xóa class 'active-filter' khỏi tất cả các nút
-    allButtons.forEach(btn => btn.classList.remove('active-filter'));
-    // Thêm class 'active-filter' vào nút vừa được nhấn
-    clickedButton.classList.add('active-filter');
+    document.getElementById('btnSearchOrder').onclick = renderTable;
   }
-  //  Gán sự kiện click cho từng nút
-  startictisBtn.addEventListener('click', () => {
-    handleButtonClick(startictisBtn); // Cập nhật giao diện nút
-    handleOrderStartictis(); // Render nội dung tương ứng
-  });
 
-  topSaledBtn.addEventListener('click', () => {
-    handleButtonClick(topSaledBtn);
-    handleTopSale();
-  });
+  function renderTable() {
+    const fromDate = document.getElementById('fromDate').value;
+    const toDate = document.getElementById('toDate').value;
+    if (currentType === 'import') {
+      // Phiếu nhập
+      const stored = localStorage.getItem('importReceipts');
+      let data = stored ? JSON.parse(stored) : [];
+      // Lọc theo ngày nếu có
+      if (fromDate) {
+        data = data.filter(r => r.date >= fromDate);
+      }
+      if (toDate) {
+        data = data.filter(r => r.date <= toDate);
+      }
+      let html = `<table class="order-statistics-table"><thead><tr><th>STT</th><th>Ngày</th><th>Chi tiết</th></tr></thead><tbody>`;
+      data.forEach((r, idx) => {
+        html += `<tr>
+          <td>${idx + 1}</td>
+          <td>${r.date}</td>
+          <td><button class="btn-detail" data-type="import" data-idx="${idx}">...</button></td>
+        </tr>`;
+      });
+      html += `</tbody></table>`;
+      tableDiv.innerHTML = html;
+      // Gán sự kiện nút 3 chấm
+      tableDiv.querySelectorAll('.btn-detail').forEach(btn => {
+        btn.onclick = function() {
+          const idx = parseInt(this.getAttribute('data-idx'));
+          showImportDetail(data[idx]);
+        };
+      });
+    } else if (currentType === 'export') {
+      // Phiếu xuất
+      const stored = localStorage.getItem('listOrders');
+      let data = stored ? JSON.parse(stored) : [];
+      // Lọc theo ngày nếu có
+      if (fromDate) {
+        data = data.filter(r => r.date >= fromDate);
+      }
+      if (toDate) {
+        data = data.filter(r => r.date <= toDate);
+      }
+      let html = `<table class="order-statistics-table"><thead><tr><th>STT</th><th>Username</th><th>Email</th><th>Ngày</th><th>Trạng thái</th><th>Chi tiết</th></tr></thead><tbody>`;
+      data.forEach((r, idx) => {
+        const user = r.user || {};
+        const status = r.order && r.order[0] ? statusText(r.order[0].check) : '';
+        html += `<tr>
+          <td>${idx + 1}</td>
+          <td>${user.name || ''}</td>
+          <td>${r.email || ''}</td>
+          <td>${r.date || ''}</td>
+          <td>${status}</td>
+          <td><button class="btn-detail" data-type="export" data-idx="${idx}">...</button></td>
+        </tr>`;
+      });
+      html += `</tbody></table>`;
+      tableDiv.innerHTML = html;
+      // Gán sự kiện nút 3 chấm
+      tableDiv.querySelectorAll('.btn-detail').forEach(btn => {
+        btn.onclick = function() {
+          const idx = parseInt(this.getAttribute('data-idx'));
+          showExportDetail(data[idx]);
+        };
+      });
+    } else {
+      tableDiv.innerHTML = '';
+    }
+  }
 
-  customerdBtn.addEventListener('click', () => {
-    handleButtonClick(customerdBtn);
-    handleTopCustomer();
-  });
+  function statusText(check) {
+    if (check == 0) return 'Đang chờ...';
+    if (check == 1) return 'Đã xác nhận!';
+    if (check == 2) return 'Đã hủy';
+    return '';
+  }
+
+  function showImportDetail(receipt) {
+    let html = `<div class="modal-content"><h3>Chi tiết phiếu nhập</h3><table><thead><tr><th>Ảnh</th><th>Tên</th><th>Số lượng</th><th>Giá nhập</th><th>Thành tiền</th></tr></thead><tbody>`;
+    receipt.items.forEach(item => {
+      // Tìm ảnh sản phẩm từ listProducts
+      let img = '';
+      if (Array.isArray(listProducts)) {
+        const prod = listProducts.find(p => p.id === item.productId);
+        img = prod ? prod.image : '';
+      }
+      html += `<tr>
+        <td>${img ? `<img src="${img}" style="width:40px;height:40px;">` : ''}</td>
+        <td>${item.nameProduct}</td>
+        <td>${item.quantity}</td>
+        <td>$${item.price.toFixed(2)}</td>
+        <td>$${item.total.toFixed(2)}</td>
+      </tr>`;
+    });
+    html += `</tbody></table><div style="text-align:right;font-weight:bold;">Tổng tiền: $${receipt.total.toFixed(2)}</div><button onclick="document.getElementById('order-statistics-modal').style.display='none'">Đóng</button></div>`;
+    modalDiv.innerHTML = html;
+    modalDiv.style.display = 'block';
+  }
+
+  function showExportDetail(order) {
+    let html = `<div class="modal-content"><h3>Chi tiết phiếu xuất</h3><table><thead><tr><th>Ảnh</th><th>Tên</th><th>Số lượng</th><th>Đơn giá</th><th>Thành tiền</th></tr></thead><tbody>`;
+    if (order.order && Array.isArray(order.order)) {
+      order.order.forEach(item => {
+        html += `<tr>
+          <td>${item.image ? `<img src="${item.image}" style="width:40px;height:40px;">` : ''}</td>
+          <td>${item.nameProduct || ''}</td>
+          <td>${item.quantity || ''}</td>
+          <td>$${item.price ? item.price.toFixed(2) : ''}</td>
+          <td>$${item.price && item.quantity ? (item.price * item.quantity).toFixed(2) : ''}</td>
+        </tr>`;
+      });
+    }
+    html += `</tbody></table>`;
+    // Thông tin bổ sung
+    html += `<div><b>Phương thức thanh toán:</b> ${order.paymentMethod || ''}</div>`;
+    html += `<div><b>Địa chỉ:</b> ${order.address || ''}</div>`;
+    html += `<div><b>Phí ship:</b> $${order.shippingFee ? order.shippingFee.toFixed(2) : '0.00'}</div>`;
+    // Tổng tiền
+    let total = 0;
+    if (order.order && Array.isArray(order.order)) {
+      order.order.forEach(item => {
+        if (item.price && item.quantity) total += item.price * item.quantity;
+      });
+    }
+    total += order.shippingFee ? order.shippingFee : 0;
+    html += `<div style="text-align:right;font-weight:bold;">Tổng tiền: $${total.toFixed(2)}</div><button onclick="document.getElementById('order-statistics-modal').style.display='none'">Đóng</button></div>`;
+    modalDiv.innerHTML = html;
+    modalDiv.style.display = 'block';
+  }
+
+  btnImport.onclick = function() {
+    currentType = 'import';
+    renderFilter();
+    tableDiv.innerHTML = '';
+    modalDiv.style.display = 'none';
+  };
+  btnExport.onclick = function() {
+    currentType = 'export';
+    renderFilter();
+    tableDiv.innerHTML = '';
+    modalDiv.style.display = 'none';
+  };
+}
+//   const orderStartictisContainer = document.querySelector(
+//     ".contain-add-product-search"
+//   );
+//   orderStartictisContainer.innerHTML = `
+//   <div class="head">
+//   <div class="form-input-startics">
+//       <form>
+//         <div>
+//            <div class="start-date-div">
+//             <label for="start-date">From Date:</label>
+//             <input type="date" id="start-date" name="start-date" />
+//           </div>
+
+//           <div class="end-date-div">
+//             <label for="end-date">To Date:</label>
+//             <input type="date" id="end-date" name="end-date" />
+//          </div>
+
+//          <div class="form-item">
+//               <label for="type">Type</label>
+//               <select name="type" id="type">
+//                   <option value="">---</option>
+//                   <option value="coffee">Coffee</option>
+//                   <option value="juice">Juice</option>
+//                   <option value="smoothie">Smoothie</option>
+//                   <option value="tea">Tea</option>
+//               </select>
+//           </div>
+
+//         </div>
+//           <button type = "button" class="btn-submit" id = "handle-Order-Startictis">Submit</button>
+//       </form>
+//       <button class="btn-sale" id = "handle-Top-Sale">Top Sales</button>
+//       <button class="btn-customer" id = "handle-Top-Customer">Top Customers</button>
+//   </div>
+// </div>
+// <div class="body-table"></div>
+// `;
+
+//   //  Lấy tham chiếu đến các nút vừa tạo
+//   const startictisBtn = document.querySelector("#handle-Order-Startictis");
+//   const topSaledBtn = document.querySelector("#handle-Top-Sale");
+//   const customerdBtn = document.querySelector("#handle-Top-Customer");
+//   const allButtons = [startictisBtn, topSaledBtn, customerdBtn];
+
+//   //  Hàm xử lý việc chuyển đổi class "active-filter"
+//   function handleButtonClick(clickedButton) {
+//     // Xóa class 'active-filter' khỏi tất cả các nút
+//     allButtons.forEach(btn => btn.classList.remove('active-filter'));
+//     // Thêm class 'active-filter' vào nút vừa được nhấn
+//     clickedButton.classList.add('active-filter');
+//   }
+//   //  Gán sự kiện click cho từng nút
+//   startictisBtn.addEventListener('click', () => {
+//     handleButtonClick(startictisBtn); // Cập nhật giao diện nút
+//     handleOrderStartictis(); // Render nội dung tương ứng
+//   });
+
+//   topSaledBtn.addEventListener('click', () => {
+//     handleButtonClick(topSaledBtn);
+//     handleTopSale();
+//   });
+
+//   customerdBtn.addEventListener('click', () => {
+//     handleButtonClick(customerdBtn);
+//     handleTopCustomer();
+//   });
 }
 //-----------------------------------------------//
 function renderTableBody() {
