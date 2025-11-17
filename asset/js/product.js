@@ -752,12 +752,24 @@ function renderProduct(arr) {
             const productSection = document.createElement("section");
             productSection.classList.add("cart");
 
+            // đảm bảo có quantity (nếu chưa có thì mặc định 100)
+            const qty = (typeof product.quantity === "number") ? product.quantity : 100;
+
+            // nếu hết hàng thì thêm class sold-out
+            if (qty <= 0) productSection.classList.add("sold-out");
+
+            const imgOnclick = qty > 0
+                ? `onclick="window.location = './details.html?id=${product.id}'"`
+                : "";
+
+            const addBtn = qty > 0
+                ? `<button class="add-to-cart-button" onclick="addToCart(${product.id})">Add to Cart</button>`
+                : `<button class="add-to-cart-button" disabled>Out of stock</button>`;
+
             productSection.innerHTML = `
                     <div class="wrap-img-cart">
                         <img src="${product.image}" alt="${product.name}" 
-                        class="img-cart" onclick="window.location = './details.html?id=${
-                            product.id
-                        }' " />
+                        class="img-cart" ${imgOnclick} />
                     </div>
                     <h3 class="title">${product.name}</h3>
                     <div class="row">
@@ -766,10 +778,9 @@ function renderProduct(arr) {
                             <img src="./asset/img/main-star.svg" alt="Star Rating" class="star" />
                             <span class="star-num">${product.star}</span>
                         </div>
-                        <button class="add-to-cart-button" onclick = "addToCart(${
-                            product.id
-                        })">Add to Cart</button>
+                        ${addBtn}
                     </div>
+                    ${qty <= 0 ? '<div class="sold-badge">Hết hàng</div>' : ''}
                 `;
 
             // Thêm sản phẩm vào danh sách sản phẩm

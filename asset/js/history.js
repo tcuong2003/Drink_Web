@@ -63,9 +63,60 @@ function saveOrderStatus(orderId, newStatus) {
     const { ListOrders } = getAppState();
     const order = ListOrders.find(o => o.id === orderId);
     if (!order || !order.order) return;
+    const prevStatus = order.order[0].check;
     order.order.forEach(item => item.check = newStatus);
     localStorage.setItem('listOrders', JSON.stringify(ListOrders));
     console.log(`[DEBUG] saved order ${orderId} -> check=${newStatus}`);
+
+    // Nếu chuyển sang trạng thái Hoàn thành (4) và trước đó chưa phải 4 => trừ tồn kho
+    if (newStatus === 4 && prevStatus !== 4) {
+        deductStockForCompletedOrder(orderId);
+    }
+}
+
+// Hàm trừ tồn kho khi đơn hàng hoàn thành
+function deductStockForCompletedOrder(orderId) {
+    // Lấy dữ liệu hiện tại
+    const ListOrders = JSON.parse(localStorage.getItem('listOrders')) || [];
+    const allProducts = JSON.parse(localStorage.getItem('listProducts')) || [];
+
+    const order = ListOrders.find(o => o.id === orderId);
+    if (!order || !Array.isArray(order.order)) return;
+
+    // Duyệt từng item trong order và trừ quantity trên product tương ứng
+    order.order.forEach(item => {
+        const pid = item.idProduct || item.id; // tùy cấu trúc
+        const qtyToSubtract = parseInt(item.quantity) || 0;
+        if (!pid || qtyToSubtract <= 0) return;
+
+        const prod = allProducts.find(p => p.id === pid);
+        if (prod) {
+            const currentQty = parseInt(prod.quantity) || 0;
+            prod.quantity = Math.max(0, currentQty - qtyToSubtract);
+        }
+    });
+
+    // Lưu lại listProducts vào localStorage
+    localStorage.setItem('listProducts', JSON.stringify(allProducts));
+    console.log('[DEBUG] Stock updated for order', orderId);
+
+    // Nếu trang admin đang mở với hàm renderProducts có sẵn, gọi để cập nhật UI admin
+    if (typeof renderProducts === 'function') {
+        try { renderProducts(allProducts); } catch (e) { console.warn(e); }
+    }
+
+    // Cập nhật product page (client) nếu hàm getProduct / renderProduct tồn tại
+    // Tải lại biến toàn cục trong product.js nếu cần
+    if (window && (typeof getProduct === 'function')) {
+        // reload client-side product data and re-render (giữ logic lọc / phân trang)
+        const allFromStorage = allProducts.slice(); // lấy bản mới
+        window.allProductsFromStorage = allFromStorage;
+        window.listProducts = allFromStorage.filter(p => !p.isHidden);
+        // cập nhật currentProductList và hiển thị lại trang 1
+        if (typeof currentProductList !== 'undefined') currentProductList = window.listProducts;
+        currentPage = 1;
+        try { getProduct(currentProductList); } catch (e) { console.warn(e); }
+    }
 }
 
 // ========= Timeline ==========
@@ -536,7 +587,7 @@ function renderHistoryOrderItemMB(orderId) {
     if (currentStatus === 2) {
         const timelineSteps = document.querySelectorAll('.timeline-step');
         timelineSteps.forEach(step => {
-            step.classList.remove('active', 'completed', 'cancelled');
+            step.classList.remove('active', 'completed');
             step.classList.add('cancelled');
         });
         timelineSteps[0].querySelector('.timeline-dot').textContent = '✕';
@@ -613,9 +664,60 @@ function saveOrderStatus(orderId, newStatus) {
     const { ListOrders } = getAppState();
     const order = ListOrders.find(o => o.id === orderId);
     if (!order || !order.order) return;
+    const prevStatus = order.order[0].check;
     order.order.forEach(item => item.check = newStatus);
     localStorage.setItem('listOrders', JSON.stringify(ListOrders));
     console.log(`[DEBUG] saved order ${orderId} -> check=${newStatus}`);
+
+    // Nếu chuyển sang trạng thái Hoàn thành (4) và trước đó chưa phải 4 => trừ tồn kho
+    if (newStatus === 4 && prevStatus !== 4) {
+        deductStockForCompletedOrder(orderId);
+    }
+}
+
+// Hàm trừ tồn kho khi đơn hàng hoàn thành
+function deductStockForCompletedOrder(orderId) {
+    // Lấy dữ liệu hiện tại
+    const ListOrders = JSON.parse(localStorage.getItem('listOrders')) || [];
+    const allProducts = JSON.parse(localStorage.getItem('listProducts')) || [];
+
+    const order = ListOrders.find(o => o.id === orderId);
+    if (!order || !Array.isArray(order.order)) return;
+
+    // Duyệt từng item trong order và trừ quantity trên product tương ứng
+    order.order.forEach(item => {
+        const pid = item.idProduct || item.id; // tùy cấu trúc
+        const qtyToSubtract = parseInt(item.quantity) || 0;
+        if (!pid || qtyToSubtract <= 0) return;
+
+        const prod = allProducts.find(p => p.id === pid);
+        if (prod) {
+            const currentQty = parseInt(prod.quantity) || 0;
+            prod.quantity = Math.max(0, currentQty - qtyToSubtract);
+        }
+    });
+
+    // Lưu lại listProducts vào localStorage
+    localStorage.setItem('listProducts', JSON.stringify(allProducts));
+    console.log('[DEBUG] Stock updated for order', orderId);
+
+    // Nếu trang admin đang mở với hàm renderProducts có sẵn, gọi để cập nhật UI admin
+    if (typeof renderProducts === 'function') {
+        try { renderProducts(allProducts); } catch (e) { console.warn(e); }
+    }
+
+    // Cập nhật product page (client) nếu hàm getProduct / renderProduct tồn tại
+    // Tải lại biến toàn cục trong product.js nếu cần
+    if (window && (typeof getProduct === 'function')) {
+        // reload client-side product data and re-render (giữ logic lọc / phân trang)
+        const allFromStorage = allProducts.slice(); // lấy bản mới
+        window.allProductsFromStorage = allFromStorage;
+        window.listProducts = allFromStorage.filter(p => !p.isHidden);
+        // cập nhật currentProductList và hiển thị lại trang 1
+        if (typeof currentProductList !== 'undefined') currentProductList = window.listProducts;
+        currentPage = 1;
+        try { getProduct(currentProductList); } catch (e) { console.warn(e); }
+    }
 }
 
 // ========== CẬP NHẬT HÀM initOrderTimeline ==========
@@ -693,9 +795,15 @@ function saveOrderStatus(orderId, newStatus) {
     const { ListOrders } = getAppState();
     const order = ListOrders.find(o => o.id === orderId);
     if (!order || !order.order) return;
+    const prevStatus = order.order[0].check;
     order.order.forEach(item => item.check = newStatus);
     localStorage.setItem('listOrders', JSON.stringify(ListOrders));
     console.log(`[DEBUG] saved order ${orderId} -> check=${newStatus}`);
+
+    // Nếu chuyển sang trạng thái Hoàn thành (4) và trước đó chưa phải 4 => trừ tồn kho
+    if (newStatus === 4 && prevStatus !== 4) {
+        deductStockForCompletedOrder(orderId);
+    }
 }
 
 // ========== CẬP NHẬT HÀM AUTO-PROGRESS TIMELINE ==========
