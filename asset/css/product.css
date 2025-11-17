@@ -394,3 +394,40 @@
         }
     }
 
+    .cart.sold-out {
+      opacity: 0.75;
+      pointer-events: none; /* ngăn mọi tương tác bên trong */
+      position: relative;
+    }
+
+    /* nhưng vẫn cho phép hover/tooltip nếu cần: không cần thiết, pointer-events none chặn click */
+    .cart.sold-out .add-to-cart-button {
+      background: #9a9a9a;
+      cursor: not-allowed;
+      color: #fff;
+    }
+
+    /* Nếu muốn chỉ disable button thôi (không muốn pointer-events trên toàn block)
+       thì thay pointer-events: none; bằng pointer-events: auto; và disable button đã đủ. */
+
+    .sold-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #dc3139;
+      color: white;
+      padding: 6px 8px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 12px;
+      z-index: 5;
+    }
+
+    /* Style cho button disabled nếu không dùng pointer-events none trên .cart */
+    .add-to-cart-button[disabled] {
+      background: #9a9a9a;
+      cursor: not-allowed;
+      box-shadow: none;
+      opacity: 0.9;
+    }
+
