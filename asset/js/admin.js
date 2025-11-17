@@ -877,7 +877,7 @@ function renderAdmin() {
   document.querySelector(".logout").onclick = function () {
     window.location = "./index.html";
   };
-
+}
 function renderImportReceipt() {
   document.querySelector(".div-title").innerHTML = `
         <h1 class="title">Import Receipt</h1>
@@ -1926,20 +1926,53 @@ function renderOrderStartictis() {
       let data = stored ? JSON.parse(stored) : [];
       // Lọc theo ngày nếu có
       if (fromDate) {
-        data = data.filter(r => r.date >= fromDate);
+        data = data.filter(r => {
+          // Lấy ngày từ order đầu tiên nếu có
+          if (r.order && r.order[0] && r.order[0].time) {
+            const orderDate = new Date(r.order[0].time).toISOString().slice(0,10);
+            return orderDate >= fromDate;
+          }
+          return false;
+        });
       }
       if (toDate) {
-        data = data.filter(r => r.date <= toDate);
+        data = data.filter(r => {
+          if (r.order && r.order[0] && r.order[0].time) {
+            const orderDate = new Date(r.order[0].time).toISOString().slice(0,10);
+            return orderDate <= toDate;
+          }
+          return false;
+        });
       }
       let html = `<table class="order-statistics-table"><thead><tr><th>STT</th><th>Username</th><th>Email</th><th>Ngày</th><th>Trạng thái</th><th>Chi tiết</th></tr></thead><tbody>`;
       data.forEach((r, idx) => {
-        const user = r.user || {};
-        const status = r.order && r.order[0] ? statusText(r.order[0].check) : '';
+        // Username: lấy từ r.user.name hoặc r.order[0].userName hoặc r.email
+        let username = '';
+        if (r.user && r.user.name) {
+          username = r.user.name;
+        } else if (r.order && r.order[0] && r.order[0].userName) {
+          username = r.order[0].userName;
+        } else if (r.email) {
+          username = r.email.split('@')[0];
+        }
+        // Ngày: lấy từ order đầu tiên
+        let date = '';
+        if (r.order && r.order[0] && r.order[0].time) {
+          const d = new Date(r.order[0].time);
+          date = d.toLocaleDateString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' });
+        } else if (r.date) {
+          date = r.date;
+        }
+        // Trạng thái: lấy từ order đầu tiên
+        let status = '';
+        if (r.check && r.check[0] && typeof r.order[0].check !== 'undefined') {
+          status = statusText(r.order[0].check);
+        }
         html += `<tr>
           <td>${idx + 1}</td>
-          <td>${user.name || ''}</td>
+          <td>${username}</td>
           <td>${r.email || ''}</td>
-          <td>${r.date || ''}</td>
+          <td>${date}</td>
           <td>${status}</td>
           <td><button class="btn-detail" data-type="export" data-idx="${idx}">...</button></td>
         </tr>`;
@@ -1982,7 +2015,11 @@ function renderOrderStartictis() {
         <td>$${item.total.toFixed(2)}</td>
       </tr>`;
     });
-    html += `</tbody></table><div style="text-align:right;font-weight:bold;">Tổng tiền: $${receipt.total.toFixed(2)}</div><button onclick="document.getElementById('order-statistics-modal').style.display='none'">Đóng</button></div>`;
+    html += `</tbody></table>`;
+    // Thông tin bổ sung: Địa chỉ, Phí ship (nếu có)
+    html += `<div><b>Địa chỉ:</b> ${receipt.address ? receipt.address : 'Không có'}</div>`;
+    html += `<div><b>Phí ship:</b> $${typeof receipt.shippingFee !== 'undefined' ? (Number(receipt.shippingFee).toFixed(2)) : '0.00'}</div>`;
+    html += `<div style="text-align:right;font-weight:bold;">Tổng tiền: $${receipt.total.toFixed(2)}</div><button onclick="document.getElementById('order-statistics-modal').style.display='none'">Đóng</button></div>`;
     modalDiv.innerHTML = html;
     modalDiv.style.display = 'block';
   }
@@ -2098,7 +2135,6 @@ function renderOrderStartictis() {
 //     handleButtonClick(customerdBtn);
 //     handleTopCustomer();
 //   });
-}
 //-----------------------------------------------//
 function renderTableBody() {
   const tableBody = document.querySelector(".body-table");
