@@ -778,6 +778,7 @@ function renderProduct(arr) {
                             <img src="./asset/img/main-star.svg" alt="Star Rating" class="star" />
                             <span class="star-num">${product.star}</span>
                         </div>
+                        <div>SL: ${product.quantity}</div>
                         ${addBtn}
                     </div>
                     ${qty <= 0 ? '<div class="sold-badge">Hết hàng</div>' : ''}
