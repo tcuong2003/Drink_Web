@@ -766,6 +766,7 @@ function renderProduct(arr) {
                             <img src="./asset/img/main-star.svg" alt="Star Rating" class="star" />
                             <span class="star-num">${product.star}</span>
                         </div>
+                        <div>SL:${product.quantity}</div>
                         <button class="add-to-cart-button" onclick = "addToCart(${
                             product.id
                         })">Add to Cart</button>

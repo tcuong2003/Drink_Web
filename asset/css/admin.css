@@ -1,3 +1,187 @@
+/* ===== Order Statistics UI ===== */
+.order-statistics-type {
+   display: flex;
+   justify-content: center;
+   gap: 24px;
+   margin-bottom: 24px;
+}
+.order-statistics-type button {
+   padding: 10px 32px;
+   font-size: 1.7rem;
+   font-weight: 700;
+   border-radius: 8px;
+   border: none;
+   background: #f3f3f3;
+   color: #1A162E;
+   cursor: pointer;
+   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+   transition: background 0.2s, color 0.2s;
+}
+.order-statistics-type button:focus,
+.order-statistics-type button.active,
+.order-statistics-type button.selected {
+   background: #1976d2;
+   color: #fff;
+}
+
+.order-statistics-filter-row {
+   display: flex;
+   gap: 18px;
+   align-items: end;
+   justify-content: center;
+   margin-bottom: 18px;
+   flex-wrap: wrap;
+}
+.order-statistics-filter-row label {
+   font-size: 1.4rem;
+   font-weight: 600;
+   color: #1A162E;
+}
+.order-statistics-filter-row input[type="date"] {
+   padding: 7px 12px;
+   border-radius: 6px;
+   border: 1px solid #e0e0e0;
+   font-size: 1.4rem;
+   background: #fafafa;
+}
+.order-statistics-filter-row button {
+   padding: 8px 22px;
+   background: #FFB700;
+   color: #222;
+   border: none;
+   border-radius: 8px;
+   font-weight: 700;
+   font-size: 1.5rem;
+   cursor: pointer;
+   box-shadow: 0 2px 8px rgba(255,183,0,0.10);
+   transition: background 0.2s;
+}
+.order-statistics-filter-row button:hover {
+   background: #ffd54f;
+}
+
+.order-statistics-table {
+   width: 100%;
+   border-collapse: separate;
+   border-spacing: 0;
+   background: #fff;
+   border-radius: 14px;
+   box-shadow: 0 4px 24px rgba(30,30,30,0.08);
+   overflow: hidden;
+   margin: 0 auto 30px;
+   font-size: 1.5rem;
+}
+.order-statistics-table thead th {
+   background: #f7f7f7;
+   color: #1976d2;
+   font-weight: 700;
+   padding: 14px 10px;
+   text-align: center;
+   border-bottom: 2px solid #e0e0e0;
+}
+.order-statistics-table tbody td {
+   padding: 13px 10px;
+   text-align: center;
+   border-bottom: 1px solid #f1f1f1;
+}
+.order-statistics-table tbody tr:last-child td {
+   border-bottom: none;
+}
+
+/* Nút 3 chấm */
+.order-statistics-table .btn-detail {
+   background: #f0f0f0;
+   border: none;
+   border-radius: 50%;
+   width: 38px;
+   height: 38px;
+   font-size: 2.1rem;
+   color: #1976d2;
+   cursor: pointer;
+   transition: background 0.2s, color 0.2s;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+.order-statistics-table .btn-detail:hover {
+   background: #1976d2;
+   color: #fff;
+}
+
+/* Modal chi tiết phiếu nhập/xuất */
+#order-statistics-modal {
+   position: fixed;
+   top: 0; left: 0; right: 0; bottom: 0;
+   background: rgba(0,0,0,0.25);
+   z-index: 9999;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+#order-statistics-modal .modal-content {
+   background: #fff;
+   border-radius: 16px;
+   box-shadow: 0 8px 32px rgba(30,30,30,0.18);
+   padding: 32px 28px 24px 28px;
+   min-width: 340px;
+   max-width: 95vw;
+   max-height: 90vh;
+   overflow-y: auto;
+   position: relative;
+}
+#order-statistics-modal h3 {
+   font-size: 2.1rem;
+   color: #1976d2;
+   margin-bottom: 18px;
+   text-align: center;
+}
+#order-statistics-modal table {
+   width: 100%;
+   border-collapse: collapse;
+   margin-bottom: 18px;
+}
+#order-statistics-modal th, #order-statistics-modal td {
+   padding: 10px 8px;
+   text-align: center;
+   border-bottom: 1px solid #eee;
+}
+#order-statistics-modal th {
+   background: #f7f7f7;
+   color: #1976d2;
+   font-weight: 700;
+}
+#order-statistics-modal tr:last-child td {
+   border-bottom: none;
+}
+#order-statistics-modal img {
+   width: 48px;
+   height: 48px;
+   object-fit: cover;
+   border-radius: 8px;
+}
+#order-statistics-modal button {
+   margin-top: 18px;
+   padding: 8px 28px;
+   background: #1976d2;
+   color: #fff;
+   border: none;
+   border-radius: 8px;
+   font-size: 1.5rem;
+   font-weight: 700;
+   cursor: pointer;
+   transition: background 0.2s;
+}
+#order-statistics-modal button:hover {
+   background: #FFB700;
+   color: #222;
+}
+#order-statistics-modal .modal-content > div {
+   margin-bottom: 8px;
+   font-size: 1.4rem;
+}
+#order-statistics-modal .modal-content > div:last-child {
+   margin-bottom: 0;
+}
 *,
 ::before,
 ::after {
